@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+  wiki:
+    build:
+      context: .
+    image: kimiwiki
+    volumes:
+      - "./:/wiki"
+    ports:
+      - "8080:8080"
