@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      Coroutine
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+        <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d06710df49879016f95c45042560225e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+          </script>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="Coroutine">
+        Coroutine
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <p>我们来看另外一个语言特性的改动，coroutine。</p>
+<p>开始之前先说一下C++这十几年的方向。因为一个zero-runtime overhead的承诺，C++基本上放弃了在运行时解决问题的这条路，主要的改动都是在尝试增强编译时。除了C++11 引入了线程以后对内存模型有了较大的改动以外，几乎没再怎么糊过运行时的东西。因为太难了：要考虑target到那么多个平台，各家都存在不同的问题，连ABI至今都没办法有个基本的解决方案的情况下往里面越挖反而问题越多。</p>
+<p>于是，coroutine这个直接影响运行时行为的东西怎么解决的呢？</p>
+<p>C++的方案是，放到编译时来搞。</p>
+<p>于是C++20的coroutine拿到手并不能直接用，因为C++只是给你定义了一套结构和规范，并且如果你正确实现了这套规范以后才可能享受到coroutine提供的便利。不是不想要runtime overhead嘛，我不提供runtime就好了，你自己实现。</p>
+<p>单纯来看，C++中的coroutine就是一个包含了<code>co_yield</code>、<code>co_return</code>或者<code>co_await</code>的函数。但是C++编译器会把他转化成一个特定的结构。这个结构会创建一个coroutine状态对象，然后根据编译器解析生成的代码配合用户选择的返回对象（return object）来执行。</p>
+<p>听起来好像什么都没说，我们直接看一个例子：</p>
+<pre><code class="language-c++">generator&lt;<span class="hljs-type">int</span>&gt; range(<span class="hljs-type">int</span> <span class="hljs-keyword">from</span>, <span class="hljs-type">int</span> <span class="hljs-keyword">to</span>) {
+  <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> x = <span class="hljs-keyword">from</span>; x &lt; <span class="hljs-keyword">to</span>; ++x) {
+    co_yield x;
+  }
+}
+</code></pre>
+<p>看起来似乎很简单，并没有说的那么夸张。但实际上，至少在目前的标准中你是没有<code>generator&lt;T&gt;</code>这个模版类可以直接拿来用的，需要自己糊出来。大概是这个样子：</p>
+<pre><code class="language-C++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">generator</span> {</span>
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">promise_type</span>;</span>
+  <span class="hljs-keyword">using</span> handle = <span class="hljs-built_in">std</span>::coroutine_handle&lt;promise_type&gt;;
+
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">promise_type</span> {</span>
+    <span class="hljs-built_in">std</span>::optional&lt;T&gt; current_value;
+
+    <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">get_return_object</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> generator{handle::from_promise(*<span class="hljs-keyword">this</span>)}; }
+    <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">initial_suspend</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-built_in">std</span>::suspend_always{}; }
+    <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">final_suspend</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-built_in">std</span>::suspend_always{}; }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unhandled_exception</span><span class="hljs-params">()</span> </span>{ <span class="hljs-built_in">std</span>::<span class="hljs-built_in">terminate</span>(); }
+    <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">yield_value</span><span class="hljs-params">(T value)</span> </span>{
+      current_value = <span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(value);
+      <span class="hljs-keyword">return</span> <span class="hljs-built_in">std</span>::suspend_always{};
+    }
+  };
+  ...
+</code></pre>
+<p>关键的部分就是这个<code>promise_type</code>：coroutine里面的各种步骤都会映射到上面的所有方法上面。整个的coroutine执行过程大概是下面这个样子：</p>
+<pre><code class="language-C++">{
+  co_await promise.initial_suspend()<span class="hljs-comment">;</span>
+  try
+  {
+    &lt;body-statements&gt;
+  }
+  catch (<span class="hljs-name">...</span>)
+  {
+    promise.unhandled_exception()<span class="hljs-comment">;</span>
+  }
+FinalSuspend:
+  co_await promise.final_suspend()<span class="hljs-comment">;</span>
+}
+</code></pre>
+<p>而其中的任何<code>co_yield</code>和<code>co_return</code>也都会翻译成对应的语句：</p>
+<pre><code class="language-c++">co_await promise.yield<span class="hljs-constructor">_value(<span class="hljs-params">a</span>)</span>;  <span class="hljs-comment">// `co_yield a`</span>
+co_await promise.return<span class="hljs-constructor">_value(<span class="hljs-params">a</span>)</span>; <span class="hljs-comment">// `co_return a`</span>
+co_await promise.return<span class="hljs-constructor">_void()</span>;   <span class="hljs-comment">// `co_return`</span>
+</code></pre>
+<p>这样配合着实现<code>generator</code>的<code>iterator</code>，就能够顺利地在C++中实现Python或者JavaScript中类似的Generator了。</p>
+<pre><code class="language-C++"><span class="hljs-comment">// pesudo code</span>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">generator</span> {</span>
+  ...
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">iterator</span> {</span>
+    <span class="hljs-keyword">void</span> <span class="hljs-keyword">operator</span>++() { ... }
+    T&amp; <span class="hljs-keyword">operator</span>*() { ... }
+  };
+
+  <span class="hljs-function">iterator <span class="hljs-title">begin</span><span class="hljs-params">()</span> </span>{ ... }
+  <span class="hljs-function">iterator <span class="hljs-title">end</span><span class="hljs-params">()</span> </span>{ ... }
+  ...
+</code></pre>
+<p>上面定义的range协程使用起来也非常简单：</p>
+<pre><code class="language-C++"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp;&amp; i : range(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)) {
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; i * i &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+}
+</code></pre>
+<p>前面定义的<code>iterator</code>和<code>begin</code>/<code>end</code>就是为了这里的range-based for语法。</p>
+<p>好的我们再从头解释一下coroutine的执行过程：</p>
+<ul>
+<li>首先，定义一个coroutine，需要一个return object。编译器会根据这个return object找到对应的<code>promise_type</code>。同时根据这个coroutine生成一个创建状态对象的结构。这个状态对象包含了coroutine的参数和一些必要的执行环境。</li>
+<li>coroutine运行的时候，会初始化coroutine状态对象，然后创建promise对象。并且根据这个promise获取coroutine的返回对象（<code>promise_type::get_return_object()</code>）。然后根据<code>initial_suspened()</code>做一些初始化操作。</li>
+<li>所有的<code>co_return</code>、<code>co_yield</code> 或者 <code>co_await</code> 都会对应到一个awaitable object，来决定当前协程的挂起状态，并且做一些写回或者唤醒操作。</li>
+<li>而在return object里，可以拿到当前的coroutine的promise对象，然后再对其行为进行控制。比如唤醒或者获取写回的值等。比如适配上iterator traits就能直接利用STL和Ranges了。</li>
+<li>等到coroutine执行结束，会调用<code>final_suspend()</code>来做一些清理工作。</li>
+</ul>
+<p>整个过程不会有什么额外的运行时负担，都会在编译期生成好，而调度工作也是用户来控制的，所以你完全可以利用这套规则来设计各种自定义的控制流。</p>
+<p>到这里问题又来了。如果每实现一个类似的coroutine运行时都要来这么一套，那怎么给一些已存在的结构添加上<code>promise_type</code>呢。</p>
+<p>早在C++0x时代大家就预想到了这个问题，比如如果一个定义的约束无法被满足，可以使用一些特化手段给他加上。对应的约束就是concept，而这套特化手段就是concept map。不过在Concept TS中已经被阉割到了只剩下约束了，而且<code>promise_type</code>是没有明确定义的标准concept可以拿来用，所以concept map是指望不上了。</p>
+<p>不过在这之前仍然还有一个上古神器，就是type traits。如果一套约束是按照type traits的思路来设计的，是很容易给已有类型添加额外的特性的。前面提到的iterator traits就是如此。C++也在标准库里提供了<code>std::coroutine_traits</code>。</p>
+<p>比如，对于C++标准库的<code>std::future</code>类型，我们可以直接扩展到coroutine上，利用<code>std::promise</code>作为<code>promise_type</code>。</p>
+<pre><code class="language-C++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T, <span class="hljs-keyword">typename</span>... Args&gt;
+<span class="hljs-keyword">requires</span>(!<span class="hljs-built_in">std</span>::is_void_v&lt;T&gt; &amp;&amp; !<span class="hljs-built_in">std</span>::is_reference_v&lt;T&gt;)
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">std</span>:</span>:coroutine_traits&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">future</span>&lt;T&gt;, Args...&gt; {
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">promise_type</span> :</span> <span class="hljs-built_in">std</span>::promise&lt;T&gt; {
+    <span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">future</span>&lt;T&gt; <span class="hljs-title">get_return_object</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;get_future();
+    }
+
+    <span class="hljs-function"><span class="hljs-built_in">std</span>::suspend_never <span class="hljs-title">initial_suspend</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> {}; }
+    <span class="hljs-function"><span class="hljs-built_in">std</span>::suspend_never <span class="hljs-title">final_suspend</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> {}; }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">return_value</span><span class="hljs-params">(<span class="hljs-keyword">const</span> T &amp;value)</span>
+    <span class="hljs-title">noexcept</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::is_nothrow_copy_constructible_v&lt;T&gt;)</span> </span>{
+      <span class="hljs-keyword">this</span>-&gt;set_value(value);
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">return_value</span><span class="hljs-params">(T &amp;&amp;value)</span>
+    <span class="hljs-title">noexcept</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::is_nothrow_move_constructible_v&lt;T&gt;)</span> </span>{
+      <span class="hljs-keyword">this</span>-&gt;set_value(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(value));
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unhandled_exception</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{
+      <span class="hljs-keyword">this</span>-&gt;set_exception(<span class="hljs-built_in">std</span>::current_exception());
+    }
+  };
+};
+</code></pre>
+<p>同时重载<code>co_await</code>运算符，来让future可以组合：</p>
+<pre><code class="language-C++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;
+<span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-keyword">operator</span> <span class="hljs-title">co_await</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">future</span>&lt;T&gt; <span class="hljs-built_in">future</span>)</span> <span class="hljs-keyword">noexcept</span>
+<span class="hljs-title">requires</span><span class="hljs-params">(!<span class="hljs-built_in">std</span>::is_reference_v&lt;T&gt;)</span> </span>{
+  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">awaiter</span> :</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">future</span>&lt;T&gt; {
+    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">await_ready</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">noexcept</span> </span>{
+      <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>::chrono_literals;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;wait_for(<span class="hljs-number">0</span>s) != <span class="hljs-built_in">std</span>::future_status::timeout;
+    }
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">await_suspend</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::coroutine_handle&lt;&gt; cont)</span> <span class="hljs-keyword">const</span> </span>{
+      <span class="hljs-built_in">std</span>::thread([<span class="hljs-keyword">this</span>, cont] {
+        <span class="hljs-keyword">this</span>-&gt;wait();
+        cont();
+      }).<span class="hljs-built_in">detach</span>();
+    }
+    <span class="hljs-function">T <span class="hljs-title">await_resume</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">get</span>(); }
+  };
+  <span class="hljs-keyword">return</span> awaiter{<span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(<span class="hljs-built_in">future</span>)};
+}
+</code></pre>
+<p>这样你就成功拥有了别的语言里费尽心思糊进去的<code>async</code>和<code>await</code>：</p>
+<pre><code class="language-C++"><span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">future</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">compute</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-keyword">int</span> a = <span class="hljs-keyword">co_await</span> <span class="hljs-built_in">std</span>::async([] { <span class="hljs-keyword">return</span> <span class="hljs-number">6</span>; });
+  <span class="hljs-keyword">int</span> b = <span class="hljs-keyword">co_await</span> <span class="hljs-built_in">std</span>::async([] { <span class="hljs-keyword">return</span> <span class="hljs-number">7</span>; });
+  <span class="hljs-keyword">co_return</span> a * b;
+}
+</code></pre>
+<p>另外，如果你还是觉得太麻烦，可以先忍一忍。等到C++23，大概就能用上标准化的std::generator和std::task了。</p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：#N/A</span>
+  <span class="field">最近更新时间：2021-08-25</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>
