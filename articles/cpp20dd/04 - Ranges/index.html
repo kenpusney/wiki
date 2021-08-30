@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      Ranges
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+        <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d06710df49879016f95c45042560225e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+          </script>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="Ranges">
+        Ranges
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <p>我们看C++20中三大特性中的第四个，ranges。</p>
+<p>早在二十几年前的C++ STL中就已经有相应的概念，即iterator（迭代器）。C++ 的iterator与普通语言中的迭代器有所不同，比如Java，iterator只需要满足非常简单的接口就好了：</p>
+<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Iterator</span>&lt;<span class="hljs-title">E</span>&gt; </span>{
+  <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span></span>;
+  <span class="hljs-function">E <span class="hljs-title">next</span><span class="hljs-params">()</span></span>;
+}
+</code></pre>
+<p>这种迭代器有一个非常不友好的问题就是，只能进行前向迭代，拿下一个元素。但是对于数组（包括std::array）或者std::vector这种连续性容器来说，更多的时候我们需要非常频繁的随机访问，而对于双链表则更有可能从后向前迭代或者前后折腾。当仅有如Java的Iterator这种简单的抽象的时候，并不能设计一些通用的接口。比如排序，对于不同特性的容器，所需要的排序操作就必然有所不同。</p>
+<p>Java解决问题的方式是提供了Arrays.sort和Collections.sort两个静态方法。但在C++ 的泛型能力下，使用统一的接口来做静态分发，完全可以做到比Java更优雅。</p>
+<p>于是就有了iterator category这个概念。对于不同类型的容器（包括裸指针T*），都有对应的分类，分别是：</p>
+<ul>
+<li>input_iterator 用于读取数据的迭代器</li>
+<li>output_iterator 用于写入数据的迭代器</li>
+<li>forward_iterator 前向迭代，约束比input iterator更强的迭代器</li>
+<li>bidirectional_iterator 可双向迭代的迭代器</li>
+<li>random_access_iterator 可随机访问的迭代器</li>
+</ul>
+<p>以及C++17中加入的：</p>
+<ul>
+<li>contiguous_iterator 元素在逻辑顺序和物理顺序上都是连续的迭代器</li>
+</ul>
+<p>前面提到了，有了iterator category的一个好处就是可以直接按照迭代器的相关特性来分发功能。比如std::sort的要求就是必须满足可随机访问的迭代器才能进行排序，但相对宽松的std::copy，只要求提供input iterator来作为复制的源以及output iterator作为复制的目标就能进行复制操作了。</p>
+<p>于是我们可以非常简单的在C++ 里实现一个cat程序：</p>
+<pre><code class="language-c++"><span class="hljs-built_in">std</span>::copy(
+  <span class="hljs-built_in">std</span>::istreambuf_iterator&lt;<span class="hljs-keyword">char</span>&gt;(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cin</span>),
+  <span class="hljs-built_in">std</span>::istreambuf_iterator&lt;<span class="hljs-keyword">char</span>&gt;(),
+  <span class="hljs-built_in">std</span>::ostreambuf_iterator&lt;<span class="hljs-keyword">char</span>&gt;(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span>));
+</code></pre>
+<p>能这样做的一个原因就是我们给输入流和输出流都实现了迭代器，进而可以利用各种标准库算法。</p>
+<p>但是这里就有了一个诡异的问题，于是产生了后来的ranges提案。</p>
+<p>我们看上面那个copy，其对应的签名如下：</p>
+<pre><code class="language-c++">template&lt;<span class="hljs-built_in">class</span> InputIterator, <span class="hljs-built_in">class</span> OutputIterator&gt;
+OutputIterator <span class="hljs-keyword">copy</span>(
+  InputIterator <span class="hljs-keyword">first</span>,
+  InputIterator <span class="hljs-keyword">last</span>,
+  OutputIterator dest
+);
+</code></pre>
+<p>看到问题了吧，大部分情况下，iterator在使用的时候必须以first/last的形式成对出现，算法所作用的是一个前闭后开的<code>[first, last)</code>区间。这样一来很多算法就只能做成inplace的，而且没办法做一些相对简单的组合。</p>
+<p>比如你想做一套流式编程里的map reduce，在C++ 里只能先transform，再accumulate。</p>
+<pre><code class="language-c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;ranges&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;numeric&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;algorithm&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iterator&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;vector&gt;</span></span>
+
+<span class="hljs-function"><span class="hljs-keyword">template</span>&lt;class Collection&gt;
+<span class="hljs-keyword">template</span>&lt;class Collection&gt;
+<span class="hljs-keyword">auto</span> <span class="hljs-title">map_reduce</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Collection&amp; c, <span class="hljs-keyword">auto</span> fn, <span class="hljs-keyword">auto</span> init, <span class="hljs-keyword">auto</span> acc)</span> </span>{
+  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">typename</span> Collection::value_type&gt; transformed {};
+  <span class="hljs-built_in">std</span>::transform(
+    c.<span class="hljs-built_in">begin</span>(), 
+    c.<span class="hljs-built_in">end</span>(), 
+    <span class="hljs-built_in">std</span>::back_inserter(transformed), 
+    fn);
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">std</span>::accumulate(
+    transformed.<span class="hljs-built_in">begin</span>(), 
+    transformed.<span class="hljs-built_in">end</span>(), 
+    init, acc);
+}
+</code></pre>
+<p>那么既然<code>[begin, end)</code>表示一个范围区间，直接用一个统一的range对象表示不就好了吗。</p>
+<p>于是我们就迎来了Ranges提案，并在C++20中合并进了标准库。</p>
+<p>一个range非常简单，有 begin 和 end 就行了。</p>
+<pre><code class="language-c++">template&lt;<span class="hljs-keyword">class</span> <span class="hljs-symbol">T</span>&gt;
+<span class="hljs-symbol">concept</span> <span class="hljs-symbol">range</span> = <span class="hljs-symbol">requires</span>(<span class="hljs-symbol">T</span>&amp; <span class="hljs-symbol">t</span>) {
+  ranges::begin(t);
+  ranges::end(t);
+};
+</code></pre>
+<p>同样在这基础之上，也有与iterator category对应的range concept，满足了对应concept的range自然也能够做针对性的静态分发。</p>
+<p>有了range以后我们就能换种方式来设计前面的 map_reduce 函数：</p>
+<pre><code class="language-c++"><span class="hljs-function"><span class="hljs-keyword">template</span>&lt;<span class="hljs-built_in">std</span>::ranges::range Range&gt;
+<span class="hljs-keyword">auto</span> <span class="hljs-title">map_reduce_range</span><span class="hljs-params">(<span class="hljs-keyword">const</span> Range&amp; r, 
+  <span class="hljs-keyword">auto</span> fn, <span class="hljs-keyword">auto</span> init, <span class="hljs-keyword">auto</span> acc)</span> </span>{
+  <span class="hljs-keyword">auto</span> transformed = r | <span class="hljs-built_in">std</span>::views::transform(fn);
+  <span class="hljs-keyword">return</span> <span class="hljs-built_in">std</span>::reduce(
+    transformed.<span class="hljs-built_in">begin</span>(), 
+    transformed.<span class="hljs-built_in">end</span>(), 
+    init, acc);
+}
+</code></pre>
+<p>这样除了简化了靠begin/end传递的iterator的麻烦，让对应的操作可以组合以外，还附带了额外的优化点。</p>
+<p>在最初的 map_reduce 函数里，为了保留 transform 的中间结果，我们不得不创建一个临时的vector对象，然后再对其accumulate。而在Ranges提案里引入了view的概念，即一个没有所有权的代理对象。view也是一种range，但是相对于传统的容器来说，并不会实际持有内部的元素，只有在获取其元素的时候才进行求值。</p>
+<p>比如在 map_reduce_range 函数里，transformed 对象就是一个由range和transform_view组合而成的view，除了持有range r的迭代器以外，并不会有任何额外的内存分配，也不会进行实际的transform操作。当reduce操作进行规约运算的时候才会进行具体的transform变换（即调用fn函数）。</p>
+<p>这个时候你大概可以把view看成是Java里的Stream。</p>
+<p>当然了，跟Steam必须先有流才能操作不一样，C++ 还允许你做一些别的事情。</p>
+<p>前面你应该注意到了，我们在 map_reduce_range 函数里面实际使用额并不是transform_view，而是std::ranges::transform，后者其实是一个适配器，用来把range转换成transformed_view。transform有两种调用方式：</p>
+<ul>
+<li>transform(range, fn) 直接适配到特定的对象，转换成一个transform_view</li>
+<li>transform(fn) 部分应用适配器，生成一个range适配器闭包对象，用于通过管线操作符 <code>|</code> 进行组合操作。</li>
+</ul>
+<p>任何适配器都可以使用这两种方式调用。同时，多个适配器闭包对象可以进行组合，即，对于一个包含了range R和适配器闭包C、D的管线操作：</p>
+<ul>
+<li><code>R | C | D</code> （按照优先级和结合性，即 <code>(R | C) | D</code>）</li>
+</ul>
+<p>其等同于：</p>
+<ul>
+<li><code>R | (C | D)</code></li>
+</ul>
+<p>因此你完全可以先把某几个适配器闭包组合起来，然后在任何方便的时候在应用到特定的range上。</p>
+<pre><code class="language-c++"><span class="hljs-built_in">auto</span> <span class="hljs-built_in">double</span>s_odd = 
+    views::filter([](<span class="hljs-built_in">auto</span> x) { <span class="hljs-keyword">return</span> x % <span class="hljs-number">2</span> != <span class="hljs-number">0</span>; }) 
+  | views::take(<span class="hljs-number">5</span>)
+  | views::transform([](<span class="hljs-built_in">auto</span> x) { <span class="hljs-keyword">return</span> x * <span class="hljs-number">2</span>; });
+
+<span class="hljs-built_in">auto</span> <span class="hljs-built_in">double</span>d_odds = views::iota(<span class="hljs-number">1</span>) | <span class="hljs-built_in">double</span>s_odd;
+</code></pre>
+<p>这里 iota 生成了一个从 1 开始的无穷整数序列，doubles_odd 则筛选其中的奇数，然后取前 5 个，再对其中的每一个数 * 2。这样下来整个风格就更贴紧函数式风格了，而且因为C++ 本身的设计，又不会带来明显的运行时负担。</p>
+<p>但同前面几个特性一样，C++20的range也有些许遗憾。虽然是少有的直接集成了concept的库，其中可以直接使用的adaptor并不多，很多东西则需要通过ranges-v3库中view来补充。不过好在ranges补完计划也已经提到C++23议程里面去了，就等这个补丁版本发布看能否有更好的进展吧。</p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：#N/A</span>
+  <span class="field">最近更新时间：2021-08-30</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>
