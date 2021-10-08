@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      我们是怎么走到这个地步的？
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+        <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d06710df49879016f95c45042560225e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+          </script>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="我们是怎么走到这个地步的？">
+        我们是怎么走到这个地步的？
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <p>C++23除了是一个即将到来的大补丁以外，还可能将加入另外一个特性，即模式匹配。</p>
+<p>当然早在模板出现以后，基于偏特化的模式匹配已经有了。这里会加入的，更多是像类似函数式编程语言中那种基于和类型的模式。</p>
+<p>和类型（sum type）这个概念我在另外一个系列文章里面提到过。对于C语言和C++来说，早期要模拟这套操作只能使用tagged union。比如我们解析INI文件或者JSON字段的时候，可能的类型会是字符串、整数或者布尔值。</p>
+<p>传统的做法是：</p>
+<pre><code class="language-c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Value</span> {</span>
+    <span class="hljs-class"><span class="hljs-keyword">union</span> {</span>
+        string str;
+        int num;
+        bool b;
+    };
+    <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Type</span> { <span class="hljs-title">STR</span>, <span class="hljs-title">INT</span>, <span class="hljs-title">BOOL</span> };</span>
+    Type tag;
+}
+</code></pre>
+<p>当然了，对于有面向对象和动态分发的语言，自然可以换个角度来糊：</p>
+<pre><code class="language-c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Value</span> </span>{};
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StringValue</span> : Value </span>{
+    <span class="hljs-built_in">string</span> str;
+};
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">IntValue</span> : Value </span>{
+    int num;
+};
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">BooleanValue</span> : Value </span>{
+    <span class="hljs-built_in">bool</span> b;
+};
+</code></pre>
+<p>这两种方式本质上并没有什么区别，毕竟都要靠运行时的判断和分发来做些事情。要么一堆的tag判断，要么dynamic_cast，要么就换成用visitor。</p>
+<p>不过巧的是某些编程语言的模式匹配实现就是生成一套visitor。</p>
+<p>我们之前讲过，C++ 近年来的努力始终都是希望把任何抽象都放到运行时。而和类型与模式匹配这套几乎完全依赖静态类型信息的操作也自然非常适合这样做。于是我们在C++17的时候迎来了std::variant和std::visit。</p>
+<p>这一切都起源于C++11的parameter pack，能够让我们在C++ 模板上添加多个参数，于是std::variant就成了这样一个模板：</p>
+<pre><code class="language-C++"><span class="hljs-keyword">template</span>&lt;class... Types&gt;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">variant</span>;</span>
+
+<span class="hljs-keyword">using</span> Value = <span class="hljs-built_in">std</span>::variant&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>, <span class="hljs-keyword">bool</span>&gt;;
+
+Value strValue = <span class="hljs-string">&quot;string value&quot;</span>;
+Value intValue = <span class="hljs-number">1</span>;
+Value boolValue = <span class="hljs-literal">false</span>;
+</code></pre>
+<p>如果是有模式匹配加持的语言，可以预期的操作会是：</p>
+<pre><code class="language-C++">match (value) {
+    <span class="hljs-built_in">string</span> s =&gt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; s;
+    <span class="hljs-keyword">int</span> s =&gt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; s;
+    <span class="hljs-keyword">bool</span> s =&gt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; s;
+}
+</code></pre>
+<p>可惜这段相当简单的结构在C++里面添加起来实在是非常费劲。虽然C++17也加入了structural binding可以对某些类型进行解构，但远没有达到可以进行模式匹配的地步。如果我们想要做到类似的效果，就只能暂时借用 std::visit。并且需要一个visitor来处理对不同类型的访问。</p>
+<pre><code class="language-C++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ValueVisitor</span> {</span>
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; s)</span> <span class="hljs-keyword">const</span> </span>{
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;A string: %s\n&quot;</span>, s.c_str());
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> n)</span> <span class="hljs-keyword">const</span> </span>{
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;An integer: %d\n&quot;</span>, n);
+    }
+
+    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">bool</span> b)</span> <span class="hljs-keyword">const</span> </span>{
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;A boolean: %d\n&quot;</span>, b);
+    }
+};
+
+<span class="hljs-built_in">std</span>::visit(ValueVisitor(), value);
+</code></pre>
+<p>尽管这样做仍然是静态分发的，但看起来就太复杂了。如果我们有更方便的方式来构建visitor，可能会更好一点。而lambda表达式作为可以静态分发的工具自然非常方便我们来达成对应的效果。预期的场景可能像下面这样：</p>
+<pre><code class="language-c++">make_visitor(
+    [](<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; s) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;string: %s\n&quot;</span>, s.c_str());
+    },
+    [](<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> d) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;integer: %d\n&quot;</span>, d);
+    },
+    [](<span class="hljs-keyword">const</span> <span class="hljs-keyword">bool</span> b) {
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;bool: %d\n&quot;</span>, b);
+    }
+)
+</code></pre>
+<p>前面提到了 C++11 有了parameter pack，可以帮我们变着法的组合出来这套操作。</p>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span> &lt;class... Fs&gt;
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">overload</span>;</span>
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">F0</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Frest</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">overload</span>&lt;</span>F0, Frest...&gt; : F0, overload&lt;Frest...&gt;
+{
+    overload(F0 f0, Frest... rest) : F0(f0), overload&lt;Frest...&gt;(rest...) {}
+
+    <span class="hljs-function"><span class="hljs-keyword">using</span> <span class="hljs-title">F0::operator</span><span class="hljs-params">()</span></span>;
+    <span class="hljs-keyword">using</span> overload&lt;Frest...&gt;::<span class="hljs-keyword">operator</span>();
+};
+
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">F0</span>&gt;</span>
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">overload</span>&lt;</span>F0&gt; : F0
+{
+    overload(F0 f0) : F0(f0) {}
+
+    <span class="hljs-function"><span class="hljs-keyword">using</span> <span class="hljs-title">F0::operator</span><span class="hljs-params">()</span></span>;
+};
+
+<span class="hljs-keyword">template</span> &lt;class... Fs&gt;
+<span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">make_visitor</span><span class="hljs-params">(Fs... fs)</span>
+</span>{
+    <span class="hljs-keyword">return</span> overload&lt;Fs...&gt;(fs...);
+}
+</code></pre>
+<p>这里利用了C++模板偏特化的一个老传统，必须进行类似的递归定义才行。每一个overload模板展开其实都相当于包裹了对应位置的lambda表达式，并且继承了其 <code>operator()</code>。而每一个overload模板又是比其少一个参数的overload模板的子类，也继承了父类的 <code>operator()</code>。这样套娃下来，就达成了我们想要的结果。</p>
+<p>然而在C++17的时候，parameter pack被扩展到了 fold 表达式和 using 声明中，于是就不再需要递归地糊这一堆递归了。同时C++17引入了CTAD（类模板参数推导），可以使用deduction guide来代替笨拙的make_visitor函数。</p>
+<pre><code class="language-c++">template&lt;class<span class="hljs-params">...</span> Ts&gt; struct overloaded : Ts<span class="hljs-params">...</span> { using Ts<span class="hljs-type">::operator</span>()<span class="hljs-params">...</span>; };
+template&lt;class<span class="hljs-params">...</span> Ts&gt; overloaded(Ts<span class="hljs-params">...</span>) -&gt; overloaded&lt;Ts<span class="hljs-params">...</span>&gt;;
+</code></pre>
+<p>C++20中扩展了CTAD的规则，以至于连最后那行deduction guide也可以直接省略掉。</p>
+<p>于是我们的visit就可以写成：</p>
+<pre><code class="language-c++"><span class="hljs-built_in">std</span>::visit(overloaded {
+    [](<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>&amp; ) { <span class="hljs-comment">/* ... */</span> },
+    <span class="hljs-comment">// ...</span>
+}, value);
+</code></pre>
+<p>虽然还是丑了点，但这相较于需要改动编译器引入新的语句和结构来实现的模式匹配来说，已经是相当轻量而且方便了。更关键的是，从parameter pack，到CTAD，到lambda表达式，都并非为了sum type 和模式匹配而准备的，但这些有机地组合在了一起就让C++能够实现堪比函数式编程语言的表达能力，并且因为完全是编译时的操作，完全不会带来运行时负担和额外的性能开销。</p>
+<p>不过相应的问题就是要去了解那么多<code>...</code>所表示的意思以及复杂的deduction guide规则了。对于库使用者相对来说还不是那么必要，但是库作者需要对外提供更加友好的接口和DSL的时候，就需要充分了解相关的内容。</p>
+<p>后续的文章我们会看一下C++其他的关于模式匹配的设计，以及现阶段的模式匹配的Proposal。</p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：#N/A</span>
+  <span class="field">最近更新时间：2021-10-08</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

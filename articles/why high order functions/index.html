@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      why high order functions
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+        <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d06710df49879016f95c45042560225e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+          </script>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="why high order functions">
+        why high order functions
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <p>昨天群里同学提到了一个问题。</p>
+<blockquote>
+<p> 为啥不要写for/foreach，为啥要引入高阶函数这些个东西。我现在的理解就是引入这些东西，就是为了用一种更加“声明式”的，更加“表意”的，而非“命令式”的方式来写代码。</p>
+</blockquote>
+<p>以下是我的回答，有所删改：</p>
+<p>从另外一个视角来看这个问题，高阶函数出现主要是能够把控制流作为数据来操作了。比如map等这些函数，实际上就是通过控制流简化了原本的程序结构，直接把循环结构给干掉了，只利用选择和递归就能解决所有问题。（实际上选择结构也可以被干掉，不过这样写出来的东西就更不说人话了。）</p>
+<p>这种好处是就是你不用关注操作控制流后面具体实现，因为对应的表述方式没有太大的差别。比如使用循环结构来操作程序的时候，你是很难控制这段程序如何去并行执行的，虽然有openmp这样的指令系统。但也有额外的操作和开销。而如果是使用map，那就把后面对应换成并行的实现就好了，具体调用的代码并不需要做改变。比如Java的ParallelStream、Visual C++的Parallel Patterns Library。甚至微软后面推出的 C++ AMP，能够直接采用GPU来加速计算，仍然采用与STL/PPL一样的调用方式。</p>
+<p>设计模式实际上一定程度在以各种形式组合出来这种高阶控制流，比如可以自由组合结构的Composite和可以层级解析结构的Interpreter，就等于变相把构建语法树和解析语法树这两个本来应该由编译器完成的操作让程序员自己来完成。</p>
+<p>所以超出结构化编程以后的各种新的控制结构和控制流，多少都是基于“高阶函数”这样一个公共的基础，通过函数和值的捕获、传递和组合来实现诸如续延、协程、异步、响应式等等。主要的思路还没变，就是在简化前端（即程序员）操作的情况下更好的来利用操作系统和硬件的基础设施。</p>
+<p>有些编程语言会选择把这些高阶控制流设计的更友好一些，把本来的高阶结构隐藏起来，在语法层把自己伪装成结构化编程的老样子，利用编译器的转换来实现。比如JavaScript的async/await，表面上看还是if/for/try/catch，实际编译过以后就变成Promise和Generator了。</p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：#N/A</span>
+  <span class="field">最近更新时间：2021-10-08</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>
