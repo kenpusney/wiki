@@ -7,8 +7,8 @@ module.exports = {
 
   site: {
     title: "Wiki",
-    author: "KimmyLeo",
-    copyright: "Copyright &copy; KimmyLeo",
+    author: "Kimmy",
+    copyright: "Copyright &copy; Kimmy",
     baseUrl: "https://wiki.kimleo.net/",
   },
 
