@@ -1,6 +1,5 @@
 ---
 title: BS C++ 论文笔记
-draft: true
 date: 2020-08-02
 ---
 
