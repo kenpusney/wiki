@@ -11,7 +11,7 @@
   </script>
   
     <title>
-      Module
+      C++ 20 解析相关文章
     </title>
     
 
@@ -166,8 +166,8 @@
 
   <header>
     
-      <h1 title="Module">
-        Module
+      <h1 title="C++ 20 解析相关文章">
+        C++ 20 解析相关文章
       </h1>
       
           <nav>
@@ -182,21 +182,106 @@
           
   </header>
   <article>
-    <p>第三项语言特性的改进是module。</p>
-<p>要说为什么有这个东西存在，我们还得退回到上个世纪的C语言上。因为最早的设计是single pass编译，以至于C语言处理所有符号的时候都必须保证是已经声明过的。而遇到互递归或者循环依赖的符号，就不得不做一个前向声明。因此便有了头文件同时用于前向声明和符号导出的习惯。同时为了处理编译期的一些条件控制，C语言引入了预处理宏，导致头文件中充斥着各种诡异的符号、宏定义和预处理条件。C++则毫无保留地把这些东西继承了下来。</p>
-<p>但与此同时，编译符号的导出和链接符号的导出又不是同一个层面所控制的。通常来说一个c/cpp文件就是一个基本编译单元，每一个相关的声明都有其链接方式（linkage）。通常为了保持符号私有，不影响到跨编译单元的链接，会单独声明成为internal linkage（即<code>static</code>）。注意这里跟链接时的static linking又有所不同：linkage表示的编译单元对于符号的导出情况，而linking表示对象文件和第三方库组合成库或者可执行程序的时候的组合方式。</p>
-<p>linkage的控制不受是否使用头文件的影响，而linking则完全与C++这个语言毫无关系。所以与简单到把所有.class文件打个包就能用的Java相比，理解native（不仅仅是C++）的这套关系都是非常有挑战性的，以至于都成了程序员自我修养的一部分。</p>
-<p>除了这对乱糟糟的东西之外。因为模板的特殊性，展开必须在编译时进行，所以模板代码通常是直接包含在头文件里面的。这就导致很多库（包括STL）的头文件异常的大，而编译器对每一个编译单元的处理都是把include指令展开然后完整编译，整个编译时间就会因为引用了某些头文件导致爆炸性增长。预编译头文件解决了部分问题，但仍然是不同实现自己在进行的hack，非常不利于工程化。</p>
-<p>module就是为了解决前面这堆（除了linking和loading之外）的问题而出现的。</p>
-<p>module与编译单元对应，包含了module声明的单元被叫做module单元（unit）。一个module可以包含多个单元，其中包含了导出（export）声明的是module接口单元（interface unit），而未包含的则作为module实现单元（implementation unit）。</p>
-<p>而在module接口单元中可以导出声明或者定义。这一定程度上像极了module之前的头文件，但是在这里就完全不用担心诸如include guard和linkage之类的问题，导出以后就是对其他编译单元可见的。这就直接统一了编译期的符号导出问题。</p>
-<p>同时因为导出声明是显式的，编译器就更好直接控制编译符号和预编译缓存的对应关系，并且更容易进行链接层面的优化，对于没有被引用到的符号完全可以直接从目标文件中排除掉。</p>
-<p>但是你看我说了大半天居然都不上代码，跟前面两篇的风格完全不一样，为什么呢？</p>
-<p>因为直到目前我都没找到一个使用起来不那么麻烦的module实现。可以说几个主流的编译器都实现了module，但各家又都有所不同。而构建系统方面的支持也是一直都没有跟上，所以整个module特性如之前提到的coroutine一样：实现了，但又没完全实现。我们只能等了。</p>
-<p>C++23的另外一个主要目标是把标准库模块化，也相对会带动下module的推广使用，等到那个时候再上也还来得及。</p>
-<p>另外就像前面说的，module主要还是为了解决linkage相关的问题，所以对于标准化的包管理并不一定能够促进。第三方的依赖甚至都不可能是通过module的方式来分发，也就不存在一个集中的module管理中心来做分发了。加上C++所处的native环境本身十分复杂，ABI的统一基本上不可能，所以只能暂时用一些可用的第三方实现替代。好在module对于头文件的引入做了兼容处理，允许我们从部分代码开始逐步替换，这样也能慢慢演化过来吧。</p>
+    <p>这里存放的是我最近两年关于 C++ 的一些文章。其中主线是源自于 Bjarne 在 HOPL 4 上的 Paper 而形成的《C++ 20解析》系列。</p>
+<p>今年相对来说也是比较精彩的一年。Google 推出了 Carbon，华为搞了 Cangjie，甚至 Herb Sutter 也搞了个新玩意儿。这一堆 C 字号的编程语言到底冲着谁来的，大家都懂，2023 新标准也会推出，到时候肯定会更精彩。</p>
+<p>关于《Better C++》一文，这点上我是完全没有想到会呼应 Carbon 和 Cangjie 的，因为这就是拿 OCaml 开的一个小玩笑。OCaml 是个好东西，作为一个不限制风格的编程语言，在某些方面与 C++ 异曲同工。</p>
 
       
+        <h2>当前类目下的页面：</h2>
+        <ul class="post-list">
+          
+            <li>
+              <h3><a href="/articles/cpp20dd/on-carbon-programming-language">
+                  说说 Carbon
+                    
+                </a><small>
+                  2022-07-28
+                </small></h3>
+            </li>
+            
+            <li>
+              <h3><a href="/articles/cpp20dd/better-cpp">
+                  Better C++：如何设计一个更好的C++编程语言
+                    
+                </a><small>
+                  2022-07-09
+                </small></h3>
+            </li>
+            
+            <li>
+              <h3><a href="/articles/cpp20dd/06 - how do we end up here">
+                  我们是怎么走到这个地步的？
+                    
+                </a><small>
+                  2021-09-01
+                </small></h3>
+            </li>
+            
+            <li>
+              <h3><a href="/articles/cpp20dd/05 - Ranges">
+                  Ranges
+                    
+                </a><small>
+                  2021-08-27
+                </small></h3>
+            </li>
+            
+            <li>
+              <h3><a href="/articles/cpp20dd/04 - Module">
+                  Module
+                    
+                </a><small>
+                  2021-08-24
+                </small></h3>
+            </li>
+            
+            <li>
+              <h3><a href="/articles/cpp20dd/03 - Coroutine">
+                  Coroutine
+                    
+                </a><small>
+                  2021-08-23
+                </small></h3>
+            </li>
+            
+            <li>
+              <h3><a href="/articles/cpp20dd/02 - Concepts">
+                  Concepts
+                    
+                </a><small>
+                  2021-08-12
+                </small></h3>
+            </li>
+            
+            <li>
+              <h3><a href="/articles/cpp20dd/BS Papers Notes">
+                  BS C++ 论文笔记
+                    
+                </a><small>
+                  2020-08-02
+                </small></h3>
+            </li>
+            
+            <li>
+              <h3><a href="/articles/cpp20dd/01 - A feature list">
+                  C++20：从一个 Proposal 列表说起
+                    
+                </a><small>
+                  2020-08-02
+                </small></h3>
+            </li>
+            
+            <li>
+              <h3><a href="/articles/cpp20dd/00 - Preface">
+                  C++ 20 解析 —— 前言
+                    
+                </a><small>
+                  2020-04-01
+                </small></h3>
+            </li>
+            
+        </ul>
+        
 
   </article>
   <!-- <div>
@@ -205,8 +290,8 @@
             <li><a href="/about">About Me</a></li>
         </ul>
     </div> -->
-  <span class="field">创建时间：#N/A</span>
-  <span class="field">最近更新时间：2022-07-12</span>
+  <span class="field">创建时间：2022-12-13</span>
+  <span class="field">最近更新时间：2022-12-13</span>
   <hr>
   <footer>
     <ul>

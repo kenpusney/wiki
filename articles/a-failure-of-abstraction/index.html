@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      一次失败的过度抽象
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+        <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d06710df49879016f95c45042560225e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+          </script>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="一次失败的过度抽象">
+        一次失败的过度抽象
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <p>众所周知，服务端应用往往可以一刀切地划分成两种结构，单体应用（monolithic）和分布式应用（distributed）。这两者本质的区别就是所有相关联的组件是否同部署和运行在一个进程之中（至于为了性能采用多进程的单体应用，属于进一步的优化，不属于本文讨论的范畴）。</p>
+<p>在长期实践单体仓库（monorepo）的项目结构以后，我一时间产生了一个幻想，如果有那么一种办法能够灵活的控制我们最终的应用是单体还是分布式的，是不是更好呢？在资源并不紧张的并且需要考虑scale的时候可以以分布式的形态部署，而在一些资源有限或者仅仅是用于简单的测试场景的时候就能换成单体形态。</p>
+<p>这个想法成型于很久之前，因为之前团队工作的过程中因为各方面的原因很难快速启动一套用于测试/验证的系统而令人抓狂。主要是在分布式场景下，各种隐式的依赖很难追踪，即便通过测试环境也只能保证当前组件是可控的，其他依赖项依然是不稳定状态。</p>
+<p>我的第一套设计就是为了解决这个问题。</p>
+<p>在讲述细节之前我们先提几个概念：</p>
+<ul>
+<li>deployable （部署件）：一个可以运行的服务端应用，可以是个容器、是个运行在物理/虚拟机上的进程，或者就是个启动了的jvm，提供了可供调用额接口</li>
+<li>module（模块）：一组可以被复用的代码，可以被链接到其他 module 中组合成不同的部署件。这里的链接，在Java的场景下也可以是直接把编译生成的class/jar文件打包在一起。模块之间有依赖性。</li>
+<li>component（组件）：一套可以实现某项特定业务的模块组合起来的结构。可以是单独运行在某个部署件里，也可以跟其他组件一起组合成一套部署件。组件之间也会有依赖，其具体的依赖性是一方面是通过模块来表现，另外在分布式系统中，也需要通过服务发现的方式来表现。</li>
+</ul>
+<p>上面的概念非常抽象，我们可以用一些具体的例子来说明一下。</p>
+<p>假如有一个在线的宠物商店，用户可以在线浏览宠物，把喜爱的宠物加入购物车，并且下单购买。以加入购物车并下单这个场景为例，我们可能的组件有下面三个：</p>
+<ul>
+<li>ShoppingCart 购物车，可以暂存要购买的宠物。依赖 Inventory 和 Order</li>
+<li>Inventory 库存，避免出现下单了发不了货的情况</li>
+<li>Order 订单，用于创建和管理订单。依赖 Inventory。</li>
+</ul>
+<p>这三部分可能会同时打包在一个jar/war文件（一个deployable）中，在服务器端启动，也可能分别部署到不同节点上（多个deployable），根据相互间的依赖关系进行远程过程调用。</p>
+<p>因为依赖关系总是单向的（没错，如果不是的话扔了重写），所以我们可以把任何复杂的关系都能简化到两个通用的抽象组件的依赖。为了不受具体示例的干扰，后面讲述这套结构的时候，我会分别叫他们xxx和yyy。yyy依赖了xxx。</p>
+<p>首先为了隔离，我们给xxx提供一套接口，xxxIntf。这样在yyy的实现yyyImpl里，就引用了xxxIntf来完成进一步的动作。</p>
+<p>而同样的因为我们要具体对应到xxx的实现xxxImpl，所以xxxImpl也实际上实现了xxxIntf。这样根据我们之前提到过的依赖注入的操作，就把xxx这块儿可能存在的硬依赖给分离开了。</p>
+<p>这样对于组件xxx来说，包含了模块xxxImpl和xxxIntf，组件yyy包含了yyyImpl、xxxIntf和其他相关模块。两者直接组合到一起实际就可以构成一个单体应用。</p>
+<p>而如果我们需要变成分布式的要怎么办呢。按照六边形架构的原则，只要在xxx上wrap一层对外的接口，变成xxxServer，无论是http也好，什么样的其他rpc也好，然后再提供一个实现了xxxIntf 的 xxxClient 给 yyy，这样我们实际上就能组合出来两个deployable：</p>
+<ul>
+<li>xxxImpl + xxxIntf + xxxServer 作为部署xxx组件的部分</li>
+<li>yyyImpl + xxxIntf + xxxClient 作为部署yyy组件的部分</li>
+</ul>
+<p>而本身作为server和client，他们并不需要了解具体的实现和调用方的细节，所以xxxServer只要实现了特定的远程接口，并且引用xxxIntf把请求转发过去就行，xxxClient也只需要实现xxxIntf，把来自xxxIntf的调用发送到远端就行。</p>
+<p>作为一个大聪明，我觉得我这样糊出来简直棒极了。除了多写了一堆boilerplate之外好像并没有啥坏处。第一个版本的结构就出现了，远程调用使用的是grpc。最开始我还是能坚持下去的，但是隔了一段回来再维护这堆结构的时候，我发现这件事情实在是太折磨人了。首先我要想尽办法把各种模块隔离开，然后是client server分别手写一套，然后有任何改动基本上要从头串到尾。而为了偷懒，xxxIntf接口部分的value object其实用的是protobuf生成的类，所以整体并没有跟grpc完全隔离开。而要想完全隔离开，还要再手写一堆的mapper。</p>
+<p>然后进一步地，我发现grpc居然有InProcessChannel。意思是人家本来就支持同进程内进行不同组件的通信。就啥server client你都塞到一起也没问题，用个inproc channel能够当成单体应用跑了。还拿什么鬼Intf做隔离，人家grpc stub本来就是天然的interface。</p>
+<p>这堆东西写起来麻烦，删起来倒还挺简单的，没多久就完全替换完了。</p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：2022-11-02</span>
+  <span class="field">最近更新时间：2022-12-13</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>

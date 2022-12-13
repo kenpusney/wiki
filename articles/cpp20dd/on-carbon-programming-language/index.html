@@ -11,7 +11,7 @@
   </script>
   
     <title>
-      Concept
+      说说 Carbon
     </title>
     
 
@@ -166,8 +166,8 @@
 
   <header>
     
-      <h1 title="Concept">
-        Concept
+      <h1 title="说说 Carbon">
+        说说 Carbon
       </h1>
       
           <nav>
@@ -182,7 +182,20 @@
           
   </header>
   <article>
-    
+    <p>月初的时候我发了篇梗文，纯粹是为了整个 OCaml 的活。没想到就在这篇文章刚发了没多久，圈子里就突然盛传出来了 Google 的新编程语言，Carbon。</p>
+<p>而且 Carbon 团队在其文档里写明了，人家就是要做 Better C++。</p>
+<p>当然啦，虽然是个后继语言，Carbon 可不甘心只是语法上扩展一下 C++ 这么简单，人家是重新设计过的（<del>甚至如同我导出 Better C++ = OCaml 这个过程一样</del>）。整个 Carbon 的 repo 里面大部分都是 Markdown 文档，其中用了专门的篇幅来细数改进 C++ 的难处。所以也就有人猜测，这群人是在 WG21 （ISO C++ 标准委员会工作组）吃了太多亏以后才不得不另起炉灶，打着兼容 C++ 的名义重新造一套轮子。</p>
+<p>Carbon 在变 Better 的路上迈得非常开。文档中提到，C++ 难改进的一个原因就是后向兼容性（backward capability），很多特性本来可以直接重新设计（<del>就像我改造 module 那样</del>），但是却不得不以新特性的形式添加上去。这样导致的结果就是很多特性交叉存在让整个语言变得十分复杂。</p>
+<p>于是 Carbon 选择了一个奇特的思路来避免这个问题，就是不管后向兼容性了。这点上像极了 Swift（可是 Swift 出现在了一个成熟的平台上，<del>直接绑架了无数的开发者，</del>这么做并不是什么大问题，而你 Carbon……），但下场可能会略有不同吧。</p>
+<p>要说 Carbon 到底该进了哪一点真的说不上来。重新设计了泛型（<del>如同我之前所说，“泛型应该是像泛型一样的泛型”</del>），并丢掉了模板；还引入了类似 Rust <code>trait</code> 的 <code>interface</code>。剩下的是一些“<strong>modern</strong>”编程语言该有的诸如模式匹配、tuple 等，然后就真的没什么可以看的东西了。</p>
+<p>你甚至都不能说这算是什么改进，毕竟，现有的 C++ 提案也覆盖了这堆东西，甚至 Circle 已经实现了大部分。至于诸如元编程、移动语义、异常处理等之类的问题，还处于 <strong>Unfinished tales</strong> 阶段。并且，在某些痛点上，甚至一贯体现了特有的 Google 味儿，比如，基本不考虑兼容 C++ 的异常；比如重新设计泛型的时候把 <code>interface</code> 做成了类似 Rust <code>trait</code> 的东西，跟你能想象到的 <code>interface</code> 完全不同，效果上感觉远不如 <code>concept</code>。前两天跟群友集中讨论了 Rust 这个设计的诡异之处，改天可以细聊下这个坑。不过好在 Carbon 还是保留了继承，某种程度上能比 Rust 好看点吧。</p>
+<p>真的对比起来月初泄漏的华为的 Cangjie，虽然两个看起来都是缝合怪，但 Cangjie 明显在特性取舍上非常务实。</p>
+<p>另外，我看到某知乎网友评价如下：</p>
+<blockquote>
+<p>设计语言是很考验品味的事情</p>
+<p>从 Google 前面推出的两个语言显然可以看出他们并没有什么品味可言</p>
+</blockquote>
+
       
 
   </article>
@@ -192,8 +205,8 @@
             <li><a href="/about">About Me</a></li>
         </ul>
     </div> -->
-  <span class="field">创建时间：#N/A</span>
-  <span class="field">最近更新时间：2022-07-12</span>
+  <span class="field">创建时间：2022-07-28</span>
+  <span class="field">最近更新时间：2022-12-13</span>
   <hr>
   <footer>
     <ul>

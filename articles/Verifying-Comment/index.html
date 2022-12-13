@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    if (location.href.endsWith("index.html")) {
+      location.href = location.href.substring(0, location.href.length - "index.html".length);
+    }
+  </script>
+  
+    <title>
+      基于形式化验证的注释
+    </title>
+    
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: light)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+          media="(prefers-color-scheme: dark)">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          media="(prefers-color-scheme: no-preference)">
+        <style type="text/css">
+          body {
+            width: 60%;
+            margin: 0 auto;
+            padding: 2em;
+            font-family: 'Segoe UI',
+              "Microsoft Yahei Light",
+              "San Francisco",
+              "Ping Fang SC",
+              "Roboto",
+              "Noto Sans CJK",
+              Tahoma, Geneva, Verdana, sans-serif;
+          }
+
+          p>img {
+            margin: 0 auto;
+            display: block;
+            max-width: 80%;
+          }
+
+          span.field {
+            display: inline-block;
+            font-weight: bolder;
+            font-size: smaller;
+          }
+
+          pre {
+            max-width: 90%;
+            overflow-x: scroll;
+            padding: 1em;
+            border-radius: 5px;
+          }
+
+          a {
+            text-decoration: none;
+            color: cornflowerblue;
+          }
+
+          a:visited {
+            color: cornflowerblue;
+          }
+
+          a:hover {
+            color: darkgray;
+          }
+
+          a.disabled-link {
+            color: lightcoral;
+            text-decoration: line-through;
+          }
+
+          nav,
+          nav ul {
+            display: inline-block;
+          }
+
+          .tags ul,
+          footer ul {
+            padding: 0;
+            display: inline;
+          }
+
+          header h1 {
+            display: inline-block;
+            min-width: 320px;
+            max-width: 50%;
+            width: 50%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            margin: auto;
+          }
+
+          @media screen and (max-width: 1200px) {
+            body {
+              width: 90%;
+              max-width: 720px;
+              padding: 0;
+              margin: 1em auto;
+            }
+
+            header h1 {
+              max-width: 90%;
+              width: 90%;
+            }
+          }
+
+          nav li,
+          .tags li,
+          footer li {
+            display: inline;
+            border-right: 1px solid darkgray;
+            padding: 0 1em;
+          }
+
+          nav li:last-child,
+          .tags li:last-child,
+          footer li:last-child {
+            border: none;
+          }
+
+          .post-list h3 {
+            margin: 0.3em 0;
+          }
+
+          blockquote {
+            margin: 0.5em;
+            border: 1px dotted darkgrey;
+            border-radius: 0.5em;
+            padding: 0 1em;
+          }
+
+          div.image-description {
+            text-align: center;
+            color: gray;
+            font-size: smaller;
+          }
+
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: #090810;
+              color: floralwhite;
+              opacity: 0.83;
+            }
+
+            pre {
+              background-color: #282a36;
+            }
+          }
+        </style>
+        <script>
+          var _hmt = _hmt || [];
+          (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?d06710df49879016f95c45042560225e";
+            var s = document.getElementsByTagName("script")[0];
+            s.parentNode.insertBefore(hm, s);
+          })();
+          </script>
+</head>
+
+<body>
+
+  <header>
+    
+      <h1 title="基于形式化验证的注释">
+        基于形式化验证的注释
+      </h1>
+      
+          <nav>
+            <ul>
+              <li><a href="/">Home</a></li>
+              <li><a href="/articles">Articles</a></li>
+              <li><a href="/about">About</a></li>
+            </ul>
+          </nav>
+          <hr>
+          <span class="field">Author: <a href="/about">KimmyLeo</a></span>
+          
+  </header>
+  <article>
+    <p>这周群里又讨论起来了月经话题了：程序到底该不该加注释。如果你看过我之前的文章，已经把我的观点和理由都充分罗列出来了。</p>
+<p>但是毕竟还是无法避免的。我糊玩具编译器的时候反正是不考虑注释，因为没什么用。但是已有的编程语言历史悠久，注释早就是个被玩烂的东西了。而我一直认为最不可容忍的点就是，注释这个玩意儿放在这里是非常影响程序的，因为大部分情况下编译器直接忽略这块儿语法结构，不会对其做验证。这就导致其实我们没办法保证，所写出来的注释就是正确的，更不能保证当代码因为某些逻辑变更改动时，注释也随之更新。</p>
+<p>所以如果我们限制一下注释的格式，让他能够变得被形式化验证，不就可以了吗？</p>
+<p>正常情况下用自然语言写出来的注释就是可能存在歧义的，但形式化方法发展了这么多年了，各种形形色色的工具都能直接搬进来用。按照这种方式写注释来解释你的代码，远比用绕来绕去说不清楚的自然语言更加高效。反过来还可以根据这些形式化的规范去验证代码实现的正确性，一举两得。</p>
+<p>最初我的设想是直接要求在注释里写 TLA+ 这种形式化的建模语言。但是想了想有点不太现实。另外三哥也提出了一个观点，评论必须能够让人直观的看懂，不能有学习成本。但是一方面本身相关结构的命名就能解决这个问题，另外一方面你都在看源码了还不能直观看懂建模工具的spec？</p>
+<p>比如下面两个例子：</p>
+<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sumOfSquares</span><span class="hljs-params">([<span class="hljs-rest_arg">...array</span>])</span> </span>{
+    let sum = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">for</span> (let item of array) {
+        sum += item * item;
+    }
+    <span class="hljs-keyword">return</span> sum;
+}
+</code></pre>
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-keyword">float</span> <span class="hljs-title">inv_sqrt</span><span class="hljs-params">(<span class="hljs-keyword">float</span> x)</span>
+</span>{
+    <span class="hljs-keyword">float</span> xhalf = <span class="hljs-number">0.5f</span>*x;
+    <span class="hljs-keyword">int</span> i = *(<span class="hljs-keyword">int</span>*)&amp;x;
+    i = <span class="hljs-number">0x5f3759df</span> - (i&gt;&gt;<span class="hljs-number">1</span>);
+    x = *(<span class="hljs-keyword">float</span>*)&amp;i;
+    x = x*(<span class="hljs-number">1.5f</span>-xhalf*x*x);
+    <span class="hljs-keyword">return</span> x;
+}
+</code></pre>
+<p>虽然相对比较极端，这两个可都不是能够应用注释的地方。第一个直观的就能从函数名看懂一切，第二个就要去读 <a href="http://lomont.org/papers/2003/InvSqrt.pdf" title="null">Chris Lomont 的 Paper</a>才行。其他的场景也几乎一样，要么复杂到你必须有一个相对完善的文档来解释，要么简单到名称解释一切<del>，要么就是写代码的人有问题</del>。</p>
+<p>不过既然注释里面写TLA+不是个好选项，那就看下有没有其他的solution吧。不过好在 Java 的生态相对健全的多，很容易就找到了 Java Modeling Language（JML）。</p>
+<p>这个工具充分利用了 Java 的注释和 Dijkstra / Hoare 那群人的理论，让你能够在代码里详细的描述清楚自己到底在做什么。并且配合相应的工具能提供编译期甚至运行期的检查。</p>
+<p>如下是 OpenJML 官网的一个<a href="http://www.openjml.org/examples/" title="null">示例</a>：</p>
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearchGood</span> </span>{
+    
+    <span class="hljs-comment">//@ requires sortedArray != null &amp;&amp; 0 &lt; sortedArray.length &lt; Integer.MAX_VALUE;</span>
+    <span class="hljs-comment">//@ requires \forall int i; 0 &lt;= i &lt; sortedArray.length; \forall int j; i &lt; j &lt; sortedArray.length; sortedArray[i] &lt;= sortedArray[j];</span>
+    <span class="hljs-comment">//@ old boolean containsValue = (\exists int i; 0 &lt;= i &lt; sortedArray.length; sortedArray[i] == value);</span>
+    <span class="hljs-comment">//@ ensures containsValue &lt;==&gt; 0 &lt;= \result &lt; sortedArray.length;</span>
+    <span class="hljs-comment">//@ ensures !containsValue &lt;==&gt; \result == -1;</span>
+    <span class="hljs-comment">//@ pure</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] sortedArray, <span class="hljs-keyword">int</span> value)</span> </span>{
+        <span class="hljs-comment">//@ ghost boolean containsValue = (\exists int i; 0 &lt;= i &lt; sortedArray.length; sortedArray[i] == value);</span>
+        <span class="hljs-keyword">if</span> (value &lt; sortedArray[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">if</span> (value &gt; sortedArray[sortedArray.length-<span class="hljs-number">1</span>]) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+        <span class="hljs-keyword">int</span> lo = <span class="hljs-number">0</span>;
+        <span class="hljs-keyword">int</span> hi = sortedArray.length-<span class="hljs-number">1</span>;
+        <span class="hljs-comment">//@ loop_invariant 0 &lt;= lo &lt; sortedArray.length &amp;&amp; 0 &lt;= hi &lt; sortedArray.length;</span>
+        <span class="hljs-comment">//@ loop_invariant containsValue ==&gt; sortedArray[lo] &lt;= value &lt;= sortedArray[hi];</span>
+        <span class="hljs-comment">//@ loop_invariant \forall int i; 0 &lt;= i &lt; lo; sortedArray[i] &lt; value;</span>
+        <span class="hljs-comment">//@ loop_invariant \forall int i; hi &lt; i &lt; sortedArray.length; value &lt; sortedArray[i];</span>
+        <span class="hljs-comment">//@ loop_decreases hi - lo;</span>
+        <span class="hljs-keyword">while</span> (lo &lt;= hi) {
+            <span class="hljs-keyword">int</span> mid = lo + (hi-lo)/<span class="hljs-number">2</span>;
+            <span class="hljs-keyword">if</span> (sortedArray[mid] == value) {
+                <span class="hljs-keyword">return</span> mid;
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sortedArray[mid] &lt; value) {
+                lo = mid+<span class="hljs-number">1</span>;
+            } <span class="hljs-keyword">else</span> {
+                hi = mid-<span class="hljs-number">1</span>;
+            }
+        }
+        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
+    }
+}
+</code></pre>
+<p>虽然这一堆的 <code>requires</code> <code>ensures</code> 和 <code>invariant</code> 让人觉得真不如直接上 Eiffel（或者其他有 Design by Contract 构造的编程语言），但是这是在Java里面，并且</p>
+<ul>
+<li>可检查</li>
+<li>容易理解</li>
+<li>100% 兼容现有的Java（虽然只支持 JDK 8）语法</li>
+</ul>
+<p>当然问题就是写起来真的太难了。</p>
+<p>不过我觉得这也是个好事儿，如果我们在Lint规则里面禁用除了 JML 以外的其他所有注释，这样就正如熊节老师说的，这样注释比代码更难写，也就能改掉那些人的诡异习惯了。</p>
+
+      
+
+  </article>
+  <!-- <div>
+        <h5>See Also</h5>
+        <ul>
+            <li><a href="/about">About Me</a></li>
+        </ul>
+    </div> -->
+  <span class="field">创建时间：2021-07-10</span>
+  <span class="field">最近更新时间：2022-12-13</span>
+  <hr>
+  <footer>
+    <ul>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/sitemap.xml">站点地图</a></li>
+      <li><a href="/rss.xml">RSS</a></li>
+      <li>Copyright &copy; KimmyLeo</li>
+    </ul>
+  </footer>
+  <script type="text/javascript">
+    document.querySelectorAll(".disabled-link").forEach(el => el.addEventListener("click", (e) => {
+      alert("链接页面不存在！");
+      e.preventDefault();
+    }));
+  </script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
+</body>
+
+</html>
