@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,15 +183,15 @@
           
   </header>
   <article>
-    <p>Service Builder 这个概念已经构思了大半年，一直都没机会来实验。今天看到前同事杨云的<a href="https://zhuanlan.zhihu.com/p/94522501" title="null">类型流方法论</a>（TypeFlow），感觉遇到了一个非常合适的构建工具。也把我这边的思路整理出来分享给大家。</p>
-<h2 id="函数">函数</h2>
+    <p>Service Builder 这个概念已经构思了大半年，一直都没机会来实验。今天看到前同事杨云的<a href="https://zhuanlan.zhihu.com/p/94522501">类型流方法论</a>（TypeFlow），感觉遇到了一个非常合适的构建工具。也把我这边的思路整理出来分享给大家。</p>
+<h2>函数</h2>
 <p>先说这个广义的抽象，基本上驱动了数学和计算机的很大的发展。函数的的模型非常简单，接受输入，产生输出，同时中间执行一些业务逻辑。</p>
 <pre><code>(<span class="hljs-built_in">input</span>) =&gt; <span class="hljs-built_in">output</span>
 </code></pre>
 <p>这里的输入，包括且不限于请求/输入参数、文件和数据库读入、触发器或者监听器产生的事件等等。</p>
 <p>输出也一样，到其他函数的调用、文件或者数据库的写入请求、转发事件通知等。</p>
-<p>这样几乎所有的逻辑都可以归于一个直观的函数，输入 A，调用 X、Y、Z，输出 B。当然，<a href="https://github.com/notyy/TypeFlow" title="null">TypeFlow</a>里面的函数相对更纯一些，没办法控制是否调用其他函数的，只能输入 -&gt; 输出，分发的过程有专门的 dispatch。</p>
-<h2 id="函数式编程">函数式编程</h2>
+<p>这样几乎所有的逻辑都可以归于一个直观的函数，输入 A，调用 X、Y、Z，输出 B。当然，<a href="https://github.com/notyy/TypeFlow">TypeFlow</a>里面的函数相对更纯一些，没办法控制是否调用其他函数的，只能输入 -&gt; 输出，分发的过程有专门的 dispatch。</p>
+<h2>函数式编程</h2>
 <p>有了上面个灵活的抽象，我们就能拿来做一些别的事情了。</p>
 <p>首先要从 FP 领域借过来的一个概念是组合。当然，组合之前我们要先有个意识，就是每个函数都是加了类型的：</p>
 <pre><code>fn1: <span class="hljs-function"><span class="hljs-params">(input: I)</span> =&gt;</span> O
@@ -199,11 +200,11 @@ fn2: <span class="hljs-function"><span class="hljs-params">(input: O)</span> =&g
 fn2(fn1())
 </code></pre>
 <p>这样自由组合（也不算太自由，毕竟有类型约束）就能够让我们通过有限的原子函数完成更丰富的功能。</p>
-<h2 id="服务端组件">服务端组件</h2>
+<h2>服务端组件</h2>
 <p>这里衍生出来的概念就是“服务端组件”，可能是一个 serverless 的函数，也可能是一个常驻在后端服务器中的 service，但只要能够前面我们提到的要求：有输入输出、类型化、可组合，那就能够拿来作为一个组件来用了。</p>
 <p>这里的组件与前端组件化的概念类似，可以是一个纯粹只对数据做处理然后输出的基本组件（比如加密），也可以是包含了业务逻辑能够实现特定功能（比如支付）的业务组件。</p>
 <p>这样一个具体的前端业务流程就可以用这些基础组件和业务组件的组合来完成，而这些组件和组合过程其实就是所谓的“中台”要提供的基本功能和能力。</p>
-<h2 id="service-builder">Service Builder</h2>
+<h2>Service Builder</h2>
 <p>这样我们来回顾审视下这种条件下的前台产品实现过程：</p>
 <ol>
 <li>设计 Schema</li>
@@ -221,7 +222,7 @@ fn2(fn1())
 <li>剥离纯函数和副作用</li>
 </ul>
 <p>我也简单尝试用这个思路来整理了下一些业务流程，感觉整个进行下来的结果就是我前面提到的服务端组件组合的样子。</p>
-<h2 id="结论">结论</h2>
+<h2>结论</h2>
 <p>Service Builder 的概念源自于前同事吕靖的前端构建工具，整体的思路也是在尝试对后端的业务流和构建方式进行一个函数式方向的简化和重组。杨云老师 TypeFlow 提供了一套建模思路和工具，能够有效地利用函数式 + serverless 来更好地进行后端开发。这篇文章串起两部分来也希望是能够给大家提供一个新的设计和构建思路。</p>
 
       
@@ -234,7 +235,7 @@ fn2(fn1())
         </ul>
     </div> -->
   <span class="field">创建时间：2019-12-01</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -251,7 +252,5 @@ fn2(fn1())
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

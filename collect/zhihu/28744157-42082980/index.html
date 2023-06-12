@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,11 +183,11 @@
           
   </header>
   <article>
-    <h1 id="在swift语言中，如何获取string每一行的内容？">在Swift语言中，如何获取String每一行的内容？</h1>
-<p><a href="https://www.zhihu.com/question/28744157/answer/42082980" title="null">知乎链接</a></p>
+    <h1>在Swift语言中，如何获取String每一行的内容？</h1>
+<p><a href="https://www.zhihu.com/question/28744157/answer/42082980">知乎链接</a></p>
 <hr>
-<p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>简直要哭了。<br>getline也不能把string变成list&lt;string&gt;啊。</p>另，Swift出了可以用上面的同学说的componentsSeparatedByString这种依赖Foundation的方式之外，还有一个更swifty &amp; functional的方式：<br>利用split函数可以做类似的各种事情，包括把一个array也给分成多段之类的。<br><div class="highlight"><pre><code class="language-text">let fuck＝ "f\nu\nc\nk";
-split(fuck) {$0 == "\n"} // ["f", "u", "c", "k"]</code></pre></div><br>说实话你们要做的<br>1. 好好读标准库，2. 学学怎么用搜索引擎<br>（Google一下：split string swift，你就能得到答案了）</span></p>
+<p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>简直要哭了。<br>getline也不能把string变成list&lt;string&gt;啊。</p>另，Swift出了可以用上面的同学说的componentsSeparatedByString这种依赖Foundation的方式之外，还有一个更swifty &amp; functional的方式：<br>利用split函数可以做类似的各种事情，包括把一个array也给分成多段之类的。<br><div class="highlight"><pre><code class="language-text">let fuck＝ &quot;f\nu\nc\nk&quot;;
+split(fuck) {$0 == &quot;\n&quot;} // [&quot;f&quot;, &quot;u&quot;, &quot;c&quot;, &quot;k&quot;]</code></pre></div><br>说实话你们要做的<br>1. 好好读标准库，2. 学学怎么用搜索引擎<br>（Google一下：split string swift，你就能得到答案了）</span></p>
 
       
 
@@ -198,7 +199,7 @@ split(fuck) {$0 == "\n"} // ["f", "u", "c", "k"]</code></pre></div><br>说实话
         </ul>
     </div> -->
   <span class="field">创建时间：2015-03-15</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -215,7 +216,5 @@ split(fuck) {$0 == "\n"} // ["f", "u", "c", "k"]</code></pre></div><br>说实话
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

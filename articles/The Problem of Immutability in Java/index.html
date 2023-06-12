@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,8 +183,8 @@
           
   </header>
   <article>
-    <h1 id="the-problem-of-immutability-in-java">The Problem of Immutability in Java</h1>
-<h1 id=""></h1>
+    <h1>The Problem of Immutability in Java</h1>
+<h1></h1>
 <blockquote>
 <p>原文作者 Bartłomiej Mazur，Allegro Tech 后端工程师</p>
 </blockquote>
@@ -201,8 +202,8 @@
 </ul>
 <p>While I can’t really propose any good solution for these problems I hope I will be able to show you that while immutability is a great tool, not all languages are fully ready to utilize all benefits, and in some cases immutability might even cause some issues. My motivation for this article is the huge amount of articles recommending immutability for every problem without analysing how it can actually affect your application in some cases.</p>
 <p>其实我并不能针对上面的问题给出什么好的解决方案，我仍希望这篇文章能够告诉你，尽管“不可变”这点非常好用，然而并非所有编程语言都能够驾驭它，充分获取不可变性带来的所有好处，甚至在某些场景下，不可变性还会带来一些问题。这篇文章的动机源自于一大堆推荐不可变性的文章，这些文章建议使用不可变性解决所有问题，却没有分析这到底对你的应用有什么其他不好的影响。</p>
-<h2 id="immutability-across-languages">Immutability across languages</h2>
-<h2 id="不同编程语言中的不可变性">不同编程语言中的不可变性</h2>
+<h2>Immutability across languages</h2>
+<h2>不同编程语言中的不可变性</h2>
 <p>In most cases immutability is a powerful tool that allows us to keep our code clean and simple even in a multithreaded environment. Each language allow us to write such code in a different way, and the majority of popular languages just allow us to define all fields of such object as final/readonly/notmutable. For example, in Java our immutable type definition would look like this:</p>
 <p>大部分情况下，不可变性是一个非常强大的工具，可以允许我们在多线程的环境下保持代码的简单整洁。每种语言都允许我们以不同的方式写出这样的代码，绝大部分编程语言仅仅允许我们声明一些对象的某字段是 final/readonly/notmutable。比如，在Java中一个不可变类型的定义如下：</p>
 <pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Enemy</span> </span>{
@@ -212,10 +213,10 @@
     <span class="hljs-comment">// +constructor</span>
 }
 </code></pre>
-<p>We need to keep in mind and remember that every referenced object must be immutable too. If we added a field with a list in it, we would either need to use some <code>ImmutableList</code> as field type or ensure in constructor that provided list is copied to some immutable collection. A common mistake here is using and trusting <a href="https://projectlombok.org/features/Value" title="null">lombok</a>. Adding <code>@Value</code> to our class does not magically handle immutability of collections and other references for us. This is similar to using Kotlin, but mostly when using Kotlin code from Java. Because even if Kotlin list appears immutable it is just compiler syntax sugar, and your List will get compiled to normal mutable Java list type, and depending on how the list was created it might be mutable too.</p>
-<p>需要牢记的一点是，要保证一个对象整体不可变，所有引用的对象也都必须是不可变的。如果我们添加了一个List字段，那么就需要使用一些比如<code>ImmutableList</code>的构造或者保证构造函数中提供的列表是来自于一些不可变集合。这里常见的错误是过度相信<a href="https://projectlombok.org/features/Value" title="null">lombok</a>。添加一个<code>@Value</code>注解到我们的类上，并不会发生什么魔幻操作导致我们的集合（或者其他引用对象）不可变。使用Kotlin也有同样的问题，通常见于在Java中引用Kotlin代码。因为即便Kotlin的list是不可变的，那也只是编译器的语法糖，你的List对象依然会被编译成普通的Java list，并且根据这个list创建的场景，它也可能是可变的。</p>
-<p>Some languages provide more interesting constructs, for example <a href="https://dlang.org/spec/const3.html" title="null">D language</a>:</p>
-<p>一些编程语言提供了更有趣的构造，比如<a href="https://dlang.org/spec/const3.html" title="null">D语言</a>：</p>
+<p>We need to keep in mind and remember that every referenced object must be immutable too. If we added a field with a list in it, we would either need to use some <code>ImmutableList</code> as field type or ensure in constructor that provided list is copied to some immutable collection. A common mistake here is using and trusting <a href="https://projectlombok.org/features/Value">lombok</a>. Adding <code>@Value</code> to our class does not magically handle immutability of collections and other references for us. This is similar to using Kotlin, but mostly when using Kotlin code from Java. Because even if Kotlin list appears immutable it is just compiler syntax sugar, and your List will get compiled to normal mutable Java list type, and depending on how the list was created it might be mutable too.</p>
+<p>需要牢记的一点是，要保证一个对象整体不可变，所有引用的对象也都必须是不可变的。如果我们添加了一个List字段，那么就需要使用一些比如<code>ImmutableList</code>的构造或者保证构造函数中提供的列表是来自于一些不可变集合。这里常见的错误是过度相信<a href="https://projectlombok.org/features/Value">lombok</a>。添加一个<code>@Value</code>注解到我们的类上，并不会发生什么魔幻操作导致我们的集合（或者其他引用对象）不可变。使用Kotlin也有同样的问题，通常见于在Java中引用Kotlin代码。因为即便Kotlin的list是不可变的，那也只是编译器的语法糖，你的List对象依然会被编译成普通的Java list，并且根据这个list创建的场景，它也可能是可变的。</p>
+<p>Some languages provide more interesting constructs, for example <a href="https://dlang.org/spec/const3.html">D language</a>:</p>
+<p>一些编程语言提供了更有趣的构造，比如<a href="https://dlang.org/spec/const3.html">D语言</a>：</p>
 <pre><code class="language-d"><span class="hljs-keyword">class</span> C {
 <span class="hljs-comment">/* 默认可变 */</span>          C mField;
              <span class="hljs-keyword">const</span>     C cField;
@@ -239,8 +240,8 @@
 </code></pre>
 <p>Here we can define each field/parameter as either normal mutable variable, const/final one — so we can’t change the value of that variable, or to mark a field directly as immutable one. Then no matter what, we don’t need to worry about mutating anything in that variable, even if it is a reference that contains mutable fields inside them — we will not be able to mutate them using our immutable reference.</p>
 <p>这里我们可以定义每一个字段/参数作为常规的可变对象，或者是不可变对象————这样我们就无法改变这个对象的值了，或者直接标记整个类型都是不可变的。无论怎么标记，我们都不用担心会修改到这个对象的任何一个部分；甚至在这个对象内部包含可变字段的时候，我们也没办法通过一个不可变引用去修改到他们。</p>
-<p><a href="https://doc.rust-lang.org/1.29.0/book/first-edition/mutability.html" title="null">Rust</a> is another interesting example. Here by default everything is immutable but at the same time there is the <code>Cell</code> type that can be used to skip immutability, so</p>
-<p>另一个有趣的例子是<a href="https://doc.rust-lang.org/1.29.0/book/first-edition/mutability.html" title="null">Rust</a>。Rust中默认所有对象都是不可变的，但与此同时<code>Cell</code>类型可以用来跳过不可变性验证，所以：</p>
+<p><a href="https://doc.rust-lang.org/1.29.0/book/first-edition/mutability.html">Rust</a> is another interesting example. Here by default everything is immutable but at the same time there is the <code>Cell</code> type that can be used to skip immutability, so</p>
+<p>另一个有趣的例子是<a href="https://doc.rust-lang.org/1.29.0/book/first-edition/mutability.html">Rust</a>。Rust中默认所有对象都是不可变的，但与此同时<code>Cell</code>类型可以用来跳过不可变性验证，所以：</p>
 <pre><code class="language-rust"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Point</span></span> {
     x: <span class="hljs-built_in">i32</span>,
     y: <span class="hljs-built_in">i32</span>,
@@ -264,8 +265,8 @@ point.y.set(<span class="hljs-number">7</span>); <span class="hljs-comment">// �
 <p>因此这样我们也没法确定我们的对象是否完全不可变，但如果是可变的，那也完全是代码作者有意为之，我们就没必要担心了。</p>
 <p>My point is: Java has one of the worst ways of defining immutability and tools like Lombok and Kotlin often only hide this instead of helping. While immutability is promising to keep developers safe from many issues, it’s not that easy to keep immutable values safe from developers without better support from the language itself. But why is that? Was Java never designed to be used with immutable values?</p>
 <p>我的点在于：Java使用了最糟糕的定义不可变性的方式，并且像Lombok和Kotlin这些通常会更多地隐藏问题。不可变性据说是可以解决开发者面临的绝大多数问题的，但在语言层面没有保障的时候让开发者来保证对象的不可变性并不是件容易的事情。为什么会出现这种情况呢？Java从来没有考虑过不可变对象的问题？</p>
-<h2 id="performance-cost-of-immutability-in-java">Performance cost of immutability in Java</h2>
-<h2 id="java-不可变性带来的性能消耗">Java 不可变性带来的性能消耗</h2>
+<h2>Performance cost of immutability in Java</h2>
+<h2>Java 不可变性带来的性能消耗</h2>
 <p>We all know (I hope so) about the good sides of using immutable values, mostly related to multi-threaded code, but did you ever wonder what the trade-off is? In many native languages such immutable objects usage can often be heavily optimized and a lot of allocations are just skipped, but that’s not the case with Java — it can still reduce the number of allocations but in a much more limited way. Many people don’t think about it, but you can allocate objects/memory fast enough to slow down your application to noticeable degree. Application then will both spend more time allocation objects and then on cleaning them up duringing GC. To cause such issues you need to constantly allocate a lot of objects in very short time, so in a typical web application it’s not that easy to encounter issues with allocation rates. And when it happens you can tweak a few GC settings and scale your application.</p>
 <p>（至少我希望）大家都知道使用不可变对象的好处————大部分都是在多线程场景下，但你有想过这样做的代价是什么吗？大部分native编程语言，这样的不可变对象通常被高效地优化，省去了非常多的空间分配（allocation）过程，Java的情况却并非如此————确实能够省掉一些空间分配，但是情况十分有限。很多人从来没考虑过这个问题，你可以尝试分配大量对象/内存导致可感知地拖慢你应用的情况看一下。这个时候应用会在分配对象和GC（Garbage Collection，垃圾回收）的过程中清理这些对象上花费大量时间。要验证这个场景你需要在短时间内不断分配大量的对象，在一个常规的Web应用中并不太容易遇到这种情况。当真的出现的时候，你可以调整GC的设置或者扩展你的应用。</p>
 <p>Imagine a piece of game code where we want to invoke a function for generated positions in world:</p>
@@ -289,8 +290,8 @@ point.y.set(<span class="hljs-number">7</span>); <span class="hljs-comment">// �
 </code></pre>
 <p>In games such a thing would probably be part of game loop, running dozens of times per second. Maybe not necessarily spawning new monsters, but definitely there is always a lot to do.</p>
 <p>这段代码可能是游戏循环的一部分，每秒运行数十次。可能并不一定是生成新的怪物等，但总有很多事情需要这样处理。</p>
-<p>We will use <a href="https://openjdk.java.net/projects/code-tools/jmh/" title="null">JMH</a> for benchmarking. Full benchmark code will be linked at the end of article.</p>
-<p>我们使用<a href="https://openjdk.java.net/projects/code-tools/jmh/" title="null">JMH</a>来做benchmark。文章后面会给出完整的benchmark代码。</p>
+<p>We will use <a href="https://openjdk.java.net/projects/code-tools/jmh/">JMH</a> for benchmarking. Full benchmark code will be linked at the end of article.</p>
+<p>我们使用<a href="https://openjdk.java.net/projects/code-tools/jmh/">JMH</a>来做benchmark。文章后面会给出完整的benchmark代码。</p>
 <pre><code class="language-java"><span class="hljs-meta">@Benchmark</span>
 <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">tick</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Throwable </span>{
     Stream.generate(positionGenerator)
@@ -315,8 +316,8 @@ point.y.set(<span class="hljs-number">7</span>); <span class="hljs-comment">// �
 <span class="hljs-attribute">tickNoHeap</span>                  <span class="hljs-number">23</span>.<span class="hljs-number">562</span>  <span class="hljs-number">0</span>.<span class="hljs-number">012</span>  ms/op
 <span class="hljs-attribute">tickNoHeap</span>:tickNoHeap p<span class="hljs-number">0</span>.<span class="hljs-number">99</span> <span class="hljs-number">23</span>.<span class="hljs-number">839</span>         ms/op
 </code></pre>
-<p>And not only it does run faster now, but can also be used again in multithreaded way without any issues. The only issue is that we would not be able to do this with larger objects, and it already looks much more complicated and less readable, and all of this because Java lacks simple structures that can be allocated on stack (but maybe someday we will see some form of structures thanks to <a href="https://openjdk.java.net/projects/valhalla/" title="null">Valhalla</a> project). Note that using a struct would not always be better, it depends on size of our data. If we use large object then it would be better to use normal object/reference as copying it would cost more than cost of dereferencing it later.</p>
-<h2 id="stressing-gc">Stressing GC</h2>
+<p>And not only it does run faster now, but can also be used again in multithreaded way without any issues. The only issue is that we would not be able to do this with larger objects, and it already looks much more complicated and less readable, and all of this because Java lacks simple structures that can be allocated on stack (but maybe someday we will see some form of structures thanks to <a href="https://openjdk.java.net/projects/valhalla/">Valhalla</a> project). Note that using a struct would not always be better, it depends on size of our data. If we use large object then it would be better to use normal object/reference as copying it would cost more than cost of dereferencing it later.</p>
+<h2>Stressing GC</h2>
 <p>Now let’s run this code using more threads and see what happens:</p>
 <pre><code class="language-java"><span class="hljs-meta">@Benchmark</span>
 <span class="hljs-meta">@Threads(-1)</span> <span class="hljs-comment">// use all cores</span>
@@ -360,10 +361,10 @@ point.y.set(<span class="hljs-number">7</span>); <span class="hljs-comment">// �
 <span class="hljs-attribute">tick_threaded20M</span>:tick_threaded<span class="hljs-number">20</span>M p<span class="hljs-number">0</span>.<span class="hljs-number">99</span>               <span class="hljs-number">478</span>.<span class="hljs-number">224</span>          ms/op
 </code></pre>
 <p>New version with objects is struggling even more to maintain good performance, and this is actually something you might observe in your web application too, when more and more time goes for GC and allocation. Some of these issues can be sometimes solved (or make them less visible) by adjusting young gen size. Issue will still be there, but now it will occur at another point, and at the end you will finally hit a limit of how much you can scale your application vertically.</p>
-<h2 id="conclusion">Conclusion?</h2>
+<h2>Conclusion?</h2>
 <p>The point of this article was to show that while immutability gives us a lot of safety, Java does not give us enough tools to use immutable data in a performant way. While it’s still a good idea to write code using immutable values, we should sometimes also consider using other methods if we need much higher throughput and scaling horizontally is either impossible or just starting to get too expensive (with games you are often limited by performance of a single PC). As a wannabe game developer myself — I’m especially looking at other web developers interested in game development, as reading web influenced game code often hurts, not only the performance of the game, but also the people who will read that code later ;)</p>
 <p>Immutability is just a tool in a software engineer’s hand, and every tool has its own good uses, but there is no universal tool and the job of a software engineer is to choose the right tools for given job.</p>
-<p><a href="https://gist.github.com/GotoFinal/2f057616f300045c7638bd11b250c20a" title="null">Full source code for benchmark can be read on gist</a></p>
+<p><a href="https://gist.github.com/GotoFinal/2f057616f300045c7638bd11b250c20a">Full source code for benchmark can be read on gist</a></p>
 
       
 
@@ -375,7 +376,7 @@ point.y.set(<span class="hljs-number">7</span>); <span class="hljs-comment">// �
         </ul>
     </div> -->
   <span class="field">创建时间：#N/A</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -392,7 +393,5 @@ point.y.set(<span class="hljs-number">7</span>); <span class="hljs-comment">// �
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,8 +183,8 @@
           
   </header>
   <article>
-    <h1 id="setjmp和longjmp的正确用法是？">setjmp和longjmp的正确用法是？</h1>
-<p><a href="https://www.zhihu.com/question/26480396/answer/32928361" title="null">知乎链接</a></p>
+    <h1>setjmp和longjmp的正确用法是？</h1>
+<p><a href="https://www.zhihu.com/question/26480396/answer/32928361">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><blockquote>这两个函数通常用于异常处理吗，正确的使用姿势是？</blockquote>这两个函数就是拿来做跳转用的，不止是异常处理。甚至可以直接拿来搞<a href="https://link.zhihu.com/?target=http%3A//yosefk.com/blog/coroutines-in-one-page-of-c.html" class=" wrap external" target="_blank" rel="nofollow noreferrer" data-za-detail-view-id="1043">Coroutine</a>。<br>正确的用法就是不要轻易用它。或者，至少做一个像样的<a href="https://link.zhihu.com/?target=http%3A//www.di.unipi.it/~nids/docs/longjump_try_trow_catch.html" class=" wrap external" target="_blank" rel="nofollow noreferrer" data-za-detail-view-id="1043">封装</a>。<blockquote>和return error_code相比有什么优势？<br></blockquote>和大多数API直接提供的return error_no对比，基本上没有什么优势（当然还是要看风格的）。</span></p>
 
@@ -197,7 +198,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2014-11-04</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -214,7 +215,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -260,7 +261,7 @@
 <li>再之后则是构造期绑定的方式连接fizzbuzz和printer，简化每次运行的时候都要重复传递printer参数这个操作</li>
 </ul>
 <p>于是，对于输出操作，或者printer这样一个依赖，我们采用了在构造函数中把它传递进来的方式来处理。这样一来我们就实现了基于构造函数的依赖注入。</p>
-<h2 id="依赖注入">依赖注入</h2>
+<h2>依赖注入</h2>
 <p>大多数人把去理解依赖注入都是因为特定的框架，比如知名的Spring Framework。很多人在讲授的过程中一直都会把十几年前EJB时代的老概念拿出来讲一番，然后得出结论说，使用某某框架，你就获得依赖注入了。</p>
 <p>然而实际上得到的结果却是，大多数人只记住了依赖注入的三种方式，记住了要分离接口和实现，记住了要用框架/容器。但写出来的代码嘛……</p>
 <p>依赖注入框架能够帮到你的只是自动化一部分注入过程，简化你的工作，无法从任何角度指导你设计出来任何好代码。因此，如果你知道自己在干什么，完全可以脱离这些工具然后依然把依赖注入用起来。无非就是把一些操作手动做一遍而已。</p>
@@ -276,7 +277,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：#N/A</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -293,7 +294,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

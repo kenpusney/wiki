@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,8 +183,8 @@
           
   </header>
   <article>
-    <h1 id="在使用了多年-c-的情况下，如何转型到-objective-c-语言？">在使用了多年 C# 的情况下，如何转型到 Objective-C 语言？</h1>
-<p><a href="https://www.zhihu.com/question/22014803/answer/20038986" title="null">知乎链接</a></p>
+    <h1>在使用了多年 C# 的情况下，如何转型到 Objective-C 语言？</h1>
+<p><a href="https://www.zhihu.com/question/22014803/answer/20038986">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>发现真正能够解决题主问题的人没几个。</p>Objective-C 与 C#同姓不同源。虽然言明了都是从C（花括号语言）发展来的。<br>C#最初的设计思路源于MS针对C++和Java的各种各样的结合。而Objective-C中你所感到的奇葩的语法几乎都是变形自Smalltalk。<br>这样做一个对比：如果说C++是“C with classes”，那么Objective-C可以看作是“C with objects”吧。<br>Objective-C相对的优点：<br><ul><li>纯粹的消息传递风格</li><ul><li>[a has: b with: c]这种方式，比很多动态语言（Python等）的关键字参数更加紧凑。比C#/Java的方法调用也看起来直接一些（当然，外层的方括号很丑）。</li></ul><li>接口与实现分离</li><ul><li>@interface 和 @implementation 这种模式，借鉴了C/C++的头文件风格。对于组织和隐藏细节很有效。</li><li>同时可以通过某种方式实现类似C#中的partial class的效果。</li></ul><li>自动内存管理（相对于C++）</li><li>语言级的闭包支持（相对于Java）</li><li>另外也是很重要的一点：Apple提供了不错的开发套件和组件库，并且相应的参考资料也算是比较齐全。</li></ul>非专业Objective-C开发者。个人见解，轻喷。</span></p>
 
@@ -197,7 +198,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2013-11-13</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -214,7 +215,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

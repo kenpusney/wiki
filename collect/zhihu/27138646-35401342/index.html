@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,8 +183,8 @@
           
   </header>
   <article>
-    <h1 id="求助，谁能描述sortedarrayusingcomparator是如何进行比较的？">求助，谁能描述sortedArrayUsingComparator是如何进行比较的？</h1>
-<p><a href="https://www.zhihu.com/question/27138646/answer/35401342" title="null">知乎链接</a></p>
+    <h1>求助，谁能描述sortedArrayUsingComparator是如何进行比较的？</h1>
+<p><a href="https://www.zhihu.com/question/27138646/answer/35401342">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text">谢邀。<br><br>手头没有Xcode，只能根据文档和我的揣测来回答。<br>根据<a href="https://link.zhihu.com/?target=https%3A//developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Classes/NSArray_Class/index.html%23//apple_ref/occ/instm/NSArray/sortedArrayUsingComparator" class=" wrap external" target="_blank" rel="nofollow noreferrer">NSArray Class Reference</a>:<br><blockquote><b>sortedArrayUsingComparator:</b><br>Returns an array that lists the receiving array’s elements in <b>ascending</b> order, as determined by the comparison method specified by a given NSComparator Block.</blockquote>也即，这个sortedArrayUsingComparator这个方法本身就是按递增的方式排序，而怎么定义递增，就看是Comparator怎么设计的了。<br>对于<a href="https://link.zhihu.com/?target=https%3A//developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Miscellaneous/Foundation_Constants/index.html%23//apple_ref/c/tdef/NSComparisonResult" class=" wrap external" target="_blank" rel="nofollow noreferrer">Comparator的返回值</a>文档有下面的说明：<br><blockquote><ul><li><p>NSOrderedAscending</p><p>The left operand is <b>smaller </b>than the right operand.</p></li><li><p>NSOrderedSame</p><p>The two operands are equal.</p></li><li><p>NSOrderedDescending</p><p>The left operand is <b>greater</b> than the right operand.</p></li></ul></blockquote>如果你期望的是值小的在前而值大的在后，则可以在比较的时候返回NSOrderedAscending（-1），否则，就是NSOrderedDescending（1）。<br>而题主的代码，在判断的时候用的是<b>&gt;（greater）</b>，返回的确是-1，得到的肯定是跟预期恰好相反的结果。<br><br>以上。</span></p>
 
@@ -197,7 +198,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2014-12-18</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -214,7 +215,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

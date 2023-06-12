@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,23 +183,23 @@
           
   </header>
   <article>
-    <h1 id="golang-如何定义一个map类型的const变量啊？">golang 如何定义一个map类型的const变量啊？</h1>
-<p><a href="https://www.zhihu.com/question/25953192/answer/31698236" title="null">知乎链接</a></p>
+    <h1>golang 如何定义一个map类型的const变量啊？</h1>
+<p><a href="https://www.zhihu.com/question/25953192/answer/31698236">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text">。。。虽说Go加入了<a href="https://link.zhihu.com/?target=http%3A//golang.org/ref/spec%23Composite_literals" class=" wrap external" target="_blank" rel="nofollow noreferrer" data-za-detail-view-id="1043">Composite literals</a>，也不是这种蛋疼的用法吧。<br>其次，Go哪有所谓的const map这一说？<br>去看下spec吧：<br><a href="https://link.zhihu.com/?target=http%3A//golang.org/ref/spec%23Constants" class=" external" target="_blank" rel="nofollow noreferrer" data-za-detail-view-id="1043"><span class="invisible">http://</span><span class="visible">golang.org/ref/spec#</span><span class="invisible">Constants</span><span class="ellipsis"></span></a><br><a href="https://link.zhihu.com/?target=http%3A//golang.org/ref/spec%23Constant_expressions" class=" external" target="_blank" rel="nofollow noreferrer"><span class="invisible">http://</span><span class="visible">golang.org/ref/spec#</span><span class="invisible">Constant_expressions</span><span class="ellipsis"></span></a><br>另附上题主所期望的效果的正确写法：<br><div class="highlight"><pre><code class="language-go"><span class="nx">romanNumeralDict</span> <span class="o">:=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
-  <span class="mi">1000</span><span class="p">:</span> <span class="s">"M"</span><span class="p">,</span>
-  <span class="mi">900</span> <span class="p">:</span> <span class="s">"CM"</span><span class="p">,</span>
-  <span class="mi">500</span> <span class="p">:</span> <span class="s">"D"</span><span class="p">,</span>
-  <span class="mi">400</span> <span class="p">:</span> <span class="s">"CD"</span><span class="p">,</span>
-  <span class="mi">100</span> <span class="p">:</span> <span class="s">"C"</span><span class="p">,</span>
-  <span class="mi">90</span>  <span class="p">:</span> <span class="s">"XC"</span><span class="p">,</span>
-  <span class="mi">50</span>  <span class="p">:</span> <span class="s">"L"</span><span class="p">,</span>
-  <span class="mi">40</span>  <span class="p">:</span> <span class="s">"XL"</span><span class="p">,</span>
-  <span class="mi">10</span>  <span class="p">:</span> <span class="s">"X"</span><span class="p">,</span>
-  <span class="mi">9</span>   <span class="p">:</span> <span class="s">"IX"</span><span class="p">,</span>
-  <span class="mi">5</span>   <span class="p">:</span> <span class="s">"V"</span><span class="p">,</span>
-  <span class="mi">4</span>   <span class="p">:</span> <span class="s">"IV"</span><span class="p">,</span>
-  <span class="mi">1</span>   <span class="p">:</span> <span class="s">"I"</span><span class="p">,</span>
+<span class="mi">1000</span><span class="p">:</span> <span class="s">&quot;M&quot;</span><span class="p">,</span>
+<span class="mi">900</span> <span class="p">:</span> <span class="s">&quot;CM&quot;</span><span class="p">,</span>
+<span class="mi">500</span> <span class="p">:</span> <span class="s">&quot;D&quot;</span><span class="p">,</span>
+<span class="mi">400</span> <span class="p">:</span> <span class="s">&quot;CD&quot;</span><span class="p">,</span>
+<span class="mi">100</span> <span class="p">:</span> <span class="s">&quot;C&quot;</span><span class="p">,</span>
+<span class="mi">90</span>  <span class="p">:</span> <span class="s">&quot;XC&quot;</span><span class="p">,</span>
+<span class="mi">50</span>  <span class="p">:</span> <span class="s">&quot;L&quot;</span><span class="p">,</span>
+<span class="mi">40</span>  <span class="p">:</span> <span class="s">&quot;XL&quot;</span><span class="p">,</span>
+<span class="mi">10</span>  <span class="p">:</span> <span class="s">&quot;X&quot;</span><span class="p">,</span>
+<span class="mi">9</span>   <span class="p">:</span> <span class="s">&quot;IX&quot;</span><span class="p">,</span>
+<span class="mi">5</span>   <span class="p">:</span> <span class="s">&quot;V&quot;</span><span class="p">,</span>
+<span class="mi">4</span>   <span class="p">:</span> <span class="s">&quot;IV&quot;</span><span class="p">,</span>
+<span class="mi">1</span>   <span class="p">:</span> <span class="s">&quot;I&quot;</span><span class="p">,</span>
 <span class="p">}</span>
 </code></pre></div></span></p>
 
@@ -212,7 +213,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2014-10-11</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -229,7 +230,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,15 +183,15 @@
           
   </header>
   <article>
-    <h1 id="为什么要学习网红编程语言">为什么要学习网红编程语言</h1>
+    <h1>为什么要学习网红编程语言</h1>
 <p>首先声明，这里不是针对 InfoQ 的那篇文章。那篇文章用了非常清晰的逻辑告诉你为什么不要学习，而其所指的学习是你投机性的投入进一个看起来美好的领域结果陷入到坑里，等这个领域凉了，你的职业生涯也可能就跟着凉了。</p>
 <p>Ruby on Rails 现状确实就是这样。存量极度萎缩的情况下，被捆绑住了的公司招不到合适的人，大量的人也找不到合适的工作，双方都不得不被迫转向其他技术栈。</p>
 <p>但不进行这种投机性的职业规划，并不以为着你不能去学习一些新的东西。不然现有的这些编程语言也没必要反复折腾自己，Java 和 Python 都相继加入了模式匹配、C++ 23 也快来了、JavaScript 还是一年一个新模样，<strong>就连</strong> Go 都有泛型了。这些老家伙们都这么努力摆脱自己不太吸引人的样子在慢慢变好，你又有什么理由不努力。</p>
-<h2 id="网红">“网红”</h2>
+<h2>“网红”</h2>
 <p>这个词用得十分不对味儿，感觉像是换着法子嘲讽 Ruby。一门 93 年出现的编程语言居然也配叫网红，2015 年前后就开始走下坡路的编程语言居然也配叫网红。那这么算现在都还没成气候的 Rust 岂不是还没进入选秀门槛？（另外，早期 Rust 可是从 Ruby 那里抄了不少东西过来）。</p>
 <p>一门编程语言或者技术栈成为流行必然有其原因，要么能够在某种程度上提升开发效率（Ruby），要么能够形成独特的生态（JavaScript），要么幕后有强大的推手（Swift / Dart），要么嘛，要能够形成特定宗教（⬚⬚⬚⬚）。原因可能五花八门，但是必然满足了特定群体的需求才会出现拥趸。而当一个程序员面对这些五花八门的“新兴”编程语言，不假思索选择一拥而上时，那肯定就会着了道。</p>
 <p>可是技术的发展必然要求一个程序员选择演进方向。不然就会出现前端那种几个月就跟不上行业大趋势的情况。甚至要能够分辨自己所使用的工具是否会像 Ruby 那样把自己带入职业陷阱。这东西没有什么具体的实操方法，而且与 InfoQ 的思路相反，我觉得多去“学习”一些“网红”们在做的事情才更能在这方面帮助和指导你。</p>
-<h2 id="学习">“学习”</h2>
+<h2>“学习”</h2>
 <p>你看着就出现了一个矛盾了。学习吧，投入太多可能会掉到坑里；不学习，也有可能自己所在的地方变成大坑爬不出来。这里可能就需要看一下所谓的“学习”的定义了。如果你真的是觉得一个流行的技术栈突然出现非常热门需要投机性的转向该方向，那自然不在我们讨论的“学习”范围内。因为投机有风险，而学习不应该是一个有风险的活动。</p>
 <p>因此我们必然要对需要了解的内容做一个筛选。怎么筛呢，Alan J. Perlis 给出过一个非常关键的原则：</p>
 <blockquote>
@@ -206,7 +207,7 @@
 </ul>
 <p>你看，要学习的其实真就不是简单的怎么用 Rails 快速糊出来一个管理系统就完事儿了的，因为迟早都会有更快的模仿者超越他们。而学会怎么使用工具反倒是这个行业最简单的那一环，理解工具存在的原因，设计思路和应用场景，也就是那些“改变你想法”的东西，才是值得你去学习的。</p>
 <p>当然了，能让你赚到钱的也值得学习。</p>
-<h2 id="编程语言">编程语言</h2>
+<h2>编程语言</h2>
 <p>如果细致了解一下这几十年的编程语言发展史的话，就会发现这十年虽然确实文艺复兴了，但仍然是把之前的很多故事以更滑稽的形式表演了出来。大部分人都是会遗忘的，而且喜欢追求新鲜事物。所以才能看到大部分人在追捧可能几十年前就被人玩过的东西。虽然这段时间并不算很长，但技术发展实在是太快，还是逐渐展露出了一些周期性的特点。如果我们只跟着表面的东西兜兜转转，长久以后会发现自己其实在原地踏步。就这一点而言，多深入了解些东西还是有必要的。</p>
 
       
@@ -219,7 +220,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：#N/A</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -236,7 +237,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

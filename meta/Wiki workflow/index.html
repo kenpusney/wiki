@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -183,13 +184,13 @@
   </header>
   <article>
     <p><strong>WARNING: This page is deprecated and out of date</strong></p>
-<p>The normal way of create a new wiki item is just add a new <a href="#" class="disabled-link">CNMD</a> page, and then publish,
+<p>The normal way of create a new wiki item is just add a new <a href="/CNMD">CNMD</a> page, and then publish,
 it will be accessible from anywhere of this wiki using the cross-notation reference.</p>
 <p>But for more complicated items, it may belongs to some specific category, like, an article, or
 a source code snippet. I use folders as categories, and then can using folder name as the namespace
 for all items in that category, and README.cn.md document under that folder will be the index of
 the category.</p>
-<p>Also I&#39;ve created a utility script to complete the workflow.</p>
+<p>Also I've created a utility script to complete the workflow.</p>
 <p>e.g. if you want to create a new category:</p>
 <pre><code>./wiki <span class="hljs-keyword">new</span> <span class="hljs-type">category</span> entity
 </code></pre>
@@ -197,8 +198,8 @@ the category.</p>
 <pre><code>./wiki <span class="hljs-keyword">new</span> <span class="hljs-type">entity</span> <span class="hljs-string">&quot;Wiki Item&quot;</span>
 </code></pre>
 <p>then go to <code>./cnmd/entity/Wiki Item.cn.md</code> edit the content.</p>
-<p>All detailed code is in <code>wiki</code> script of <a href="https://github.com/kenpusney/wiki" title="kenpusney/wiki">kenpusney/wiki</a> repository.</p>
-<h2 id="wiki-program-reference"><code>./wiki</code> program reference</h2>
+<p>All detailed code is in <code>wiki</code> script of <a href="https://github.com/kenpusney/wiki">kenpusney/wiki</a> repository.</p>
+<h2><code>./wiki</code> program reference</h2>
 <ul>
 <li><code>./wiki new &lt;item&gt;</code>, create a new toplevel wiki item</li>
 <li><code>./wiki new category &lt;cat&gt;</code> create a new wiki category</li>
@@ -226,7 +227,7 @@ git add *.json
         </ul>
     </div> -->
   <span class="field">创建时间：2017-01-17</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -243,7 +244,5 @@ git add *.json
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

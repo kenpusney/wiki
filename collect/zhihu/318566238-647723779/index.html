@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,8 +183,8 @@
           
   </header>
   <article>
-    <h1 id="通过读一种脚本语言（如-python）的源码来自学编译原理是否可行？">通过读一种脚本语言（如 Python）的源码来自学编译原理是否可行？</h1>
-<p><a href="https://www.zhihu.com/question/318566238/answer/647723779" title="null">知乎链接</a></p>
+    <h1>通过读一种脚本语言（如 Python）的源码来自学编译原理是否可行？</h1>
+<p><a href="https://www.zhihu.com/question/318566238/answer/647723779">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>不靠谱。</p><p>先不说cpython的Parser那堆各种生成代码的黑魔法，单是一个简单的手写parser（比如lua），也只能给你一种“哦原来看起来这么简单”的感觉，真的写起来还是到处都是坑。</p><p>所以最好的办法还是自己选择/设计/抄袭一套语法然后实现一个完整的从解析到生成/执行的编译系统，无论是通用编程语言、DSL还是什么其他的东西都行。这个时候再回头看什么理论书都比较简单了就。</p><p>Learn by doing才是制胜之道。</p><p class="ztext-empty-paragraph"><br></p><p>另同样推荐楼上的那本Understanding Computation（《计算的本质》，但是建议看英文原版），一本step by step把那些理论性的东西具象出来的书。只是没有涉及太多跟parsing相关的内容，另结合一些别的书籍会更好。&lt;del&gt;（比如 <span><span class="UserLink"><div class="Popover"><div id="Popover11-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="Popover11-content"><a class="UserLink-link" data-za-detail-view-element_name="User" target="_blank" href="//www.zhihu.com/people/0970f947b898ecc0ec035f9126dd4e08">@vczh</a></div></div></span></span> 通常推荐的 Parsing Techniques（雾&lt;/del&gt;</p><p class="ztext-empty-paragraph"><br></p><p>以上。</p></span></p>
 
@@ -197,7 +198,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2019-04-11</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -214,7 +215,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

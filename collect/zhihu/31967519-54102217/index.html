@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,19 +183,19 @@
           
   </header>
   <article>
-    <h1 id="public-static--list-aslistt-a-原型是怎么回事">public static <T> List<T> asList(T... a) 原型是怎么回事?</h1>
-<p><a href="https://www.zhihu.com/question/31967519/answer/54102217" title="null">知乎链接</a></p>
+    <h1>public static <T> List<T> asList(T... a) 原型是怎么回事?</h1>
+<p><a href="https://www.zhihu.com/question/31967519/answer/54102217">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text">泛型的意思是就是说类型可以在以后指定，但是这仍然需要告诉编译器，我需要某个类型作为一个占位符，比如T。<br><div class="highlight"><pre><code class="language-java"><span class="kd">public</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">fuck</span><span class="o">(</span><span class="n">T</span> <span class="n">shit</span><span class="o">)</span> <span class="o">{</span>
-   <span class="o">...</span>
+<span class="o">...</span>
 <span class="o">}</span></code></pre></div>然后编译器会问你说，T是个什么鬼？你没有告诉我啊（Cannot resolve symbol）。<br>所以需要在前面显式地声明一下（这就是为啥不能省略），就成了<br><div class="highlight"><pre><code class="language-java"><span class="kd">public</span> <span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="nf">fuck</span><span class="o">(</span><span class="n">T</span> <span class="o">...)</span> <span class="o">...</span></code></pre></div>共出现了三个T，第一个是用来声明<b>类型参数</b>的，后面的两个才是泛型的实现。<br>所以说Java这种写法丑死了。<br>看我C#声明和使用多么一致。<br><div class="highlight"><pre><code class="language-csharp"><span class="k">public</span> <span class="n">List</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;</span> <span class="n">fuck</span><span class="p">&lt;</span><span class="n">T</span><span class="p">&gt;(</span><span class="n">T</span> <span class="n">shit</span><span class="p">)</span>
 <span class="p">{</span>
-   <span class="p">...</span>
+<span class="p">...</span>
 <span class="p">}</span>
 </code></pre></div>看我C++，清清楚楚地标明啥是啥。<br><div class="highlight"><pre><code class="language-cpp"><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">T</span><span class="o">&gt;</span>
 <span class="n">list</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">fuck</span><span class="p">(</span><span class="n">T</span><span class="p">...</span> <span class="n">shits</span><span class="p">)</span>
 <span class="p">{</span>
-   <span class="p">...</span>
+<span class="p">...</span>
 <span class="p">}</span>
 </code></pre></div>说起来你要觉得看着像颜文字的话，可以这样写啊：<br><div class="highlight"><pre><code class="language-java"><span class="o">&lt;</span><span class="n">Type</span> <span class="kd">extends</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">Type</span><span class="o">&gt;</span> <span class="nf">fuck</span><span class="o">(</span><span class="n">Type</span><span class="o">...</span> <span class="o">)</span> <span class="o">...</span></code></pre></div><p>然而并没有什么用。</p>以上。</span></p>
 
@@ -208,7 +209,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2015-07-07</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -225,7 +226,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

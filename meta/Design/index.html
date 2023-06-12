@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,7 +183,7 @@
           
   </header>
   <article>
-    <h2 id="基本思路">基本思路</h2>
+    <h2>基本思路</h2>
 <p>这个Wiki源自于2014年我host自己一些项目文档和实例的站点，2015年左右Wiki化，后面变更了几个版本，逐渐拆分开Markdown文档和整体的Wiki逻辑代码。</p>
 <p>直到前段时间还一直都是单页面调用GitHub接口来获取Wiki内容，导致整个站点访问非常慢（依赖非常多，React、Marked.js、Highlight.js还有ReactRouter以及一些基础库），加上本身GitHub接口访问的限制，实在是让人难以忍受了。好在GitHub Actions已经非常成熟，所以我最后决定还是用静态页面生成的方式来实现。</p>
 <p>在短暂验证了一轮之后，决定直接用hugo，但没多久我就觉得有点不太对劲了，hugo太复杂了，而且相应的功能也没办法满足我的需要，像cnmd这样的功能已经不能再复用。所以一段时间后我决定还是自己来写。</p>
@@ -191,9 +192,9 @@
 <li>我是要准备深度区分析post和结果，制造更丰富的交叉引用的，所以需要拿到parse的结果，然后对其进一步的分析。但这里hugo非常难扩展，做不到我想要的</li>
 <li>除此之外的工作流、分词工具都是用python或者nodejs来实现，所以也需要nodejs本身的技术栈，所以干脆换成node来实现整个生成。</li>
 </ul>
-<h2 id="特性">特性</h2>
-<h2 id="后续规划">后续规划</h2>
-<h2 id="关于-metacnmd">关于 <a href="/meta/CNMD" title="CNMD 标记语法">CNMD 标记语法</a></h2>
+<h2>特性</h2>
+<h2>后续规划</h2>
+<h2>关于 <a href="/meta/CNMD">meta/CNMD</a></h2>
 
       
 
@@ -205,7 +206,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2020-08-26</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -222,7 +223,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

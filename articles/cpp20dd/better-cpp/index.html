@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,9 +183,9 @@
           
   </header>
   <article>
-    <p>去年拖了很长的一段时间终于<a href="https://wiki.kimleo.net/articles/cpp20dd/" title="null">填完了 C++ 20 的坑</a>。其中也提到了，C++ 20 并不完善。诸如 module、coroutine 以及 concept，语言上的特性虽然已经加上了，但仍然需要标准库和社区的支持。这个目标是准备放在明年的 C++ 23 里面的，但由于我实在等不及再要几年标准完稿然后供应商实现这个过程，就尝试换了个思路来解决这些问题。</p>
+    <p>去年拖了很长的一段时间终于<a href="https://wiki.kimleo.net/articles/cpp20dd/">填完了 C++ 20 的坑</a>。其中也提到了，C++ 20 并不完善。诸如 module、coroutine 以及 concept，语言上的特性虽然已经加上了，但仍然需要标准库和社区的支持。这个目标是准备放在明年的 C++ 23 里面的，但由于我实在等不及再要几年标准完稿然后供应商实现这个过程，就尝试换了个思路来解决这些问题。</p>
 <p>标题既然提到了 Better C++，我们就先分别来看一下 C++ 存活的这几十年里已经出现了哪些（至少宣称）Better C++ 的语言。</p>
-<h2 id="better-c-">Better C++ ?</h2>
+<h2>Better C++ ?</h2>
 <p>首先说 Java。但 Java 因为其特殊的运行时需求，跟 C++ 本来就完全不在一个生态位。其最终的结果也就是把 C++ 多出来的那部分应用开发领域的功能给占了。这里的应用包括服务端应用。所以硬说是 Better，也只 Better 在了去掉了一大堆复杂特性导致自己的抽象能力不够，设计模式来凑的情况。不过，偷师来的一堆工具链算是给后来的人们设置了一个标准，这也是至今 C++ 都没能做得很好的地方。</p>
 <p>虽然 Java 的运行时本身是个问题，但像 Java 一样重度依赖运行时（至少是 GC）的 Better C++ 也不少。D 和 Golang 就分别是复杂和简单设计的代表。D 语言在 Andrei 当年加入的时候还短暂火了一把（也就大概就火到 Haskell 这个水平）；但还是因为其过于复杂，那可真是要啥有啥，一个典型的缝合怪（甚至一定程度上兼容 Java 的语法，dwt 就是源码级转译 swt 的 UI 工具库），劝退了大部分人。</p>
 <p>这个复杂程度是怎么衡量的呢，一方面是特性的数量，C++ / D 独有的模板、CTFE、UFCS 等特性又进一步加深了组合各种语言元素的复杂度；另一方面则是来自 Golang 社区的人的标准，即关键字的数量。有一个简单的统计，D 语言基本上是常见编程语言里面关键字最多的那个（Golang 相对较少，至少在我看到这个标准的年代，还没有 C 语言多，这也是当时不少人宣传的一个重点）。</p>
@@ -194,7 +195,7 @@
 <p>less is more 大概说的就是这种现象吧，特性上少了，语言更简单了，但是要做的工作却猛然增加了。</p>
 <p>C# 面临的问题基本跟 Java 一样，可能更大的问题是开源比 Java 要晚，而且早起被微软的名声带的有点偏。东西呢是个好东西，但还是那个问题，生态位不同。早些年微软也有过实验，即整个操作系统都跑在管理运行时之上，这样其实就能拿 C# 干些系统编程的活了。但 Singularity 和 Midori 都是试验性作品，随后就被关停了。留下的 <a href="http://joeduffyblog.com/2015/11/03/blogging-about-midori/" title="Blogging about Midori">Joe Duffy 老师的几篇文章</a>倒是真不错。</p>
 <p>闲话扯得有点多，我们再来看看一个相当符合理想的编程语言应该是什么样子的吧。</p>
-<h2 id="better-c--1">Better C++ !</h2>
+<h2>Better C++ !</h2>
 <p>C++ 一个非常严重的问题是 module，多个编译单元的组合还在依赖操作系统提供的动态/静态链接，而头文件这种继承自 C 的机制，虽然一定程度上保证了接口与实现隔离，但确实整体包含和解析的操作让这个过程慢了不少，还不好控制整体的结构。使用的时候可能没那么明显，但当你去编写一堆头文件的时候，怎么保证不出现循环依赖都能抠破脑袋。</p>
 <p>module 通常来说会有两种作用，一方面作为一个独立的构建单元，能够让外部程序进行引用和链接，另外一方面，使用 module 做符号的隔离，也会比 C++限行两套特性（另一个就是 namespace）来干两件事情更方便。另外不知道这是不是个传统，TypeScript 也给自己硬塞了一个 namespace 进去。可能也是因为当年 JavaScript 的 module 难产，不得不专门搞得一套符号管理方案吧。</p>
 <p>理想状态下的 module 应该是用来切分编译单元和进行符号管理的工具。同时，作为一个编译期可控的对象，完全可以像其他元素一样，给参数化起来。这样的结果就是，我们在特定的场景，完全可以通过 module 的组合来简单实现 mixin 或者更加灵活的操作，而不必动用一些特殊构造的 class 甚至 template。</p>
@@ -228,7 +229,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2022-07-09</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -245,7 +246,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

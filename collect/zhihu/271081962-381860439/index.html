@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,8 +183,8 @@
           
   </header>
   <article>
-    <h1 id="递归思想为什么是编程的基本思想，它效率很高吗？">递归思想为什么是编程的基本思想，它效率很高吗？</h1>
-<p><a href="https://www.zhihu.com/question/271081962/answer/381860439" title="null">知乎链接</a></p>
+    <h1>递归思想为什么是编程的基本思想，它效率很高吗？</h1>
+<p><a href="https://www.zhihu.com/question/271081962/answer/381860439">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>递归是基本思想，是因为他能够直白的表示出来运算过程，题主给出来的斐波那契函数，在没有通项公式的情况下，用递推公式简单直观，一目了然地描述了问题，同时，因为这种递推关系，程序会自动帮你去做计算。</p><p class="ztext-empty-paragraph"><br></p><p>但是递归的效率通常是不高的。一方面，频繁的函数调用导致重复压栈出栈，有很多额外开销（当然，尾调用优化可以解决一部分这种问题），另外，像fib这种函数，在同一个函数调用中有多个递归点，展开之后会是一个复杂的树状递归调用图，在没有做记忆处理的情况下，其中的重复运算带来的时间和空间开销都非常的大。所以，这样一个看似简单的函数，耗时久再正常不过了。</p><p>当然有一些技巧可以手动对其做一些优化，比如，把树状递归改写成线性递归调用的尾递归（符合尾调用形式的递归），再进一步就可以利用编译器，或者是手动进行尾调用优化。这些基本的技巧其实对你理解编程和计算都有很大的帮助，建议可以多练习一下。</p><p class="ztext-empty-paragraph"><br></p><p>另外推荐两本书，其中涉及了相关的内容。一本是大名鼎鼎的SICP，另外一本是 Element of Programming（中译本叫《编程原本》），可以拿来做参考。</p><p class="ztext-empty-paragraph"><br></p><p>以上。</p></span></p>
 
@@ -197,7 +198,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2018-05-03</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -214,7 +215,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

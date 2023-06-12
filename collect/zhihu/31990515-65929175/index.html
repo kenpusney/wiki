@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,8 +183,8 @@
           
   </header>
   <article>
-    <h1 id="如何改善国内基础编程环境？">如何改善国内基础编程环境？</h1>
-<p><a href="https://www.zhihu.com/question/31990515/answer/65929175" title="null">知乎链接</a></p>
+    <h1>如何改善国内基础编程环境？</h1>
+<p><a href="https://www.zhihu.com/question/31990515/answer/65929175">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>其实你说的那三点都并没有切中主要问题。<br>主要问题还是太多人在乎钱和名了，而没有真正地在做事情。</p><p>就像非要拿国家的经费搞所谓的自主知识产权的xx系统（不止是OS哦），然而对于真正跟生产实践和学术研究相关的问题都抛到了一边。<br>更不用说去传播和普及计算机科学知识了。</p><p>好的我们抛开一切情怀话题，从“如何改善国内基础编程环境？”上入手。<br>---------------------------------------------------------------</p><p><b>首先，我更倾向于Alan Perlis及其弟子<span><span class="UserLink"><div class="Popover"><div id="Popover7-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="Popover7-content"><a class="UserLink-link" data-za-detail-view-element_name="User" target="_blank" href="//www.zhihu.com/people/dcddea61834f6b2dcb515f393fe29575">@bhuztez</a></div></div></span></span>关于中文编程语言的看法。（<a href="http://zhuanlan.zhihu.com/impress-your-cat/19936493" class="internal">为什么你应该用中文写程序 - impress your cat - 知乎专栏</a></b><br>并且，这实际上已经不只是“编程”或者“计算机科学”领域的话题了，更深远一点，要涉及到语言学和数学相关的东西。有很大一部分人（包括我）的表达能力根本不够，却还希望传达自己想法，就会造成不小的问题。<br>但反过来，对于编程语言，其每一个语法单元都是形式定义的，每一个执行步骤的语义也都是确定的，不存在表达不清晰或者理解不透彻这种情况（当然，也有unspecified behavior这个概念，但这并不能说明什么，毕竟对于特定实现还是会specify的）。<br>至于中英文互译，这很大程度上反映了中文的复杂性。中文中很多时候一个词可以兼做动词名词形容词和副词，稍不留意就可能一下偏离原文的意思很远。再加上本来IT类语言借自于其他领域的词汇就很多（想想看overload）很难甚至根本不能进行准确的意译（把overloading翻译成“过载”？），更是容易增加这个复杂度。<br>就像题主所说的，很多译著术语不统一，用词不准确，表意混乱。<br>（关于术语翻译这个问题，只要是学术典籍都会有存在。<b>要么等业界出一套标准，要么在译著后面附一个索引。</b>有责任的作者和译者都在往这两方面努力吧。<br>另外，侯捷先生对于这个问题很早就有过讨论，从他的作品来看，是业界的标杆。（<a href="https://link.zhihu.com/?target=http%3A//jjhou.boolan.com/article99-14.htm" class=" wrap external" target="_blank" rel="nofollow noreferrer">技術引導乎 文化傳承乎</a></p><p>然后是<b>让更多人去尝试注重<u>过程</u>而非<u>结果</u></b>。<br>就像题主说的，主流操作系统软件（用于包括个人电脑、嵌入式设备和高性能计算机等）的核心都是源自国外的手笔，于是看到这一结果很多人就开始说要发展“我国”的OS了。然而大部分人都忽略了导致这个结果的整个过程：几十年前的OS林立以及后来慢慢的发展和合并，才有了现在的Windows、Linux各发行版和各种版本的Unix。举国之力开发出来的操作系统，估计还不如几年前番茄花园的Ghost XP。且不说生态圈和技术积累之类的概念，单只由于对利益十分看重<b>导致计划</b><b>不能</b><b>长久执行</b>这一点，就会让每一个新OS都是从零开始。<br>过程就这样被忽视掉了。</p><p>举个例子就是，20年前发布的ECMA-234，里面提及的内容，在现在你的Windows SDK里面依然能够正常的用。<br>然而我们国家20年前开发的操作系统在哪儿呢？</p><p>学习编程（和其他的知识、技能）也一样。如果是冲着一个特定的目的去学，那么这次用完学到的东西之后，大概过不了多久就忘掉了。（就因为这个原因，每回用Python写代码我都要去翻标准库使用手册。）</p><p>另外，编程是一种<u><b>思想</b></u>、<u><b>方法</b></u>和<u><b>艺术</b></u>。就像是美术和音乐一样，也需要创作灵感，也需要特殊的思维方式，也<u><b>需要作为一种兴趣来培养</b></u>，并不是反复练习就能达成的。但是在我们国家很多人最开始接触编程就是通过<b>竞赛</b>。跟很多基础性学科一样，我们国家竞赛很屌，结果真的在学科贡献上呢？</p><p>同样地，国内的专业教育也是很乏力。就像在大学物理课上只能学到科普知识，在数学系也只能学到一些粗浅的皮毛一样，计算机科学和编程的教育在大部分高校都很差劲。<b>很多时候制定教材和讲授课程的老师们也都不知道他们在做什么</b>，学生们也更在乎这门课是不是能够考过，所以大部分情况下都在死死的纠结考点细节的时候啥都没学就结束了。我几天前有幸再次回学校听一个老师讲计算机网络，完全是摘读谢希仁先生的那本教材，特别地点出说，哪儿哪儿是考点，你们一定要好好看，而并不知道他自己对这个发展了这么多年的体系有多少理解。</p>=================<br>第一次说这么多废话，好像并没能解答题主的问题。<br><blockquote>1.从OS角度讲，几大主流OS都是国外的。本人用ubuntu，每次查系统手册，基本是英文，虽然也有中文手册，总觉得翻译的中文手册读起来怪怪的，不
 像中文，而且理解起来还不如直接看英文原文，虽然阅读效率理解效率低下了些（明明是自己英文水平不行～～～）如果中文编程能够发展得很好，是否有助于改善
@@ -205,7 +206,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2015-10-01</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -222,7 +223,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,16 +183,16 @@
           
   </header>
   <article>
-    <h1 id="api-gotchas">API Gotchas</h1>
-<h2 id="api-category">API Category</h2>
+    <h1>API Gotchas</h1>
+<h2>API Category</h2>
 <ol>
 <li>Back-end for front-end</li>
 <li>Domain API</li>
 <li>System API</li>
 <li>Aggregation Layer</li>
 </ol>
-<h3 id="1-version-hell">1. Version Hell</h3>
-<h4 id="场景">场景</h4>
+<h3>1. Version Hell</h3>
+<h4>场景</h4>
 <ul>
 <li>v1：支撑最初业务需求的API</li>
 <li>v2：新需求导致业务流程需要简单改进</li>
@@ -199,15 +200,15 @@
 <li>v4：上面那堆东西写成了一坨屎，我们新建一个项目吧</li>
 <li>v5：不好意思新需求又来了</li>
 </ul>
-<h4 id="原因">原因</h4>
+<h4>原因</h4>
 <ul>
 <li>版本与消费者（客户端）的管理不到位</li>
 <li>业务场景划分不明确导致频繁变更</li>
 </ul>
-<h4 id="解决方案">解决方案</h4>
+<h4>解决方案</h4>
 <p>？</p>
-<h3 id="2-version-tree">2. Version Tree</h3>
-<h4 id="场景-1">场景</h4>
+<h3>2. Version Tree</h3>
+<h4>场景</h4>
 <p>BFF或者Aggregator：</p>
 <ul>
 <li>v1依赖A-v1和B-v1</li>
@@ -216,37 +217,37 @@
 <li>Version Hell导致v1 v2 v3都不能被彻底摆脱</li>
 <li>新建项目把所有依赖升级到最新版</li>
 </ul>
-<h4 id="原因-1">原因</h4>
+<h4>原因</h4>
 <ul>
 <li>Provider Management</li>
 <li>Cross-Refed Dependency</li>
 </ul>
-<h4 id="解决方案-1">解决方案</h4>
+<h4>解决方案</h4>
 <p>？</p>
-<h3 id="3-schema-violation">3. Schema Violation</h3>
-<h4 id="场景-2">场景</h4>
+<h3>3. Schema Violation</h3>
+<h4>场景</h4>
 <p>Consumer与Provider之间采用强Schema进行约束，任何一方都绝对依赖于另外一方。</p>
-<h4 id="解决方案-2">解决方案</h4>
+<h4>解决方案</h4>
 <p>？</p>
-<h3 id="4-exposed-domain-entity">4. Exposed Domain Entity</h3>
-<h4 id="场景-3">场景</h4>
+<h3>4. Exposed Domain Entity</h3>
+<h4>场景</h4>
 <p>Provider将自身内部的领域对象整体暴露出去</p>
-<h4 id="解决方案-3">解决方案</h4>
+<h4>解决方案</h4>
 <p>？</p>
-<h3 id="5-god-service">5. God service</h3>
-<h4 id="场景-4">场景</h4>
+<h3>5. God service</h3>
+<h4>场景</h4>
 <p>The service that was cross-layered and depended by most of other services.</p>
-<h4 id="解决方案-4">解决方案</h4>
+<h4>解决方案</h4>
 <p>?</p>
-<h3 id="6-circular-referencedependency">6. Circular Reference/Dependency</h3>
-<h4 id="场景-5">场景</h4>
+<h3>6. Circular Reference/Dependency</h3>
+<h4>场景</h4>
 <p>Lower stream services have ex/implicit dependency for higher stream services.</p>
-<h4 id="解决方案-5">解决方案</h4>
+<h4>解决方案</h4>
 <p>?</p>
-<h3 id="7-schema-inference">7. Schema Inference</h3>
-<h4 id="场景-6">场景</h4>
+<h3>7. Schema Inference</h3>
+<h4>场景</h4>
 <p>Services provide nothing but an endpoint, client must try to understand the schema and behaviour by combinating every possible inputs.</p>
-<h4 id="解决方案-6">解决方案</h4>
+<h4>解决方案</h4>
 <p>?</p>
 
       
@@ -259,7 +260,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2017-11-15</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -276,7 +277,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

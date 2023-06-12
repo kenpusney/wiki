@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,71 +183,71 @@
           
   </header>
   <article>
-    <h1 id="faster-and-more-predicatible">Faster, and more Predicatible</h1>
-<p>每个人都希望他们的软件开发组织<a href="https://medium.com/@JoshuaKerievsky/the-role-of-speed-grace-in-being-agile-69ed35483b5b" title="null">更快</a>、更可预测。</p>
+    <h1>Faster, and more Predicatible</h1>
+<p>每个人都希望他们的软件开发组织<a href="https://medium.com/@JoshuaKerievsky/the-role-of-speed-grace-in-being-agile-69ed35483b5b">更快</a>、更可预测。</p>
 <p>对于大多数组织来说，这是可能的。</p>
 <p>如果您从了解工作缓慢且不可预测的原因开始，这些变化并不容易，但相当简单。</p>
 <p>让我们探索一个系统（不是假设的）及其问题，然后提出一些可以改进他们的工作方式的方法。</p>
-<p>这种问题模式听起来可能很熟悉。如果是，那么<a href="https://www.industriallogic.com/training/technical/" title="null">我们提供</a>的各种<a href="https://www.industriallogic.com/training/technical/" title="null">解决方案</a>可能对您的组织有所帮助。</p>
+<p>这种问题模式听起来可能很熟悉。如果是，那么<a href="https://www.industriallogic.com/training/technical/">我们提供</a>的各种<a href="https://www.industriallogic.com/training/technical/">解决方案</a>可能对您的组织有所帮助。</p>
 <p>请考虑尝试其中的一些解决方案，并在底部给我们评论，告诉我们它是如何为您服务的。</p>
-<h1 id="阻止软件交付">阻止软件交付</h1>
+<h1>阻止软件交付</h1>
 <p>问题始于一个简单的认识，即几乎所有的软件开发策略和流程都存在_阻止软件发布_。</p>
 <p>这不是故意的。他们并不想公开阻止软件的发布。这只是系统的工作方式。</p>
 <p>我们的政策基于这样一种理解，即人们正在做的一些工作将会做得_很差_。我们必须阻止不良变化进入生产！</p>
 <p>过滤步骤到位，以便可以捕获和删除_不良的_软件更改，同时可以允许_好的_软件更改（稍微慢一些）流向生产。</p>
 <p>这些过滤器被设置为流程中的_门控步骤_：开发人员做一些工作，检查、审查或测试工作，并且只有在该阶段满足质量标准时才能通过流程。</p>
-<p>要理解系统，从<a href="https://www.amazon.com/Principles-Product-Development-Flow-Generation/dp/1935401009" title="null">工作本身</a>的<a href="https://www.amazon.com/Principles-Product-Development-Flow-Generation/dp/1935401009" title="null">角度来</a>思考：</p>
+<p>要理解系统，从<a href="https://www.amazon.com/Principles-Product-Development-Flow-Generation/dp/1935401009">工作本身</a>的<a href="https://www.amazon.com/Principles-Product-Development-Flow-Generation/dp/1935401009">角度来</a>思考：</p>
 <blockquote>
 <p>我是代码更改。如果你不阻止我，我要进入下一个版本！</p>
 </blockquote>
 <p>门控步骤是一种阻止更改进入下一个版本的代码库的方法。</p>
 <p>通常一个过程有几个这样的门。一些通常观察到的门是：</p>
 <ul>
-<li>  代码审查</li>
-<li>  合并前代码审查</li>
-<li>  团队负责人批准</li>
-<li>  合并（如果合并或构建失败，可能会拒绝）</li>
-<li>  合并后审查</li>
-<li>  自动化测试</li>
-<li>  用户体验测试</li>
-<li>  正确性测试</li>
-<li>  自动安全扫描</li>
-<li>  部署测试</li>
-<li>  回归测试</li>
-<li>  负载测试</li>
-<li>  管理审批</li>
+<li>代码审查</li>
+<li>合并前代码审查</li>
+<li>团队负责人批准</li>
+<li>合并（如果合并或构建失败，可能会拒绝）</li>
+<li>合并后审查</li>
+<li>自动化测试</li>
+<li>用户体验测试</li>
+<li>正确性测试</li>
+<li>自动安全扫描</li>
+<li>部署测试</li>
+<li>回归测试</li>
+<li>负载测试</li>
+<li>管理审批</li>
 </ul>
 <p>如果流程的各个阶段绘制在图表中，它们通常以管道的形式呈现，显示代码从开发人员流向代码审查人员，再到合并到测试部门等等。</p>
 <p>这些图表给人的印象是一条有序的装配线，其中所有的工作都将无缝有序地进行。</p>
-<h1 id="缓慢的工作涓涓细流">缓慢的工作涓涓细流</h1>
+<h1>缓慢的工作涓涓细流</h1>
 <p>如果工作要真正顺利地通过系统，可能需要 2-3 天的开发，然后是几分钟的自动化测试、快速合并、一两天的测试、一些安全和负载测试以及部署！</p>
 <p>预计每个新功能都会在不到一周的时间内从流程的另一端出现。如果我们只是按照计划行事，这是可以预测的、可估计的，而且非常简单，对吗？</p>
-<h3 id="天？我们正在思考分钟！">天？我们正在思考分钟！</h3>
-<p>随着<a href="https://www.industriallogic.com/blog/benefits-continuous-deployment/" title="null">持续部署</a>的出现（并日益<a href="https://newrelic.com/blog/best-practices/data-culture-survey-results-faster-deployment" title="null">流行</a>），人们<a href="https://www.youtube.com/watch?v=_dSA71NjVFE&ab_channel=GOTOConferences" title="null">每天</a>部署<a href="https://www.youtube.com/watch?v=_dSA71NjVFE&ab_channel=GOTOConferences" title="null">多次</a>、每小时多次，甚至每分钟多次。<a href="https://www.industriallogic.com/blog/benefits-continuous-deployment/" title="null"></a><a href="https://www.youtube.com/watch?v=_dSA71NjVFE&ab_channel=GOTOConferences" title="null"></a></p>
-<p>虽然对某些人来说，改变需要几天时间的想法可能看起来很荒谬，但在许多组织中，它似乎短得无法想象，甚至<a href="https://agilemanifesto.org/principles.html" title="null">敏捷宣言中</a>描述的“几周”似乎都无法实现。</p>
+<h3>天？我们正在思考分钟！</h3>
+<p>随着<a href="https://www.industriallogic.com/blog/benefits-continuous-deployment/">持续部署</a>的出现（并日益<a href="https://newrelic.com/blog/best-practices/data-culture-survey-results-faster-deployment">流行</a>），人们<a href="https://www.youtube.com/watch?v=_dSA71NjVFE&amp;ab_channel=GOTOConferences">每天</a>部署<a href="https://www.youtube.com/watch?v=_dSA71NjVFE&amp;ab_channel=GOTOConferences">多次</a>、每小时多次，甚至每分钟多次。<a href="https://www.industriallogic.com/blog/benefits-continuous-deployment/"></a><a href="https://www.youtube.com/watch?v=_dSA71NjVFE&amp;ab_channel=GOTOConferences"></a></p>
+<p>虽然对某些人来说，改变需要几天时间的想法可能看起来很荒谬，但在许多组织中，它似乎短得无法想象，甚至<a href="https://agilemanifesto.org/principles.html">敏捷宣言中</a>描述的“几周”似乎都无法实现。</p>
 <p>我们观察到的不是从开始到结束的平稳流程。相反，目前尚不清楚工作的状态以及何时完成。甚至工作的质量也难以评估。</p>
-<p>部分原因是软件固有的不断增加的复杂性，因为我们添加了为系统带来新约束的功能，有些可能是因为诸如<a href="https://www.industriallogic.com/blog/scatter-gather/" title="null">scatter-gather 之</a>类的有问题的做法。</p>
-<p>让我们关注在我们整洁的管道流文档中没有显示的两个关键特性：_队列_和_循环_。</p>
-<h2 id="排队">排队</h2>
-<p><img src=https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/handoff-is-queue.png alt='alt_text' title=图片显示了两个人之间的队列><div class='image-description'><span>⬆️</span>alt_text</div></p>
+<p>部分原因是软件固有的不断增加的复杂性，因为我们添加了为系统带来新约束的功能，有些可能是因为诸如<a href="https://www.industriallogic.com/blog/scatter-gather/">scatter-gather 之</a>类的有问题的做法。</p>
+<p>让我们关注在我们整洁的管道流文档中没有显示的两个关键特性：<em>队列_和_循环</em>。</p>
+<h2>排队</h2>
+<p><figure><img src="https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/handoff-is-queue.png" alt="alt_text" title="图片显示了两个人之间的队列" /><figcaption align="center"><small>◎ 图片显示了两个人之间的队列</small></figcaption></figure></p>
 <p>哪里有交接，哪里就有队列。</p>
 <p>排队是因为系统中的所有人都有很多工作要做；他们不只是坐在那里等待一位特定的程序员完成一项特定的工作。</p>
 <p>为了将工作移交给忙碌的人，您必须将工作放入他们的入站队列中。在实体办公室中，这曾经是通过“in box”或“in托盘”完成的，但在现代，它通常通过一些电子系统（甚至可能是 Slack 或电子邮件）来完成。</p>
 <p>工作将等到该人可用并检查下一个可用的工作。</p>
 <p>如果我们打断了一个人来处理我们的工作，他们必须改变工作（在这种情况下，正在进行的工作会回到队列中）。人们实际上一次只能处理一个项目。</p>
 <p>排队是在人们忙碌的情况下进行交接的自然且不可避免的结果。</p>
-<h3 id="开发队列">开发队列</h3>
-<p>工作分配给开发者（作为一个群体或个人）在大多数组织，因为<a href="https://www.industriallogic.com/blog/swarm-programming-with-the-swarm-board" title="null">工作的其他方面</a>还没有渗透到许多大公司_还没有_。</p>
+<h3>开发队列</h3>
+<p>工作分配给开发者（作为一个群体或个人）在大多数组织，因为<a href="https://www.industriallogic.com/blog/swarm-programming-with-the-swarm-board">工作的其他方面</a>还没有渗透到许多大公司_还没有_。</p>
 <p>通常，领导、经理或产品负责人会将工作交给开发人员来完成。此人不会与开发人员一起完成工作，而是会转移到其他职责。这使得这是一个交接。</p>
 <p><em>哪里有交接，哪里就有队列。</em></p>
 <p>开发人员通常很忙，因此要完成的工作必须等待开发人员可用。</p>
 <p>这个队列有多大，项目通常平均等待多长时间？</p>
-<p>通常会分配<a href="https://www.scrum.org/resources/what-is-a-sprint-in-scrum" title="null">2 周的工作</a>时间。有些工作会立即开始，但其他工作可能要到最后一天才会开始，因此一个项目在队列中的平均时间约为 5 个工作日。</p>
+<p>通常会分配<a href="https://www.scrum.org/resources/what-is-a-sprint-in-scrum">2 周的工作</a>时间。有些工作会立即开始，但其他工作可能要到最后一天才会开始，因此一个项目在队列中的平均时间约为 5 个工作日。</p>
 <p>虽然工作持续时间是可变的，但我们发现编程工作通常需要几天时间。有些工作可能需要几分钟或几小时，有些可能需要一天或一周。</p>
-<p>变化的原因包含在<a href="https://www.industriallogic.com/blog/estimates-vs-actuals/" title="null">各种问题中</a>，包括每个任务的具体难度、平台和语言的不确定性、破坏现有软件功能的风险、代码修改的难易程度、习惯和技能。开发人员，以及组织是否擅长将较大的功能分解为小的、可部署的工作单元。</p>
+<p>变化的原因包含在<a href="https://www.industriallogic.com/blog/estimates-vs-actuals/">各种问题中</a>，包括每个任务的具体难度、平台和语言的不确定性、破坏现有软件功能的风险、代码修改的难易程度、习惯和技能。开发人员，以及组织是否擅长将较大的功能分解为小的、可部署的工作单元。</p>
 <p>出于我们的目的，我们假设工作平均需要 2 天左右。您可以调整组织的数字。</p>
 <p>因此，平均而言，两天的开发需要 5 天的等待时间。</p>
-<h3 id="检查队列">检查队列</h3>
+<h3>检查队列</h3>
 <p>假设某些更改将是_不良_更改，因此让人们审查系统的每个更改似乎是谨慎的。</p>
 <p>当我需要你审查我的工作时，我会把我的工作交给你检查。</p>
 <p><em>哪里有交接，哪里就有队列。</em></p>
@@ -255,16 +256,16 @@
 <p>他在短时间内做了很多评论，总是给出很好的反馈。平均等待时间不到 3 个工作日（请注意，这在许多公司中会被视为快速审查）。这并非极端或不切实际，因此我们将使用 3 天作为审核等待时间。同样，您可以针对您的组织进行调整。</p>
 <p>所以我们平均要等5天开始工作，2天工作，3天等待审查，然后是一个小时的检查。我们可以预计任何给定的项目都需要 10 个工作日多一点的时间。</p>
 <p>我们最初每周至少发布一个功能的想法现在不太可能了。但是让我们看看剩下的过程。</p>
-<h3 id="合并队列">合并队列</h3>
+<h3>合并队列</h3>
 <p>开发人员的代码完成并审核后，将其与其他也已单独审核和接受的更改合并。</p>
 <p>通常在合并之前，审查过的代码会交由经理批准。</p>
-<p>_哪里有切换，哪里就有队列_。</p>
+<p><em>哪里有切换，哪里就有队列</em>。</p>
 <p>那么这个有多大，有多长呢？让我们称之为一天的等待。</p>
-<p>合并有时并不顺利<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:1" title="null">1</a>并且需要人工干预。涉及到一个人，所以这至少又是一次交接。</p>
+<p>合并有时并不顺利<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:1">1</a>并且需要人工干预。涉及到一个人，所以这至少又是一次交接。</p>
 <p><em>哪里有切换，哪里就有队列。</em></p>
 <p>这个队列有多长？清空的速度有多快？</p>
 <p>幸运的是，大多数时候合并是在审查的同一天完成的，有时是一两天。让我们为每个功能增加一天的时间（现在平均约为 12 或 13 个工作日）。</p>
-<h3 id="测试队列">测试队列</h3>
+<h3>测试队列</h3>
 <p>合并创建了一个以前从未存在过的独特的新代码版本。单独测试时正确的各种变化可能会带来意想不到的后果。</p>
 <p>添加某种测试来帮助发现和纠正由合并引起的任何细微缺陷似乎是合理的。</p>
 <p>由于制作、审查、批准和合并更改的人员没有与测试人员一起工作，因此这是一种交接。</p>
@@ -275,47 +276,47 @@
 <p>有了这个添加，17 个工作日对于我们的功能来说听起来很合理。</p>
 <p>我怀疑我们的许多在 Scrum 商店工作的读者都在他们的座位上不舒服地移动。一个典型的 Scrum “sprint”是 10 个工作日，这个过程已经使得在 sprint 内交付是不可能的。</p>
 <p>但是让我们继续。</p>
-<h3 id="然后我们部署，对吗？">然后我们部署，对吗？</h3>
+<h3>然后我们部署，对吗？</h3>
 <p>之后，我们必须将工作交给安全测试和性能测试。这些都要排队好几天，每个流程也只有两三天的时间。让我们为每一个增加 4 天，所以现在我们正在寻找大约 25 个工作日才能完成的事情。</p>
-<p><img src=https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/work-with-queues.png alt='由队列分隔的进程中的工人图像' title=由队列分隔的进程中的工人图像><div class='image-description'><span>⬆️</span>由队列分隔的进程中的工人图像</div></p>
+<p><figure><img src="https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/work-with-queues.png" alt="由队列分隔的进程中的工人图像" title="由队列分隔的进程中的工人图像" /><figcaption align="center"><small>◎ 由队列分隔的进程中的工人图像</small></figcaption></figure></p>
 <p>典型的企业工作流程可能涉及多个队列</p>
 <p>曾经有一段时间人们每隔几年或每 18 个月发布一次新版本，但那段时间已经过去了。今天，即使是相对较短的 5 周时间也令人不舒服。</p>
 <p>感受到这种不适，许多组织开始考虑如何加快开发人员的速度，以便他们能够更快地获得更改。</p>
 <p>如果 2 天的更改需要 25 天才能通过此系统，如果开发人员的速度提高_一倍_，它完成的速度会快多少？对。这将是 24 天而不是 25 天。没有人会注意到其中的差异。如果他们<strong>慢</strong>一倍，那就只有 27 天了，这根本不重要。</p>
-<p>Don Reinertsen 说要 <a href="https://www.amazon.com/Principles-Product-Development-Flow-Generation/dp/1935401009" title="null">“注意接力棒，而不是跑步者”。</a>问题不在于程序员的速度，而在于整个系统的工作流程。</p>
+<p>Don Reinertsen 说要 <a href="https://www.amazon.com/Principles-Product-Development-Flow-Generation/dp/1935401009">“注意接力棒，而不是跑步者”。</a>问题不在于程序员的速度，而在于整个系统的工作流程。</p>
 <p>被进程拖慢的不仅仅是糟糕的代码；所有代码都必须通过系统，因为我们无法提前知道哪些更改是需要检查的不良更改。</p>
 <p>无论质量如何，在流程中移动一个工作项目都有一个固定的最短时间。最长时间是多少？有最大时间吗？</p>
-<h2 id="循环">循环</h2>
+<h2>循环</h2>
 <p>在我们的系统中，我们在流程的许多步骤中检查不良更改。当我们找到一个时，我们会怎么做？</p>
 <p>团队或管理层不太可能会说“没关系，我们真的不想要这个。”</p>
 <p>当在我们的任何门控步骤中发现问题时，工作将_返回到开发_以进行修复。</p>
-<p><img src=https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/looping.png alt='两个人围成一圈的图片' title=两个人围成一圈的图片><div class='image-description'><span>⬆️</span>两个人围成一圈的图片</div></p>
+<p><figure><img src="https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/looping.png" alt="两个人围成一圈的图片" title="两个人围成一圈的图片" /><figcaption align="center"><small>◎ 两个人围成一圈的图片</small></figcaption></figure></p>
 <p>循环涉及返回的工作，循环中的每个参与者都有一个队列。</p>
 <p>当工作返回时，它会在流程的较早阶段重新加入流程。修复后最终会返回到失败的检查步骤。</p>
 <p>返回工作在我们的流程中形成一个循环。</p>
-<h3 id="返工延误">返工延误</h3>
-<p>虽然上面对通过审批门的工作的描述听起来慢得令人无法忍受，但现在我们意识到它是_不切实际的快_<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:2" title="null">2，</a>因为我们没有计算拒绝一个糟糕的更改造成的延迟。</p>
+<h3>返工延误</h3>
+<p>虽然上面对通过审批门的工作的描述听起来慢得令人无法忍受，但现在我们意识到它是_不切实际的快_<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:2">2，</a>因为我们没有计算拒绝一个糟糕的更改造成的延迟。</p>
 <p>如果审阅者针对任何返工返回了初始代码更改，则：</p>
 <ol>
-<li> 工作将不得不返回到_开发队列_，等待已经转移到其他工作的开发人员。</li>
-<li> 如果返回的工作移到开发人员队列的前面，它会延迟队列中的所有其他工作。如果它加入队列的后面，它将在队列中停留更长的时间。</li>
-<li> 在有大量工作进行的地方<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:3" title="null">3</a>，通常会增加一个优先级步骤。经理必须将返回的工作优先于开发团队的其他工作<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:4" title="null">4</a>。工作将移交给经理进行优先排序。_哪里有交接，哪里就有队列_。这给该过程增加了一个延迟。</li>
-<li> 当退回的作品被修复后，将不得不重新进入审稿人的队列进行检查。与第一次一样，这平均又增加了 3 天。</li>
-<li> 我们不确定该作品在返工后是否会通过审核而不会被拒绝。可能会有新的问题。一些_不好的更改_是棘手的，尤其是对于复杂或凌乱的代码<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:5" title="null">5</a>，这样对一个缺陷的更正可能会导致另一个缺陷，从而导致另一个返回。因此我们可以看到，拒绝不良更改的机会需要付出相当大的代价。</li>
+<li>工作将不得不返回到_开发队列_，等待已经转移到其他工作的开发人员。</li>
+<li>如果返回的工作移到开发人员队列的前面，它会延迟队列中的所有其他工作。如果它加入队列的后面，它将在队列中停留更长的时间。</li>
+<li>在有大量工作进行的地方<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:3">3</a>，通常会增加一个优先级步骤。经理必须将返回的工作优先于开发团队的其他工作<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:4">4</a>。工作将移交给经理进行优先排序。<em>哪里有交接，哪里就有队列</em>。这给该过程增加了一个延迟。</li>
+<li>当退回的作品被修复后，将不得不重新进入审稿人的队列进行检查。与第一次一样，这平均又增加了 3 天。</li>
+<li>我们不确定该作品在返工后是否会通过审核而不会被拒绝。可能会有新的问题。一些_不好的更改_是棘手的，尤其是对于复杂或凌乱的代码<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:5">5</a>，这样对一个缺陷的更正可能会导致另一个缺陷，从而导致另一个返回。因此我们可以看到，拒绝不良更改的机会需要付出相当大的代价。</li>
 </ol>
 <p>创建更改需要多长时间？这取决于项目排队的时间、队列中其他项目的数量、它们的比较优先级以及它们循环的次数。</p>
 <p>在这样一个动态系统中，很难责怪经理或开发人员没有预测交付。</p>
-<h3 id="循环巢">循环巢</h3>
+<h3>循环巢</h3>
 <p>之后，如果在测试中发现了一个缺陷，那么它将返回给开发人员再次返工，之后它必须再次通过审查员、代码合并和测试员的方式工作。</p>
-<p><img src=https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/nested-loops.png alt='进程中嵌套循环的图片' title=进程中嵌套循环的图片><div class='image-description'><span>⬆️</span>进程中嵌套循环的图片</div></p>
+<p><figure><img src="https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/nested-loops.png" alt="进程中嵌套循环的图片" title="进程中嵌套循环的图片" /><figcaption align="center"><small>◎ 进程中嵌套循环的图片</small></figcaption></figure></p>
 <p>典型的软件过程具有嵌套循环。</p>
 <p>每个循环都会导致工作重新访问所有_中间队列和批准门_。在继续之前，它可能会在任何这些嵌套循环上再次循环。</p>
 <p>返回工作会延迟计划的工作，因此我们无法确定即使是完美的更改也能在短短 25 天内通过系统 - 这取决于当时所有其他正在进行的工作的状态。</p>
-<p>在这一点上，我们已经失去了任何可预测性。我们无法确定任何工作何时完成。<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:6" title="null">6</a></p>
-<p>请记住，这些更改仍然平均只需要两天，而且大多数修复每次只需几分钟到几小时即可完成。开发人员的时间是_相当_可预测的<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:7" title="null">7</a>，审阅者的时间和测试的时间也是可以预测的。这是难以想象的非工作时间。开发人员充分利用他们的工作，尽快将其纳入审查、合并和测试管道。</p>
+<p>在这一点上，我们已经失去了任何可预测性。我们无法确定任何工作何时完成。<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:6">6</a></p>
+<p>请记住，这些更改仍然平均只需要两天，而且大多数修复每次只需几分钟到几小时即可完成。开发人员的时间是_相当_可预测的<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:7">7</a>，审阅者的时间和测试的时间也是可以预测的。这是难以想象的非工作时间。开发人员充分利用他们的工作，尽快将其纳入审查、合并和测试管道。</p>
 <p>在没有更好地了解开发系统的影响的情况下，两天的更改可能不会部署几个月似乎很荒谬。</p>
 <p>令人震惊的是：上述描述是一种简化。我们领域的顾问看到了更慢、更复杂的工作系统。</p>
-<h1 id="更好的估计怎么样？">更好的估计怎么样？</h1>
+<h1>更好的估计怎么样？</h1>
 <p>每个人都很忙，但很少有事情能完成。</p>
 <p>现在，组织对完成工作的不可预测的涓涓细流感到沮丧，将要求开发团队为他们提供_可靠的_估计，这些估计可以传递给客户和其他利益相关者。</p>
 <p>这看起来很合理，只是开发人员没有比系统中的任何其他人更有能力克服系统的先天不可预测性。</p>
@@ -327,38 +328,38 @@
 <p>每个系统都是完美的（如果不是故意的），目的是准确地获得它产生的结果。——我们戴明</p>
 </blockquote>
 <p>我们需要一个不会表现出相同不良行为的系统。</p>
-<h1 id="解决系统问题">解决系统问题</h1>
+<h1>解决系统问题</h1>
 <p>上述系统因三个主要因素而变得复杂：</p>
 <ul>
-<li>  循环</li>
-<li>  队列</li>
-<li>  缺陷</li>
+<li>循环</li>
+<li>队列</li>
+<li>缺陷</li>
 </ul>
-<h3 id="更快地使用队列">更快地使用队列</h3>
+<h3>更快地使用队列</h3>
 <p>我们可以做的第一件事也是最明显的事情是减少排队时间。</p>
-<p>我们可以减少队列中的项目数量。通过减少进行中（或因为他们正在等待而不是进行中而_拥有）_的项目数量，我们缩短了队列。这大大缩短了我们的上市时间。的影响<a href="https://improvingflow.com/2021/09/12/improving_predictability.html" title="null">降低进展中的工作</a> _（WIP）_是证据充分的，值得一网络搜索或两个。</p>
+<p>我们可以减少队列中的项目数量。通过减少进行中（或因为他们正在等待而不是进行中而_拥有）_的项目数量，我们缩短了队列。这大大缩短了我们的上市时间。的影响<a href="https://improvingflow.com/2021/09/12/improving_predictability.html">降低进展中的工作</a> _（WIP）_是证据充分的，值得一网络搜索或两个。</p>
 <p>我们还可以减少忙碌以提高响应速度。如果我们总是有一个测试人员和一个测试环境待命，我们就可以防止测试队列被填满。</p>
 <p>这听起来效率低下，支付了等待工作的人 - 但如果每个工作项目节省几天时间呢？更快更频繁地交付软件变更有多大价值？记住“看指挥棒，而不是跑者”。</p>
 <p>部分工作可以通过自动化方式完成，这可以让部分工作在没有任何人工干预的情况下开始（并可能完成）。例如：</p>
 <ul>
-<li>  每次提交更改时，重复测试都可以自动化并自动运行。仅当代码未通过测试时才需要人工干预。</li>
-<li>  合并可以在批准时自动完成，并且只有在检测到合并冲突时才会排队等待人工干预</li>
-<li>  安全扫描和负载测试通常是自动化的，并且在发现新漏洞时需要人工干预。</li>
+<li>每次提交更改时，重复测试都可以自动化并自动运行。仅当代码未通过测试时才需要人工干预。</li>
+<li>合并可以在批准时自动完成，并且只有在检测到合并冲突时才会排队等待人工干预</li>
+<li>安全扫描和负载测试通常是自动化的，并且在发现新漏洞时需要人工干预。</li>
 </ul>
 <p>其中一些任务具有不可或缺的人为因素：如果您关心用户体验，就无法避免让人来测试您的系统，也不能安全地忽略安全性或可靠性的人为方面。</p>
-<p>仍有一些任务可以<a href="https://www.industriallogic.com/blog/what-should-we-measure/" title="null">自动化，从而解放人类，专注</a>于他们工作中明显人性化的一面。</p>
+<p>仍有一些任务可以<a href="https://www.industriallogic.com/blog/what-should-we-measure/">自动化，从而解放人类，专注</a>于他们工作中明显人性化的一面。</p>
 <p>请注意，这些自动化任务需要持续的人工关注；这里没有“设置并忘记它”，但它非常值得付出努力。</p>
-<h3 id="消除拒绝循环">消除拒绝循环</h3>
+<h3>消除拒绝循环</h3>
 <p>循环乘以我们排队相同工作的次数。</p>
 <p>为了消除循环，我们必须减少返回工作的发生率。</p>
 <p>由于我们仍然不希望糟糕的工作投入生产，因此我们必须首先通过制作更好的工作产品来减少拒绝。</p>
 <p>虽然我们不一定能消除所有错误，但我们可以在我们的流程中更早地注意到并修复它们。</p>
 <p>在我们最初的编辑会话期间，我们必须尽早制定和纠正我们的所有错误，这样工作就不会重复。</p>
-<p>许多组织错误地试图<a href="https://www.industriallogic.com/blog/managing-programmers/" title="null">加速程序员而不是过程</a>。开发人员通过匆忙编写的代码进行检查和测试来响应对原始速度的需求，当然这会增加代码循环返回以进行修复的次数。</p>
+<p>许多组织错误地试图<a href="https://www.industriallogic.com/blog/managing-programmers/">加速程序员而不是过程</a>。开发人员通过匆忙编写的代码进行检查和测试来响应对原始速度的需求，当然这会增加代码循环返回以进行修复的次数。</p>
 <p>由于等待时间使开发时间相形见绌，减少等待和循环应该可以为开发腾出更多的时间。</p>
-<p>有什么办法可以提高我们的<a href="https://www.industriallogic.com/blog/first-time-through/" title="null">首次通过</a>率吗？</p>
+<p>有什么办法可以提高我们的<a href="https://www.industriallogic.com/blog/first-time-through/">首次通过</a>率吗？</p>
 <p>如果每一次更改都尽我们所能做到完美，也许是通过花更多时间仔细编程、更早、更频繁地测试以及让更多人参与工作，那么我们的回报可能会少得多，趋向于每个项目的回报为零。</p>
-<p><img src=https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/deming-quote.png alt='如果把我们的过程比作吐司制作，我们会让一个人把每一块都烤好，然后下一个人把它刮掉' title=戴明说，如果把我们的过程比作烤面包，我们会让一个人把每一块烤好，然后下一个把它刮掉。><div class='image-description'><span>⬆️</span>如果把我们的过程比作吐司制作，我们会让一个人把每一块都烤好，然后下一个人把它刮掉</div></p>
+<p><figure><img src="https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/deming-quote.png" alt="如果把我们的过程比作吐司制作，我们会让一个人把每一块都烤好，然后下一个人把它刮掉" title="戴明说，如果把我们的过程比作烤面包，我们会让一个人把每一块烤好，然后下一个把它刮掉。" /><figcaption align="center"><small>◎ 戴明说，如果把我们的过程比作烤面包，我们会让一个人把每一块烤好，然后下一个把它刮掉。</small></figcaption></figure></p>
 <p>戴明建议建立高质量的输出而不是努力挽救低质量的输出</p>
 <p>更好的工具可以帮助程序员更快地发现错误。当编辑开始提供彩色语法突出显示时，语法意识的提高阻止了软件中的大多数语法错误。</p>
 <p>现在，我们的开发环境中内置了安全扫描器和“lint”工具。通过在提交代码以供审查之前意识到问题，开发人员可以避免往返。</p>
@@ -367,33 +368,51 @@
 <p>这提供了一个基本的安全网，以确保代码在其直接域内工作，通过应用程序智能增强智能工具。</p>
 <p>我们在 TDD 中使用的（微）测试仍然不能在更大的系统环境中保护我们。除了 TDD 的测试之外，我们还需要更广泛的测试。</p>
 <p>但是编写在自动化系统测试期间不会失败的代码可能需要比单个程序员一次能记住的更多的知识。我们可能需要更多的观点。</p>
-<p>结对工作已被证明可以减少多达 40% 的缺陷，同时还可以帮助团队保持更高的质量和对标准的遵守。其他集成技术，如<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9mobprogramming.org" title="null">mob 编程</a>和<a href="https://www.industriallogic.com/blog/swarm-programming-with-the-swarm-board/" title="null">蜂拥而至</a>，只会带来好处。</p>
-<p>如果我们的团队组织得很好，那么对于我们可能犯的大多数错误，团队中的某个人应该具备在工作进行审查或测试之前<a href="https://agileotter.blogspot.com/2014/01/bug-teams-well-meaning-foolishness.html" title="null">识别和纠正它们</a>的技能和知识。</p>
-<h3 id="组队消除队列">组队消除队列</h3>
+<p>结对工作已被证明可以减少多达 40% 的缺陷，同时还可以帮助团队保持更高的质量和对标准的遵守。其他集成技术，如<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9mobprogramming.org">mob 编程</a>和<a href="https://www.industriallogic.com/blog/swarm-programming-with-the-swarm-board/">蜂拥而至</a>，只会带来好处。</p>
+<p>如果我们的团队组织得很好，那么对于我们可能犯的大多数错误，团队中的某个人应该具备在工作进行审查或测试之前<a href="https://agileotter.blogspot.com/2014/01/bug-teams-well-meaning-foolishness.html">识别和纠正它们</a>的技能和知识。</p>
+<h3>组队消除队列</h3>
 <p>我们可以通过组合连续的流程步骤来减少队列的数量，例如开发和审查相结合，审查和合并相结合等。</p>
-<p>为了消除队列，您必须<a href="https://www.industriallogic.com/blog/scatter-gather/" title="null">召集本来可以</a>在他们之间<a href="https://www.industriallogic.com/blog/scatter-gather/" title="null">交接工作的</a>人员，让他们一起处理一个工作项目，即时审查和测试。这包括开发人员、测试人员、用户体验、用户界面、安全性……所有人。</p>
+<p>为了消除队列，您必须<a href="https://www.industriallogic.com/blog/scatter-gather/">召集本来可以</a>在他们之间<a href="https://www.industriallogic.com/blog/scatter-gather/">交接工作的</a>人员，让他们一起处理一个工作项目，即时审查和测试。这包括开发人员、测试人员、用户体验、用户界面、安全性……所有人。</p>
 <p>如果他们可以一起开始，一起工作，一起完成，那么他们之间就没有交接和排队。</p>
-<p><img src=https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/thumbnail.png alt='围绕单个开发任务的许多人的图片' title=围绕一个开发任务的许多人的照片><div class='image-description'><span>⬆️</span>围绕单个开发任务的许多人的图片</div></p>
+<p><figure><img src="https://www.industriallogic.com/img/blog/2021-12-03-faster-and-predictable/thumbnail.png" alt="围绕单个开发任务的许多人的图片" title="围绕一个开发任务的许多人的照片" /><figcaption align="center"><small>◎ 围绕一个开发任务的许多人的照片</small></figcaption></figure></p>
 <p>召集人员以消除交接和循环</p>
-<p>这种<a href="https://agilemanifesto.org/principles.html" title="null">以跨职能方式协同工作的</a>想法可能听起来很激进，但当我们将系统视为流并了解循环和队列时，这显然是一种简化。</p>
+<p>这种<a href="https://agilemanifesto.org/principles.html">以跨职能方式协同工作的</a>想法可能听起来很激进，但当我们将系统视为流并了解循环和队列时，这显然是一种简化。</p>
 <p>想象一下消除编码和审查之间、审查和合并之间、合并和测试之间的队列的速度增加。许多公司的队列等待代码的时间比团队在代码上花费的时间要长得多，因此您可以消除延迟和进度不确定性的主要来源。</p>
-<p>如果没有循环和队列，我们将只关心实际完成工作所需的时间。如果循环和队列占了 90% 的前置时间，理论上这可以为每个工作项提供_高达_90% 的速度提升<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:8" title="null">8</a>，尽管这超出了任何人的合理预期或承诺。</p>
-<p>在后台添加一些自动化测试，突然之间，给定的更改实际上可以在几天内投入生产似乎是合理的<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:9" title="null">9</a>。</p>
-<p>这甚至不需要雇用更好的程序员或每个人都更加努力地工作，甚至不需要调用<a href="https://www.industriallogic.com/blog/managing-programmers/" title="null">生产力管理</a>。</p>
+<p>如果没有循环和队列，我们将只关心实际完成工作所需的时间。如果循环和队列占了 90% 的前置时间，理论上这可以为每个工作项提供_高达_90% 的速度提升<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:8">8</a>，尽管这超出了任何人的合理预期或承诺。</p>
+<p>在后台添加一些自动化测试，突然之间，给定的更改实际上可以在几天内投入生产似乎是合理的<a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fn:9">9</a>。</p>
+<p>这甚至不需要雇用更好的程序员或每个人都更加努力地工作，甚至不需要调用<a href="https://www.industriallogic.com/blog/managing-programmers/">生产力管理</a>。</p>
 <p>这是一个重大的系统变化，需要改变一些习惯，但这并非不可能或不可想象。</p>
-<p><a href="https://www.industriallogic.com/technical-excellence-workshop/" title="null">提高技术技能</a>也总是很方便，但问题出在系统上的地方，唯一更快、更可预测的方法是处理系统中的等待和队列。</p>
-<p>有许多组织正是这样做的：使用良好的工具和<a href="http://www.extremeprogramming.org/" title="null">XP 实践进行</a><a href="https://mobprogramming.org/" title="null">集成编程</a>。他们中的<a href="https://www.industriallogic.com/blog/test-driven-development-with-continuous-delivery" title="null">许多人每天多次</a>将代码发布到生产环境中<a href="https://www.industriallogic.com/blog/test-driven-development-with-continuous-delivery" title="null">。</a><a href="http://www.extremeprogramming.org/" title="null"></a><a href="https://www.industriallogic.com/blog/test-driven-development-with-continuous-delivery" title="null"></a></p>
-<h2 id="笔记">笔记</h2>
+<p><a href="https://www.industriallogic.com/technical-excellence-workshop/">提高技术技能</a>也总是很方便，但问题出在系统上的地方，唯一更快、更可预测的方法是处理系统中的等待和队列。</p>
+<p>有许多组织正是这样做的：使用良好的工具和<a href="http://www.extremeprogramming.org/">XP 实践进行</a><a href="https://mobprogramming.org/">集成编程</a>。他们中的<a href="https://www.industriallogic.com/blog/test-driven-development-with-continuous-delivery">许多人每天多次</a>将代码发布到生产环境中<a href="https://www.industriallogic.com/blog/test-driven-development-with-continuous-delivery">。</a><a href="http://www.extremeprogramming.org/"></a><a href="https://www.industriallogic.com/blog/test-driven-development-with-continuous-delivery"></a></p>
+<h2>笔记</h2>
 <ol>
-<li>这是由于我们目前称为集成漂移的原因，开发人员本地分支中的代码和主代码行中的代码正在独立更改，慢慢变得不兼容。它很复杂，可能是未来不同博客文章的主题。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:1" title="null">↩</a></li>
-<li>是的，我知道这听起来并不快。但请耐心等待。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:2" title="null">↩</a></li>
-<li>排队的工作并不是真正的“进行中”。我喜欢将分配但等待的工作称为“拥有”而不是“进行中”。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:3" title="null">↩</a></li>
-<li>我们已经看到管理人员努力优先纠正数十个未完成的功能、数千个生产错误和数百个新功能请求。像这样的系统可能会失控，即使是最优秀、最有组织的经理也很难跟上。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:4" title="null">↩</a></li>
-<li>重构是一种我们用来防止代码变得混乱的技术，这样我们就可以在不破坏任何东西的情况下进行更改。可悲的是，许多团队不选择进行重构，有些则不允许。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:5" title="null">↩</a></li>
-<li>平均而言，我们大致知道在给定时间段内完成了多少功能或编程任务，因此我们在这里可以依靠统计方法，但单个项目的完成时间是不确定的。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:6" title="null">↩</a></li>
-<li>对于“可预测的 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:7" title="null">↩</a></li>
-<li>一旦他们掌握了合作的窍门。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:8" title="null">↩</a></li>
-<li> 这是轻描淡写。通过集成编程和自动化测试，许多组织每天多次将代码部署到生产环境中，有时甚至每天数百次。这种工作方式称为“持续部署”。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:9" title="null">↩</a></li>
+<li>
+<p>这是由于我们目前称为集成漂移的原因，开发人员本地分支中的代码和主代码行中的代码正在独立更改，慢慢变得不兼容。它很复杂，可能是未来不同博客文章的主题。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:1">↩</a></p>
+</li>
+<li>
+<p>是的，我知道这听起来并不快。但请耐心等待。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:2">↩</a></p>
+</li>
+<li>
+<p>排队的工作并不是真正的“进行中”。我喜欢将分配但等待的工作称为“拥有”而不是“进行中”。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:3">↩</a></p>
+</li>
+<li>
+<p>我们已经看到管理人员努力优先纠正数十个未完成的功能、数千个生产错误和数百个新功能请求。像这样的系统可能会失控，即使是最优秀、最有组织的经理也很难跟上。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:4">↩</a></p>
+</li>
+<li>
+<p>重构是一种我们用来防止代码变得混乱的技术，这样我们就可以在不破坏任何东西的情况下进行更改。可悲的是，许多团队不选择进行重构，有些则不允许。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:5">↩</a></p>
+</li>
+<li>
+<p>平均而言，我们大致知道在给定时间段内完成了多少功能或编程任务，因此我们在这里可以依靠统计方法，但单个项目的完成时间是不确定的。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:6">↩</a></p>
+</li>
+<li>
+<p>对于“可预测的 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:7">↩</a></p>
+</li>
+<li>
+<p>一旦他们掌握了合作的窍门。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:8">↩</a></p>
+</li>
+<li>
+<p>这是轻描淡写。通过集成编程和自动化测试，许多组织每天多次将代码部署到生产环境中，有时甚至每天数百次。这种工作方式称为“持续部署”。 <a href="https://www.industriallogic.com/blog/faster-and-more-predictable/#fn:9#fnref:9">↩</a></p>
+</li>
 </ol>
 
       
@@ -406,7 +425,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：#N/A</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -423,7 +442,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

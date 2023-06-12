@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -183,14 +184,14 @@
   </header>
   <article>
     <p>CNMD, aka Cross Notation Markdown, is a syntax extension for Markdown.</p>
-<h2 id="extension-used-in-this-format">Extension used in this format</h2>
-<h3 id="namespaces">namespaces</h3>
-<p>Let&#39;s say if you want link an item exists in Wikipedia, you can just add
+<h2>Extension used in this format</h2>
+<h3>namespaces</h3>
+<p>Let's say if you want link an item exists in Wikipedia, you can just add
 a normal link, but with a <code>wiki:</code> prefix like <code>[wiki:Markdown]()</code>, it
 means that you want link this page to <code>https://en.wikipedia.org/wiki/Markdown</code>.</p>
-<p>For internal items(like in wikipedia, it&#39;s single page for one item),
-just put an <code>:</code> as a prefix, e.g. <code>[:about]()</code> (<a href="/about" title="关于我">关于我</a>).</p>
-<h3 id="tags-and-refs">Tags and Refs</h3>
+<p>For internal items(like in wikipedia, it's single page for one item),
+just put an <code>:</code> as a prefix, e.g. <code>[:about]()</code> (<a href="/about">about</a>).</p>
+<h3>Tags and Refs</h3>
 <p>You can now add front-matter to include tags and refs declaration.</p>
 <pre><code class="language-markdown">---
 tags:
@@ -199,7 +200,7 @@ refs:
 <span class="hljs-section">  - meta/Fork Me
 ---</span>
 </code></pre>
-<h2 id="extensions-to-be-implemented">Extensions to be implemented:</h2>
+<h2>Extensions to be implemented:</h2>
 <ul>
 <li>Alias</li>
 </ul>
@@ -214,7 +215,7 @@ refs:
         </ul>
     </div> -->
   <span class="field">创建时间：2017-01-17</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -231,7 +232,5 @@ refs:
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

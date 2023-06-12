@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -183,14 +184,14 @@
   </header>
   <article>
     <blockquote>
-<p>原文发布于 2015-05-10 我的Lofter：<a href="http://kimleo.lofter.com/post/46977_6e75c68" title="undefined">http://kimleo.lofter.com/post/46977_6e75c68</a></p>
+<p>原文发布于 2015-05-10 我的Lofter：http://kimleo.lofter.com/post/46977_6e75c68</p>
 </blockquote>
 <p>前面简单说了一下JSONSpec，主要是关于如何给一个JSON文档加上类型约束，和这样做的意义。</p>
 <p>之后看到有人评论说，这跟JSON-Schema很像。</p>
 <p>嘛，其实我在简略设计完JSONSpec之后就去网上找了找是否有类似或者同样的东西存在，就发现了JSON-Schema。但是简单做了一下对比发现，JSON-Schema并不是我所期待的那种。</p>
-<p> 一方面它实在是过于庞大，甚至是臃肿，继承了XMLSchema的一切但又没有XMLSchema那种特殊的表现形式；另一方面，为了完整模仿XMLSchema，还额外定义了两个增加JSON格式负担的JSON-Reference和JSON-Pointer，更是失去了JSON本来相较于XML的优势。</p>
-<p> 但是就像是我们预先期待的那样，JSONSpec要有一种描述服务或者是约束的能力。对数据的限定可以像前文中提到的type spec来加以限定，但是服务，或者是约束，或者是规范（Specification），并不只是特定数量type spec的集合。其中还要包含依赖、语义、以及整体暴露出去的接口等等。</p>
-<p> 所以除了type spec之外我们还需要有对spec的spec。</p>
+<p>一方面它实在是过于庞大，甚至是臃肿，继承了XMLSchema的一切但又没有XMLSchema那种特殊的表现形式；另一方面，为了完整模仿XMLSchema，还额外定义了两个增加JSON格式负担的JSON-Reference和JSON-Pointer，更是失去了JSON本来相较于XML的优势。</p>
+<p>但是就像是我们预先期待的那样，JSONSpec要有一种描述服务或者是约束的能力。对数据的限定可以像前文中提到的type spec来加以限定，但是服务，或者是约束，或者是规范（Specification），并不只是特定数量type spec的集合。其中还要包含依赖、语义、以及整体暴露出去的接口等等。</p>
+<p>所以除了type spec之外我们还需要有对spec的spec。</p>
 <p>示例如下：</p>
 <pre><code class="language-json">{
     <span class="hljs-attr">&quot;name&quot;</span>: <span class="hljs-string">&quot;JSONSpec&quot;</span>,
@@ -219,7 +220,7 @@
 </code></pre>
 <p>嗯，我们能从这里看到什么呢？</p>
 <ol>
-<li>当我去访问 <a href="http://spec.kimleo.net/JSONSpec/draft0/JSONSpec.spec.json" title="undefined">http://spec.kimleo.net/JSONSpec/draft0/JSONSpec.spec.json</a> 的时候，我们可以知道同时该网站提供一项验证服务：只要POST符合JSONSpec type spec规定的格式的文档到 <a href="http://spec.kimleo.net/JSONSpec/draft0/validate" title="undefined">http://spec.kimleo.net/JSONSpec/draft0/validate</a> ，就会自动进行验证，同时返回给你验证结果（ValidateResult）。</li>
+<li>当我去访问 http://spec.kimleo.net/JSONSpec/draft0/JSONSpec.spec.json 的时候，我们可以知道同时该网站提供一项验证服务：只要POST符合JSONSpec type spec规定的格式的文档到 http://spec.kimleo.net/JSONSpec/draft0/validate ，就会自动进行验证，同时返回给你验证结果（ValidateResult）。</li>
 <li>JSONSpec validate服务有一项外部的type spec依赖，直接在ValidateResult中做了一个简单的声明，就可以重用该type spec了。</li>
 <li>… …</li>
 </ol>
@@ -236,7 +237,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2015-05-10</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -253,7 +254,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

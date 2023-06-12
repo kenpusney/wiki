@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -184,7 +185,7 @@
   <article>
     <p>昨天群里同学提到了一个问题。</p>
 <blockquote>
-<p> 为啥不要写for/foreach，为啥要引入高阶函数这些个东西。我现在的理解就是引入这些东西，就是为了用一种更加“声明式”的，更加“表意”的，而非“命令式”的方式来写代码。</p>
+<p>为啥不要写for/foreach，为啥要引入高阶函数这些个东西。我现在的理解就是引入这些东西，就是为了用一种更加“声明式”的，更加“表意”的，而非“命令式”的方式来写代码。</p>
 </blockquote>
 <p>以下是我的回答，有所删改：</p>
 <p>从另外一个视角来看这个问题，高阶函数出现主要是能够把控制流作为数据来操作了。比如map等这些函数，实际上就是通过控制流简化了原本的程序结构，直接把循环结构给干掉了，只利用选择和递归就能解决所有问题。（实际上选择结构也可以被干掉，不过这样写出来的东西就更不说人话了。）</p>
@@ -203,7 +204,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：#N/A</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -220,7 +221,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

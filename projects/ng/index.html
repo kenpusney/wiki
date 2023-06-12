@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,26 +183,26 @@
           
   </header>
   <article>
-    <h1 id="ng-next-generation-programming-language">NG: Next generation Programming language</h1>
+    <h1>NG: Next generation Programming language</h1>
 <p>This is about the detailed description of ng-lang and for now
-it&#39;s still work in progress.</p>
-<h2 id="core-concept">core concept</h2>
-<p>ng is a programming language which may be different from today&#39;s
-programming languages, it won&#39;t be object-oriented, and it is
+it's still work in progress.</p>
+<h2>core concept</h2>
+<p>ng is a programming language which may be different from today's
+programming languages, it won't be object-oriented, and it is
 strong and static-typed. It is also not so much like modern
 functional programming language, no such FP things annoying you.
 No vars, no macros, and no MONADs! and every function should
 be explicitly annotated with types.</p>
 <p>And ng inherites <strong>template</strong> from C++/D with much powerful
 enhancement to let you do CTFE (Compile time function execution).</p>
-<h2 id="types">Types</h2>
+<h2>Types</h2>
 <p>Here we have to different kinds of types, everything with out
 the <code>ref</code> modifier is an value type, which is on value semantics.
 and ones with <code>ref</code>, is reference type, and on ref semantics.</p>
 <p>Let me explain you what is this about in following details.</p>
 <p>Simple type:</p>
 <ul>
-<li><p>Primitives:</p>
+<li>Primitives:
 <ul>
 <li>Num (what? float?? sorry, make it yourself!)</li>
 <li>Bool</li>
@@ -209,23 +210,23 @@ and ones with <code>ref</code>, is reference type, and on ref semantics.</p>
 <li>Unit</li>
 </ul>
 </li>
-<li><p>Composites:</p>
+<li>Composites:
 <ul>
 <li>Tuples (a.k.a. Product types)</li>
 <li>Records</li>
 <li>Sum types</li>
 </ul>
-<p>Parameterized type:</p>
 </li>
 </ul>
-<p>Let&#39;s say we want build a thing that may useful like an array.
-which can support different type with fixed size. How could 
+<p>Parameterized type:</p>
+<p>Let's say we want build a thing that may useful like an array.
+which can support different type with fixed size. How could
 you represent this? I got <code>Array&lt;Int, 3&gt;</code> here.</p>
 <p>The Int and 3 in <code>Array&lt;Int, 3&gt;</code> are the parameters of this
 type. And for the prototype of array, should looks like</p>
 <pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Array</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>, <span class="hljs-symbol">&#x27;arity</span>: Num&gt; <span class="hljs-keyword">where</span> <span class="hljs-symbol">&#x27;arity</span> &gt;= <span class="hljs-number">0</span>
 </code></pre>
-<p>The where clause is a constraints for &#39;arity parameter which
+<p>The where clause is a constraints for 'arity parameter which
 indicates that field cannot be negative.</p>
 <p>Here is another syntax to do this checking</p>
 <pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">NonNegative</span></span>&lt;<span class="hljs-symbol">&#x27;num</span>: Num&gt; <span class="hljs-keyword">where</span> <span class="hljs-symbol">&#x27;num</span> &gt;= <span class="hljs-number">0</span>
@@ -249,7 +250,7 @@ other languages such like Haskell/C++/D.</p>
         </ul>
     </div> -->
   <span class="field">创建时间：2016-05-05</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -266,7 +267,5 @@ other languages such like Haskell/C++/D.</p>
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

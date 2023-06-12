@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -183,14 +184,13 @@
   </header>
   <article>
     <hr>
-<p>title: Monorepo
-date: 2020-10-10</p>
-<hr>
-<p>&quot;Every code commit essentially becomes a release with monorepo!&quot; （<a href="https://itsvit.com/blog/monorepo-google-way-ci-cd/）" title="undefined">https://itsvit.com/blog/monorepo-google-way-ci-cd/）</a></p>
+<h2>title: Monorepo
+date: 2020-10-10</h2>
+<p>&quot;Every code commit essentially becomes a release with monorepo!&quot; （https://itsvit.com/blog/monorepo-google-way-ci-cd/）</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Monorepo" title="undefined">https://en.wikipedia.org/wiki/Monorepo</a></li>
+<li>https://en.wikipedia.org/wiki/Monorepo</li>
 </ul>
-<h2 id="advantages">Advantages</h2>
+<h2>Advantages</h2>
 <ul>
 <li><strong>Ease of code reuse</strong> – Similar functionality or communication protocols can be abstracted into shared libraries and directly included by projects, without the need of a dependency package manager.</li>
 <li><strong>Simplified dependency management</strong> – In a multiple repository environment where multiple projects depend on a third-party dependency, that dependency might be downloaded or built multiple times. In a monorepo the build can be easily optimized, as referenced dependencies all exist in the same codebase.</li>
@@ -198,34 +198,34 @@ date: 2020-10-10</p>
 <li><strong>Large-scale code refactoring</strong> – Since developers have access to the entire project, refactors can ensure that every piece of the project continues to function after a refactor.</li>
 <li><strong>Collaboration across teams</strong> – In a monorepo that uses source dependencies (dependencies that are compiled from source), teams can improve projects being worked on by other teams. This leads to flexible code ownership.</li>
 </ul>
-<h2 id="disadvantages">Disadvantages</h2>
+<h2>Disadvantages</h2>
 <ul>
 <li><strong>Loss of version information</strong> – Although not required, some monorepo builds use one version number across all projects in the repository. This leads to a loss of per-project semantic versioning.</li>
 <li><strong>Lack of per-project access control</strong> – With split repositories, access to a repository can be granted based upon need. A monorepo allows read access to all software in the project, possibly presenting new security issues.</li>
 </ul>
 <p>其他参考资料：</p>
 <ul>
-<li><a href="https://www.sohu.com/a/165037119_575744" title="undefined">https://www.sohu.com/a/165037119_575744</a></li>
+<li>https://www.sohu.com/a/165037119_575744</li>
 </ul>
 <p>Google:</p>
 <ul>
-<li><a href="https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext" title="undefined">https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext</a></li>
-<li><a href="https://itsvit.com/blog/monorepo-google-way-ci-cd/" title="undefined">https://itsvit.com/blog/monorepo-google-way-ci-cd/</a></li>
+<li>https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext</li>
+<li>https://itsvit.com/blog/monorepo-google-way-ci-cd/</li>
 <li></li>
 </ul>
 <p>Facebook:</p>
 <ul>
-<li><a href="https://engineering.fb.com/core-data/scaling-mercurial-at-facebook/" title="undefined">https://engineering.fb.com/core-data/scaling-mercurial-at-facebook/</a></li>
-<li><a href="https://www.infoq.com/news/2014/01/facebook-scaling-hg/" title="undefined">https://www.infoq.com/news/2014/01/facebook-scaling-hg/</a></li>
-<li><a href="https://www.theregister.com/2016/10/18/facebook_mercurial_devs_forget_git/" title="undefined">https://www.theregister.com/2016/10/18/facebook_mercurial_devs_forget_git/</a></li>
+<li>https://engineering.fb.com/core-data/scaling-mercurial-at-facebook/</li>
+<li>https://www.infoq.com/news/2014/01/facebook-scaling-hg/</li>
+<li>https://www.theregister.com/2016/10/18/facebook_mercurial_devs_forget_git/</li>
 </ul>
 <p>Others:</p>
 <ul>
-<li>Coinbase: <a href="https://blog.coinbase.com/bootstrapping-the-coinbase-monorepo-575cf981c859" title="undefined">https://blog.coinbase.com/bootstrapping-the-coinbase-monorepo-575cf981c859</a></li>
-<li><a href="https://www.fourtheorem.com/blog/monorepo" title="undefined">https://www.fourtheorem.com/blog/monorepo</a></li>
-<li><a href="https://blog.nrwl.io/misconceptions-about-monorepos-monorepo-monolith-df1250d4b03c" title="undefined">https://blog.nrwl.io/misconceptions-about-monorepos-monorepo-monolith-df1250d4b03c</a></li>
-<li><a href="https://www.squash.io/the-issue-with-monorepos/" title="undefined">https://www.squash.io/the-issue-with-monorepos/</a></li>
-<li><a href="https://blog.nrwl.io/misconceptions-about-monorepos-monorepo-monolith-df1250d4b03c" title="undefined">https://blog.nrwl.io/misconceptions-about-monorepos-monorepo-monolith-df1250d4b03c</a></li>
+<li>Coinbase: https://blog.coinbase.com/bootstrapping-the-coinbase-monorepo-575cf981c859</li>
+<li>https://www.fourtheorem.com/blog/monorepo</li>
+<li>https://blog.nrwl.io/misconceptions-about-monorepos-monorepo-monolith-df1250d4b03c</li>
+<li>https://www.squash.io/the-issue-with-monorepos/</li>
+<li>https://blog.nrwl.io/misconceptions-about-monorepos-monorepo-monolith-df1250d4b03c</li>
 </ul>
 
       
@@ -238,7 +238,7 @@ date: 2020-10-10</p>
         </ul>
     </div> -->
   <span class="field">创建时间：#N/A</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -255,7 +255,5 @@ date: 2020-10-10</p>
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

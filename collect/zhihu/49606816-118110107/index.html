@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,8 +183,8 @@
           
   </header>
   <article>
-    <h1 id="c中，为什么函数指针的定义不能将指针类型前置？">C++中，为什么函数指针的定义不能将指针类型前置？</h1>
-<p><a href="https://www.zhihu.com/question/49606816/answer/118110107" title="null">知乎链接</a></p>
+    <h1>C++中，为什么函数指针的定义不能将指针类型前置？</h1>
+<p><a href="https://www.zhihu.com/question/49606816/answer/118110107">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>C类型记法跟这个类型的对象声明的时候所在的位置是一致的。</p><p>你声明一个函数也是</p><p>int fuck(int);</p><p>所以函数指针应该也是放在fuck的位置。</p><p>typedef也是一样。</p><p>你看int i是声明一个变量，所以typedef int i就是重命名一个类型。</p><p>至于foreach里面，int(*)(int)没有对应的变量，依然能够表示类型啊。</p><p>至于为什么parse的时候报错，我也不太清楚，试着写个C++前端你应该就能理解了。</p>就是这样。</span></p>
 
@@ -197,7 +198,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2016-08-21</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -214,7 +215,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,8 +183,8 @@
           
   </header>
   <article>
-    <h1 id="如何说服林纳斯托瓦兹（linus-torvalds）用go语言完全重写kernel-50版本">如何说服林纳斯托瓦兹（Linus Torvalds）用Go语言完全重写Kernel 5.0版本?</h1>
-<p><a href="https://www.zhihu.com/question/27363130/answer/118137655" title="null">知乎链接</a></p>
+    <h1>如何说服林纳斯托瓦兹（Linus Torvalds）用Go语言完全重写Kernel 5.0版本?</h1>
+<p><a href="https://www.zhihu.com/question/27363130/answer/118137655">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>唉，我那五毛钱白赌了。</p><p>内核这种东西Rust和D都没有野心到重写Linux的地步。更不用说D还特么是用的阉割掉GC的版本，Rust unsafe飞起。</p><p>你Go啥时候有信心去掉GC，然后获取C/C++那样的直接硬件映射的超能力，再说写内核吧。</p><p>而且，照Linus的尿性，真觉得C不好用了应该是自己撸一个专用的来搞吧。想想Linux和git都是这样产生的好伐。</p>所以我觉得，这件事第一个要做的就是去GC，然后感觉你Go就变成一个连C都不如的语言了。<br>嗯，基本上就不用考虑第二件事了。</span></p>
 
@@ -197,7 +198,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2016-08-21</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -214,7 +215,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

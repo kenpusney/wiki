@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,8 +183,8 @@
           
   </header>
   <article>
-    <h1 id="php-为什么不把类或者类构造器当作一种数据类型使用？">PHP 为什么不把类或者类构造器当作一种数据类型使用？</h1>
-<p><a href="https://www.zhihu.com/question/319055623/answer/646868636" title="null">知乎链接</a></p>
+    <h1>PHP 为什么不把类或者类构造器当作一种数据类型使用？</h1>
+<p><a href="https://www.zhihu.com/question/319055623/answer/646868636">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>个人理解。</p><p>Duck Typing 或者 Dynamic Typing 的情况下，实际并不需要把类型信息携带上，完全可以一把梭地写代码，反正只要该对象行为满足我预期就好了。</p><p>只有一些场景是动态构造该类的实例或者动态改造该类型。这种纯在运行时的操作通过Reflection和运行时丰富的扩展也能够满足。只是PHP没有提供一种直接的形式获取该“类”对象（class object），而是要通过类名来从运行时拿到相关信息（<code>zend_class_entry</code>）。</p><p>如果预期是像Hack那种编译期类型检查和约束，怕是得整个重写PHP编译器了。</p></span></p>
 
@@ -197,7 +198,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2019-04-10</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -214,7 +215,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

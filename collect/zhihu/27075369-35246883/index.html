@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,17 +183,17 @@
           
   </header>
   <article>
-    <h1 id="如何理解结构中包含一个指向结构本身的指针？">如何理解结构中包含一个指向结构本身的指针？</h1>
-<p><a href="https://www.zhihu.com/question/27075369/answer/35246883" title="null">知乎链接</a></p>
+    <h1>如何理解结构中包含一个指向结构本身的指针？</h1>
+<p><a href="https://www.zhihu.com/question/27075369/answer/35246883">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>这种其实是<a href="https://link.zhihu.com/?target=http%3A//en.wikipedia.org/wiki/Recursive_data_type" class=" wrap external" target="_blank" rel="nofollow noreferrer" data-za-detail-view-id="1043">Recursive Data Type</a></p>题主所说的链表，大致可以看成这种结构：<br><figure><noscript><img src="https://pic4.zhimg.com/50/13b123678cd6b278a77461962a569ccb_hd.jpg?source=1940ef5c" data-rawwidth="300" data-rawheight="72" class="content_image" width="300"/></noscript><img src="https://pic4.zhimg.com/80/13b123678cd6b278a77461962a569ccb_720w.jpg?source=1940ef5c" data-rawwidth="300" data-rawheight="72" class="content_image lazy" width="300" data-actualsrc="https://pic4.zhimg.com/50/13b123678cd6b278a77461962a569ccb_hd.jpg?source=1940ef5c" data-lazy-status="ok"></figure><br>其实去掉最开始的那个是结点（42），余下的两个结点还是能够构成一个链表。<br>也即一个类型实例中可能会包含另一个同样类型的实例。<br>这就是为什么会被称为<b>递归数据类型</b>的原因。<br>上面的结构对应到Haskell中如下：<br><div class="highlight"><pre><code class="language-text">data List e = Nil | Cons (e, List e)   -- List type</p>
 <p>Cons(42, Cons(69, Cons(613, Nil)))  -- the list</code></pre></div>或者对应到Java也很明显：<br><div class="highlight"><pre><code class="language-text">class List&lt;E&gt; {
-    E value;
-    List&lt;E&gt; next;
+E value;
+List&lt;E&gt; next;
 }</code></pre></div>但是在C语言里面，因为默认是值语义，所以不可能出现像Java这种写法（首先定义在类型的时候就会出错，其次，就算不出错也会出现某答案中sizeof无穷的问题）。<br>于是只好用指针来代替了。<br><div class="highlight"><pre><code class="language-text">typedef int ElementType;
 struct List {
-    ElementType value;
-    struct List* next;
+ElementType value;
+struct List* next;
 }</code></pre></div>至于该指针如何指向，就只能看题主想要的是什么了，只要能清晰地画出来上面那个图的样子，就能理解这一点了。</span></p>
 
       
@@ -205,7 +206,7 @@ struct List {
         </ul>
     </div> -->
   <span class="field">创建时间：2014-12-16</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -222,7 +223,5 @@ struct List {
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

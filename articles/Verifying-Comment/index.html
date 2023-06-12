@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -206,10 +207,10 @@
     <span class="hljs-keyword">return</span> x;
 }
 </code></pre>
-<p>虽然相对比较极端，这两个可都不是能够应用注释的地方。第一个直观的就能从函数名看懂一切，第二个就要去读 <a href="http://lomont.org/papers/2003/InvSqrt.pdf" title="null">Chris Lomont 的 Paper</a>才行。其他的场景也几乎一样，要么复杂到你必须有一个相对完善的文档来解释，要么简单到名称解释一切<del>，要么就是写代码的人有问题</del>。</p>
+<p>虽然相对比较极端，这两个可都不是能够应用注释的地方。第一个直观的就能从函数名看懂一切，第二个就要去读 <a href="http://lomont.org/papers/2003/InvSqrt.pdf">Chris Lomont 的 Paper</a>才行。其他的场景也几乎一样，要么复杂到你必须有一个相对完善的文档来解释，要么简单到名称解释一切<del>，要么就是写代码的人有问题</del>。</p>
 <p>不过既然注释里面写TLA+不是个好选项，那就看下有没有其他的solution吧。不过好在 Java 的生态相对健全的多，很容易就找到了 Java Modeling Language（JML）。</p>
 <p>这个工具充分利用了 Java 的注释和 Dijkstra / Hoare 那群人的理论，让你能够在代码里详细的描述清楚自己到底在做什么。并且配合相应的工具能提供编译期甚至运行期的检查。</p>
-<p>如下是 OpenJML 官网的一个<a href="http://www.openjml.org/examples/" title="null">示例</a>：</p>
+<p>如下是 OpenJML 官网的一个<a href="http://www.openjml.org/examples/">示例</a>：</p>
 <pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearchGood</span> </span>{
     
     <span class="hljs-comment">//@ requires sortedArray != null &amp;&amp; 0 &lt; sortedArray.length &lt; Integer.MAX_VALUE;</span>
@@ -262,7 +263,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2021-07-10</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -279,7 +280,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

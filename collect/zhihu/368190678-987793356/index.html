@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -182,8 +183,8 @@
           
   </header>
   <article>
-    <h1 id="c语言到底能抽象到什么境界">C语言到底能抽象到什么境界?</h1>
-<p><a href="https://www.zhihu.com/question/368190678/answer/987793356" title="null">知乎链接</a></p>
+    <h1>C语言到底能抽象到什么境界?</h1>
+<p><a href="https://www.zhihu.com/question/368190678/answer/987793356">知乎链接</a></p>
 <hr>
 <p><span class="RichText ztext CopyrightRichText-richText" itemprop="text"><p>Gnome桌面环境有一个底层库，glib，就有一套题主提到的对象系统。这套系统顺便给vala提供了运行时。</p><p>Linux的VFS，也是类似的操作，给你定义了一套接口（函数指针组成的对象），只要你对应实现上面这些操作，就能做一套自己的文件系统。</p><p>另外的黑魔法，无非就是利用tagged union（ADT）和函数指针（高阶函数/闭包）来模拟函数式编程的一些操作啦。</p><p>只要你写着不嫌麻烦不嫌累，除了涉及泛型的抽象（这个其实也可以用宏来处理）不太容易搞定之外，其他的基本都不在话下。（反正到了搞不定的地方都能void*暴力解决）</p></span></p>
 
@@ -197,7 +198,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2020-01-28</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -214,7 +215,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

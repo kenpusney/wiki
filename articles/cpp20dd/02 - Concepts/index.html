@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -184,9 +185,9 @@
   <article>
     <p>我们先从整个 C++ 社区心念多年的特性说起。</p>
 <p>首先我们来看 Concept 是什么。</p>
-<p><a href="https://mp.weixin.qq.com/s/F-_vBBgOSMGtz21O66NyBQ" title="null">泛型编程</a>中，我们通常需要限制某个类型的行为，并通过这种方式来保证我们使用泛型的代码是正确的，不存在异常行为。</p>
+<p><a href="https://mp.weixin.qq.com/s/F-_vBBgOSMGtz21O66NyBQ">泛型编程</a>中，我们通常需要限制某个类型的行为，并通过这种方式来保证我们使用泛型的代码是正确的，不存在异常行为。</p>
 <p>比如 Java 提供了泛型约束的方式，如果你没有在泛型参数列表中声明某类型需要满足的约束，那就只能把该类型的对象当成 <code>Object</code> 来用，或者使用 <code>instanceof</code> 和强制类型转换来得到你想要的方法。</p>
-<p>这样的结果就是，<a href="https://mp.weixin.qq.com/s/E2rfuPvIpUTP2qOHNS40-w" title="null">是否使用泛型根本没啥区别</a>。</p>
+<p>这样的结果就是，<a href="https://mp.weixin.qq.com/s/E2rfuPvIpUTP2qOHNS40-w">是否使用泛型根本没啥区别</a>。</p>
 <p>比如我们需要处理一个可迭代对象：</p>
 <pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Processor</span>&lt;<span class="hljs-title">T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Iterable</span>&lt;?&gt;&gt; </span>{
   <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">process</span><span class="hljs-params">(T t)</span> </span>{
@@ -293,7 +294,7 @@ test.<span class="hljs-attr">cpp:</span><span class="hljs-number">6</span>:<span
         </ul>
     </div> -->
   <span class="field">创建时间：2021-08-12</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -310,7 +311,5 @@ test.<span class="hljs-attr">cpp:</span><span class="hljs-number">6</span>:<span
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

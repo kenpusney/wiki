@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -186,15 +187,15 @@
 <p>本文源自于我在 2012 ～ 2013 年写的 Meta Functions 系列文章，以及知乎专栏的《map 四种》。通过细致地讲解和练习函数相关的内容来让大家了解<strong>函数</strong>、<strong>闭包</strong>、<strong>延迟计算</strong>和<strong>流</strong>。</p>
 <p>你可以把它看成一个 SICP 前三章的超级简化版，不过这其中我不会讨论过多的细节。文中所有的代码都在浏览器控制台执行通过，你也可以简单地对着浏览器或者任意实现了 ES6 特性的 JavaScript REPL 试验其中的代码。</p>
 </blockquote>
-<h1 id="函数">函数</h1>
-<p>这里的函数我比较倾向于集合论中的定义，即是两个集合之间的映射关系。也就是那种非常<strong>纯</strong>（pure）的函数。后文也会涉及一些带有状态的函数，不过绝大多数情况下我所期待的是对于一个函数 $f$ ，给定其参数 $x$ ，那么 $f(x)$ 的结果一定是<strong>确定的</strong>（deterministic）。</p>
+<h1>函数</h1>
+<p>这里的函数我比较倾向于集合论中的定义，即是两个集合之间的映射关系。也就是那种非常<strong>纯</strong>（pure）的函数。后文也会涉及一些带有状态的函数，不过绝大多数情况下我所期待的是对于一个函数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi></mrow><annotation encoding="application/x-tex">f</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span></span></span></span> ，给定其参数 <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">x</span></span></span></span> ，那么 <p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(x)</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathnormal">x</span><span class="mclose">)</span></span></span></span></span></p>
+ 的结果一定是<strong>确定的</strong>（deterministic）。</p>
 <p>我们先来实现一个简单的函数，比如<strong>斐波那契（fibonacci）数列</strong>的定义。</p>
-<p>$$
-fib(0) = \begin{cases}
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>f</mi><mi>i</mi><mi>b</mi><mo stretchy="false">(</mo><mn>0</mn><mo stretchy="false">)</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.36em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>1</mn><mo separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>x</mi><mo>=</mo><mn>0</mn><mo separator="true">,</mo><mi>o</mi><mi>r</mi></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>x</mi><mo>=</mo><mn>1</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>f</mi><mi>i</mi><mi>b</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo>+</mo><mi>f</mi><mi>i</mi><mi>b</mi><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>2</mn><mo stretchy="false">)</mo><mo separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>x</mi><mo>≥</mo><mn>2</mn></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">fib(0) = \begin{cases}
     1, &amp;x = 0, or &amp;x = 1\cr
     fib(n-1) + fib(n-2), &amp;x \ge 2
 \end{cases}
-$$</p>
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">ib</span><span class="mopen">(</span><span class="mord">0</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3em;vertical-align:-1.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">1</span><span class="mpunct">,</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">ib</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">ib</span><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">2</span><span class="mclose">)</span><span class="mpunct">,</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≥</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:0.5em;"></span><span class="col-align-c"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal">x</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">1</span></span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
 <p>如果你熟悉递归，可以很容易根据上面的递归定义把 <code>fib</code> 函数实现了：</p>
 <pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(n) {
     if (n === 0 || n === 1) {
@@ -208,11 +209,11 @@ $$</p>
 <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">9</span>)</span> + <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">8</span>)</span> =&gt;
 <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">8</span>)</span> + <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">7</span>)</span> + <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">7</span>)</span> + <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">6</span>)</span> =&gt;
 <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">7</span>)</span> + <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">6</span>)</span> + <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">6</span>)</span> + <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">5</span>)</span> + <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">6</span>)</span> + <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">5</span>)</span> + <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">5</span>)</span> + <span class="hljs-title">fib</span><span class="hljs-params">(<span class="hljs-number">4</span>)</span> =&gt;
-.....</span>
-</code></pre>
+.....
+</span></code></pre>
 <p>最后展开会是一个深度为 10 节点非常多的<strong>递归树</strong>。</p>
 <p>在我的电脑上，计算 <code>fib(30)</code> 已经需要等待一段时间，明显感觉到延迟了。</p>
-<h2 id="尾递归">尾递归</h2>
+<h2>尾递归</h2>
 <p>对于这个操作，实际可以用另外一个办法来简化，就是通过<strong>尾递归</strong>，把计算的操作合并到尾调用的参数求值中去。</p>
 <pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(n, a = 1, b = 1) {
     if (n == 0) {
@@ -281,22 +282,21 @@ $$</p>
 </code></pre>
 <p><code>while(true)</code> 里面的内容，跟尾递归版的结构几乎一模一样，而这里直接改到参数的赋值，就可以一步替换为尾递归。</p>
 <p>你可以对比尾递归形式和最后这个循环实现的内容。现实其实通常是反过来的，就是会通常是我们<strong>写成尾递归的样子</strong>，然后再由编译器<strong>优化成循环</strong>。这样的结果是能够省掉函数传参和压栈的过程，算是一步提效明显的优化，对时间（额外的压栈和传参操作）和空间（调用栈）的开销都能节省很多，还能避免不必要的<strong>爆栈</strong>（Stack Overflow）风险。</p>
-<h3 id="练习">练习</h3>
+<h3>练习</h3>
 <ul>
 <li>请实现另外一个常用递归函数阶乘（factorial）的直接递归版和尾递归版。阶乘函数的定义如下：</li>
 </ul>
-<p>$$
-n! = \begin{cases}
+<p class="katex-block"><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mrow><mi>n</mi><mo stretchy="false">!</mo><mo>=</mo><mrow><mo fence="true">{</mo><mtable rowspacing="0.36em" columnalign="left left" columnspacing="1em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mn>1</mn><mo separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>n</mi><mo>=</mo><mn>0</mn></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mn>1</mn><mo stretchy="false">)</mo><mo stretchy="false">!</mo><mo>×</mo><mi>n</mi><mo separator="true">,</mo></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="false"><mrow><mi>n</mi><mo>&gt;</mo><mn>0</mn></mrow></mstyle></mtd></mtr></mtable></mrow></mrow><annotation encoding="application/x-tex">n! = \begin{cases}
   1, &amp;n = 0 \cr
   (n-1)!\times n, &amp;n \gt 0
 \end{cases}
-$$</p>
-<h1 id="函数进阶">函数进阶</h1>
+</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">n</span><span class="mclose">!</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:3em;vertical-align:-1.25em;"></span><span class="minner"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size4">{</span></span><span class="mord"><span class="mtable"><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord">1</span><span class="mpunct">,</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mopen">(</span><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord">1</span><span class="mclose">)!</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mord mathnormal">n</span><span class="mpunct">,</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span><span class="arraycolsep" style="width:1em;"></span><span class="col-align-l"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:1.69em;"><span style="top:-3.69em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">0</span></span></span><span style="top:-2.25em;"><span class="pstrut" style="height:3.008em;"></span><span class="mord"><span class="mord mathnormal">n</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">&gt;</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mord">0</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:1.19em;"><span></span></span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span></span></p>
+<h1>函数进阶</h1>
 <p>我们上一节简单实现了一个函数，那么现在来认真地回顾考虑这么一个问题，函数到底是什么？</p>
 <p>其实很简单，函数就是这么一个结构，你给他一个输入，他返回给你一个输出。而其由输入得到输出的过程，是你可以定义的。</p>
 <p>这其实是一个非常广义的抽象，可以拿来类比各种东西，比如一个生产流水线也可以这么抽象地看，原材料作为输入，产品作为输出；而这个流水线的每一个节点又都是有自己的输入和输出。</p>
 <p>于是我们可以看到函数的另外一个特征：可组合（Composable）。</p>
-<h2 id="可组合性">可组合性</h2>
+<h2>可组合性</h2>
 <p>比如我们定义一个函数，去求一个数组排序后的结果：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sorted</span><span class="hljs-params">(<span class="hljs-keyword">array</span>)</span> </span>{
     <span class="hljs-keyword">return</span> <span class="hljs-keyword">array</span>.slice().sort();
@@ -325,7 +325,7 @@ $$</p>
 </code></pre>
 <p>实际这两种做法本质上是同一件事情。有些编程语言（比如 D 语言）中，<code>x.f(y)</code> 与 <code>f(x, y)</code> 是等价操作，实现的这种转换叫做<strong>统一函数调用语法</strong>（Uniform Function Call Syntax）。</p>
 </blockquote>
-<h2 id="函数对象">函数对象</h2>
+<h2>函数对象</h2>
 <p>回到上面的排序函数。</p>
 <p>JavaScript 有一个问题，就是排序默认是用的文本序，对数字也是如此，也就是说，111 是会排在 12 前面的，而 JavaScript 的 <code>Array.prototype.sort</code> 函数会让我们传递一个匿名函数进去来作为排序的比较器（Comparator），达到对数值做排序的目的。</p>
 <p>这个比较器就是一个函数对象。</p>
@@ -334,7 +334,7 @@ $$</p>
 </code></pre>
 <p><strong>函数对象</strong>，又叫<strong>匿名函数</strong>，在某些语境下面也叫 lambda 表达式（因其源自于 lambda 演算）。一个函数对象是可以赋值给某个变量、作为参数传递的；或者说，函数对象，是<strong>第一类值</strong>（first class value）。</p>
 <p>比如上文中的 <code>(x, y) =&gt; x - y</code>。</p>
-<h2 id="闭包">闭包</h2>
+<h2>闭包</h2>
 <p>既然函数是<strong>第一类值</strong>，那么我们也就能有方式来构造他了。</p>
 <p>通常一个函数在传递过程中不只是作为一个独立的单位存在，还会包括一些<strong>上下文</strong>，这样组合起来的一个结构就叫闭包。</p>
 <p>比如，我们定义以下函数，会返回一个函数对象，而这个函数对象每次调用都会累加一次，行为表现像是一个计数器：</p>
@@ -371,8 +371,8 @@ p(right) <span class="hljs-comment">// =&gt; 2;</span>
 <li><strong>封装</strong>：<code>pair</code> 的内部结构在构造时确定，无法在外部获取和改变内部结构，只能通过定义 <code>pair</code> 的方法来处理</li>
 </ul>
 <p>在只有“函数”这个构造的情况下我们也能做这些事情。甚至在一些编程语言（比如 Java/C++）里面，函数对象就是通过<strong>结构/类</strong>加上特定的<strong>函数/方法</strong>来实现的，也就只有这样他们才能做捕获形成闭包。</p>
-<h1 id="数据抽象">数据抽象</h1>
-<h2 id="可变性">可变性</h2>
+<h1>数据抽象</h1>
+<h2>可变性</h2>
 <p>我们知道 OO 的一个特色是可变性来描述状态，闭包在这里也完全可以实现。当然需要借助一些额外的结构。</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mutablePair</span>(<span class="hljs-params">a, b</span>) </span>{
     <span class="hljs-keyword">return</span> <span class="hljs-function">(<span class="hljs-params">fn</span>) =&gt;</span> {
@@ -408,12 +408,12 @@ mp(getLeft); <span class="hljs-comment">// 5</span>
 <p>其实可以看到，<code>mp</code> 接受的每个函数都是 <code>(a, b) =&gt; [a, b, x]</code> 这种形式。这样就是能够给传递函数充分地信息来获取结构，然后生成充分足够地信息来更新 <code>mp</code> 闭包的内部。如果我们再简化一点，把 <code>a</code> 和 <code>b</code> 作为一个对象比如 <code>this</code> 或者 <code>self</code> 来看，<code>mp</code> 接受的每个函数变成了 <code>(self) =&gt; result</code>。其中对 <code>self</code> 的改变也包括在内。</p>
 <p>这其实就是大部分编程语言的面向对象的“方法”的实现机制，都会给这些方法绑定一个 <code>this</code> 或者 <code>self</code> 变量，让方法内部可控制。</p>
 <p>你看，就这么简单。</p>
-<h3 id="练习-1">练习</h3>
+<h3>练习</h3>
 <ol>
 <li>给 mutablePair 实现一个方法，可以交换 pair 左右两边的值。</li>
 <li>有没有更简单地只用函数来实现 mutablePair 的方式？</li>
 </ol>
-<h2 id="生成器">生成器</h2>
+<h2>生成器</h2>
 <p>我们回想一下上一个场景中的计数器，其实是一个非常有用的结构。</p>
 <p>比如我们希望得到斐波那契数列，但又不希望提前获取这所有内容的时候：</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fibGenerator</span>(<span class="hljs-params"></span>) </span>{
@@ -467,11 +467,11 @@ bg(forward); <span class="hljs-comment">// 5</span>
 bg(forward); <span class="hljs-comment">// 8</span>
 </code></pre>
 <p>思路与 <code>mutablePair</code> 类似，我们构造一个特定结构作为这个对象的<code>this</code>，所有的操作都是围绕这里所谓的 <code>this</code> 来进行操作。</p>
-<h3 id="练习-2">练习</h3>
+<h3>练习</h3>
 <ul>
 <li>给 <code>generator</code> 加上范围限制，实现 <code>boundedGenerator</code>。</li>
 </ul>
-<h2 id="不可变性">不可变性</h2>
+<h2>不可变性</h2>
 <p>前面的生成器中，有一个很关键的问题就是我们<strong>改变了 <code>generator</code> 的内部状态</strong>，才得以每次获取都拿到不同的结果。这种情况实际违背了函数其执行的<strong>确定性</strong>。通常我们很少会用这种繁杂的方式实现对象和状态，而是用另外一些更加直观的形式。这个话题我们以后在涉及对象的时候再去讨论。</p>
 <p>继续看，如果我们不去改变生成器的内部状态，如何实现一个类似的结构。</p>
 <p>一个生成器会产生一系列的值，形成一个序列结构。我们先定义一个序列结构，可以依照前面的定义来：</p>
@@ -524,7 +524,7 @@ head(tail(tail(<span class="hljs-built_in">zeros</span>())())()); <span class="h
 
 <span class="hljs-keyword">take</span>(<span class="hljs-number">10</span>, zeros()); <span class="hljs-comment">// [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span>
 </code></pre>
-<h3 id="练习-3">练习</h3>
+<h3>练习</h3>
 <ol>
 <li>实现 <code>take</code> 函数的非生成器（即由 <code>cons</code>/<code>nil</code> 组合而成的链表）版本。</li>
 <li>通常与 <code>take</code> 配套的函数时 <code>drop</code>，即舍去掉 <code>take</code> 所获取的的那部分结果，直接把生成器快进到某个状态。请实现 <code>drop</code> 函数。</li>
@@ -587,7 +587,7 @@ take(<span class="hljs-number">10</span>, <span class="hljs-keyword">generate</s
 </code></pre>
 <p>请思考前面<code>generate(fib, inc)</code>所实现的 fibonacci 序列生成器，获取其前 10 项时所完整展开的结构以及对 <code>fib</code> 函数的调用次数。</p>
 <p>你会发现，<code>generate</code> 这种方式对于需要复杂迭代运算的 <code>gn</code> 并不友好。</p>
-<h2 id="通用生成器">通用生成器</h2>
+<h2>通用生成器</h2>
 <p>其实根据 fibonacci 序列的递归定义，我们可以写出更合适的生成器。</p>
 <pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generateFib</span>(<span class="hljs-params"></span>) </span>{
     <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">generator</span>(<span class="hljs-params">a = <span class="hljs-number">1</span>, b = <span class="hljs-number">1</span></span>) </span>{
@@ -613,12 +613,12 @@ take(<span class="hljs-number">10</span>, generateFib()()); <span class="hljs-co
 take(<span class="hljs-number">10</span>, generateBy((a, b) =&gt; [b, a + b])(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>));
 <span class="hljs-comment">// [1, 1, 2, 3, 5, 8, 13, 21, 34, 55]</span>
 </code></pre>
-<h3 id="练习-4">练习</h3>
+<h3>练习</h3>
 <ul>
 <li>编写与 <code>generateFib</code> 类似的阶乘函数(factorial)所对应的版本，并用 <code>generateBy</code> 进行改写。</li>
 <li>把前面的 <code>zeros</code>、<code>repeat</code> 和 <code>counter</code> 用 <code>generateBy</code> 进行改写</li>
 </ul>
-<h3 id="发生了什么？">发生了什么？</h3>
+<h3>发生了什么？</h3>
 <p>生成器这种构造，最主要的优势是利用函数在构造过程中捕获并保留其上下文的特性，来保持执行状态。这样每次在我们对生成器进行求值的时候，随即创建一个新的保持下一次状态的函数，就能够拿到下一个状态的生成器。</p>
 <p>而如何生成下一个状态，存在两种场景：</p>
 <ul>
@@ -629,11 +629,11 @@ take(<span class="hljs-number">10</span>, generateBy((a, b) =&gt; [b, a + b])(<s
 <p>同样，由我们导出两种类型生成器的过程可以看到，程序的演进过程就是一整个的<strong>抽象</strong>与<strong>组合</strong>的过程。每一次我们得到一个<strong>相对直观的结果</strong>以后，都可以进一步对其再<strong>抽象</strong>，获得一个<strong>更加通用</strong>的方案。</p>
 <p>反过来，如果我们有一些简单函数（像 <code>inc</code>）可以做到<strong>预期</strong>的操作，与其他函数<strong>组合</strong>所构成的结构将可以解决几乎任意复杂度的问题。</p>
 <p>你所需要知道的与函数相关的一切，绝对不会超出这两个过程的范围。</p>
-<h3 id="练习-5">练习</h3>
+<h3>练习</h3>
 <ul>
 <li>请考虑为这些不可变迭代器加入倒带功能。</li>
 </ul>
-<h1 id="附文：《map-四种》">附文：《<a href="https://zhuanlan.zhihu.com/p/28471507" title="map 四种">map 四种</a>》</h1>
+<h1>附文：《<a href="https://zhuanlan.zhihu.com/p/28471507" title="map 四种">map 四种</a>》</h1>
 <pre><code class="language-js"><span class="hljs-comment">// * common functions</span>
 inc = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x + <span class="hljs-number">1</span>
 double = <span class="hljs-function"><span class="hljs-params">x</span> =&gt;</span> x + x
@@ -733,7 +733,7 @@ map_lazy = <span class="hljs-function">(<span class="hljs-params">f, s</span>) =
         </ul>
     </div> -->
   <span class="field">创建时间：2020-07-17</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -750,7 +750,5 @@ map_lazy = <span class="hljs-function">(<span class="hljs-params">f, s</span>) =
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>

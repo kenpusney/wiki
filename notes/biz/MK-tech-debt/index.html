@@ -19,9 +19,10 @@
           media="(prefers-color-scheme: light)">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
-        <style type="text/css">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+          <style type="text/css">
           body {
             width: 60%;
             margin: 0 auto;
@@ -183,19 +184,21 @@
   </header>
   <article>
     <blockquote>
-<p><strong>“By reinventing our debt management, we went from 75 percent of engineer time paying the [tech debt] ‘tax’ to 25 percent. It allowed us to be who we are today.”</strong> 
+<p><strong>“By reinventing our debt management, we went from 75 percent of engineer time paying the [tech debt] ‘tax’ to 25 percent. It allowed us to be who we are today.”</strong>
 —— Former CIO, major cloud provider</p>
 </blockquote>
-<p><img src='/images/notes/mk/tech-debt/tech-debt-trends.png' alt='Tech Debt Trends'/><div class='image-description'><span>⬆️</span>Tech Debt Trends</div></p>
-<h2 id="what-is-tech-debt">What is tech debt</h2>
+<p><figure><img src="/images/notes/mk/tech-debt/tech-debt-trends.png" alt="Tech Debt Trends" title="Tech Debt Trends" /><figcaption align="center"><small>◎ Tech Debt Trends</small></figcaption></figure></p>
+<h2>What is tech debt</h2>
 <ul>
-<li>The <strong>principal</strong>（本金） is all the work that must be done to modernize the entire technology stack.<ul>
+<li>The <strong>principal</strong>（本金） is all the work that must be done to modernize the entire technology stack.
+<ul>
 <li>deferred maintenance or upgrades below the app layer,</li>
 <li>modifications to comply with data standards,</li>
 <li>and bespoke packaged software</li>
 </ul>
 </li>
-<li>The <strong>interest</strong>（利息） is the complexity tax that every project pays today.<ul>
+<li>The <strong>interest</strong>（利息） is the complexity tax that every project pays today.
+<ul>
 <li>work through fragile point-to-point or batch data integrations,</li>
 <li>harmonize nonstandard data,</li>
 <li>and create workarounds to confront risk and meet business needs.</li>
@@ -205,9 +208,10 @@
 <blockquote>
 <p>Tech-debt principal accounts for up to 40 percent of IT balance sheets, while most companies pay more than 10 percent interest on projects.</p>
 </blockquote>
-<h2 id="what-derives-tech-dept">What derives tech dept</h2>
+<h2>What derives tech dept</h2>
 <ul>
-<li>Strategy<ul>
+<li>Strategy
+<ul>
 <li>failure to clarity overall strategy</li>
 <li>poor alignment between IT and strategy</li>
 <li>mismatch between funding and strategy</li>
@@ -215,7 +219,8 @@
 <li>Excessive complexity in products, processes or applications</li>
 </ul>
 </li>
-<li>Architecture<ul>
+<li>Architecture
+<ul>
 <li>legacy issue</li>
 <li>failure to update hosting environments</li>
 <li>inflexible software design</li>
@@ -223,19 +228,21 @@
 <li>failure to agree on a consistent data model</li>
 </ul>
 </li>
-<li>Talent<ul>
+<li>Talent
+<ul>
 <li>internal and external skill gap</li>
 <li>failure to align incentives</li>
 </ul>
 </li>
-<li>Process<ul>
+<li>Process
+<ul>
 <li>poor prioritization</li>
 <li>weak management of development and maintenance processes</li>
 <li>unstable IT operations</li>
 </ul>
 </li>
 </ul>
-<h2 id="how-to-tackle-tech-debt">How to tackle tech debt</h2>
+<h2>How to tackle tech debt</h2>
 <ol>
 <li>Start with a shared definition of tech debt</li>
 <li>Treat tech debt as a business issue, not a technology problem</li>
@@ -256,7 +263,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2020-10-13</span>
-  <span class="field">最近更新时间：2023-05-30</span>
+  <span class="field">最近更新时间：2023-06-12</span>
   <hr>
   <footer>
     <ul>
@@ -273,7 +280,5 @@
     }));
   </script>
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script
 </body>
-
 </html>
