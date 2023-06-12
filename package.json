@@ -5,14 +5,16 @@
   },
   "private": true,
   "dependencies": {
+    "@andatoshiki/markdown-it-image-caption": "^0.0.2",
+    "@vscode/markdown-it-katex": "^1.0.0",
     "cheerio": "^1.0.0-rc.5",
-    "cnmd": "0.1.1",
     "ejs": "^3.1.5",
     "front-matter": "^4.0.2",
     "glob": "^7.1.6",
     "highlight.js": "^10.4.1",
     "lodash": "^4.17.21",
-    "marked": "^2.0.0",
+    "markdown-it": "^13.0.1",
+    "markdown-it-for-inline": "^0.1.1",
     "moment": "^2.27.0",
     "nodejieba": "^2.5.1"
   },
@@ -24,9 +26,9 @@
   },
   "scripts": {
     "test": "jest",
-    "serve": "http-server",
+    "serve": "http-server public",
     "generate": "node gen.js",
-    "watch-result": "http-server",
+    "watch-result": "http-server public",
     "watch-generate": "nodemon gen.js",
     "dev": "concurrently npm:watch-*"
   },

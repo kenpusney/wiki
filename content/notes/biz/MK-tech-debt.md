@@ -7,7 +7,7 @@ date: 2020-10-13
 > —— Former CIO, major cloud provider
 
 
-![Tech Debt Trends](../../../static/images/notes/mk/tech-debt/tech-debt-trends.png)
+![Tech Debt Trends](../../../static/images/notes/mk/tech-debt/tech-debt-trends.png 'Tech Debt Trends')
 
 ## What is tech debt
 

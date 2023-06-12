@@ -1,29 +1,12 @@
 const hljs = require("highlight.js");
 
-const CnmdRenderer = require("cnmd").CnmdRenderer;
-
-function fixStaticFileLink(href) {
-  if (href.startsWith("../"))
-    return href.substring(href.search("static") + "static".length);
-  return href;
-}
-
-function image(href, title, text) {
-  let el = "";
-  if (href.startsWith("../")) {
-    href = fixStaticFileLink(href)
-  }
-  if (title) {
-    el = `<img src=${href} alt='${text}' title=${title}>`
-  } else {
-    el = `<img src='${href}' alt='${text}'/>`
-
-  }
-  if (text) {
-    el += `<div class='image-description'><span>⬆️</span>${text}</div>`
-  }
-
-  return el;
+const cnmd_handlers = 
+{
+  "": (postfix, render) => render(`/${postfix}`, postfix),
+  "github": (postfix, render) => render(`https://github.com/${postfix}`, postfix),
+  "\\": (postfix, render) => render(`:${postfix}`, postfix),
+  "twitter": (postfix, render) => render(`https://twitter.com/${postfix}`, postfix),
+  "wiki": (postfix, render) => render(`https://en.wikipedia.org/wiki/${postfix}`, postfix),
 }
 
 function highlight(code, lang) {
@@ -34,15 +17,12 @@ function highlight(code, lang) {
   }
 }
 
-function cnmdRenderer(wiki) {
-  return new CnmdRenderer({
-    ...CnmdRenderer.default_handlers,
-    "": (postfix, r) => wiki.postExists(postfix) ?
-      r(postfix.startsWith(".") ? `../${postfix}` : `/${postfix}`, wiki.post(postfix).title) :
-      `<a href="#" class="disabled-link">${postfix}</a>`,
-  })
+function fixStaticFileLink(href) {
+  if (href.startsWith("../"))
+    return href.substring(href.search("static") + "static".length);
+  return href;
 }
 
 module.exports = {
-  image, highlight, cnmdRenderer
+  cnmd_handlers, highlight, fixStaticFileLink
 }
