@@ -11,7 +11,7 @@ const cnmd_handlers =
 
 function highlight(code, lang) {
   if (lang && hljs.listLanguages().includes(lang)) {
-    return hljs.highlight(lang, code, true).value;
+    return hljs.highlight(code, {language: lang, ignoreIllegals: true}).value;
   } else {
     return hljs.highlightAuto(code).value;
   }
