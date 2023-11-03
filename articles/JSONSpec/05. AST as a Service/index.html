@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -191,32 +191,32 @@
 <p>然而问题究竟在哪儿呢？</p>
 <p>首先是关于是否有必要在请求的结果中描述逻辑的问题。</p>
 <p>比如：</p>
-<pre><code class="language-json"><span class="hljs-string">&quot;foo&quot;</span>:<span class="hljs-literal">true</span>, 
+<pre><code class="language-json"><span class="hljs-attr">&quot;foo&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span> 
 
-<span class="hljs-string">&quot;cities&quot;</span>:[<span class="hljs-string">&quot;Montreal&quot;</span>,<span class="hljs-string">&quot;Toronto&quot;</span>], 
+<span class="hljs-attr">&quot;cities&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;Montreal&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-string">&quot;Toronto&quot;</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span> 
 
-<span class="hljs-string">&quot;city&quot;</span>: {
-    <span class="hljs-attr">&quot;_IF&quot;</span>:<span class="hljs-string">&quot;{foo}&quot;</span>,
-    <span class="hljs-attr">&quot;_THEN&quot;</span>:{
-        <span class="hljs-attr">&quot;city&quot;</span>:{<span class="hljs-attr">&quot;_PATH&quot;</span>:[<span class="hljs-string">&quot;cities&quot;</span>,<span class="hljs-number">0</span>]},
-        <span class="hljs-attr">&quot;_RETURN&quot;</span>:<span class="hljs-string">&quot;{city}&quot;</span>
-    },
-    <span class="hljs-attr">&quot;_ELSE&quot;</span>:{<span class="hljs-attr">&quot;_PATH&quot;</span>:[<span class="hljs-string">&quot;cities&quot;</span>,<span class="hljs-number">1</span>]}
-}
+<span class="hljs-attr">&quot;city&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;_IF&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;{foo}&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;_THEN&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;city&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;_PATH&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;cities&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-number">0</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;_RETURN&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-string">&quot;{city}&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;_ELSE&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">{</span><span class="hljs-attr">&quot;_PATH&quot;</span><span class="hljs-punctuation">:</span><span class="hljs-punctuation">[</span><span class="hljs-string">&quot;cities&quot;</span><span class="hljs-punctuation">,</span><span class="hljs-number">1</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <p>大致相当于下面的JS代码：</p>
-<pre><code class="language-js">var <span class="hljs-attr">foo=true,</span> <span class="hljs-attr">cities</span> = [<span class="hljs-string">&quot;Montreal&quot;</span>, <span class="hljs-string">&quot;Toronto&quot;</span>], city;
+<pre><code class="language-js">var <span class="hljs-attribute">foo</span>=<span class="hljs-literal">true</span>, cities = [<span class="hljs-string">&quot;Montreal&quot;</span>, <span class="hljs-string">&quot;Toronto&quot;</span>], city;
 
 <span class="hljs-keyword">if</span>(foo) {
-    <span class="hljs-attr">city</span> = cities[<span class="hljs-number">0</span>];
+    city = cities[0];
 } <span class="hljs-keyword">else</span> {
-    <span class="hljs-attr">city</span> = cities[<span class="hljs-number">1</span>];
+    city = cities[1];
 }
 </code></pre>
 <p>但是，当这段代码逻辑出现的时候，其实就可以直接对其进行求值然后变成：</p>
-<pre><code class="language-json">{
-    <span class="hljs-attr">&quot;city&quot;</span>: <span class="hljs-string">&quot;Montreal&quot;</span>
-}
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;city&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Montreal&quot;</span>
+<span class="hljs-punctuation">}</span>
 </code></pre>
 <p>简直节省了大量的带宽和客户端的业务量。</p>
 <p>当然，也有一个理由让客户端知道如何处理这样的业务逻辑。比如，要求Dynamic或者是Reactive时，客户端就可以直接对当前获得到的业务逻辑，自己就能进行处理了。</p>
@@ -239,7 +239,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2015-07-27</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

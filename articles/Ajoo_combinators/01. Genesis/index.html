@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -198,10 +198,10 @@
 <p>当然，大致的思路总归差不多的。因为我的neptune系统只需要一个logging的工具，而不关心这个logging工具是什么，这就是一个perfect的依赖注射的场合。</p>
 <p>先定义接口Logger，然后从构造函数传递近来一个Logger实例，接着就直接调用Logger就是了。</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Logger</span></span>{ 
-  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>; 
-  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> level, String msg)</span></span>; 
-  <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">logException</span><span class="hljs-params">(Throwable e)</span></span>; 
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">interface</span> <span class="hljs-title class_">Logger</span>{ 
+  <span class="hljs-keyword">void</span> <span class="hljs-title function_">print</span><span class="hljs-params">(<span class="hljs-type">int</span> level, String msg)</span>; 
+  <span class="hljs-keyword">void</span> <span class="hljs-title function_">println</span><span class="hljs-params">(<span class="hljs-type">int</span> level, String msg)</span>; 
+  <span class="hljs-keyword">void</span> <span class="hljs-title function_">logException</span><span class="hljs-params">(Throwable e)</span>; 
 }
 </code></pre>
 <p>print用来输出信息，但是不折行，println可以折行。
@@ -209,14 +209,14 @@ logException用来直接纪录异常。这样，对异常是直接printStackTrac
 <p>好。接下来我吭哧吭哧地把neptune完成了，剩下的就是从哪里找一个Logger实现了。</p>
 <p>最简单的Logger实现自然就是直接往屏幕上打印了：</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimpleLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Logger</span></span>{ 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(<span class="hljs-keyword">int</span> lvl, String msg)</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleLogger</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Logger</span>{ 
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">print</span><span class="hljs-params">(<span class="hljs-type">int</span> lvl, String msg)</span>{ 
     System.out.print(msg); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">println</span><span class="hljs-params">(<span class="hljs-keyword">int</span> lvl, String msg)</span></span>{ 
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">println</span><span class="hljs-params">(<span class="hljs-type">int</span> lvl, String msg)</span>{ 
     System.out.println(msg); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printException</span><span class="hljs-params">(Throwable e)</span></span>{ 
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">printException</span><span class="hljs-params">(Throwable e)</span>{ 
     e.printStackTrace(); 
   } 
 }
@@ -276,7 +276,7 @@ no big deal，对么？</p>
         </ul>
     </div> -->
   <span class="field">创建时间：2006-01-13</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

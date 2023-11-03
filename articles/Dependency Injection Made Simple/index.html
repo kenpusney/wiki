@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -185,37 +185,37 @@
   <article>
     <p>假设你在实现一个简单的应用，比如，fizzbuzz。需求非常简单，遇到 3 的倍数，输出 fizz，遇到 5 的倍数，输出 buzz，遇到 3 和 5 的公倍数（common multiple），输出 fizzbuzz。</p>
 <p>逻辑非常简单，所以实现起来自然也就很方便。</p>
-<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fizzbuzz</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i++) {
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fizzbuzz</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">for</span> (let i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i++) {
         <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span> &amp;&amp; i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
-            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;fizzbuzz&quot;</span>);
+            <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;fizzbuzz&quot;</span>);
         } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span>) {
-            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;fizz&quot;</span>);
+            <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;fizz&quot;</span>);
         } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
-            <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;buzz&quot;</span>);
+            <span class="hljs-built_in">console</span>.<span class="hljs-built_in">log</span>(<span class="hljs-string">&quot;buzz&quot;</span>);
         }
     }
 }
 </code></pre>
 <p>但这里我们只说了是输出，并没有说是往什么地方输出，所以这样一来如果需求变成了append到文档末尾而不是输出到控制台，我们就不得不去改fizzbuzz的实现，把三行<code>console.log</code>替换成<code>document.write</code>。</p>
 <p>那更好的办法就是消除重复，我们把console.log这里做一个抽取函数，定义一个专用的print函数专门用来实现输出方式：</p>
-<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">print</span>(<span class="hljs-params"></span>) </span>{
+<pre><code class="language-js">function <span class="hljs-built_in">print</span>() {
     <span class="hljs-comment">// ...</span>
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fizzbuzz</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i ++) {
-        <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span> &amp;&amp; i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
-            print(<span class="hljs-string">&quot;fizzbuzz&quot;</span>);
-        } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-comment">/* ... */</span>)
+function <span class="hljs-built_in">fizzbuzz</span>() {
+    for (let i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i ++) {
+        if (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span> &amp;&amp; i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
+            <span class="hljs-built_in">print</span>(&quot;fizzbuzz&quot;);
+        } else if (/* ... */)
         <span class="hljs-comment">// ...</span>
 </code></pre>
 <p>这里我们把对console.log的强依赖通过print给屏蔽掉了，但是依然还是保持了对print的强依赖。如此一来fizzbuzz的行为会跟print的具体实现直接相关。如果需求变成了，我需要多个fizzbuzz操作：一种是往控制台输出，一种是往页面追加<del>，另外一种是旋转三周半然后走卫星通讯给火星车发消息告诉可能存在的外星人我们可以进行善意的交流</del>。这个时候现在的fizzbuzz就不太能满足我们的需要了。要解决这个问题，可以选择CV编程法把这段代码复制一份改改函数名完事儿，但这里就又出现了重复。</p>
 <p>那如果print这个动作都是可变的，那我们就可以考虑把print做成变量参数化进来，这样每次执行fizzbuzz的时候选择对应的print实现就好了。</p>
-<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fizzbuzz</span>(<span class="hljs-params">printer</span>) </span>{
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fizzbuzz</span>(<span class="hljs-params">printer</span>) {
     <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i ++) {
         <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span> &amp;&amp; i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
-            printer.print(<span class="hljs-string">&quot;fizzbuzz&quot;</span>);
+            printer.<span class="hljs-title function_">print</span>(<span class="hljs-string">&quot;fizzbuzz&quot;</span>);
         } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-comment">/* ... */</span>)
         <span class="hljs-comment">// ...</span>
 </code></pre>
@@ -224,13 +224,13 @@
 <p>但是这又导致了另外一个问题。每次我运行fizzbuzz的时候都需要提供一个printer实现。这里对于不希望了解实现细节的调用者来说非常麻烦，甚至还要为了管理printer多做一堆的事情。</p>
 <p>比如，如果你无法确定调用者传递进来的printer是不是一个无效值，就得在每次执行的过程中做一些验证，确保printer不会破坏fizzbuzz原本的业务逻辑。</p>
 <p>怎么能创造一个保持printer状态的fizzbuzz函数，让我们每次调用的时候都能重复使用一个特定的printer呢？当然是用闭包啦（雾）。</p>
-<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">makeFizzbuzz</span>(<span class="hljs-params">printer</span>) </span>{
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">makeFizzbuzz</span>(<span class="hljs-params">printer</span>) {
     <span class="hljs-comment">// validate printer</span>
     <span class="hljs-comment">// then</span>
-    <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>{
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
         <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i ++) {
             <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span> &amp;&amp; i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
-                printer.print(<span class="hljs-string">&quot;fizzbuzz&quot;</span>);
+                printer.<span class="hljs-title function_">print</span>(<span class="hljs-string">&quot;fizzbuzz&quot;</span>);
             } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-comment">/* ... */</span>)
             <span class="hljs-comment">// ...</span>
     };
@@ -238,16 +238,16 @@
 </code></pre>
 <p>每次makeFizzbuzz得到的都是一个与特定priner绑定的fizzbuzz实现。这样既不失灵活性（因为你可以任意选择printer的实现），又不失易用性（得到的fizzbuzz实现是与printer绑定的，不需要再每次运行都准备一套printer）。</p>
 <p>而我们都知道，闭包只是简化了一些的对象。上面这个结构完全可以改成更加自然的没那么隐晦的类/对象结构：</p>
-<pre><code class="language-js"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Fizzbuzz</span> </span>{
-    #printer;
-    <span class="hljs-function"><span class="hljs-title">constructor</span>(<span class="hljs-params">printer</span>)</span> {
+<pre><code class="language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Fizzbuzz</span> {
+    <span class="hljs-comment">#printer;</span>
+    <span class="hljs-title function_">constructor</span>(<span class="hljs-params">printer</span>) {
         <span class="hljs-comment">// validate &amp; bind</span>
-        <span class="hljs-built_in">this</span>.#printer = printer;
+        <span class="hljs-variable language_">this</span>.<span class="hljs-comment">#printer = printer;</span>
     }
-    <span class="hljs-function"><span class="hljs-title">run</span>(<span class="hljs-params"></span>)</span> {
-        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> i = <span class="hljs-number">1</span>; i &lt;= <span class="hljs-number">100</span>; i ++) {
-            <span class="hljs-keyword">if</span> (i % <span class="hljs-number">3</span> == <span class="hljs-number">0</span> &amp;&amp; i % <span class="hljs-number">5</span> == <span class="hljs-number">0</span>) {
-                <span class="hljs-built_in">this</span>.#printer.print(<span class="hljs-string">&quot;fizzbuzz&quot;</span>);
+    <span class="hljs-title function_">run</span>() {
+        <span class="hljs-keyword">for</span> (<span class="hljs-variable">let</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-number">1</span>; <span class="hljs-variable">i</span> <span class="hljs-operator">&lt;=</span> <span class="hljs-number">100</span>; <span class="hljs-variable">i</span> <span class="hljs-operator">+</span><span class="hljs-operator">+</span>) {
+            <span class="hljs-keyword">if</span> (<span class="hljs-variable">i</span> <span class="hljs-operator">%</span> <span class="hljs-number">3</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span> <span class="hljs-operator">&amp;&amp;</span> <span class="hljs-variable">i</span> <span class="hljs-operator">%</span> <span class="hljs-number">5</span> <span class="hljs-operator">==</span> <span class="hljs-number">0</span>) {
+                <span class="hljs-variable language_">this</span>.<span class="hljs-comment">#printer.print(&quot;fizzbuzz&quot;);</span>
             } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-comment">/* ... */</span>)
             <span class="hljs-comment">// ...</span>
     }
@@ -277,7 +277,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：#N/A</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

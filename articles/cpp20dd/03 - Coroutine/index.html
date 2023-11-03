@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -197,21 +197,21 @@
 }
 </code></pre>
 <p>看起来似乎很简单，并没有说的那么夸张。但实际上，至少在目前的标准中你是没有<code>generator&lt;T&gt;</code>这个模版类可以直接拿来用的，需要自己糊出来。大概是这个样子：</p>
-<pre><code class="language-C++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;</span>
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">generator</span> {</span>
-  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">promise_type</span>;</span>
-  <span class="hljs-keyword">using</span> handle = <span class="hljs-built_in">std</span>::coroutine_handle&lt;promise_type&gt;;
+<pre><code class="language-C++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">T</span>&gt;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">generator</span> {
+  <span class="hljs-keyword">struct</span> <span class="hljs-title class_">promise_type</span>;
+  <span class="hljs-keyword">using</span> handle = std::coroutine_handle&lt;promise_type&gt;;
 
-  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">promise_type</span> {</span>
-    <span class="hljs-built_in">std</span>::optional&lt;T&gt; current_value;
+  <span class="hljs-keyword">struct</span> <span class="hljs-title class_">promise_type</span> {
+    std::optional&lt;T&gt; current_value;
 
-    <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">get_return_object</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> generator{handle::from_promise(*<span class="hljs-keyword">this</span>)}; }
-    <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">initial_suspend</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-built_in">std</span>::suspend_always{}; }
-    <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">final_suspend</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-built_in">std</span>::suspend_always{}; }
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unhandled_exception</span><span class="hljs-params">()</span> </span>{ <span class="hljs-built_in">std</span>::<span class="hljs-built_in">terminate</span>(); }
+    <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">get_return_object</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> generator{handle::<span class="hljs-built_in">from_promise</span>(*<span class="hljs-keyword">this</span>)}; }
+    <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">initial_suspend</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> std::suspend_always{}; }
+    <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">final_suspend</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> std::suspend_always{}; }
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">unhandled_exception</span><span class="hljs-params">()</span> </span>{ std::<span class="hljs-built_in">terminate</span>(); }
     <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">yield_value</span><span class="hljs-params">(T value)</span> </span>{
-      current_value = <span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(value);
-      <span class="hljs-keyword">return</span> <span class="hljs-built_in">std</span>::suspend_always{};
+      current_value = std::<span class="hljs-built_in">move</span>(value);
+      <span class="hljs-keyword">return</span> std::suspend_always{};
     }
   };
   ...
@@ -219,31 +219,31 @@
 </code></pre>
 <p>关键的部分就是这个<code>promise_type</code>：coroutine里面的各种步骤都会映射到上面的所有方法上面。整个的coroutine执行过程大概是下面这个样子：</p>
 <pre><code class="language-C++">{
-  co_await promise.initial_suspend()<span class="hljs-comment">;</span>
-  try
+  <span class="hljs-keyword">co_await</span> promise.<span class="hljs-built_in">initial_suspend</span>();
+  <span class="hljs-keyword">try</span>
   {
     &lt;body-statements&gt;
   }
-  catch (<span class="hljs-name">...</span>)
+  <span class="hljs-built_in">catch</span> (...)
   {
-    promise.unhandled_exception()<span class="hljs-comment">;</span>
+    promise.<span class="hljs-built_in">unhandled_exception</span>();
   }
 FinalSuspend:
-  co_await promise.final_suspend()<span class="hljs-comment">;</span>
+  <span class="hljs-keyword">co_await</span> promise.<span class="hljs-built_in">final_suspend</span>();
 }
 </code></pre>
 <p>而其中的任何<code>co_yield</code>和<code>co_return</code>也都会翻译成对应的语句：</p>
-<pre><code class="language-c++">co_await promise.yield<span class="hljs-constructor">_value(<span class="hljs-params">a</span>)</span>;  <span class="hljs-comment">// `co_yield a`</span>
-co_await promise.return<span class="hljs-constructor">_value(<span class="hljs-params">a</span>)</span>; <span class="hljs-comment">// `co_return a`</span>
-co_await promise.return<span class="hljs-constructor">_void()</span>;   <span class="hljs-comment">// `co_return`</span>
+<pre><code class="language-c++"><span class="hljs-keyword">co_await</span> promise.<span class="hljs-built_in">yield_value</span>(a);  <span class="hljs-comment">// `co_yield a`</span>
+<span class="hljs-keyword">co_await</span> promise.<span class="hljs-built_in">return_value</span>(a); <span class="hljs-comment">// `co_return a`</span>
+<span class="hljs-keyword">co_await</span> promise.<span class="hljs-built_in">return_void</span>();   <span class="hljs-comment">// `co_return`</span>
 </code></pre>
 <p>这样配合着实现<code>generator</code>的<code>iterator</code>，就能够顺利地在C++中实现Python或者JavaScript中类似的Generator了。</p>
 <pre><code class="language-C++"><span class="hljs-comment">// pesudo code</span>
-<span class="hljs-keyword">template</span>&lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">T</span>&gt;</span>
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">generator</span> {</span>
+<span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">T</span>&gt;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">generator</span> {
   ...
-  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">iterator</span> {</span>
-    <span class="hljs-keyword">void</span> <span class="hljs-keyword">operator</span>++() { ... }
+  <span class="hljs-keyword">struct</span> <span class="hljs-title class_">iterator</span> {
+    <span class="hljs-type">void</span> <span class="hljs-keyword">operator</span>++() { ... }
     T&amp; <span class="hljs-keyword">operator</span>*() { ... }
   };
 
@@ -252,10 +252,10 @@ co_await promise.return<span class="hljs-constructor">_void()</span>;   <span cl
   ...
 </code></pre>
 <p>上面定义的range协程使用起来也非常简单：</p>
-<pre><code class="language-C++"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span>&amp;&amp; i : range(<span class="hljs-number">0</span>, <span class="hljs-number">10</span>)) {
-  <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; i * i &lt;&lt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">endl</span>;
+<pre><code class="language-C++"><span class="hljs-keyword">for</span> (auto&amp;&amp; i : range(0, 10)) {
+  std::cout &lt;&lt; <span class="hljs-string">i * i</span> &lt;&lt; <span class="hljs-string">std::endl;
 }
-</code></pre>
+</span></code></pre>
 <p>前面定义的<code>iterator</code>和<code>begin</code>/<code>end</code>就是为了这里的range-based for语法。</p>
 <p>好的我们再从头解释一下coroutine的执行过程：</p>
 <ul>
@@ -271,54 +271,54 @@ co_await promise.return<span class="hljs-constructor">_void()</span>;   <span cl
 <p>不过在这之前仍然还有一个上古神器，就是type traits。如果一套约束是按照type traits的思路来设计的，是很容易给已有类型添加额外的特性的。前面提到的iterator traits就是如此。C++也在标准库里提供了<code>std::coroutine_traits</code>。</p>
 <p>比如，对于C++标准库的<code>std::future</code>类型，我们可以直接扩展到coroutine上，利用<code>std::promise</code>作为<code>promise_type</code>。</p>
 <pre><code class="language-C++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T, <span class="hljs-keyword">typename</span>... Args&gt;
-<span class="hljs-keyword">requires</span>(!<span class="hljs-built_in">std</span>::is_void_v&lt;T&gt; &amp;&amp; !<span class="hljs-built_in">std</span>::is_reference_v&lt;T&gt;)
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">std</span>:</span>:coroutine_traits&lt;<span class="hljs-built_in">std</span>::<span class="hljs-built_in">future</span>&lt;T&gt;, Args...&gt; {
-  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">promise_type</span> :</span> <span class="hljs-built_in">std</span>::promise&lt;T&gt; {
-    <span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">future</span>&lt;T&gt; <span class="hljs-title">get_return_object</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;get_future();
+<span class="hljs-built_in">requires</span>(!std::is_void_v&lt;T&gt; &amp;&amp; !std::is_reference_v&lt;T&gt;)
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">std</span>::coroutine_traits&lt;std::future&lt;T&gt;, Args...&gt; {
+  <span class="hljs-keyword">struct</span> <span class="hljs-title class_">promise_type</span> : std::promise&lt;T&gt; {
+    <span class="hljs-function">std::future&lt;T&gt; <span class="hljs-title">get_return_object</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">get_future</span>();
     }
 
-    <span class="hljs-function"><span class="hljs-built_in">std</span>::suspend_never <span class="hljs-title">initial_suspend</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> {}; }
-    <span class="hljs-function"><span class="hljs-built_in">std</span>::suspend_never <span class="hljs-title">final_suspend</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> {}; }
+    <span class="hljs-function">std::suspend_never <span class="hljs-title">initial_suspend</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> {}; }
+    <span class="hljs-function">std::suspend_never <span class="hljs-title">final_suspend</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">noexcept</span> </span>{ <span class="hljs-keyword">return</span> {}; }
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">return_value</span><span class="hljs-params">(<span class="hljs-keyword">const</span> T &amp;value)</span>
-    <span class="hljs-title">noexcept</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::is_nothrow_copy_constructible_v&lt;T&gt;)</span> </span>{
-      <span class="hljs-keyword">this</span>-&gt;set_value(value);
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">return_value</span><span class="hljs-params">(<span class="hljs-type">const</span> T &amp;value)</span>
+    <span class="hljs-title">noexcept</span><span class="hljs-params">(std::is_nothrow_copy_constructible_v&lt;T&gt;)</span> </span>{
+      <span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">set_value</span>(value);
     }
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">return_value</span><span class="hljs-params">(T &amp;&amp;value)</span>
-    <span class="hljs-title">noexcept</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::is_nothrow_move_constructible_v&lt;T&gt;)</span> </span>{
-      <span class="hljs-keyword">this</span>-&gt;set_value(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(value));
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">return_value</span><span class="hljs-params">(T &amp;&amp;value)</span>
+    <span class="hljs-title">noexcept</span><span class="hljs-params">(std::is_nothrow_move_constructible_v&lt;T&gt;)</span> </span>{
+      <span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">set_value</span>(std::<span class="hljs-built_in">move</span>(value));
     }
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">unhandled_exception</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{
-      <span class="hljs-keyword">this</span>-&gt;set_exception(<span class="hljs-built_in">std</span>::current_exception());
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">unhandled_exception</span><span class="hljs-params">()</span> <span class="hljs-keyword">noexcept</span> </span>{
+      <span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">set_exception</span>(std::<span class="hljs-built_in">current_exception</span>());
     }
   };
 };
 </code></pre>
 <p>同时重载<code>co_await</code>运算符，来让future可以组合：</p>
 <pre><code class="language-C++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> T&gt;
-<span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-keyword">operator</span> <span class="hljs-title">co_await</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">future</span>&lt;T&gt; <span class="hljs-built_in">future</span>)</span> <span class="hljs-keyword">noexcept</span>
-<span class="hljs-title">requires</span><span class="hljs-params">(!<span class="hljs-built_in">std</span>::is_reference_v&lt;T&gt;)</span> </span>{
-  <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">awaiter</span> :</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">future</span>&lt;T&gt; {
-    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">await_ready</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">noexcept</span> </span>{
-      <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>::chrono_literals;
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;wait_for(<span class="hljs-number">0</span>s) != <span class="hljs-built_in">std</span>::future_status::timeout;
+<span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-keyword">operator</span> <span class="hljs-title">co_await</span><span class="hljs-params">(std::future&lt;T&gt; future)</span> <span class="hljs-keyword">noexcept</span>
+<span class="hljs-title">requires</span><span class="hljs-params">(!std::is_reference_v&lt;T&gt;)</span> </span>{
+  <span class="hljs-keyword">struct</span> <span class="hljs-title class_">awaiter</span> : std::future&lt;T&gt; {
+    <span class="hljs-function"><span class="hljs-type">bool</span> <span class="hljs-title">await_ready</span><span class="hljs-params">()</span> <span class="hljs-type">const</span> <span class="hljs-keyword">noexcept</span> </span>{
+      <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std::chrono_literals;
+      <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">wait_for</span>(<span class="hljs-number">0</span>s) != std::future_status::timeout;
     }
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">await_suspend</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::coroutine_handle&lt;&gt; cont)</span> <span class="hljs-keyword">const</span> </span>{
-      <span class="hljs-built_in">std</span>::thread([<span class="hljs-keyword">this</span>, cont] {
-        <span class="hljs-keyword">this</span>-&gt;wait();
-        cont();
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">await_suspend</span><span class="hljs-params">(std::coroutine_handle&lt;&gt; cont)</span> <span class="hljs-type">const</span> </span>{
+      std::<span class="hljs-built_in">thread</span>([<span class="hljs-keyword">this</span>, cont] {
+        <span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">wait</span>();
+        <span class="hljs-built_in">cont</span>();
       }).<span class="hljs-built_in">detach</span>();
     }
     <span class="hljs-function">T <span class="hljs-title">await_resume</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>-&gt;<span class="hljs-built_in">get</span>(); }
   };
-  <span class="hljs-keyword">return</span> awaiter{<span class="hljs-built_in">std</span>::<span class="hljs-built_in">move</span>(<span class="hljs-built_in">future</span>)};
+  <span class="hljs-keyword">return</span> awaiter{std::<span class="hljs-built_in">move</span>(future)};
 }
 </code></pre>
 <p>这样你就成功拥有了别的语言里费尽心思糊进去的<code>async</code>和<code>await</code>：</p>
-<pre><code class="language-C++"><span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">future</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">compute</span><span class="hljs-params">()</span> </span>{
-  <span class="hljs-keyword">int</span> a = <span class="hljs-keyword">co_await</span> <span class="hljs-built_in">std</span>::async([] { <span class="hljs-keyword">return</span> <span class="hljs-number">6</span>; });
-  <span class="hljs-keyword">int</span> b = <span class="hljs-keyword">co_await</span> <span class="hljs-built_in">std</span>::async([] { <span class="hljs-keyword">return</span> <span class="hljs-number">7</span>; });
+<pre><code class="language-C++"><span class="hljs-function">std::future&lt;<span class="hljs-type">int</span>&gt; <span class="hljs-title">compute</span><span class="hljs-params">()</span> </span>{
+  <span class="hljs-type">int</span> a = <span class="hljs-keyword">co_await</span> std::<span class="hljs-built_in">async</span>([] { <span class="hljs-keyword">return</span> <span class="hljs-number">6</span>; });
+  <span class="hljs-type">int</span> b = <span class="hljs-keyword">co_await</span> std::<span class="hljs-built_in">async</span>([] { <span class="hljs-keyword">return</span> <span class="hljs-number">7</span>; });
   <span class="hljs-keyword">co_return</span> a * b;
 }
 </code></pre>
@@ -334,7 +334,7 @@ co_await promise.return<span class="hljs-constructor">_void()</span>;   <span cl
         </ul>
     </div> -->
   <span class="field">创建时间：2021-08-23</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

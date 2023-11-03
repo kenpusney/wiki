@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -224,19 +224,19 @@ which can support different type with fixed size. How could
 you represent this? I got <code>Array&lt;Int, 3&gt;</code> here.</p>
 <p>The Int and 3 in <code>Array&lt;Int, 3&gt;</code> are the parameters of this
 type. And for the prototype of array, should looks like</p>
-<pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Array</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>, <span class="hljs-symbol">&#x27;arity</span>: Num&gt; <span class="hljs-keyword">where</span> <span class="hljs-symbol">&#x27;arity</span> &gt;= <span class="hljs-number">0</span>
+<pre><code class="language-ng"><span class="hljs-keyword">type</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-symbol">&#x27;t</span>, <span class="hljs-symbol">&#x27;arity</span>: Num&gt; <span class="hljs-keyword">where</span> <span class="hljs-symbol">&#x27;arity</span> &gt;= <span class="hljs-number">0</span>
 </code></pre>
 <p>The where clause is a constraints for 'arity parameter which
 indicates that field cannot be negative.</p>
 <p>Here is another syntax to do this checking</p>
-<pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">NonNegative</span></span>&lt;<span class="hljs-symbol">&#x27;num</span>: Num&gt; <span class="hljs-keyword">where</span> <span class="hljs-symbol">&#x27;num</span> &gt;= <span class="hljs-number">0</span>
+<pre><code class="language-ng"><span class="hljs-keyword">type</span> <span class="hljs-title class_">NonNegative</span>&lt;<span class="hljs-symbol">&#x27;num</span>: Num&gt; <span class="hljs-keyword">where</span> <span class="hljs-symbol">&#x27;num</span> &gt;= <span class="hljs-number">0</span>
 
-<span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">Array</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>, <span class="hljs-symbol">&#x27;arity</span>: NonNegative&gt;
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">Array</span>&lt;<span class="hljs-symbol">&#x27;t</span>, <span class="hljs-symbol">&#x27;arity</span>: NonNegative&gt;
 </code></pre>
 <p>NonNegative is like typeclass / type traits / concepts in
 other languages such like Haskell/C++/D.</p>
 <p>Here is another constraint example in ng.</p>
-<pre><code class="language-ng"><span class="hljs-class"><span class="hljs-keyword">type</span> <span class="hljs-title">ValueType</span></span>&lt;<span class="hljs-symbol">&#x27;t</span>: * <span class="hljs-symbol">&#x27;a</span>&gt; = <span class="hljs-symbol">&#x27;a</span>
+<pre><code class="language-ng"><span class="hljs-keyword">type</span> <span class="hljs-type">ValueType&lt;&#x27;t: </span>* <span class="hljs-symbol">&#x27;a</span>&gt; = <span class="hljs-symbol">&#x27;a</span>
 </code></pre>
 <p>Here we can use ValueType<ref Int> to represent Int now.</p>
 
@@ -250,7 +250,7 @@ other languages such like Haskell/C++/D.</p>
         </ul>
     </div> -->
   <span class="field">创建时间：2016-05-05</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

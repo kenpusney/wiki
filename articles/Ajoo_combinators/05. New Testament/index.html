@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -192,9 +192,9 @@
 如果这样，那么什么重要程度的信息进入error.log，什么进入warning.log，什么进入info.log也需要决定。</p>
 <p>不同的文件吗？好办啊。就是不同的PrintWriter对象了。
 java代码:</p>
-<pre><code class="language-java">Logger err_log = writer(err_writer); 
-Logger warning_log = writer(warning_writer); 
-Logger info_log = writer(info_writer);
+<pre><code class="language-java"><span class="hljs-type">Logger</span> <span class="hljs-variable">err_log</span> <span class="hljs-operator">=</span> writer(err_writer); 
+<span class="hljs-type">Logger</span> <span class="hljs-variable">warning_log</span> <span class="hljs-operator">=</span> writer(warning_writer); 
+<span class="hljs-type">Logger</span> <span class="hljs-variable">info_log</span> <span class="hljs-operator">=</span> writer(info_writer);
 </code></pre>
 <p>各个文件记录不同重要程度的信息是么？
 java代码:</p>
@@ -204,7 +204,7 @@ info_log = filter(INFO, info_log, nop());
 </code></pre>
 <p>最终把三个不同的logger串联起来就是了：
 java代码:</p>
-<pre><code class="language-java">Logger logger = sequence(err_log, warning_log, info_log);
+<pre><code class="language-java"><span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> sequence(err_log, warning_log, info_log);
 </code></pre>
 <p>3。也许可以象ant一样把所有的信息都打印到一个文件中。</p>
 <p>这就更简单了，就一个是WriterLogger。</p>
@@ -217,15 +217,15 @@ java代码:</p>
 <p>5。不仅仅是log文件，我们还希望能够在标准错误输出上直接看见错误，普通的信息可以打印到log文件中，对错误信息，我们希望log文件和标准输出上都有。</p>
 <p>可以创建针对标准输出的Logger，然后和打印log 文件的logger串联起来。
 java代码:</p>
-<pre><code class="language-java">Logger std_logger = writer(<span class="hljs-keyword">new</span> PrintWriter(System.err)); 
+<pre><code class="language-java"><span class="hljs-type">Logger</span> <span class="hljs-variable">std_logger</span> <span class="hljs-operator">=</span> writer(<span class="hljs-keyword">new</span> <span class="hljs-title class_">PrintWriter</span>(System.err)); 
 std_logger = ignore(ERROR, std_logger); 
 logger = sequence(std_logger, logger); 
 </code></pre>
 <p>6。标准输出上的东西只要通知我们出错了就行，大概不需要详细的stack trace，所以exception stack trace可以打印到文件中，而屏幕上有个简短的exception的message就够了。</p>
 <p>这里需要对std_logger稍微改写一下：
 java代码:</p>
-<pre><code class="language-java">PrintWriter out = <span class="hljs-keyword">new</span> PrintWriter(System.err); 
-std_logger = <span class="hljs-keyword">new</span> ErrorMessageLogger(out, writer(out)); 
+<pre><code class="language-java"><span class="hljs-type">PrintWriter</span> <span class="hljs-variable">out</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PrintWriter</span>(System.err); 
+std_logger = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ErrorMessageLogger</span>(out, writer(out)); 
 std_logger = ignore(ERROR, std_logger, nop()); 
 </code></pre>
 <p>用ErrorMessageLogger来改写对异常的log逻辑。</p>
@@ -255,9 +255,9 @@ java代码:</p>
 <p>14。因为printExecutionTrace()和printEvaluationTrace()本身已经打印了这个异常的getMessage()，所以，对这两种异常，我们就不再象对待其它种类的异常那样在屏幕上打印getMessage()了，以免重复。</p>
 <p>就是说，一旦一个exception被发现是NeptuneException，那么ErrorMessageLogger就要被跳过了。
 java代码:</p>
-<pre><code class="language-java">    <span class="hljs-keyword">final</span> Logger err_logger = <span class="hljs-keyword">new</span> ErrorMessageLogger(writer); 
-    <span class="hljs-keyword">final</span> Logger jaskell_logger = <span class="hljs-keyword">new</span> JaskellExceptionLogger(writer, err_logger); 
-    <span class="hljs-keyword">final</span> Logger neptune_logger = <span class="hljs-keyword">new</span> NeptuneExceptionLogger(writer, jaskell_logger); 
+<pre><code class="language-java">    <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">err_logger</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ErrorMessageLogger</span>(writer); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">jaskell_logger</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JaskellExceptionLogger</span>(writer, err_logger); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">neptune_logger</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NeptuneExceptionLogger</span>(writer, jaskell_logger); 
     <span class="hljs-keyword">return</span> neptune_logger;
 </code></pre>
 <p>这个neptune_logger先判断异常是不是NeptuneException，如果是，直接处理，否则，传递给 jaskell_logger。jaskell_logger继续判断，如果不是它感兴趣的，再传递给ErrorMessageLogger来做最后的缺 省处理。</p>
@@ -266,39 +266,39 @@ java代码:</p>
 <p>很惊讶地发现，就这么几个小儿科似的积木，就似乎全部解决了曾让我们烦恼的这些需求？</p>
 <p>为了给大家一个完整的印象，下面是我实际项目中使用这些组合子应对上面这些需求的代码：
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StreamLogger</span> </span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">StreamLogger</span> { 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> OutputStream out; 
   
   <span class="hljs-comment">/** 
    * To create a StreamLogger object. 
    * <span class="hljs-doctag">@param</span> out the OutputStream object that the log message should go to. 
    */</span> 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">StreamLogger</span><span class="hljs-params">(OutputStream out)</span> </span>{ 
-    <span class="hljs-keyword">this</span>.out = out; 
+  <span class="hljs-keyword">public</span> <span class="hljs-title function_">StreamLogger</span><span class="hljs-params">(OutputStream out)</span> { 
+    <span class="hljs-built_in">this</span>.out = out; 
   } 
   
   <span class="hljs-comment">/** 
    * To get the OutputStream that the log messages should go to. 
    */</span> 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> OutputStream <span class="hljs-title">getStream</span><span class="hljs-params">()</span> </span>{ 
+  <span class="hljs-keyword">public</span> OutputStream <span class="hljs-title function_">getStream</span><span class="hljs-params">()</span> { 
     <span class="hljs-keyword">return</span> out; 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger <span class="hljs-title">getBaseLogger</span><span class="hljs-params">(PrintWriter writer)</span></span>{ 
-    <span class="hljs-keyword">final</span> Logger nop = <span class="hljs-keyword">new</span> NopLogger(); 
-    <span class="hljs-keyword">final</span> Logger base = Loggers.logger(writer); 
-    <span class="hljs-keyword">final</span> Logger neptune_logger = <span class="hljs-keyword">new</span> NeptuneExceptionLogger(writer, nop); 
-    <span class="hljs-keyword">final</span> Logger jaskell_logger = <span class="hljs-keyword">new</span> JaskellExceptionLogger(writer, nop); 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger <span class="hljs-title function_">getBaseLogger</span><span class="hljs-params">(PrintWriter writer)</span>{ 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">nop</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NopLogger</span>(); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">base</span> <span class="hljs-operator">=</span> Loggers.logger(writer); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">neptune_logger</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NeptuneExceptionLogger</span>(writer, nop); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">jaskell_logger</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JaskellExceptionLogger</span>(writer, nop); 
     <span class="hljs-keyword">return</span> Loggers.sequence( 
-        <span class="hljs-keyword">new</span> Logger[]{neptune_logger, jaskell_logger, base} 
+        <span class="hljs-keyword">new</span> <span class="hljs-title class_">Logger</span>[]{neptune_logger, jaskell_logger, base} 
     ); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger <span class="hljs-title">getEchoLogger</span><span class="hljs-params">(PrintWriter writer)</span></span>{ 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ErrorMessageLogger(writer); 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger <span class="hljs-title function_">getEchoLogger</span><span class="hljs-params">(PrintWriter writer)</span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ErrorMessageLogger</span>(writer); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger <span class="hljs-title">getErrorLogger</span><span class="hljs-params">(PrintWriter writer)</span></span>{ 
-    <span class="hljs-keyword">final</span> Logger err_logger = <span class="hljs-keyword">new</span> ErrorMessageLogger(writer); 
-    <span class="hljs-keyword">final</span> Logger jaskell_logger = <span class="hljs-keyword">new</span> JaskellExceptionLogger(writer, err_logger); 
-    <span class="hljs-keyword">final</span> Logger neptune_logger = <span class="hljs-keyword">new</span> NeptuneExceptionLogger(writer, jaskell_logger); 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Logger <span class="hljs-title function_">getErrorLogger</span><span class="hljs-params">(PrintWriter writer)</span>{ 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">err_logger</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ErrorMessageLogger</span>(writer); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">jaskell_logger</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">JaskellExceptionLogger</span>(writer, err_logger); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">neptune_logger</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">NeptuneExceptionLogger</span>(writer, jaskell_logger); 
     <span class="hljs-keyword">return</span> neptune_logger; 
   } 
   <span class="hljs-comment">/** 
@@ -306,11 +306,11 @@ java代码:</p>
    * <span class="hljs-doctag">@param</span> min_level the minimal critical level for a log message to show up in the log. 
    * <span class="hljs-doctag">@return</span> the Logger instance. 
    */</span> 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Logger <span class="hljs-title">getDefaultLogger</span><span class="hljs-params">(<span class="hljs-keyword">int</span> min_level)</span></span>{ 
-    <span class="hljs-keyword">final</span> PrintWriter writer = <span class="hljs-keyword">new</span> PrintWriter(out, <span class="hljs-keyword">true</span>); 
-    <span class="hljs-keyword">final</span> PrintWriter err = <span class="hljs-keyword">new</span> PrintWriter(System.err, <span class="hljs-keyword">true</span>); 
-    <span class="hljs-keyword">final</span> PrintWriter warn = <span class="hljs-keyword">new</span> PrintWriter(System.out, <span class="hljs-keyword">true</span>); 
-    <span class="hljs-keyword">final</span> Logger all = Loggers.sequence(<span class="hljs-keyword">new</span> Logger[]{ 
+  <span class="hljs-keyword">public</span> Logger <span class="hljs-title function_">getDefaultLogger</span><span class="hljs-params">(<span class="hljs-type">int</span> min_level)</span>{ 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">PrintWriter</span> <span class="hljs-variable">writer</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PrintWriter</span>(out, <span class="hljs-literal">true</span>); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">PrintWriter</span> <span class="hljs-variable">err</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PrintWriter</span>(System.err, <span class="hljs-literal">true</span>); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">PrintWriter</span> <span class="hljs-variable">warn</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">PrintWriter</span>(System.out, <span class="hljs-literal">true</span>); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">all</span> <span class="hljs-operator">=</span> Loggers.sequence(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Logger</span>[]{ 
         Loggers.ignore(getErrorLogger(err), Logger.ERROR), 
         Loggers.filter(getEchoLogger(warn), Logger.WARNING), 
         getBaseLogger(writer) 
@@ -328,8 +328,8 @@ java代码:</p>
 <p>如果你仔细看上面的代码，也许你会有所感觉：对Logger的千奇百怪的组合本身已经有点象一个程序代码了。
 如果用伪码表示：</p>
 <p>java代码:</p>
-<pre><code class="language-java">  all_logger = <span class="hljs-function">ignore messages below ERROR <span class="hljs-keyword">for</span> <span class="hljs-title">getErrorLogger</span><span class="hljs-params">(err)</span></span>; 
-          <span class="hljs-function">filter messages except WARNING <span class="hljs-keyword">for</span> <span class="hljs-title">getEchoLogger</span><span class="hljs-params">(warn)</span></span>; 
+<pre><code class="language-java">  all_logger = ignore messages below ERROR <span class="hljs-keyword">for</span> <span class="hljs-title function_">getErrorLogger</span><span class="hljs-params">(err)</span>; 
+          filter messages except WARNING <span class="hljs-keyword">for</span> <span class="hljs-title function_">getEchoLogger</span><span class="hljs-params">(warn)</span>; 
           baseBaseLogger(writer); 
   ignore messages below lvl <span class="hljs-keyword">for</span> all_logger;
 </code></pre>
@@ -371,7 +371,7 @@ co和oo，既然各自都不能宣称自己就是银弹，那么为什么不能�
         </ul>
     </div> -->
   <span class="field">创建时间：2006-01-13</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

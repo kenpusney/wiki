@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -211,7 +211,7 @@
 </code></pre>
 <p>这里看上去可能会比较奇怪，因为并不再是使用模板来定义泛型了。首先，前面提到的强大的 module 已经承载了模板的大部分功能在，而泛型本来就应该是像泛型一样的泛型，并非 C++ 如今用模板打的一个巨型补丁。模板带来的混乱导致调试困难这个问题，困扰了 C++ 程序员几十年了，是时候抛弃这个诡异特性了。</p>
 <p>甚至，作为早期混乱的一个来源之一，尖括号形式的模板参数也可以考虑换掉。新的编程语言里也就少数编程语言还在坚守这个奇怪用法，对编译器前端工作人员相当不友好。可以考虑学习下 Scala，D 或者一些函数式编程语言，用更清晰的写法，比如用后缀的方式看起来甚至会更直观：</p>
-<pre><code class="language-cpp"><span class="hljs-keyword">int</span> option <span class="hljs-built_in">list</span> <span class="hljs-comment">// vs list&lt;optional&lt;int&gt;&gt;</span>
+<pre><code class="language-cpp"><span class="hljs-type">int</span> option list <span class="hljs-comment">// vs list&lt;optional&lt;int&gt;&gt;</span>
 </code></pre>
 <p>为了避免歧义，可以在泛型参数上做一些简单的标记。这样一来我们的引用定义就变成了：</p>
 <pre><code class="language-haskell"><span class="hljs-class"><span class="hljs-keyword">type</span> &#x27;a ref = { <span class="hljs-title">mutable</span> <span class="hljs-title">content</span>: &#x27;<span class="hljs-title">a</span> };</span>
@@ -229,7 +229,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2022-07-09</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

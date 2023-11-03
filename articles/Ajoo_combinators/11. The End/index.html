@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -197,35 +197,35 @@ age0就给出了几个方案供大家选择。</p>
 java代码:</p>
 <pre><code class="language-java"><span class="hljs-comment">// client: </span>
 
-string id = input_id; 
+<span class="hljs-type">string</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> input_id; 
 
-Member member = Members.GetMemberByID(id); 
+<span class="hljs-type">Member</span> <span class="hljs-variable">member</span> <span class="hljs-operator">=</span> Members.GetMemberByID(id); 
 
-<span class="hljs-keyword">int</span> discount = member.GetDiscount(); 
-<span class="hljs-keyword">int</span> point = member.GetReturnPoint(); 
+<span class="hljs-type">int</span> <span class="hljs-variable">discount</span> <span class="hljs-operator">=</span> member.GetDiscount(); 
+<span class="hljs-type">int</span> <span class="hljs-variable">point</span> <span class="hljs-operator">=</span> member.GetReturnPoint(); 
 
 <span class="hljs-comment">// service </span>
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Members</span> 
-</span>{ 
-        <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">public</span> Member <span class="hljs-title">GetMemberByID</span><span class="hljs-params">(string id)</span> 
-        </span>{ 
-                string type = GetMemberTypeByID(id); 
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Members</span> 
+{ 
+        <span class="hljs-keyword">static</span> <span class="hljs-keyword">public</span> Member <span class="hljs-title function_">GetMemberByID</span><span class="hljs-params">(string id)</span> 
+        { 
+                <span class="hljs-type">string</span> <span class="hljs-variable">type</span> <span class="hljs-operator">=</span> GetMemberTypeByID(id); 
                 
                 <span class="hljs-keyword">switch</span>(type) 
                 { 
                         <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;金卡&quot;</span>: 
-                                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> GoldenMember(); 
+                                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">GoldenMember</span>(); 
                         
                         <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;银卡&quot;</span> 
-                                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SilverMember(); 
+                                <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">SilverMember</span>(); 
                 } 
                 
-                <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>; 
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>; 
         } 
         
-        <span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">protected</span> string <span class="hljs-title">GetMemberTypeByID</span><span class="hljs-params">(id)</span> 
-        </span>{ 
+        <span class="hljs-keyword">static</span> <span class="hljs-keyword">protected</span> string <span class="hljs-title function_">GetMemberTypeByID</span><span class="hljs-params">(id)</span> 
+        { 
                 string type; 
         
                 <span class="hljs-comment">// get type by id </span>
@@ -236,45 +236,45 @@ Member member = Members.GetMemberByID(id);
         } 
 } 
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Member</span> 
-</span>{ 
-        <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-title">Member</span><span class="hljs-params">()</span> 
-        </span>{ 
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Member</span> 
+{ 
+        <span class="hljs-keyword">protected</span> <span class="hljs-title function_">Member</span><span class="hljs-params">()</span> 
+        { 
         } 
         
-        <span class="hljs-function">virtual <span class="hljs-keyword">public</span> <span class="hljs-title">GetDiscount</span><span class="hljs-params">()</span> 
-        </span>{ 
+        virtual <span class="hljs-keyword">public</span> <span class="hljs-title function_">GetDiscount</span><span class="hljs-params">()</span> 
+        { 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; 
         } 
         
-        <span class="hljs-function">virtual <span class="hljs-keyword">public</span> <span class="hljs-title">GetReturnPoint</span><span class="hljs-params">()</span> 
-        </span>{ 
+        virtual <span class="hljs-keyword">public</span> <span class="hljs-title function_">GetReturnPoint</span><span class="hljs-params">()</span> 
+        { 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>; 
         } 
 } 
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GoldenMember</span> 
-</span>{ 
-        <span class="hljs-function">override <span class="hljs-keyword">public</span> <span class="hljs-title">GetDiscount</span><span class="hljs-params">()</span> 
-        </span>{ 
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">GoldenMember</span> 
+{ 
+        override <span class="hljs-keyword">public</span> <span class="hljs-title function_">GetDiscount</span><span class="hljs-params">()</span> 
+        { 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">10</span>; 
         } 
         
-        <span class="hljs-function">override <span class="hljs-keyword">public</span> <span class="hljs-title">GetReturnPoint</span><span class="hljs-params">()</span> 
-        </span>{ 
+        override <span class="hljs-keyword">public</span> <span class="hljs-title function_">GetReturnPoint</span><span class="hljs-params">()</span> 
+        { 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">1.5</span>; 
         } 
 } 
 
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SilverMember</span> 
-</span>{ 
-        <span class="hljs-function">override <span class="hljs-keyword">public</span> <span class="hljs-title">GetDiscount</span><span class="hljs-params">()</span> 
-        </span>{ 
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">SilverMember</span> 
+{ 
+        override <span class="hljs-keyword">public</span> <span class="hljs-title function_">GetDiscount</span><span class="hljs-params">()</span> 
+        { 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">5</span>; 
         } 
         
-        <span class="hljs-function">override <span class="hljs-keyword">public</span> <span class="hljs-title">GetReturnPoint</span><span class="hljs-params">()</span> 
-        </span>{ 
+        override <span class="hljs-keyword">public</span> <span class="hljs-title function_">GetReturnPoint</span><span class="hljs-params">()</span> 
+        { 
                 <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>; 
         } 
 } 
@@ -303,37 +303,37 @@ Member member = Members.GetMemberByID(id);
 <p>这个模块可以用Java, groovy, ruby, xml，这些都是可以考虑的方案。
 Quake Wang就用bean shell的脚本写了一个解决方法。
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BeanShellDiscountStrategy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">DiscountStrategy</span> </span>{ 
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String DISCOUNT_BY_POINT = <span class="hljs-string">&quot;if(member.point &gt; 5) return 0.05; else return 0.02;&quot;</span>; 
-    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String DISCOUNT_BY_GENDER = <span class="hljs-string">&quot;if(member.gender == 0) return 0.01; else return 0.03;&quot;</span>; 
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BeanShellDiscountStrategy</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">DiscountStrategy</span> { 
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">DISCOUNT_BY_POINT</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;if(member.point &gt; 5) return 0.05; else return 0.02;&quot;</span>; 
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-type">String</span> <span class="hljs-variable">DISCOUNT_BY_GENDER</span> <span class="hljs-operator">=</span> <span class="hljs-string">&quot;if(member.gender == 0) return 0.01; else return 0.03;&quot;</span>; 
     
-    <span class="hljs-keyword">private</span> Interpreter i = <span class="hljs-keyword">new</span> Interpreter(); 
+    <span class="hljs-keyword">private</span> <span class="hljs-type">Interpreter</span> <span class="hljs-variable">i</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Interpreter</span>(); 
     <span class="hljs-keyword">private</span> String discountScript; 
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">BeanShellDiscountStrategy</span><span class="hljs-params">(Member member, String discountScript)</span> </span>{ 
-        <span class="hljs-keyword">this</span>.discountScript = discountScript; 
+    <span class="hljs-keyword">public</span> <span class="hljs-title function_">BeanShellDiscountStrategy</span><span class="hljs-params">(Member member, String discountScript)</span> { 
+        <span class="hljs-built_in">this</span>.discountScript = discountScript; 
         <span class="hljs-keyword">try</span> { 
             i.set(<span class="hljs-string">&quot;member&quot;</span>, member); 
         } <span class="hljs-keyword">catch</span> (EvalError e) { 
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(e); 
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e); 
         } 
     } 
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">double</span> <span class="hljs-title">getDiscount</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-keyword">public</span> <span class="hljs-type">double</span> <span class="hljs-title function_">getDiscount</span><span class="hljs-params">()</span> { 
         <span class="hljs-keyword">try</span> { 
             <span class="hljs-keyword">return</span> ((Double) i.eval(discountScript)).doubleValue(); 
         } <span class="hljs-keyword">catch</span> (EvalError e) { 
-            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> RuntimeException(e); 
+            <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RuntimeException</span>(e); 
         } 
     } 
 
     <span class="hljs-comment">//getters and setters </span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getDiscountScript</span><span class="hljs-params">()</span> </span>{ 
+    <span class="hljs-keyword">public</span> String <span class="hljs-title function_">getDiscountScript</span><span class="hljs-params">()</span> { 
         <span class="hljs-keyword">return</span> discountScript; 
     } 
 
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setDiscountScript</span><span class="hljs-params">(String discountScript)</span> </span>{ 
-        <span class="hljs-keyword">this</span>.discountScript = discountScript; 
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">setDiscountScript</span><span class="hljs-params">(String discountScript)</span> { 
+        <span class="hljs-built_in">this</span>.discountScript = discountScript; 
     } 
 }
 </code></pre>
@@ -349,14 +349,14 @@ exclusive(rule1, rule2, rule3)，而不用关心rule1, rule2, rule3到底都是�
 <p>变化的东西我们不好掌握，但是这些不变的东西还是可以啃一啃的。如果我们把这些搞定了。那么不管age0给老板出什么馊主意，我们都可以更轻松的应对。</p>
 <p>比如：
 java代码:</p>
-<pre><code class="language-java">Rule single = married.not(); 
-Rule young = age &lt; <span class="hljs-number">18</span>; 
-Rule good = breast &gt; 32C; 
-Rule boss_likes = and(single, young, good); 
-Rule boss_pays = and(boss_likes, 大功告成able); 
-Rule paid_by_boss = boss_pays.then(<span class="hljs-number">120</span>); 
-Rule big_discount = boss_likes.then(<span class="hljs-number">50</span>); 
-Rule boss_afair = exclusive(paid_by_boss, big_discount); 
+<pre><code class="language-java"><span class="hljs-type">Rule</span> <span class="hljs-variable">single</span> <span class="hljs-operator">=</span> married.not(); 
+<span class="hljs-type">Rule</span> <span class="hljs-variable">young</span> <span class="hljs-operator">=</span> age &lt; <span class="hljs-number">18</span>; 
+<span class="hljs-type">Rule</span> <span class="hljs-variable">good</span> <span class="hljs-operator">=</span> breast &gt; 32C; 
+<span class="hljs-type">Rule</span> <span class="hljs-variable">boss_likes</span> <span class="hljs-operator">=</span> and(single, young, good); 
+<span class="hljs-type">Rule</span> <span class="hljs-variable">boss_pays</span> <span class="hljs-operator">=</span> and(boss_likes, 大功告成able); 
+<span class="hljs-type">Rule</span> <span class="hljs-variable">paid_by_boss</span> <span class="hljs-operator">=</span> boss_pays.then(<span class="hljs-number">120</span>); 
+<span class="hljs-type">Rule</span> <span class="hljs-variable">big_discount</span> <span class="hljs-operator">=</span> boss_likes.then(<span class="hljs-number">50</span>); 
+<span class="hljs-type">Rule</span> <span class="hljs-variable">boss_afair</span> <span class="hljs-operator">=</span> exclusive(paid_by_boss, big_discount); 
 </code></pre>
 <p>哈，老板啊，您的代号为“选美”的折扣计划搞定了。</p>
 <p>嗯。yy结束。理想是真美好啊。那么，怎么变成现实呢？熟读经典yy文学（武侠小说，比如说）的我们，一定知道被狗屎运缠身所烦恼的主角的成功方 法，那就是：夏梦————对不起，是“瞎蒙”，拼音输入给搞错了。（传说yy大师金老先生从前的yy情人就叫夏梦还是“瞎蒙”来着？小生八卦功力浅薄，也 不知是否和老先生的作品yy风格有不可说的联系？）</p>
@@ -368,8 +368,8 @@ Rule boss_afair = exclusive(paid_by_boss, big_discount);
 2。它生成的结果。</p>
 <p>这个rule还要知道很多facts。于是，一个Rule的接口可以这样定义：</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Rule</span></span>{ 
-  <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span></span>; 
+<pre><code class="language-java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Rule</span>{ 
+  <span class="hljs-type">boolean</span> <span class="hljs-title function_">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span>; 
 }
 </code></pre>
 <p>返回的boolean值表现这个rule是否可用。
@@ -379,26 +379,26 @@ RuleContext给rule提供所有需要的信息。</p>
 <p>下面来看看前面我们说到的那些组合：
 ExclusiveRule用来实现排他性组合：</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ExclusiveRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Rule</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ExclusiveRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Rule</span>{ 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Rule[] rules; 
-  <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span></span>{ 
+  <span class="hljs-type">boolean</span> <span class="hljs-title function_">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span>{ 
     <span class="hljs-keyword">for</span>(Rule rule: rules){ 
       <span class="hljs-keyword">if</span>(rule.apply(facts, result)) 
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>; 
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; 
     } 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; 
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; 
   } 
 }
 </code></pre>
 <p>java代码:</p>
 <p>IfElseRule用来实现简单的if-else逻辑：</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">IfElseRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Rule</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">IfElseRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Rule</span>{ 
   <span class="hljs-keyword">private</span> Rule cond; 
   <span class="hljs-keyword">private</span> Rule consequence; 
   <span class="hljs-keyword">private</span> Rule alternative; 
-  <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span></span>{ 
+  <span class="hljs-type">boolean</span> <span class="hljs-title function_">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span>{ 
     <span class="hljs-keyword">if</span>(!cond.apply(facts, result)){ 
-      <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; 
+      <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; 
     } 
     <span class="hljs-keyword">if</span>(result.getBoolean()){ 
       <span class="hljs-keyword">return</span> consequence.apply(facts, result); 
@@ -411,31 +411,31 @@ ExclusiveRule用来实现排他性组合：</p>
 </code></pre>
 <p>NotRule用来把一个rule的bool返回值取反：
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NotRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Rule</span></span>{ 
-  <span class="hljs-function"><span class="hljs-keyword">private</span> Rule rule 
-  <span class="hljs-keyword">boolean</span> <span class="hljs-title">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span></span>{ 
-    <span class="hljs-keyword">if</span>(!rule.apply(facts, result)) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">NotRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Rule</span>{ 
+  <span class="hljs-keyword">private</span> Rule rule 
+  <span class="hljs-type">boolean</span> <span class="hljs-title function_">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span>{ 
+    <span class="hljs-keyword">if</span>(!rule.apply(facts, result)) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; 
     result.setBoolean(!result.getBoolean()); 
   } 
 }
 </code></pre>
 <p>AndRule用来把两个rule的bool值进行逻辑与：
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AndRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Rule</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">AndRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Rule</span>{ 
   <span class="hljs-keyword">private</span> Rule rule1; 
   <span class="hljs-keyword">private</span> Rule rule2; 
-  <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span></span>{ 
+  <span class="hljs-type">boolean</span> <span class="hljs-title function_">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span>{ 
     <span class="hljs-keyword">if</span>(rule1.apply(facts, result)){ 
       <span class="hljs-keyword">if</span>(!result.getBoolean()) 
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>; 
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; 
     } 
     <span class="hljs-keyword">if</span>(rule2.apply(facts, result){ 
       <span class="hljs-keyword">if</span>(!result.getBoolean()){ 
-        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>; 
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; 
       } 
     } 
-    result.setBoolean(<span class="hljs-keyword">true</span>); 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>; 
+    result.setBoolean(<span class="hljs-literal">true</span>); 
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; 
   } 
 }
 </code></pre>
@@ -444,9 +444,9 @@ java代码:</p>
 <p>另外一点需要注意的，是我们实现了ifelse，但是前面所述的组合逻辑中我们只是说如果mm漂漂就如何，没有说不漂漂如何。不能简单地认为不漂漂就不给折扣，在排它性组合中，一个规则是否被应用了决定后续其它规则是否有机会被执行。</p>
 <p>不过，我们仍然可以用ifelse来处理单纯if的情况。只需要定义一个NilRule就好了。这个Rule干脆不返回任何值，它永远都是一个不会被应用的规则（也就是说，apply()函数必然返回false）
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">NilRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Rule</span></span>{ 
-  <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span></span>{ 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">NilRule</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Rule</span>{ 
+  <span class="hljs-type">boolean</span> <span class="hljs-title function_">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; 
   } 
 } 
 </code></pre>
@@ -459,18 +459,18 @@ java代码:</p>
 <p>这些信息我们都假设可以从RuleContext得到。</p>
 <p>那么，可以写一个SimpleRule来简化这些原子规则的创建：</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimpleRule</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Rule</span></span>{ 
-  <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">abstract</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleRule</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">Rule</span>{ 
+  <span class="hljs-type">boolean</span> <span class="hljs-title function_">apply</span><span class="hljs-params">(RuleContext facts, Variant result)</span>{ 
     result.set(run(facts)); 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>; 
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">abstract</span> Object <span class="hljs-title">run</span><span class="hljs-params">(RuleContext facts)</span></span>; 
+  <span class="hljs-keyword">abstract</span> Object <span class="hljs-title function_">run</span><span class="hljs-params">(RuleContext facts)</span>; 
 }
 </code></pre>
 <p>对取得性别这个原子规则，我们就可以这样写：
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GenderRule</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SimpleRule</span></span>{ 
-  <span class="hljs-function">Object <span class="hljs-title">run</span><span class="hljs-params">(RuleContext facts)</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">GenderRule</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">SimpleRule</span>{ 
+  Object <span class="hljs-title function_">run</span><span class="hljs-params">(RuleContext facts)</span>{ 
     <span class="hljs-keyword">return</span> facts.getGender(); 
   } 
 } 
@@ -492,52 +492,52 @@ java代码:</p>
 <span class="hljs-keyword">import</span> jfun.cre.demo.MyRules; 
 <span class="hljs-keyword">import</span> junit.framework.TestCase; 
 
-<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SimpleTestCase</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">TestCase</span></span>{ 
-  <span class="hljs-function"><span class="hljs-keyword">private</span> Rule <span class="hljs-title">getRule</span><span class="hljs-params">()</span></span>{ 
-    <span class="hljs-keyword">final</span> Rule gold_member = MyRules.discountByMember(<span class="hljs-string">&quot;gold&quot;</span>, <span class="hljs-number">0.1</span>); 
-    <span class="hljs-keyword">final</span> Rule silver_member = MyRules.discountByMember(<span class="hljs-string">&quot;silver&quot;</span>, <span class="hljs-number">0.05</span>); 
-    <span class="hljs-keyword">final</span> Rule platinum_member = MyRules.discountByMember(<span class="hljs-string">&quot;platinum&quot;</span>, <span class="hljs-number">0.2</span>); 
-    <span class="hljs-keyword">final</span> Rule by_member = MyRules.any(<span class="hljs-keyword">new</span> Rule[]{platinum_member, 
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">SimpleTestCase</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_">TestCase</span>{ 
+  <span class="hljs-keyword">private</span> Rule <span class="hljs-title function_">getRule</span><span class="hljs-params">()</span>{ 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Rule</span> <span class="hljs-variable">gold_member</span> <span class="hljs-operator">=</span> MyRules.discountByMember(<span class="hljs-string">&quot;gold&quot;</span>, <span class="hljs-number">0.1</span>); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Rule</span> <span class="hljs-variable">silver_member</span> <span class="hljs-operator">=</span> MyRules.discountByMember(<span class="hljs-string">&quot;silver&quot;</span>, <span class="hljs-number">0.05</span>); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Rule</span> <span class="hljs-variable">platinum_member</span> <span class="hljs-operator">=</span> MyRules.discountByMember(<span class="hljs-string">&quot;platinum&quot;</span>, <span class="hljs-number">0.2</span>); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Rule</span> <span class="hljs-variable">by_member</span> <span class="hljs-operator">=</span> MyRules.any(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Rule</span>[]{platinum_member, 
         gold_member, silver_member}); 
     
     
     
-    <span class="hljs-keyword">final</span> Rule is_female = MyRules.isGender(<span class="hljs-string">&quot;female&quot;</span>); 
-    <span class="hljs-keyword">final</span> Rule is_female_day = MyRules.isMonth(Calendar.MARCH) 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Rule</span> <span class="hljs-variable">is_female</span> <span class="hljs-operator">=</span> MyRules.isGender(<span class="hljs-string">&quot;female&quot;</span>); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Rule</span> <span class="hljs-variable">is_female_day</span> <span class="hljs-operator">=</span> MyRules.isMonth(Calendar.MARCH) 
         .and(MyRules.isDay(<span class="hljs-number">8</span>)); 
-    <span class="hljs-keyword">final</span> Rule female_discount = is_female.and(is_female_day) 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Rule</span> <span class="hljs-variable">female_discount</span> <span class="hljs-operator">=</span> is_female.and(is_female_day) 
         .then(MyRules.discount(<span class="hljs-number">0.05</span>)); 
     
     
     
-    <span class="hljs-keyword">final</span> Rule tvspeaker = MyRules.purchased(<span class="hljs-keyword">new</span> String[]{<span class="hljs-string">&quot;tv&quot;</span>,<span class="hljs-string">&quot;speaker&quot;</span>}) 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Rule</span> <span class="hljs-variable">tvspeaker</span> <span class="hljs-operator">=</span> MyRules.purchased(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[]{<span class="hljs-string">&quot;tv&quot;</span>,<span class="hljs-string">&quot;speaker&quot;</span>}) 
         .then(MyRules.discount(<span class="hljs-number">0.05</span>)); 
-    <span class="hljs-keyword">final</span> Rule tvspeakerdvd = MyRules.purchased(<span class="hljs-keyword">new</span> String[]{<span class="hljs-string">&quot;tv&quot;</span>,<span class="hljs-string">&quot;speaker&quot;</span>,<span class="hljs-string">&quot;dvd&quot;</span>}) 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Rule</span> <span class="hljs-variable">tvspeakerdvd</span> <span class="hljs-operator">=</span> MyRules.purchased(<span class="hljs-keyword">new</span> <span class="hljs-title class_">String</span>[]{<span class="hljs-string">&quot;tv&quot;</span>,<span class="hljs-string">&quot;speaker&quot;</span>,<span class="hljs-string">&quot;dvd&quot;</span>}) 
         .then(MyRules.discount(<span class="hljs-number">0.07</span>)); 
-    <span class="hljs-keyword">final</span> Rule by_purchase = MyRules.any(<span class="hljs-keyword">new</span> Rule[]{tvspeakerdvd, tvspeaker}); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Rule</span> <span class="hljs-variable">by_purchase</span> <span class="hljs-operator">=</span> MyRules.any(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Rule</span>[]{tvspeakerdvd, tvspeaker}); 
     
-    <span class="hljs-keyword">final</span> Rule final_discount = MyRules.productDouble(<span class="hljs-keyword">new</span> Rule[]{ 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Rule</span> <span class="hljs-variable">final_discount</span> <span class="hljs-operator">=</span> MyRules.productDouble(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Rule</span>[]{ 
       by_member, female_discount, by_purchase 
     }); 
     <span class="hljs-keyword">return</span> final_discount; 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test1</span><span class="hljs-params">()</span></span>{ 
-    <span class="hljs-keyword">final</span> MyRuleContext mrc = <span class="hljs-keyword">new</span> MyRuleContext(); 
-    <span class="hljs-keyword">final</span> Variant result = <span class="hljs-keyword">new</span> Variant(); 
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test1</span><span class="hljs-params">()</span>{ 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">MyRuleContext</span> <span class="hljs-variable">mrc</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyRuleContext</span>(); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Variant</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Variant</span>(); 
     assertTrue(getRule().apply(mrc, result)); 
     assertEquals(<span class="hljs-number">0.837</span>, result.getDouble()); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test2</span><span class="hljs-params">()</span></span>{ 
-    <span class="hljs-keyword">final</span> MyRuleContext mrc = <span class="hljs-keyword">new</span> MyRuleContext(){ 
-      <span class="hljs-function"><span class="hljs-keyword">public</span> Date <span class="hljs-title">getNow</span><span class="hljs-params">()</span></span>{ 
-        Calendar cal = getCalendar(); 
-        cal.setTime(<span class="hljs-keyword">super</span>.getNow()); 
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title function_">test2</span><span class="hljs-params">()</span>{ 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">MyRuleContext</span> <span class="hljs-variable">mrc</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">MyRuleContext</span>(){ 
+      <span class="hljs-keyword">public</span> Date <span class="hljs-title function_">getNow</span><span class="hljs-params">()</span>{ 
+        <span class="hljs-type">Calendar</span> <span class="hljs-variable">cal</span> <span class="hljs-operator">=</span> getCalendar(); 
+        cal.setTime(<span class="hljs-built_in">super</span>.getNow()); 
         cal.set(Calendar.MONTH, Calendar.MARCH); 
         cal.set(Calendar.DAY_OF_MONTH, <span class="hljs-number">8</span>); 
         <span class="hljs-keyword">return</span> cal.getTime(); 
       } 
     }; 
-    <span class="hljs-keyword">final</span> Variant result = <span class="hljs-keyword">new</span> Variant(); 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Variant</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Variant</span>(); 
     assertTrue(getRule().apply(mrc, result)); 
     assertEquals(<span class="hljs-number">0.837</span>*<span class="hljs-number">0.95d</span>, result.getDouble()); 
   } 
@@ -587,7 +587,7 @@ jaskell代码:</p>
         </ul>
     </div> -->
   <span class="field">创建时间：2006-01-13</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

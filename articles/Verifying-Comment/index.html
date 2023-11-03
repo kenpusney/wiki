@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -189,7 +189,7 @@
 <p>正常情况下用自然语言写出来的注释就是可能存在歧义的，但形式化方法发展了这么多年了，各种形形色色的工具都能直接搬进来用。按照这种方式写注释来解释你的代码，远比用绕来绕去说不清楚的自然语言更加高效。反过来还可以根据这些形式化的规范去验证代码实现的正确性，一举两得。</p>
 <p>最初我的设想是直接要求在注释里写 TLA+ 这种形式化的建模语言。但是想了想有点不太现实。另外三哥也提出了一个观点，评论必须能够让人直观的看懂，不能有学习成本。但是一方面本身相关结构的命名就能解决这个问题，另外一方面你都在看源码了还不能直观看懂建模工具的spec？</p>
 <p>比如下面两个例子：</p>
-<pre><code class="language-js"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sumOfSquares</span><span class="hljs-params">([<span class="hljs-rest_arg">...array</span>])</span> </span>{
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">sumOfSquares</span><span class="hljs-params">([<span class="hljs-rest_arg">...array</span>])</span> {
     let sum = <span class="hljs-number">0</span>;
     <span class="hljs-keyword">for</span> (let item of array) {
         sum += item * item;
@@ -197,12 +197,12 @@
     <span class="hljs-keyword">return</span> sum;
 }
 </code></pre>
-<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-keyword">float</span> <span class="hljs-title">inv_sqrt</span><span class="hljs-params">(<span class="hljs-keyword">float</span> x)</span>
+<pre><code class="language-cpp"><span class="hljs-function"><span class="hljs-type">float</span> <span class="hljs-title">inv_sqrt</span><span class="hljs-params">(<span class="hljs-type">float</span> x)</span>
 </span>{
-    <span class="hljs-keyword">float</span> xhalf = <span class="hljs-number">0.5f</span>*x;
-    <span class="hljs-keyword">int</span> i = *(<span class="hljs-keyword">int</span>*)&amp;x;
+    <span class="hljs-type">float</span> xhalf = <span class="hljs-number">0.5f</span>*x;
+    <span class="hljs-type">int</span> i = *(<span class="hljs-type">int</span>*)&amp;x;
     i = <span class="hljs-number">0x5f3759df</span> - (i&gt;&gt;<span class="hljs-number">1</span>);
-    x = *(<span class="hljs-keyword">float</span>*)&amp;i;
+    x = *(<span class="hljs-type">float</span>*)&amp;i;
     x = x*(<span class="hljs-number">1.5f</span>-xhalf*x*x);
     <span class="hljs-keyword">return</span> x;
 }
@@ -211,7 +211,7 @@
 <p>不过既然注释里面写TLA+不是个好选项，那就看下有没有其他的solution吧。不过好在 Java 的生态相对健全的多，很容易就找到了 Java Modeling Language（JML）。</p>
 <p>这个工具充分利用了 Java 的注释和 Dijkstra / Hoare 那群人的理论，让你能够在代码里详细的描述清楚自己到底在做什么。并且配合相应的工具能提供编译期甚至运行期的检查。</p>
 <p>如下是 OpenJML 官网的一个<a href="http://www.openjml.org/examples/">示例</a>：</p>
-<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BinarySearchGood</span> </span>{
+<pre><code class="language-java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">BinarySearchGood</span> {
     
     <span class="hljs-comment">//@ requires sortedArray != null &amp;&amp; 0 &lt; sortedArray.length &lt; Integer.MAX_VALUE;</span>
     <span class="hljs-comment">//@ requires \forall int i; 0 &lt;= i &lt; sortedArray.length; \forall int j; i &lt; j &lt; sortedArray.length; sortedArray[i] &lt;= sortedArray[j];</span>
@@ -219,19 +219,19 @@
     <span class="hljs-comment">//@ ensures containsValue &lt;==&gt; 0 &lt;= \result &lt; sortedArray.length;</span>
     <span class="hljs-comment">//@ ensures !containsValue &lt;==&gt; \result == -1;</span>
     <span class="hljs-comment">//@ pure</span>
-    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> <span class="hljs-title">search</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] sortedArray, <span class="hljs-keyword">int</span> value)</span> </span>{
+    <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">int</span> <span class="hljs-title function_">search</span><span class="hljs-params">(<span class="hljs-type">int</span>[] sortedArray, <span class="hljs-type">int</span> value)</span> {
         <span class="hljs-comment">//@ ghost boolean containsValue = (\exists int i; 0 &lt;= i &lt; sortedArray.length; sortedArray[i] == value);</span>
         <span class="hljs-keyword">if</span> (value &lt; sortedArray[<span class="hljs-number">0</span>]) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
         <span class="hljs-keyword">if</span> (value &gt; sortedArray[sortedArray.length-<span class="hljs-number">1</span>]) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;
-        <span class="hljs-keyword">int</span> lo = <span class="hljs-number">0</span>;
-        <span class="hljs-keyword">int</span> hi = sortedArray.length-<span class="hljs-number">1</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">lo</span> <span class="hljs-operator">=</span> <span class="hljs-number">0</span>;
+        <span class="hljs-type">int</span> <span class="hljs-variable">hi</span> <span class="hljs-operator">=</span> sortedArray.length-<span class="hljs-number">1</span>;
         <span class="hljs-comment">//@ loop_invariant 0 &lt;= lo &lt; sortedArray.length &amp;&amp; 0 &lt;= hi &lt; sortedArray.length;</span>
         <span class="hljs-comment">//@ loop_invariant containsValue ==&gt; sortedArray[lo] &lt;= value &lt;= sortedArray[hi];</span>
         <span class="hljs-comment">//@ loop_invariant \forall int i; 0 &lt;= i &lt; lo; sortedArray[i] &lt; value;</span>
         <span class="hljs-comment">//@ loop_invariant \forall int i; hi &lt; i &lt; sortedArray.length; value &lt; sortedArray[i];</span>
         <span class="hljs-comment">//@ loop_decreases hi - lo;</span>
         <span class="hljs-keyword">while</span> (lo &lt;= hi) {
-            <span class="hljs-keyword">int</span> mid = lo + (hi-lo)/<span class="hljs-number">2</span>;
+            <span class="hljs-type">int</span> <span class="hljs-variable">mid</span> <span class="hljs-operator">=</span> lo + (hi-lo)/<span class="hljs-number">2</span>;
             <span class="hljs-keyword">if</span> (sortedArray[mid] == value) {
                 <span class="hljs-keyword">return</span> mid;
             } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (sortedArray[mid] &lt; value) {
@@ -263,7 +263,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2021-07-10</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

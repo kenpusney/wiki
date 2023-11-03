@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -186,19 +186,19 @@
     <p>其实，前面我还忘了提一个非常重要的基本组合子：singleton。
 这里补充提一下：
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SingletonComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Component</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">SingletonComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Component</span>{ 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Component c; 
   <span class="hljs-keyword">private</span> Object val; 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">getType</span><span class="hljs-params">()</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">getType</span><span class="hljs-params">()</span>{ 
     <span class="hljs-keyword">return</span> c.getType(); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> Object <span class="hljs-title">create</span><span class="hljs-params">(Dependency dep)</span></span>{ 
-    <span class="hljs-keyword">if</span>(val!=<span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> val; 
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> Object <span class="hljs-title function_">create</span><span class="hljs-params">(Dependency dep)</span>{ 
+    <span class="hljs-keyword">if</span>(val!=<span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> val; 
     val = c.create(dep); 
     <span class="hljs-keyword">return</span> val; 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> Class <span class="hljs-title">verify</span><span class="hljs-params">(Dependency dep)</span></span>{ 
-    <span class="hljs-keyword">if</span>(val!=<span class="hljs-keyword">null</span>) <span class="hljs-keyword">return</span> val.getClass(); 
+  <span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> Class <span class="hljs-title function_">verify</span><span class="hljs-params">(Dependency dep)</span>{ 
+    <span class="hljs-keyword">if</span>(val!=<span class="hljs-literal">null</span>) <span class="hljs-keyword">return</span> val.getClass(); 
     <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> c.verify(dep); 
   } 
 }
@@ -209,9 +209,9 @@ java代码:</p>
 <p>有了bind，很多的功能都可以自然推演出来了。</p>
 <p>比如我们前面用来刁难pico的那个例子，甚至，为了更强调复杂性，我们可以给B和A再另外增加一些参数，这些参数要求从容器解析（毕竟，我们之所以需要容器，就是为了自动解析一些依赖关系，要是全部依赖关系都hard-code，意义就不大了）：
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-function"><span class="hljs-keyword">void</span> A <span class="hljs-title">createA</span><span class="hljs-params">()</span></span>{ 
-  B b = <span class="hljs-keyword">new</span> B(...); 
-  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> A(b,b, ...); 
+<pre><code class="language-java"><span class="hljs-keyword">void</span> A <span class="hljs-title function_">createA</span><span class="hljs-params">()</span>{ 
+  <span class="hljs-type">B</span> <span class="hljs-variable">b</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">B</span>(...); 
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">A</span>(b,b, ...); 
 }
 </code></pre>
 <p>用bind，我们的思路可以是这样：
@@ -219,12 +219,12 @@ java代码:</p>
 2。这个Component生成一个对象，
 3。这个产生的对象被传递给一个对应A的Component当作参数。这一步可以用bind来搞定。</p>
 <p>java代码:</p>
-<pre><code class="language-java">Component b_component = Components.ctor(B.class); 
-<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BoundComponent(b_component, <span class="hljs-keyword">new</span> Binder(){ 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(Object b)</span></span>{ 
-    <span class="hljs-keyword">final</span> Component arg = Components.value(b); 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> WithArgument( 
-      <span class="hljs-keyword">new</span> WithArgument(a, <span class="hljs-number">0</span>, arg), 
+<pre><code class="language-java"><span class="hljs-type">Component</span> <span class="hljs-variable">b_component</span> <span class="hljs-operator">=</span> Components.ctor(B.class); 
+<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BoundComponent</span>(b_component, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Binder</span>(){ 
+  <span class="hljs-keyword">public</span> Component <span class="hljs-title function_">bind</span><span class="hljs-params">(Object b)</span>{ 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Component</span> <span class="hljs-variable">arg</span> <span class="hljs-operator">=</span> Components.value(b); 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">WithArgument</span>( 
+      <span class="hljs-keyword">new</span> <span class="hljs-title class_">WithArgument</span>(a, <span class="hljs-number">0</span>, arg), 
     <span class="hljs-number">1</span>, arg); 
   } 
 }); 
@@ -241,35 +241,35 @@ cc.value(obj)。舒服些了吧？</p>
 我们可以处理if-else，可以处理循环，递归，任何可以直接用java写出来的对象创建方式，我们都可以在高阶逻辑上得到对应的组合版本，只 要我们有足够的原子组合子。（所谓原字组合子，不过是：FunctionComponent, BeanComponent，ValueComponent几种）</p>
 <p>比如，对应于：</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-function">X <span class="hljs-title">createX</span><span class="hljs-params">()</span></span>{ 
-  A a = A.instance(...); 
+<pre><code class="language-java">X <span class="hljs-title function_">createX</span><span class="hljs-params">()</span>{ 
+  <span class="hljs-type">A</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> A.instance(...); 
   <span class="hljs-keyword">if</span>(a.isX(...)){ 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> X(...); 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">X</span>(...); 
   } 
   <span class="hljs-keyword">else</span>{ 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Y(a, ...).getX(...); 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Y</span>(a, ...).getX(...); 
   } 
 }
 </code></pre>
 <p>这里，所有的省略号都代表可能需要从容器解析的参数。使用高阶Component对象而不是直接调用createX()函数的一个原因，就是我们想要把依赖解析隐藏起来并且集中灵活地配置和管理。</p>
 <p>对此，我们可以写成：
 java代码:</p>
-<pre><code class="language-java">Component a_component = Components.static_method(A.class, <span class="hljs-string">&quot;instance&quot;</span>); 
-<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BoundComponent(a_component, <span class="hljs-keyword">new</span> Binder(){ 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Object a)</span></span>{ 
-    <span class="hljs-keyword">final</span> Component isx_component = Components.method(a, <span class="hljs-string">&quot;isX&quot;</span>); 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BoundComponent(isx_component, <span class="hljs-keyword">new</span> Binder(){ 
-      <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(Object isx)</span></span>{ 
-        <span class="hljs-keyword">final</span> Boolean v = (Boolean)isx; 
+<pre><code class="language-java"><span class="hljs-type">Component</span> <span class="hljs-variable">a_component</span> <span class="hljs-operator">=</span> Components.static_method(A.class, <span class="hljs-string">&quot;instance&quot;</span>); 
+<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BoundComponent</span>(a_component, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Binder</span>(){ 
+  <span class="hljs-keyword">public</span> Component <span class="hljs-title function_">bind</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Object a)</span>{ 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Component</span> <span class="hljs-variable">isx_component</span> <span class="hljs-operator">=</span> Components.method(a, <span class="hljs-string">&quot;isX&quot;</span>); 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BoundComponent</span>(isx_component, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Binder</span>(){ 
+      <span class="hljs-keyword">public</span> Component <span class="hljs-title function_">bind</span><span class="hljs-params">(Object isx)</span>{ 
+        <span class="hljs-keyword">final</span> <span class="hljs-type">Boolean</span> <span class="hljs-variable">v</span> <span class="hljs-operator">=</span> (Boolean)isx; 
         <span class="hljs-keyword">if</span>(v.booleanValue()){ 
           <span class="hljs-keyword">return</span> Components.ctor(X.class); 
         } 
         <span class="hljs-keyword">else</span>{ 
-          <span class="hljs-keyword">final</span> Coponent y_component = 
-           <span class="hljs-keyword">new</span> WithArgument(Components.ctor(Y.class), <span class="hljs-number">0</span>, 
+          <span class="hljs-keyword">final</span> <span class="hljs-type">Coponent</span> <span class="hljs-variable">y_component</span> <span class="hljs-operator">=</span> 
+           <span class="hljs-keyword">new</span> <span class="hljs-title class_">WithArgument</span>(Components.ctor(Y.class), <span class="hljs-number">0</span>, 
               Components.value(a)); 
-          <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BoundComponent(y_component, <span class="hljs-keyword">new</span> Binder(){ 
-            <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(Object y)</span></span>{ 
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">BoundComponent</span>(y_component, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Binder</span>(){ 
+            <span class="hljs-keyword">public</span> Component <span class="hljs-title function_">bind</span><span class="hljs-params">(Object y)</span>{ 
               <span class="hljs-keyword">return</span> Components.method(y, <span class="hljs-string">&quot;getX&quot;</span>); 
             } 
           }); 
@@ -297,8 +297,8 @@ new BoundComponent(c1, ...)，而写：c1.bind(...)。
 new WithArgument(c, 0, arg)，而写：c.withArgument(0, arg)。
 可以避免写：
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-keyword">new</span> BoundComponent(c1, <span class="hljs-keyword">new</span> Binder(){ 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(Object obj)</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">new</span> <span class="hljs-title class_">BoundComponent</span>(c1, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Binder</span>(){ 
+  <span class="hljs-keyword">public</span> Component <span class="hljs-title function_">bind</span><span class="hljs-params">(Object obj)</span>{ 
     <span class="hljs-keyword">return</span> Components.method(obj, <span class="hljs-string">&quot;method&quot;</span>); 
   } 
 });
@@ -309,8 +309,8 @@ java代码:</p>
 </code></pre>
 <p>可以避免写：
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-keyword">new</span> BoundComponent(c1, <span class="hljs-keyword">new</span> Binder(){ 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(Object obj)</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">new</span> <span class="hljs-title class_">BoundComponent</span>(c1, <span class="hljs-keyword">new</span> <span class="hljs-title class_">Binder</span>(){ 
+  <span class="hljs-keyword">public</span> Component <span class="hljs-title function_">bind</span><span class="hljs-params">(Object obj)</span>{ 
     <span class="hljs-keyword">if</span>(((Boolean)obj).booleanValue()){ 
       <span class="hljs-keyword">return</span> a; 
     } 
@@ -327,10 +327,10 @@ java代码:</p>
 <p>但是，从实际效果考虑，我发现它损失的架构上的美感，远远比不上它带来的编码上的方便程度。谁让我们用的是java呢，世上没有十全十美的事情，就凑合吧。</p>
 <p>经过这个改动，上面的对应createX的高阶代码变成：</p>
 <p>java代码:</p>
-<pre><code class="language-java">Component a_component = Components.static_method(A.class, <span class="hljs-string">&quot;instance&quot;</span>); 
-<span class="hljs-keyword">return</span> a_component.bind(<span class="hljs-keyword">new</span> Binder(){ 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Component <span class="hljs-title">bind</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Object a)</span></span>{ 
-    <span class="hljs-keyword">final</span> Component isx_component = Components.method(a, <span class="hljs-string">&quot;isX&quot;</span>); 
+<pre><code class="language-java"><span class="hljs-type">Component</span> <span class="hljs-variable">a_component</span> <span class="hljs-operator">=</span> Components.static_method(A.class, <span class="hljs-string">&quot;instance&quot;</span>); 
+<span class="hljs-keyword">return</span> a_component.bind(<span class="hljs-keyword">new</span> <span class="hljs-title class_">Binder</span>(){ 
+  <span class="hljs-keyword">public</span> Component <span class="hljs-title function_">bind</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Object a)</span>{ 
+    <span class="hljs-keyword">final</span> <span class="hljs-type">Component</span> <span class="hljs-variable">isx_component</span> <span class="hljs-operator">=</span> Components.method(a, <span class="hljs-string">&quot;isX&quot;</span>); 
     <span class="hljs-keyword">return</span> isx_component.ifelse( 
       Components.ctor(X.class), 
       Components.ctor(Y.class) 
@@ -343,19 +343,19 @@ java代码:</p>
 <p>稍微好些了。而如果我们不需要给Y的构造函数指定参数，那么效果还会更好。
 比如对
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-function">X <span class="hljs-title">createX</span><span class="hljs-params">()</span></span>{ 
-  A a = A.instance(...); 
+<pre><code class="language-java">X <span class="hljs-title function_">createX</span><span class="hljs-params">()</span>{ 
+  <span class="hljs-type">A</span> <span class="hljs-variable">a</span> <span class="hljs-operator">=</span> A.instance(...); 
   <span class="hljs-keyword">if</span>(a.isX(...)){ 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> X(...); 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">X</span>(...); 
   } 
   <span class="hljs-keyword">else</span>{ 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Y(...).getX(...); 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Y</span>(...).getX(...); 
   } 
 }
 </code></pre>
 <p>高阶代码会变成：
 java代码:</p>
-<pre><code class="language-java">Component a_component = Components.static_method(A.class, <span class="hljs-string">&quot;instance&quot;</span>); 
+<pre><code class="language-java"><span class="hljs-type">Component</span> <span class="hljs-variable">a_component</span> <span class="hljs-operator">=</span> Components.static_method(A.class, <span class="hljs-string">&quot;instance&quot;</span>); 
 <span class="hljs-keyword">return</span> a_component.method(<span class="hljs-string">&quot;isX&quot;</span>).ifelse( 
     Components.ctor(X.class), 
     Components.ctor(Y.class) 
@@ -366,7 +366,7 @@ java代码:</p>
 <p>又简洁了不少。</p>
 <p>当然，说实话，如果我们把情况任意复杂化，比如：</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-function">Y <span class="hljs-title">createY</span><span class="hljs-params">()</span></span>{ 
+<pre><code class="language-java">Y <span class="hljs-title function_">createY</span><span class="hljs-params">()</span>{ 
   a = A.createA(...); 
   b = B.createB(a, ...); 
   c = C.createC(a,b,...); 
@@ -419,7 +419,7 @@ java代码:</p>
         </ul>
     </div> -->
   <span class="field">创建时间：2006-01-13</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

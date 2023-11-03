@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -186,11 +186,11 @@
     <p>仍然是先用oo把轮廓划出来，我们需要建模一个接口来围绕它进行组合。</p>
 <p>因为本文是关于co的论述，那么这个接口怎样分析出来的就暂时忽略掉了：</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Dependency</span></span>{ 
-  <span class="hljs-function">Object <span class="hljs-title">getArgument</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i, Class type)</span></span>; 
-  <span class="hljs-function">Class <span class="hljs-title">verifyArgument</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i, Class type)</span></span>; 
-  <span class="hljs-function">Object <span class="hljs-title">getProperty</span><span class="hljs-params">(Object key, Class type)</span></span>; 
-  <span class="hljs-function">Class <span class="hljs-title">verifyProperty</span><span class="hljs-params">(Object key, Class type)</span></span>; 
+<pre><code class="language-java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Dependency</span>{ 
+  Object <span class="hljs-title function_">getArgument</span><span class="hljs-params">(<span class="hljs-type">int</span> i, Class type)</span>; 
+  Class <span class="hljs-title function_">verifyArgument</span><span class="hljs-params">(<span class="hljs-type">int</span> i, Class type)</span>; 
+  Object <span class="hljs-title function_">getProperty</span><span class="hljs-params">(Object key, Class type)</span>; 
+  Class <span class="hljs-title function_">verifyProperty</span><span class="hljs-params">(Object key, Class type)</span>; 
 }
 </code></pre>
 <p>这个Dependency接口由每个不同的组件调用，来解决依赖。如果解析失败，则抛出异常。此处，我们暂时忽略异常这个细节。</p>
@@ -200,10 +200,10 @@ getArgument(2, String.class)。</p>
 <p>那两个verify是只取得解析到的那个符合要求的组件类型，但是并不实际创建对象。</p>
 <p>然后是Component接口。这里，为了名字简短，我们不用ComponentAdapter这么恶长的名字，直接就是Component好了。</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Component</span></span>{ 
-  <span class="hljs-function">Class <span class="hljs-title">getType</span><span class="hljs-params">()</span></span>; 
-  <span class="hljs-function">Object <span class="hljs-title">create</span><span class="hljs-params">(Dependency dep)</span></span>; 
-  <span class="hljs-function">Class <span class="hljs-title">verify</span><span class="hljs-params">(Dependency dep)</span></span>; 
+<pre><code class="language-java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Component</span>{ 
+  Class <span class="hljs-title function_">getType</span><span class="hljs-params">()</span>; 
+  Object <span class="hljs-title function_">create</span><span class="hljs-params">(Dependency dep)</span>; 
+  Class <span class="hljs-title function_">verify</span><span class="hljs-params">(Dependency dep)</span>; 
 }
 </code></pre>
 <p>getType()用来返回这个Component生成的对象的类型。
@@ -211,23 +211,23 @@ create用来创建这个对象。
 verify用来保证这个对象可以被创建。</p>
 <p>至于容器接口，再简单不过了。我们都知道pico不过是个hash table，yan的容器也差不多，虽然多几个getComponentOfType()的方法，但是大体上就是一个hash table。</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Container</span></span>{ 
-  <span class="hljs-function">Component <span class="hljs-title">getComponent</span><span class="hljs-params">(Object key)</span></span>; 
-  <span class="hljs-function">Component <span class="hljs-title">getComponentOfType</span><span class="hljs-params">(Class type)</span></span>; 
+<pre><code class="language-java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Container</span>{ 
+  Component <span class="hljs-title function_">getComponent</span><span class="hljs-params">(Object key)</span>; 
+  Component <span class="hljs-title function_">getComponentOfType</span><span class="hljs-params">(Class type)</span>; 
 } 
 </code></pre>
 <p>好了。oo完毕。下面来co。</p>
 <p>首先，最简单的Component是什么？什么也不干，直接返回一个值。
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ValueComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Component</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ValueComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Component</span>{ 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Object v; 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">getType</span><span class="hljs-params">()</span></span>{ 
-    <span class="hljs-keyword">return</span> v==<span class="hljs-keyword">null</span>?<span class="hljs-keyword">null</span>:v.getClass(); 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">getType</span><span class="hljs-params">()</span>{ 
+    <span class="hljs-keyword">return</span> v==<span class="hljs-literal">null</span>?<span class="hljs-literal">null</span>:v.getClass(); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">create</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">create</span><span class="hljs-params">(Dependency dep)</span>{ 
     <span class="hljs-keyword">return</span> v; 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">verify</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">verify</span><span class="hljs-params">(Dependency dep)</span>{ 
     <span class="hljs-keyword">return</span> getType(); 
   } 
 } 
@@ -236,45 +236,45 @@ java代码:</p>
 实际上，java的reflection api里面的Method和Constructor还是有很多相似点的。
 为了抽取共性，我们定义一个新的接口，叫做Function:</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Function</span></span>{ 
-  <span class="hljs-function">Class <span class="hljs-title">getReturnType</span><span class="hljs-params">()</span></span>; 
+<pre><code class="language-java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Function</span>{ 
+  Class <span class="hljs-title function_">getReturnType</span><span class="hljs-params">()</span>; 
   Class[] getParameterTypes(); 
-  <span class="hljs-function">Object <span class="hljs-title">call</span><span class="hljs-params">(Object[] args)</span></span>; 
+  Object <span class="hljs-title function_">call</span><span class="hljs-params">(Object[] args)</span>; 
 }
 </code></pre>
 <p>这里，我就不展现把Method和Constructor匹配为Function的代码了，因为应该一目了然。
 我们只要知道我们现在可以有三个函数产生Function对象：</p>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Functions</span></span>{ 
-  <span class="hljs-function"><span class="hljs-keyword">static</span> Function <span class="hljs-title">ctor</span><span class="hljs-params">(Constructor ctor)</span></span>; 
-  <span class="hljs-function"><span class="hljs-keyword">static</span> Function <span class="hljs-title">method</span><span class="hljs-params">(Object obj, Method mtd)</span></span>; 
-  <span class="hljs-function"><span class="hljs-keyword">static</span> Function <span class="hljs-title">static_method</span><span class="hljs-params">(Class type, Method mtd)</span></span>; 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Functions</span>{ 
+  <span class="hljs-keyword">static</span> Function <span class="hljs-title function_">ctor</span><span class="hljs-params">(Constructor ctor)</span>; 
+  <span class="hljs-keyword">static</span> Function <span class="hljs-title function_">method</span><span class="hljs-params">(Object obj, Method mtd)</span>; 
+  <span class="hljs-keyword">static</span> Function <span class="hljs-title function_">static_method</span><span class="hljs-params">(Class type, Method mtd)</span>; 
 }
 </code></pre>
 <p>当然，还有一些辅助函数，
 比如：
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-function"><span class="hljs-keyword">static</span> Function <span class="hljs-title">ctor</span><span class="hljs-params">(Class type)</span></span>;
+<pre><code class="language-java"><span class="hljs-keyword">static</span> Function <span class="hljs-title function_">ctor</span><span class="hljs-params">(Class type)</span>;
 </code></pre>
 <p>然后是FunctionComponent。
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FunctionComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Component</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">FunctionComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Component</span>{ 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Function f; 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">getType</span><span class="hljs-params">()</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">getType</span><span class="hljs-params">()</span>{ 
     <span class="hljs-keyword">return</span> f.getReturnType(); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">create</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">create</span><span class="hljs-params">(Dependency dep)</span>{ 
     <span class="hljs-keyword">final</span> Class[] types = f.getParameterTypes(); 
-    <span class="hljs-keyword">final</span> Object[] args = <span class="hljs-keyword">new</span> Object[types.length]; 
+    <span class="hljs-keyword">final</span> Object[] args = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Object</span>[types.length]; 
     foreach(t:types){ 
       args[i] = dep.getArgument(i, t); 
     } 
     <span class="hljs-keyword">return</span> f.call(args); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">verify</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">verify</span><span class="hljs-params">(Dependency dep)</span>{ 
     <span class="hljs-keyword">final</span> Class[] types = f.getParameterTypes(); 
     foreach(t:types){ 
-      Class arg_type = dep.verifyArgument(i, t); 
+      <span class="hljs-type">Class</span> <span class="hljs-variable">arg_type</span> <span class="hljs-operator">=</span> dep.verifyArgument(i, t); 
       checkTypeMatch(types[i], arg_type); 
     } 
     <span class="hljs-keyword">return</span> f.getReturnType(); 
@@ -283,16 +283,16 @@ java代码:</p>
 </code></pre>
 <p>然后一个基本的component应该是java bean的setter了，对应pico的SetterInjectionComponentAdapter，也对应spring的bean。
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BeanComponent</span>  <span class="hljs-keyword">implements</span> <span class="hljs-title">Component</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">BeanComponent</span>  <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Component</span>{ 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Class type; 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">getType</span><span class="hljs-params">()</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">getType</span><span class="hljs-params">()</span>{ 
     <span class="hljs-keyword">return</span> type; 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">create</span><span class="hljs-params">(Dependency dep)</span></span>{ 
-    Object r = createInstance(); 
+  <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">create</span><span class="hljs-params">(Dependency dep)</span>{ 
+    <span class="hljs-type">Object</span> <span class="hljs-variable">r</span> <span class="hljs-operator">=</span> createInstance(); 
     setJavaBeans(r,dep); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">verify</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">verify</span><span class="hljs-params">(Dependency dep)</span>{ 
     ... 
   } 
 }
@@ -302,22 +302,22 @@ java代码:</p>
 <p>下面看看都有些什么组合规则。</p>
 <p>1。手工指定某个参数。
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WithArgument</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Component</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">WithArgument</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Component</span>{ 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Component parent; 
-  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> pos; 
+  <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> <span class="hljs-type">int</span> pos; 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Component arg; 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">getType</span><span class="hljs-params">()</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">getType</span><span class="hljs-params">()</span>{ 
     <span class="hljs-keyword">return</span> parent.getType(); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">create</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">create</span><span class="hljs-params">(Dependency dep)</span>{ 
     <span class="hljs-keyword">return</span> parent.create(withArg(dep)); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">verify</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">verify</span><span class="hljs-params">(Dependency dep)</span>{ 
     <span class="hljs-keyword">return</span> parent.verify(withArg(dep)); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">private</span> Dependency <span class="hljs-title">withArg</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Dependency dep)</span></span>{ 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Dependency(){ 
-      <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getArgument</span><span class="hljs-params">(<span class="hljs-keyword">int</span> i, Class type)</span></span>{ 
+  <span class="hljs-keyword">private</span> Dependency <span class="hljs-title function_">withArg</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Dependency dep)</span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Dependency</span>(){ 
+      <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">getArgument</span><span class="hljs-params">(<span class="hljs-type">int</span> i, Class type)</span>{ 
         <span class="hljs-keyword">if</span>(i==pos){ 
           checkTypeMatch(type, arg); 
           <span class="hljs-keyword">return</span> arg.create(dep); 
@@ -333,22 +333,22 @@ java代码:</p>
 这里，我们对参数仍然用Component，而不是一个简单的Object作为这个参数的值，是因为参数本身也可能需要创建，它的依赖关系也可能需要在Dependency对象中解析。如果参数不需要创建，那么，你尽可以用ValueComponent来包装一下。</p>
 <p>2。手工指定property的值。跟上面的代码非常类似，就是重载了getProperty()和verifyProperty()。
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WithProperty</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Component</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">WithProperty</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Component</span>{ 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Component parent; 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Object key; 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Component prop; 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">getType</span><span class="hljs-params">()</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">getType</span><span class="hljs-params">()</span>{ 
     <span class="hljs-keyword">return</span> parent.getType(); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">create</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">create</span><span class="hljs-params">(Dependency dep)</span>{ 
     <span class="hljs-keyword">return</span> parent.create(withProp(dep)); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">verify</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">verify</span><span class="hljs-params">(Dependency dep)</span>{ 
     <span class="hljs-keyword">return</span> parent.verify(withProp(dep)); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">private</span> Dependency <span class="hljs-title">withProp</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Dependency dep)</span></span>{ 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Dependency(){ 
-      <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">getProperty</span><span class="hljs-params">(Object k, Class type)</span></span>{ 
+  <span class="hljs-keyword">private</span> Dependency <span class="hljs-title function_">withProp</span><span class="hljs-params">(<span class="hljs-keyword">final</span> Dependency dep)</span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Dependency</span>(){ 
+      <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">getProperty</span><span class="hljs-params">(Object k, Class type)</span>{ 
         <span class="hljs-keyword">if</span>(k.equals(key)){ 
           checkTypeMatch(type, prop); 
           <span class="hljs-keyword">return</span> prop.create(dep); 
@@ -362,21 +362,21 @@ java代码:</p>
 </code></pre>
 <p>3。和很多组合子一样，map是一个相当有用的组合规则。它负责把一个Component返回的对象作一下额外的处理，transform成另外一个对象。
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Map</span></span>{ 
-  <span class="hljs-function">Object <span class="hljs-title">map</span><span class="hljs-params">(Object obj)</span></span>; 
+<pre><code class="language-java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Map</span>{ 
+  Object <span class="hljs-title function_">map</span><span class="hljs-params">(Object obj)</span>; 
 }
 </code></pre>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MapComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Component</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MapComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Component</span>{ 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Component c; 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Map map; 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">getType</span><span class="hljs-params">()</span></span>{ 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>; 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">getType</span><span class="hljs-params">()</span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>; 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">create</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">create</span><span class="hljs-params">(Dependency dep)</span>{ 
     <span class="hljs-keyword">return</span> map.map(c.create(dep)); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">verify</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">verify</span><span class="hljs-params">(Dependency dep)</span>{ 
     c.verify(dep); 
     <span class="hljs-keyword">return</span> Object.class; 
   } 
@@ -386,21 +386,21 @@ java代码:</p>
 <p>注意，这里，因为我们无法预先知道Map这个接口返回的对象会是什么类型，所以，我们让getType()返回null来标示这是一个动态决定的组件类型。</p>
 <p>4。比map更一般化一点的，是bind动作。所谓bind，也是根据一个Component创建的对象来决定接下来返回什么动作。不同的是，它用这个对象来产生另外一个Component，让这个Component来生成一个新对象。多说无益，让我们看代码：
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Binder</span></span>{ 
-  <span class="hljs-function">Component <span class="hljs-title">bind</span><span class="hljs-params">(Object obj)</span></span>; 
+<pre><code class="language-java"><span class="hljs-keyword">interface</span> <span class="hljs-title class_">Binder</span>{ 
+  Component <span class="hljs-title function_">bind</span><span class="hljs-params">(Object obj)</span>; 
 }
 </code></pre>
 <p>java代码:</p>
-<pre><code class="language-java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">BoundComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Component</span></span>{ 
+<pre><code class="language-java"><span class="hljs-keyword">class</span> <span class="hljs-title class_">BoundComponent</span> <span class="hljs-keyword">implements</span> <span class="hljs-title class_">Component</span>{ 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Component c; 
   <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Binder binder; 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">getType</span><span class="hljs-params">()</span></span>{ 
-    <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>; 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">getType</span><span class="hljs-params">()</span>{ 
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">null</span>; 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">create</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Object <span class="hljs-title function_">create</span><span class="hljs-params">(Dependency dep)</span>{ 
     <span class="hljs-keyword">return</span> binder.bind(c.create(dep)).create(dep); 
   } 
-  <span class="hljs-function"><span class="hljs-keyword">public</span> Class <span class="hljs-title">verify</span><span class="hljs-params">(Dependency dep)</span></span>{ 
+  <span class="hljs-keyword">public</span> Class <span class="hljs-title function_">verify</span><span class="hljs-params">(Dependency dep)</span>{ 
     c.verify(dep); 
     <span class="hljs-keyword">return</span> Object.class; 
   } 
@@ -416,7 +416,7 @@ java代码:</p>
 </code></pre>
 <p>这个代码的意思是说，你可以很轻易地把一个Map对象adapt到Binder对象，只要在bind函数里面调用：
 java代码:</p>
-<pre><code class="language-java"><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ValueComponent(map.map(v));
+<pre><code class="language-java"><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ValueComponent</span>(map.map(v));
 </code></pre>
 <p>就行了。</p>
 <p>后面的很多组合子，比如对一个组件生成的对象调用某个方法，设置一些java bean setter，都是从这个bind组合子衍生出来的。</p>
@@ -432,7 +432,7 @@ java代码:</p>
         </ul>
     </div> -->
   <span class="field">创建时间：2006-01-13</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

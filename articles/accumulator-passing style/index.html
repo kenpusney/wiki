@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -216,9 +216,9 @@
 }
 </code></pre>
 <p><strong>第一步</strong>，引入 accumulator 作为参数。</p>
-<pre><code class="language-js"><span class="hljs-keyword">function</span> fact<span class="hljs-constructor">Acc(<span class="hljs-params">n</span>, <span class="hljs-params">acc</span>)</span> {<span class="hljs-operator">
-  ...
-</span></code></pre>
+<pre><code class="language-js"><span class="hljs-variable">function</span> <span class="hljs-title function_">factAcc</span>(<span class="hljs-params">n</span>, <span class="hljs-params">acc</span>) {
+  <span class="hljs-operator">...</span>
+</code></pre>
 <p>因为 accumulator 在整个递归过程中用于累计递归的结算结果和额外的状态，所以显然把他作为参数传递给下一次调用是最好的办法。这里的 accumulator 并不仅限于一个参数。像之前提到的 fibonacci 函数，需要把前一次的结果也传递给下一次调用，也就出现两个额外参数的情况。</p>
 <p><strong>第二步</strong>，在递归的终结点返回 accumulator 的值。</p>
 <pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">factAcc</span>(n, acc) {
@@ -229,11 +229,11 @@
 </code></pre>
 <p>前面说了，既然 accumulator 用于累计计算结果，那到了递归终止的时候，就应该把结果返回。在 factorial 函数的例子中，当我们递归到 0 的时候，已经把前面该累乘的结果计算进了 <code>acc</code> 里面。</p>
 <p><strong>第三步</strong>，递归调用当前函数，更新参数和 accumulator 的值。</p>
-<pre><code class="language-js"><span class="hljs-keyword">function</span> fact<span class="hljs-constructor">Acc(<span class="hljs-params">n</span>, <span class="hljs-params">acc</span>)</span> {
-  <span class="hljs-keyword">if</span> (n<span class="hljs-operator"> == </span><span class="hljs-number">0</span>) {
-    return acc;
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">factAcc</span>(n, acc) {
+  if (n == 0) {
+    <span class="hljs-keyword">return</span> <span class="hljs-type">acc</span>;
   }
-  return fact<span class="hljs-constructor">Acc(<span class="hljs-params">n</span> - 1, <span class="hljs-params">acc</span> <span class="hljs-operator">*</span> <span class="hljs-params">n</span>)</span>;
+  <span class="hljs-keyword">return</span> factAcc(n - <span class="hljs-number">1</span>, acc * n);
 }
 </code></pre>
 <p>这里是稍微困难的一步，即如何改写之前的递归调用点。这需要看对应的场景来确定如何计算累计结果。在 factorial 的例子中，就是简单的把每次递归的 n 累乘进来。而在其他很多场合，则需要更进一步的设计。如 fibonacci 的树状递归，本质上是前后两次计算结果的合并，处理起来就没这么明显。</p>
@@ -243,17 +243,17 @@
 }
 </code></pre>
 <h2>例：fibonacci 函数</h2>
-<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fib</span>(n) {
-  if (n == 0 || n == 1) {
-    <span class="hljs-keyword">return</span> <span class="hljs-type">1</span>;
+<pre><code class="language-js">function <span class="hljs-built_in">fib</span>(n) {
+  if (n == <span class="hljs-number">0</span> || n == <span class="hljs-number">1</span>) {
+    return <span class="hljs-number">1</span>;
   }
-  <span class="hljs-keyword">return</span> fib(n - <span class="hljs-number">1</span>) + fib(n - <span class="hljs-number">2</span>);
+  return <span class="hljs-built_in">fib</span>(n - <span class="hljs-number">1</span>) + <span class="hljs-built_in">fib</span>(n - <span class="hljs-number">2</span>);
 }
 </code></pre>
 <p><strong>第一步</strong>，引入 accumulator 作为参数。因为有两次递归调用，设计到结果合并，引入两个参数。</p>
-<pre><code class="language-js"><span class="hljs-keyword">function</span> fib<span class="hljs-constructor">Acc(<span class="hljs-params">n</span>, <span class="hljs-params">a</span>, <span class="hljs-params">b</span>)</span> {<span class="hljs-operator">
-  ...
-</span></code></pre>
+<pre><code class="language-js"><span class="hljs-variable">function</span> <span class="hljs-title function_">fibAcc</span>(<span class="hljs-params">n</span>, <span class="hljs-params">a</span>, <span class="hljs-params">b</span>) {
+  <span class="hljs-operator">...</span>
+</code></pre>
 <p><strong>第二步</strong>，在递归的终结点返回 accumulator 的值。</p>
 <pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fibAcc</span>(n, a, b) {
   if (n == 0 || n == 1) {
@@ -262,11 +262,11 @@
   ...
 </code></pre>
 <p><strong>第三步</strong>，递归调用当前函数，更新参数和 accumulator 的值。fibnacci 函数的定义，第 n 次结果是前两次结果（假设分别为 <code>a</code>、<code>b</code>）的和（即 <code>a + b</code>），下一次再取到的“前两次结果”就变成了 <code>b</code>、 <code>a + b</code>。</p>
-<pre><code class="language-js"><span class="hljs-keyword">function</span> fib<span class="hljs-constructor">Acc(<span class="hljs-params">n</span>, <span class="hljs-params">a</span>, <span class="hljs-params">b</span>)</span> {
-  <span class="hljs-keyword">if</span> (n<span class="hljs-operator"> == </span><span class="hljs-number">0</span><span class="hljs-operator"> || </span>n<span class="hljs-operator"> == </span><span class="hljs-number">1</span>) {
-    return a;
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title">fibAcc</span>(n, a, b) {
+  if (n == 0 || n == 1) {
+    <span class="hljs-keyword">return</span> <span class="hljs-type">a</span>;
   }
-  return fib<span class="hljs-constructor">Acc(<span class="hljs-params">n</span>-1, <span class="hljs-params">b</span>, <span class="hljs-params">a</span> + <span class="hljs-params">b</span>)</span>;
+  <span class="hljs-keyword">return</span> fibAcc(n-<span class="hljs-number">1</span>, b, a + b);
 }
 </code></pre>
 <p><strong>第四步</strong>，写一个函数 wrap 刚才的尾递归函数，初始化 accumulator。</p>
@@ -278,31 +278,31 @@
 <p>各位可以试着自行改写一下 <code>sum</code>（列表求和）、<code>map</code>（列表映射）和 <code>fold</code>（列表折叠）的实现。（前两个相对简单，第三个需要多思考一下）</p>
 <p>其定义分别如下：</p>
 <pre><code class="language-js">
-<span class="hljs-comment">// sum([a, b, c]) = a + b + c</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">sum</span><span class="hljs-params">(xs)</span> </span>{
-  <span class="hljs-keyword">if</span> (xs.length == <span class="hljs-number">0</span>) {
-    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;
+// <span class="hljs-built_in">sum</span>([a, b, c]) = a + b + c
+function <span class="hljs-built_in">sum</span>(xs) {
+  <span class="hljs-keyword">if</span> (xs.<span class="hljs-built_in">length</span> == <span class="hljs-number">0</span>) {
+    <span class="hljs-built_in">return</span> <span class="hljs-number">0</span>;
   }
-  <span class="hljs-keyword">let</span> [first, ...rest] = xs;
-  <span class="hljs-keyword">return</span> first + sum(rest);
+  <span class="hljs-built_in">let</span> [<span class="hljs-built_in">first</span>, ...<span class="hljs-built_in">rest</span>] = xs;
+  <span class="hljs-built_in">return</span> <span class="hljs-built_in">first</span> + <span class="hljs-built_in">sum</span>(<span class="hljs-built_in">rest</span>);
 }
 
-<span class="hljs-comment">// map([a, b, c], fn) = [fn(a), fn(b), fn(c)]</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">map</span><span class="hljs-params">(xs, fn)</span> </span>{
-  <span class="hljs-keyword">if</span> (xs.length == <span class="hljs-number">0</span>) {
-    <span class="hljs-keyword">return</span> [];
+// <span class="hljs-built_in">map</span>([a, b, c], fn) = [fn(a), fn(b), fn(c)]
+function <span class="hljs-built_in">map</span>(xs, fn) {
+  <span class="hljs-keyword">if</span> (xs.<span class="hljs-built_in">length</span> == <span class="hljs-number">0</span>) {
+    <span class="hljs-built_in">return</span> [];
   }
-  <span class="hljs-keyword">let</span> [first, ...rest] = xs;
-  <span class="hljs-keyword">return</span> [<span class="hljs-function"><span class="hljs-keyword">fn</span><span class="hljs-params">(first)</span>, ...<span class="hljs-title">map</span><span class="hljs-params">(rest, fn)</span>]</span>;
+  <span class="hljs-built_in">let</span> [<span class="hljs-built_in">first</span>, ...<span class="hljs-built_in">rest</span>] = xs;
+  <span class="hljs-built_in">return</span> [fn(<span class="hljs-built_in">first</span>), ...<span class="hljs-built_in">map</span>(<span class="hljs-built_in">rest</span>, fn)];
 }
 
-<span class="hljs-comment">// fold([a, b, c], fn, z) == fn(a, fn(b, fn(c, zero)))</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fold</span><span class="hljs-params">(xs, fn, zero)</span> </span>{
-  <span class="hljs-keyword">if</span> (xs.length == <span class="hljs-number">0</span>) {
-    <span class="hljs-keyword">return</span> zero;
+// fold([a, b, c], fn, z) == fn(a, fn(b, fn(c, zero)))
+function fold(xs, fn, zero) {
+  <span class="hljs-keyword">if</span> (xs.<span class="hljs-built_in">length</span> == <span class="hljs-number">0</span>) {
+    <span class="hljs-built_in">return</span> zero;
   }
-  <span class="hljs-keyword">let</span> [first, ...rest] = xs;
-  <span class="hljs-keyword">return</span> <span class="hljs-function"><span class="hljs-keyword">fn</span><span class="hljs-params">(first, fold<span class="hljs-params">(rest, fn, zero)</span>)</span></span>;
+  <span class="hljs-built_in">let</span> [<span class="hljs-built_in">first</span>, ...<span class="hljs-built_in">rest</span>] = xs;
+  <span class="hljs-built_in">return</span> fn(<span class="hljs-built_in">first</span>, fold(<span class="hljs-built_in">rest</span>, fn, zero));
 }
 </code></pre>
 
@@ -316,7 +316,7 @@
         </ul>
     </div> -->
   <span class="field">创建时间：2021-02-24</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

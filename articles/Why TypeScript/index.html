@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -188,25 +188,25 @@
 <h2>TypeScript 能干什么</h2>
 <p>在这之前我们先看一下 TypeScript 能干什么。</p>
 <p>以下面这段代码为基础，我们定义了 4 个函数。除了仅有的两个参数标记了类型之外，其他跟 JavaScript 的函数定义完全一致。</p>
-<pre><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnRetrunsString</span>(<span class="hljs-params"></span>) </span>{ <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello&quot;</span>; }
+<pre><code class="language-typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fnRetrunsString</span>(<span class="hljs-params"></span>) { <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;hello&quot;</span>; }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnDoesNothing</span>(<span class="hljs-params"></span>) </span>{}
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">fnDoesNothing</span>(<span class="hljs-params"></span>) {}
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnAcceptsNumberReturnsEitherNumberOrString</span>(<span class="hljs-params">s: <span class="hljs-built_in">number</span></span>) </span>{
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">fnAcceptsNumberReturnsEitherNumberOrString</span>(<span class="hljs-params">s: <span class="hljs-built_in">number</span></span>) {
     <span class="hljs-keyword">if</span> (s &gt; <span class="hljs-number">0</span>) {
         <span class="hljs-keyword">return</span> s;
     }
-    <span class="hljs-keyword">return</span> fnRetrunsString();
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">fnRetrunsString</span>();
 }
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnTakesString</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>) </span>{
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">fnTakesString</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>) {
     <span class="hljs-keyword">return</span> s;
 }
 </code></pre>
 <p>然后我们尝试用 TypeScript 编译器（<code>tsc</code>）编译下面这段代码：</p>
-<pre><code class="language-typescript">fnTakesString(fnRetrunsString());
-fnTakesString(fnDoesNothing());
-fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-number">1</span>));
+<pre><code class="language-typescript"><span class="hljs-title function_">fnTakesString</span>(<span class="hljs-title function_">fnRetrunsString</span>());
+<span class="hljs-title function_">fnTakesString</span>(<span class="hljs-title function_">fnDoesNothing</span>());
+<span class="hljs-title function_">fnTakesString</span>(<span class="hljs-title function_">fnAcceptsNumberReturnsEitherNumberOrString</span>(-<span class="hljs-number">1</span>));
 </code></pre>
 <p>各位可以简单动手试一下，或者细想一下会发生的事情再继续阅读。这里到底 TypeScript 到底会对这段代码怎么处理，又回报什么错误。</p>
 <p>我们插个话题，渐进式类型（Gradual Typing）。</p>
@@ -214,7 +214,7 @@ fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-numb
 <p>熟悉 JavaScript 的朋友肯定知道动态类型这个概念。<strong>类型就是解析对象方式的标签</strong>，比如 number 类型，则说明这个对象是一个数字，string 类型，则说明这个对象是一个字符串。在 JavaScript 等之类的语言中，变量的类型是可变的，这一特性可以使得 JavaScript 在作为一种脚本语言的情况下更灵活的适用各种场景。比如我有一个数组，那这个数组里可以随意地塞数字（number）或者字符串（string）或者甚至是嵌套无限层的数组和对象。</p>
 <p>但这样通常会出现一些问题，比如当我们明确想要知道某些数据的类型的时候，就必须进行运行时的判断，于是 JavaScript 就提供了<code>typeof</code>和<code>instanceof</code>两个运算符，来帮我们做这些事情。</p>
 <p>然后问题就来了，你可能经常会看到代码里出现这些神奇的操作：</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">doSomethingBasedOnTypeOfParam</span>(<span class="hljs-params">param</span>) </span>{
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">doSomethingBasedOnTypeOfParam</span>(<span class="hljs-params">param</span>) {
     <span class="hljs-keyword">if</span> (param === <span class="hljs-literal">null</span> || param === <span class="hljs-literal">undefined</span>) {
         <span class="hljs-comment">// ...</span>
     }
@@ -227,7 +227,7 @@ fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-numb
         <span class="hljs-comment">// ...</span>
     }
 
-    <span class="hljs-keyword">if</span> (param.hasOwnProperty(<span class="hljs-string">&quot;foo&quot;</span>)) {
+    <span class="hljs-keyword">if</span> (param.<span class="hljs-title function_">hasOwnProperty</span>(<span class="hljs-string">&quot;foo&quot;</span>)) {
         <span class="hljs-comment">// ...</span>
     }
 
@@ -236,7 +236,7 @@ fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-numb
 </code></pre>
 <p>因为 JavaScript 是动态类型语言，我们没办法在写代码的时候就知道参数<code>param</code>的值，于是只好写大量的<strong>守卫（guard）代码</strong>来对类型进行判断和检查。而往往这个时候就非常需要一个特性，让这个编程语言能够给你在这一部分做个限制。</p>
 <p>比如同样的场景放在 Java 里面，就会是这样子的：</p>
-<pre><code class="language-java"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">doSomethingBasedOnTypeOfParam</span><span class="hljs-params">(String param)</span> </span>{
+<pre><code class="language-java"><span class="hljs-keyword">void</span> <span class="hljs-title function_">doSomethingBasedOnTypeOfParam</span><span class="hljs-params">(String param)</span> {
     <span class="hljs-comment">// do with string</span>
 }
 </code></pre>
@@ -248,20 +248,20 @@ fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-numb
 <h3>TypeScript 的尴尬</h3>
 <p>TypeScript 就处在这么一个尴尬的位置上。</p>
 <p>JavaScript 语言的动态性不只是类型可以随时变。对象模型也是在运行期可以进行各种操作的，反正拿到构造器的 <code>prototype</code> 往上面加方法就好了。这个时候 TypeScript 完全就成了鸡肋一样的存在。举个例子：</p>
-<pre><code class="language-javascript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">BaseObject</span>(<span class="hljs-params"></span>) </span>{
+<pre><code class="language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">BaseObject</span>(<span class="hljs-params"></span>) {
 }
 
-BaseObject.prototype.defineMethod = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params">name, fn</span>) </span>{
-    BaseObject.prototype[name] = fn;
+<span class="hljs-title class_">BaseObject</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">defineMethod</span> = <span class="hljs-keyword">function</span>(<span class="hljs-params">name, fn</span>) {
+    <span class="hljs-title class_">BaseObject</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>[name] = fn;
 };
 </code></pre>
 <p>你永远都不知道 <code>BaseObject</code> 的对象会在运行时多出什么诡异的方法来，而这也正是很多基础框架会做的事情：读到一些模版或者配置，编译处理之后在 JavaScript 运行时生成一些对象。这个时候只能靠框架设计者自觉地提供合理靠谱的<code>.d.ts</code>来确保类型检查了。</p>
 <p>但撇开这些坑人的框架，剩下的部分 TypeScript 可以充分胜任。</p>
 <h3>类型检查和推导</h3>
 <p>我们回到前面提到的三行代码：</p>
-<pre><code class="language-typescript">fnTakesString(fnRetrunsString());
-fnTakesString(fnDoesNothing());
-fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-number">1</span>));
+<pre><code class="language-typescript"><span class="hljs-title function_">fnTakesString</span>(<span class="hljs-title function_">fnRetrunsString</span>());
+<span class="hljs-title function_">fnTakesString</span>(<span class="hljs-title function_">fnDoesNothing</span>());
+<span class="hljs-title function_">fnTakesString</span>(<span class="hljs-title function_">fnAcceptsNumberReturnsEitherNumberOrString</span>(-<span class="hljs-number">1</span>));
 </code></pre>
 <ul>
 <li>第一行是类型安全的，TypeScript 也不会向你抱怨什么。</li>
@@ -270,23 +270,23 @@ fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-numb
 </ul>
 <p>这里除了 fnTakesString 中参数类型之外，我们是没有额外标注诸如<code>void</code>或者<code>string | number</code>这样的信息的。能够正确得出这样的信息，就是因为 TypeScript 对整个代码进行类型检查的过程中，还对未知类型的部分做了推导。</p>
 <p>最开始的这四个函数定义中，TypeScript 分别能推导出来的类型是：</p>
-<pre><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnRetrunsString</span>(<span class="hljs-params"></span>): <span class="hljs-title">string</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnDoesNothing</span>(<span class="hljs-params"></span>): <span class="hljs-title">void</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnAcceptsNumberReturnsEitherNumberOrString</span>(<span class="hljs-params">s: <span class="hljs-built_in">number</span></span>): <span class="hljs-title">string</span> | <span class="hljs-title">number</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnTakesString</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-title">string</span>
-</span></span></span></span></code></pre>
+<pre><code class="language-typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fnRetrunsString</span>(<span class="hljs-params"></span>): <span class="hljs-built_in">string</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">fnDoesNothing</span>(<span class="hljs-params"></span>): <span class="hljs-built_in">void</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">fnAcceptsNumberReturnsEitherNumberOrString</span>(<span class="hljs-params">s: <span class="hljs-built_in">number</span></span>): <span class="hljs-built_in">string</span> | <span class="hljs-built_in">number</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">fnTakesString</span>(<span class="hljs-params">s: <span class="hljs-built_in">string</span></span>): <span class="hljs-built_in">string</span>
+</code></pre>
 <p>这四个类型签名基本上跟代码和我们希望表达的逻辑是一致的。</p>
 <p>而如果你尝试把 <code>fnDoesNothing</code> 的定义修改成：</p>
-<pre><code class="language-typescript"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnDoesNothing</span>(<span class="hljs-params"></span>): <span class="hljs-title">any</span> </span>{}
+<pre><code class="language-typescript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">fnDoesNothing</span>(<span class="hljs-params"></span>): <span class="hljs-built_in">any</span> {}
 </code></pre>
 <p>会发现<code>fnTakesString(fnDoesNothing())</code>的错误提示不存在了。这个操作就是在错误的引导 TypeScript 的类型检查，因为 any 就是来摆脱强制类型检查用的，加上了 any 反倒是回产生错误的结果。</p>
 <p>那假设你真的需要一个通用类型，又不想破坏调用方的类型契约。使用并类型（即前面出现的<code>string | number</code>或者会参与强制检查的<code>Object</code>类型会更好。</p>
 <p>这个例子中，对于 <code>fnDoesNothing</code>，就可以变为：</p>
 <pre><code class="language-typescript"><span class="hljs-comment">// void 表示函数没有返回值</span>
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">fnDoesNothing</span>(<span class="hljs-params"></span>): <span class="hljs-title">Object</span> | <span class="hljs-title">void</span> </span>{}
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">fnDoesNothing</span>(<span class="hljs-params"></span>): <span class="hljs-title class_">Object</span> | <span class="hljs-built_in">void</span> {}
 
 <span class="hljs-comment">// 也可以选择对这个类型做一个alias</span>
-<span class="hljs-keyword">type</span> SafeAny = <span class="hljs-built_in">Object</span> | <span class="hljs-built_in">void</span>;
+<span class="hljs-keyword">type</span> <span class="hljs-title class_">SafeAny</span> = <span class="hljs-title class_">Object</span> | <span class="hljs-built_in">void</span>;
 </code></pre>
 <p>于是<code>fnTakesString(fnDoesNothing())</code>调用中的错误提示又回来了。</p>
 <h3>TypeScript 不能干什么</h3>
@@ -294,43 +294,43 @@ fnTakesString(fnAcceptsNumberReturnsEitherNumberOrString(-<span class="hljs-numb
 <p>比如前面说起过的，前后端数据通信的验证。拿到后端的数据肯定都是在运行时了，这个过程早就不再是 TypeScript 参与的阶段，而拿到的数据是 JSON 或者其他的序列化结构，也并非常规的 JavaScript 对象。</p>
 <p>这个时候一些做法可能是通过 JavaScript 的<strong>装饰器</strong>（decorator）配合<code>reflect-metadata</code>这样的库生成出来运行时可用的信息作为程序的一部分，然后配合做处理（我参与过的 TypeGraphQL 这个框架就采用了这种方式）。另外的做法是引入一些<strong>运行时的类型检查</strong>库来做验证。</p>
 <p>我在去年也专门针对这种类型特点的数据设计过一个非常简单的<strong>类型系统</strong><a href="http://kimleo.net/infer/" title=" infer">infer</a>，同时提供了 Java 和 JavaScript 实现来做对运行时无模式的数据进行检查和验证：</p>
-<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { Schema, Union } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;infer-schema&quot;</span>);
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> { <span class="hljs-title class_">Schema</span>, <span class="hljs-title class_">Union</span> } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;infer-schema&quot;</span>);
 
 <span class="hljs-comment">// 定义类型模式</span>
-<span class="hljs-keyword">const</span> Phone = <span class="hljs-keyword">new</span> Schema({
-    <span class="hljs-attr">areaCode</span>: <span class="hljs-built_in">String</span>,
-    <span class="hljs-attr">number</span>: <span class="hljs-built_in">String</span>,
-    <span class="hljs-attr">extension</span>: <span class="hljs-built_in">String</span>,
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">Phone</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Schema</span>({
+    <span class="hljs-attr">areaCode</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">number</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">extension</span>: <span class="hljs-title class_">String</span>,
 });
 
-<span class="hljs-keyword">const</span> Name  = <span class="hljs-keyword">new</span> Schema({
-    <span class="hljs-attr">firstName</span>: <span class="hljs-built_in">String</span>,
-    <span class="hljs-attr">middleName</span>: <span class="hljs-built_in">String</span>,
-    <span class="hljs-attr">lastName</span>: <span class="hljs-built_in">String</span>,
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">Name</span>  = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Schema</span>({
+    <span class="hljs-attr">firstName</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">middleName</span>: <span class="hljs-title class_">String</span>,
+    <span class="hljs-attr">lastName</span>: <span class="hljs-title class_">String</span>,
 });
 
-<span class="hljs-keyword">const</span> Contact = <span class="hljs-keyword">new</span> Schema({
-    <span class="hljs-attr">emails</span>: [ { <span class="hljs-attr">tag</span>: <span class="hljs-built_in">String</span>, <span class="hljs-attr">email</span>: <span class="hljs-built_in">String</span> } ],
-    <span class="hljs-attr">phones</span>: [ { <span class="hljs-attr">tag</span>: <span class="hljs-built_in">String</span>, <span class="hljs-attr">phone</span>: <span class="hljs-keyword">new</span> Union(<span class="hljs-built_in">String</span>, Phone) } ],
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">Contact</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Schema</span>({
+    <span class="hljs-attr">emails</span>: [ { <span class="hljs-attr">tag</span>: <span class="hljs-title class_">String</span>, <span class="hljs-attr">email</span>: <span class="hljs-title class_">String</span> } ],
+    <span class="hljs-attr">phones</span>: [ { <span class="hljs-attr">tag</span>: <span class="hljs-title class_">String</span>, <span class="hljs-attr">phone</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Union</span>(<span class="hljs-title class_">String</span>, <span class="hljs-title class_">Phone</span>) } ],
 });
 
-<span class="hljs-keyword">const</span> Party = <span class="hljs-keyword">new</span> Schema({
-    <span class="hljs-attr">nickname</span>: <span class="hljs-built_in">String</span>,
+<span class="hljs-keyword">const</span> <span class="hljs-title class_">Party</span> = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Schema</span>({
+    <span class="hljs-attr">nickname</span>: <span class="hljs-title class_">String</span>,
     <span class="hljs-attr">names</span>: {
-        <span class="hljs-attr">legal</span>: Name,
-        <span class="hljs-attr">prefered</span>: Name,
-        <span class="hljs-attr">foreign</span>: [ { <span class="hljs-attr">tag</span>: <span class="hljs-built_in">String</span>, <span class="hljs-attr">name</span>: Name } ],
+        <span class="hljs-attr">legal</span>: <span class="hljs-title class_">Name</span>,
+        <span class="hljs-attr">prefered</span>: <span class="hljs-title class_">Name</span>,
+        <span class="hljs-attr">foreign</span>: [ { <span class="hljs-attr">tag</span>: <span class="hljs-title class_">String</span>, <span class="hljs-attr">name</span>: <span class="hljs-title class_">Name</span> } ],
     },
-    <span class="hljs-attr">contact</span>: Contact,
-    <span class="hljs-attr">tags</span>: [<span class="hljs-built_in">String</span>],
-    <span class="hljs-attr">extensions</span>: <span class="hljs-built_in">Object</span>,
+    <span class="hljs-attr">contact</span>: <span class="hljs-title class_">Contact</span>,
+    <span class="hljs-attr">tags</span>: [<span class="hljs-title class_">String</span>],
+    <span class="hljs-attr">extensions</span>: <span class="hljs-title class_">Object</span>,
 });
 
 <span class="hljs-comment">// 验证数据对象</span>
-Party.validate(party);
+<span class="hljs-title class_">Party</span>.<span class="hljs-title function_">validate</span>(party);
 
 <span class="hljs-comment">// 生成示例数据</span>
-Party.declval();
+<span class="hljs-title class_">Party</span>.<span class="hljs-title function_">declval</span>();
 </code></pre>
 <h2>TypeScript 最佳实践</h2>
 <p>很明显即便是静态类型检查，TypeScript 也还是能阻止很多愚蠢的错误的。所以如果团队成员能够广泛接受静态类型所带来的思维转变，引入 TypeScript 是一个百利无一害的事情。这里就针对本文讨论的一些话题，聊一聊 TypeScript 的最佳实践。</p>
@@ -360,7 +360,7 @@ Party.declval();
         </ul>
     </div> -->
   <span class="field">创建时间：2020-03-17</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>

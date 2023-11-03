@@ -15,11 +15,11 @@
     </title>
     
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: light)">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/dracula.min.css"
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/dracula.min.css"
           media="(prefers-color-scheme: dark)">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/styles/default.min.css"
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css"
           media="(prefers-color-scheme: no-preference)">
           <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.7/katex.min.css" integrity="sha512-t2ALGTyUR6g1HJiHCmSTge2yGseGofdO88Q+zOWQx/N0ikecVw0YuyOet9xZDV8+Vx0Y0n1a3f3Qx3V9CcnsKA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
           <style type="text/css">
@@ -187,36 +187,36 @@
 <p>当然早在模板出现以后，基于偏特化的模式匹配已经有了。这里会加入的，更多是像类似函数式编程语言中那种基于和类型的模式。</p>
 <p>和类型（sum type）这个概念我在另外一个系列文章里面提到过。对于C语言和C++来说，早期要模拟这套操作只能使用tagged union。比如我们解析INI文件或者JSON字段的时候，可能的类型会是字符串、整数或者布尔值。</p>
 <p>传统的做法是：</p>
-<pre><code class="language-c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Value</span> {</span>
-    <span class="hljs-class"><span class="hljs-keyword">union</span> {</span>
-        string str;
+<pre><code class="language-c++"><span class="hljs-keyword">struct</span> <span class="hljs-type">Value</span> {
+    <span class="hljs-built_in">union</span> {
+        <span class="hljs-keyword">string</span> str;
         int num;
-        bool b;
+        <span class="hljs-keyword">bool</span> b;
     };
-    <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Type</span> { <span class="hljs-title">STR</span>, <span class="hljs-title">INT</span>, <span class="hljs-title">BOOL</span> };</span>
-    Type tag;
+    enum <span class="hljs-built_in">Type</span> { STR, INT, <span class="hljs-keyword">BOOL</span> };
+    <span class="hljs-built_in">Type</span> tag;
 }
 </code></pre>
 <p>当然了，对于有面向对象和动态分发的语言，自然可以换个角度来糊：</p>
-<pre><code class="language-c++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Value</span> </span>{};
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">StringValue</span> : Value </span>{
-    <span class="hljs-built_in">string</span> str;
+<pre><code class="language-c++"><span class="hljs-keyword">struct</span> <span class="hljs-type">Value</span> {};
+<span class="hljs-keyword">struct</span> <span class="hljs-type">StringValue</span> : Value {
+    <span class="hljs-keyword">string</span> str;
 };
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">IntValue</span> : Value </span>{
+<span class="hljs-keyword">struct</span> <span class="hljs-type">IntValue</span> : Value {
     int num;
 };
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">BooleanValue</span> : Value </span>{
-    <span class="hljs-built_in">bool</span> b;
+<span class="hljs-keyword">struct</span> <span class="hljs-type">BooleanValue</span> : Value {
+    <span class="hljs-keyword">bool</span> b;
 };
 </code></pre>
 <p>这两种方式本质上并没有什么区别，毕竟都要靠运行时的判断和分发来做些事情。要么一堆的tag判断，要么dynamic_cast，要么就换成用visitor。</p>
 <p>不过巧的是某些编程语言的模式匹配实现就是生成一套visitor。</p>
 <p>我们之前讲过，C++ 近年来的努力始终都是希望把任何抽象都放到运行时。而和类型与模式匹配这套几乎完全依赖静态类型信息的操作也自然非常适合这样做。于是我们在C++17的时候迎来了std::variant和std::visit。</p>
 <p>这一切都起源于C++11的parameter pack，能够让我们在C++ 模板上添加多个参数，于是std::variant就成了这样一个模板：</p>
-<pre><code class="language-C++"><span class="hljs-keyword">template</span>&lt;class... Types&gt;
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">variant</span>;</span>
+<pre><code class="language-C++"><span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">class</span>... Types&gt;
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">variant</span>;
 
-<span class="hljs-keyword">using</span> Value = <span class="hljs-built_in">std</span>::variant&lt;<span class="hljs-built_in">string</span>, <span class="hljs-keyword">int</span>, <span class="hljs-keyword">bool</span>&gt;;
+<span class="hljs-keyword">using</span> Value = std::variant&lt;string, <span class="hljs-type">int</span>, <span class="hljs-type">bool</span>&gt;;
 
 Value strValue = <span class="hljs-string">&quot;string value&quot;</span>;
 Value intValue = <span class="hljs-number">1</span>;
@@ -224,66 +224,66 @@ Value boolValue = <span class="hljs-literal">false</span>;
 </code></pre>
 <p>如果是有模式匹配加持的语言，可以预期的操作会是：</p>
 <pre><code class="language-C++">match (value) {
-    <span class="hljs-built_in">string</span> s =&gt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; s;
-    <span class="hljs-keyword">int</span> s =&gt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; s;
-    <span class="hljs-keyword">bool</span> s =&gt; <span class="hljs-built_in">std</span>::<span class="hljs-built_in">cout</span> &lt;&lt; s;
+    <span class="hljs-keyword">string</span> s =&gt; std::cout &lt;&lt; s;
+    <span class="hljs-keyword">int</span> s =&gt; std::cout &lt;&lt; s;
+    <span class="hljs-keyword">bool</span> s =&gt; std::cout &lt;&lt; s;
 }
 </code></pre>
 <p>可惜这段相当简单的结构在C++里面添加起来实在是非常费劲。虽然C++17也加入了structural binding可以对某些类型进行解构，但远没有达到可以进行模式匹配的地步。如果我们想要做到类似的效果，就只能暂时借用 std::visit。并且需要一个visitor来处理对不同类型的访问。</p>
-<pre><code class="language-C++"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ValueVisitor</span> {</span>
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; s)</span> <span class="hljs-keyword">const</span> </span>{
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;A string: %s\n&quot;</span>, s.c_str());
+<pre><code class="language-C++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">ValueVisitor</span> {
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">const</span> string&amp; s)</span> <span class="hljs-type">const</span> </span>{
+        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;A string: %s\n&quot;</span>, s.<span class="hljs-built_in">c_str</span>());
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> n)</span> <span class="hljs-keyword">const</span> </span>{
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">int</span> n)</span> <span class="hljs-type">const</span> </span>{
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;An integer: %d\n&quot;</span>, n);
     }
 
-    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">bool</span> b)</span> <span class="hljs-keyword">const</span> </span>{
+    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-type">const</span> <span class="hljs-type">bool</span> b)</span> <span class="hljs-type">const</span> </span>{
         <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;A boolean: %d\n&quot;</span>, b);
     }
 };
 
-<span class="hljs-built_in">std</span>::visit(ValueVisitor(), value);
+std::<span class="hljs-built_in">visit</span>(<span class="hljs-built_in">ValueVisitor</span>(), value);
 </code></pre>
 <p>尽管这样做仍然是静态分发的，但看起来就太复杂了。如果我们有更方便的方式来构建visitor，可能会更好一点。而lambda表达式作为可以静态分发的工具自然非常方便我们来达成对应的效果。预期的场景可能像下面这样：</p>
-<pre><code class="language-c++">make_visitor(
-    [](<span class="hljs-keyword">const</span> <span class="hljs-built_in">string</span>&amp; s) {
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;string: %s\n&quot;</span>, s.c_str());
+<pre><code class="language-c++"><span class="hljs-built_in">make_visitor</span>(
+    [](const string&amp; s) {
+        <span class="hljs-built_in">printf</span>(&quot;string: %s\n&quot;, s.c_str());
     },
-    [](<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> d) {
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;integer: %d\n&quot;</span>, d);
+    <span class="hljs-selector-attr">[]</span>(const int d) {
+        <span class="hljs-built_in">printf</span>(&quot;integer: %d\n&quot;, d);
     },
-    [](<span class="hljs-keyword">const</span> <span class="hljs-keyword">bool</span> b) {
-        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;bool: %d\n&quot;</span>, b);
+    <span class="hljs-selector-attr">[]</span>(const bool b) {
+        <span class="hljs-built_in">printf</span>(&quot;bool: %d\n&quot;, b);
     }
 )
 </code></pre>
 <p>前面提到了 C++11 有了parameter pack，可以帮我们变着法的组合出来这套操作。</p>
-<pre><code class="language-c++"><span class="hljs-keyword">template</span> &lt;class... Fs&gt;
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">overload</span>;</span>
+<pre><code class="language-c++"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span>... Fs&gt;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">overload</span>;
 
-<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">F0</span>, <span class="hljs-title">class</span>... <span class="hljs-title">Frest</span>&gt;</span>
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">overload</span>&lt;</span>F0, Frest...&gt; : F0, overload&lt;Frest...&gt;
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">F0</span>, <span class="hljs-keyword">class</span>... Frest&gt;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">overload</span>&lt;F0, Frest...&gt; : F0, overload&lt;Frest...&gt;
 {
-    overload(F0 f0, Frest... rest) : F0(f0), overload&lt;Frest...&gt;(rest...) {}
+    <span class="hljs-built_in">overload</span>(F0 f0, Frest... rest) : <span class="hljs-built_in">F0</span>(f0), <span class="hljs-built_in">overload</span>&lt;Frest...&gt;(rest...) {}
 
     <span class="hljs-function"><span class="hljs-keyword">using</span> <span class="hljs-title">F0::operator</span><span class="hljs-params">()</span></span>;
-    <span class="hljs-keyword">using</span> overload&lt;Frest...&gt;::<span class="hljs-keyword">operator</span>();
+    <span class="hljs-keyword">using</span> overload&lt;Frest...&gt;::<span class="hljs-built_in">operator</span>();
 };
 
-<span class="hljs-keyword">template</span> &lt;<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">F0</span>&gt;</span>
-<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">overload</span>&lt;</span>F0&gt; : F0
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span> <span class="hljs-title class_">F0</span>&gt;
+<span class="hljs-keyword">struct</span> <span class="hljs-title class_">overload</span>&lt;F0&gt; : F0
 {
-    overload(F0 f0) : F0(f0) {}
+    <span class="hljs-built_in">overload</span>(F0 f0) : <span class="hljs-built_in">F0</span>(f0) {}
 
     <span class="hljs-function"><span class="hljs-keyword">using</span> <span class="hljs-title">F0::operator</span><span class="hljs-params">()</span></span>;
 };
 
-<span class="hljs-keyword">template</span> &lt;class... Fs&gt;
+<span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">class</span>... Fs&gt;
 <span class="hljs-function"><span class="hljs-keyword">auto</span> <span class="hljs-title">make_visitor</span><span class="hljs-params">(Fs... fs)</span>
 </span>{
-    <span class="hljs-keyword">return</span> overload&lt;Fs...&gt;(fs...);
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">overload</span>&lt;Fs...&gt;(fs...);
 }
 </code></pre>
 <p>这里利用了C++模板偏特化的一个老传统，必须进行类似的递归定义才行。每一个overload模板展开其实都相当于包裹了对应位置的lambda表达式，并且继承了其 <code>operator()</code>。而每一个overload模板又是比其少一个参数的overload模板的子类，也继承了父类的 <code>operator()</code>。这样套娃下来，就达成了我们想要的结果。</p>
@@ -293,8 +293,8 @@ template&lt;class<span class="hljs-params">...</span> Ts&gt; overloaded(Ts<span 
 </code></pre>
 <p>C++20中扩展了CTAD的规则，以至于连最后那行deduction guide也可以直接省略掉。</p>
 <p>于是我们的visit就可以写成：</p>
-<pre><code class="language-c++"><span class="hljs-built_in">std</span>::visit(overloaded {
-    [](<span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span>&amp; ) { <span class="hljs-comment">/* ... */</span> },
+<pre><code class="language-c++">std::<span class="hljs-built_in">visit</span>(overloaded {
+    [](<span class="hljs-type">const</span> <span class="hljs-type">int</span>&amp; ) { <span class="hljs-comment">/* ... */</span> },
     <span class="hljs-comment">// ...</span>
 }, value);
 </code></pre>
@@ -312,7 +312,7 @@ template&lt;class<span class="hljs-params">...</span> Ts&gt; overloaded(Ts<span 
         </ul>
     </div> -->
   <span class="field">创建时间：2021-09-01</span>
-  <span class="field">最近更新时间：2023-08-23</span>
+  <span class="field">最近更新时间：2023-11-03</span>
   <hr>
   <footer>
     <ul>
