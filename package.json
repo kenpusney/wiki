@@ -6,14 +6,14 @@
   "private": true,
   "dependencies": {
     "@andatoshiki/markdown-it-image-caption": "^0.0.2",
-    "@vscode/markdown-it-katex": "^1.0.0",
+    "@vscode/markdown-it-katex": "1.1.0",
     "cheerio": "^1.0.0-rc.12",
     "ejs": "^3.1.9",
     "front-matter": "^4.0.2",
     "glob": "^7.1.6",
     "highlight.js": "^11.9.0",
     "lodash": "^4.17.21",
-    "markdown-it": "^13.0.1",
+    "markdown-it": "14.1.0",
     "markdown-it-for-inline": "^0.1.1",
     "moment": "^2.29.4",
     "nodejieba": "^2.6.0"
@@ -21,7 +21,7 @@
   "devDependencies": {
     "concurrently": "^8.2.2",
     "http-server": "^14.1.1",
-    "jest": "^26.4.2",
+    "jest": "^29.7.0",
     "nodemon": "^3.0.1"
   },
   "scripts": {

@@ -1,7 +1,7 @@
 
 const markdownIt = require("markdown-it");
 
-const mk = require("@vscode/markdown-it-katex");
+const mk = require("@vscode/markdown-it-katex").default;
 
 const iterator = require("markdown-it-for-inline");
 
