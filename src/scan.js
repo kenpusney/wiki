@@ -1,9 +1,9 @@
 
 const glob = require("glob")
 
-async function scan({patterns}) {
+async function scan({patterns, ignore}) {
   return new Promise(function(resolve, reject) {
-    glob(patterns, (err, matches) => {
+    glob(patterns, {ignore}, (err, matches) => {
       if (!err) {
         resolve(matches)
       } else {

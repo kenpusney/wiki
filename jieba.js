@@ -1,44 +1,15 @@
 
-// const glob = require("glob");
+const jieba = require("@node-rs/jieba");
 
-// const { loadWikiData } = require("./src/loader");
-// const { render } = require("./src/render");
+const {load, cut, extract, tag, cutForSearch} = jieba;
 
-// const Wiki = require("./src/wiki")
+load()
 
-// const nodejieba = require("nodejieba")
+const fs = require("fs");
 
-// const cheerio = require("cheerio")
+let text = fs.readFileSync("content/articles/a-failure-of-abstraction.md");
 
 
-// nodejieba.load({
-//   stopWordDict: "content/dict/STOPWORDS.txt",
-//   userDict: "content/dict/USERDICT.txt"
-// })
+let result = cutForSearch(text)
 
-// function generate() {
-//   const wiki = new Wiki();
-
-//   glob("content/articles/30hours.md", function (err, data) {
-
-//     loadWikiData(data, wiki).forEach(item => {
-//       const result = render(item, wiki)
-
-//         // console.log(result)
-
-//         const $ = cheerio.load(result)
-//         $("pre").remove();
-//         $("a").remove();
-
-//         console.log(nodejieba.cut($.text(), true));
-
-//         console.log(nodejieba.tag($.text()).filter(({tag}) => { return tag.startsWith("n") || tag === "eng"}));
-
-//         console.log(nodejieba.extract($.text(), 50))
-//     })
-//   })
-// }
-
-// if (require.main === module) {
-//   generate()
-// }
+console.log(result)

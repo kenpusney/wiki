@@ -26,6 +26,10 @@ async function generate() {
   for (let file of await scan({patterns: `${config.staticDir}/**/*`})) {
     staticPublish(file)
   }
+
+  for (let file of await scan({patterns: `${config.sourceDir}/**/*`, ignore: "**/*.md"})) {
+    staticPublish(file, "content/")
+  }
 }
 
 if (require.main === module) {

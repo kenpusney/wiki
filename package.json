@@ -6,6 +6,7 @@
   "private": true,
   "dependencies": {
     "@andatoshiki/markdown-it-image-caption": "^0.0.2",
+    "@node-rs/jieba": "^1.10.3",
     "@vscode/markdown-it-katex": "1.1.0",
     "cheerio": "^1.0.0-rc.12",
     "ejs": "^3.1.9",

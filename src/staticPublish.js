@@ -2,8 +2,8 @@
 const fs = require('fs');
 const path = require('path').posix;
 
-function staticPublish(file) {
-  const subFileName = file.substring("static/".length);
+function staticPublish(file, prefix="static/") {
+  const subFileName = file.substring(prefix.length);
 
   const targetFileName = "public/" + subFileName;
 

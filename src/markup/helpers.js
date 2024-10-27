@@ -20,6 +20,9 @@ function highlight(code, lang) {
 function fixStaticFileLink(href) {
   if (href.startsWith("../"))
     return href.substring(href.search("static") + "static".length);
+  if (href.startsWith("./")) {
+    return "." + href;
+  }
   return href;
 }
 
