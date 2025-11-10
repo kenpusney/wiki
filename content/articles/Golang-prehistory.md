@@ -1,7 +1,7 @@
 ---
 title: Golang 的前世今生
 date: 2021-01-22
-draft: true
+public: false
 ---
 
 https://docs.google.com/document/d/1OaatvGhEAq7VseQ9kkavxKNAfepWy2yhPUBs96FGV28/

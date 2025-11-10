@@ -1,5 +1,5 @@
 ---
-title: "JSONSpec: AST as a Service"
+title: JSONSpec: AST as a Service
 date: 2015-07-27
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "JSONSpec: GraphQL"
+title: JSONSpec: GraphQL
 date: 2015-08-10
 ---
 

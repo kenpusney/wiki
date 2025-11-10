@@ -1,5 +1,5 @@
 ---
-title: "TypeSpec: TypeScript-based JSONSpec"
+title: TypeSpec: TypeScript-based JSONSpec
 date: 2015-06-12
 ---
 

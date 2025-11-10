@@ -1,5 +1,5 @@
 ---
-title: "JSONSpec: Data Driven Design"
+title: JSONSpec: Data Driven Design
 date: 2015-08-06
 ---
 

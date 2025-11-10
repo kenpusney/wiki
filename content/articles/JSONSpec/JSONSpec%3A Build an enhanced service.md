@@ -1,5 +1,5 @@
 ---
-title: "JSONSpec: Build an enhanced service"
+title: JSONSpec: Build an enhanced service
 date: 2015-05-10
 ---
 

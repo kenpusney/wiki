@@ -1,6 +1,6 @@
 ---
 title: 面向对象分析与设计（第三版）笔记
-draft: true
+public: false
 date: 2020-10-19
 ---
 

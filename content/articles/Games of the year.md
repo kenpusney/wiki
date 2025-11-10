@@ -1,6 +1,6 @@
 ---
 title: 历年最佳游戏
-draft: true
+public: false
 date: 2020-09-07
 ---
 

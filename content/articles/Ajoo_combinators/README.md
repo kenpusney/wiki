@@ -1,17 +1,17 @@
 ---
-title: "Ajoo: 论面向组合子程序设计方法 系列文章"
+title: Ajoo: 论面向组合子程序设计方法 系列文章
 date: 2006-01-13
 ---
 
-1. [创世纪][:articles/Ajoo_combinators/01. Genesis]() http://www.blogjava.net/ajoo/archive/2013/06/29/27838.html
-2. [失乐园][:articles/Ajoo_combinators/02. Paradise Lost]() http://www.blogjava.net/ajoo/articles/27839.html
-3. [失乐园 之 补充][:articles/Ajoo_combinators/03. Paradise Lost part 2]() http://www.blogjava.net/ajoo/articles/27840.html
-4. [燃烧的荆棘][:articles/Ajoo_combinators/04. Burning Thorns]() http://www.blogjava.net/ajoo/articles/27841.html
-5. [新约][:articles/Ajoo_combinators/05. New Testament]() http://www.blogjava.net/ajoo/articles/27842.html
-6. [oracle][:articles/Ajoo_combinators/06. Oracle]() http://www.blogjava.net/ajoo/articles/27843.html
-7. [重构][:articles/Ajoo_combinators/07. Refactoring]() http://www.blogjava.net/ajoo/articles/27844.html
-8. [Monad][:articles/Ajoo_combinators/08. Monad]() http://www.blogjava.net/ajoo/articles/27849.html
-9. [南无阿弥陀佛][:articles/Ajoo_combinators/09. The Buddha]() http://www.blogjava.net/ajoo/articles/27850.html
-10. [还是重构][:articles/Ajoo_combinators/10. Refactoring (again)]() http://www.blogjava.net/ajoo/articles/27845.html
-11. [微步毂纹生][:articles/Ajoo_combinators/11. The End]() http://www.blogjava.net/ajoo/articles/27846.html
- 
+1. [[论面向组合子程序设计方法 之一 创世纪]] http://www.blogjava.net/ajoo/archive/2013/06/29/27838.html
+
+- 2. [[论面向组合子程序设计方法 之二 失乐园]] http://www.blogjava.net/ajoo/articles/27839.html
+- 3. [[论面向组合子程序设计方法 之三 失乐园 之补充]] http://www.blogjava.net/ajoo/articles/27840.html
+- 4. [[论面向组合子程序设计方法 之四 燃烧的荆棘]] http://www.blogjava.net/ajoo/articles/27841.html
+- 5. [[论面向组合子程序设计方法 之五 新约]] http://www.blogjava.net/ajoo/articles/27842.html
+- 6. [[论面向组合子程序设计方法 之六 oracle]] http://www.blogjava.net/ajoo/articles/27843.html
+- 7. [[论面向组合子程序设计方法 之七 重构]] http://www.blogjava.net/ajoo/articles/27844.html
+- 8. [[论面向组合子程序设计方法 之八 monad]] http://www.blogjava.net/ajoo/articles/27849.html
+- 9. [[论面向组合子程序设计方法 之九 南无阿弥陀佛]] http://www.blogjava.net/ajoo/articles/27850.html
+- 10. [[论面向组合子程序设计方法 之十 还是重构]] http://www.blogjava.net/ajoo/articles/27845.html
+- 11. [[论面向组合子程序设计方法 之十一 微步毂纹生]] http://www.blogjava.net/ajoo/articles/27846.html

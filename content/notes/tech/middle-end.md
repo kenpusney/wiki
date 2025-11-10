@@ -1,6 +1,6 @@
 ---
 title: 中台
-draft: true
+public: false
 ---
 
 

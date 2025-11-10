@@ -1,5 +1,5 @@
 ---
-title: "JSONSpec: Build a well-typed Web."
+title: JSONSpec: Build a well-typed Web
 date: 2015-05-02
 ---
 

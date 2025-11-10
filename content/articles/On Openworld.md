@@ -1,6 +1,6 @@
 ---
 title: 说说开放世界 Open World
-draft: true
+public: false
 ---
 ## 游戏世界
 

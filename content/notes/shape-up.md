@@ -1,7 +1,7 @@
 ---
 title: Shape up - Stop Running in Circles and Ship Work that Matters
 date: 2020-11-30
-draft: true
+public: false
 ---
 
 # Shape Up - Stop Running in Circles and Ship Work that Matters

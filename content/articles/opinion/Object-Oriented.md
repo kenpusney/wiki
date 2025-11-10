@@ -1,7 +1,7 @@
 ---
 title: Object Oriented Programming 面向对象编程
 date: 2020-09-10
-draft: true
+public: false
 ---
 
 面向对象编程是个被overhyped的概念，无论是OOA还是OOD。这里特别要提一点的是，面向对象和结构化编程没有太大的诞生先后之分，甚至面向对象反倒是更早。所以随后把所谓的面向对象吹嘘成是比结构化编程更新更好的方式，实际是有问题的。

@@ -1,5 +1,5 @@
 ---
-title: "JSONSpec: Next step"
+title: JSONSpec: Next step
 date: 2015-08-10
 ---
 
