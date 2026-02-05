@@ -1,7 +1,7 @@
 ---
 title: 经典回顾：辐射新维加斯
 date: 2020-10-06
-draft: true
+public: false
 ---
 
 > 幸运38赌场，如今空无一人

@@ -1,12 +1,35 @@
----
-title: 笔记
-date: 2019-05-10
----
+title:: 笔记
+date:: 2019-05-10
 
-
-笔记一直是很好的整理思路的东西。
-
-下面是另外的一些值得关注的笔记站：
-
-- [文浩读书](https://www.jianshu.com/u/bfa56e6f979d)：我的朋友和前同事，前ThoughtWorks高级咨询师文浩在简书的读书笔记。
-
+- 笔记一直是很好的整理思路的东西。
+- 下面是另外的一些值得关注的笔记站：
+	- [文浩读书](https://www.jianshu.com/u/bfa56e6f979d)：我的朋友和前同事，前ThoughtWorks高级咨询师文浩在简书的读书笔记。
+- 笔记列表
+	- 摄影相关
+		- 心理学
+			- [[Perception and Imaging - Photography as a Way of Seeing]]
+		- 镜头设计
+			- [[Introduction to Lens Design 阅读笔记]]
+	- [[SICP 笔记]]
+	- Azure Architecture Guide
+		- [[AZ-304 备考]]
+	- Agile Note
+	- Biz Report Note
+		- [["McKinsey - Tech debt: Reclaiming tech equity"]]
+		- [[McKinsey - Reimagining transaction banking with B2B APIs]]
+		- [[McKinsey - AI-bank of the future]]
+		- [[McKinsey - The Hidden perils of unresolved grief]]
+		- [["McKinsey - Ecosystem 2.0: Climbing to the next level"]]
+		- [[McKinsey - Four ways to improve tech service resiliency]]
+	- Ideas
+		- [[Service Builder]]
+		- [[Complex]]
+		- [[Music Programming Interface]]
+	- 技术类话题
+		- [[结合用户场景设计热度排序]]
+		- [[post third party cookie era]]
+		- [[SOLID Services]]
+		- [[Recursion]]
+		- [[Programming Language]]
+		- [[API Gotchas]]
+		- [[Meta-Programming (draft)]]

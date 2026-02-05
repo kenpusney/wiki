@@ -1,5 +1,5 @@
 ---
-draft: true
+public: false
 title: 思维框架
 ---
 

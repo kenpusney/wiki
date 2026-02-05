@@ -1,7 +1,7 @@
 ---
 title: 强力文集：从YAML的问题聊数据序列化格式的设计
 date: 2020-10-08
-draft: true
+public: false
 ---
 > “强力文集”系列是源自于“[强力宣言](http://kimleo.net/strength "强力宣言")”的一系列虚构作品，作为强力宣言的主要价值观、原则和观点的展示。
 

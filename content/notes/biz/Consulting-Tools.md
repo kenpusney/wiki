@@ -1,7 +1,7 @@
 ---
 title: 咨询工具
 date: 2021-01-21
-draft: true
+public: false
 ---
 
 ## 波特五力分析模型 Michael Porter's Five Forces Model

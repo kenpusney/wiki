@@ -1,7 +1,7 @@
 ---
 title: 敏捷软件开发 Agile Software Development - The Cooperative Game
 date: 2020-09-21
-draft: true
+public: false
 ---
 
 作者：Alistair Cockburn

@@ -1,6 +1,6 @@
 ---
 title: 莫生气
-draft: true
+public: false
 date: 2021-03-17
 ---
 这事儿还得从 20 多年前说起。
