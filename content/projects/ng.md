@@ -2,8 +2,7 @@
 title: NG
 date: 2016-05-05
 ---
-NG: Next generation Programming language
-======
+# NG: Next generation Programming language
 
 This is about the detailed description of ng-lang and for now
 it's still work in progress.
@@ -54,7 +53,7 @@ type. And for the prototype of array, should looks like
 type Array<'t, 'arity: Num> where 'arity >= 0
 ```
 
-The where clause is a constraints for 'arity parameter which
+The where clause is a constraints for `'arity` parameter which
 indicates that field cannot be negative.
 
 Here is another syntax to do this checking
@@ -71,6 +70,6 @@ Here is another constraint example in ng.
 ```ng
 type ValueType<'t: * 'a> = 'a
 ```
-Here we can use ValueType<ref Int> to represent Int now.
+Here we can use `ValueType<ref Int>` to represent Int now.
 
 

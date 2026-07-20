@@ -1,7 +1,7 @@
 ---
 title: Monorepo
 date: 2020-10-10
-----
+---
 
 "Every code commit essentially becomes a release with monorepo!" （https://itsvit.com/blog/monorepo-google-way-ci-cd/）
 

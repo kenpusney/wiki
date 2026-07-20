@@ -1,0 +1,216 @@
+{
+  "main": {
+    "id": "2a09070869dc0b30",
+    "type": "split",
+    "children": [
+      {
+        "id": "2fb2599915483763",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e081a005d4a44193",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "content/Kimmy's Wiki.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Kimmy's Wiki"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "535cd5421a5d70d7",
+    "type": "split",
+    "children": [
+      {
+        "id": "0ea42f0f91b474eb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "384a18ae79873a6b",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "303f4bc248f961de",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "da9df1a528dc890e",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "86ae03747201b01e",
+    "type": "split",
+    "children": [
+      {
+        "id": "4c577e09fbc5f670",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "bc6748a9a780b86b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "content/Kimmy's Wiki.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks for Kimmy's Wiki"
+            }
+          },
+          {
+            "id": "2cf870d07480753d",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "content/Kimmy's Wiki.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links from Kimmy's Wiki"
+            }
+          },
+          {
+            "id": "b41deb6d628ad3d2",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "0d80b3e06a524287",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "6b881ec2460b3c7f",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "content/Kimmy's Wiki.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline of Kimmy's Wiki"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "e081a005d4a44193",
+  "lastOpenFiles": [
+    "static/images/others/horseshit.png",
+    "static/images/others",
+    "static/images/notes/mk/tech-debt/tech-debt-trends.png",
+    "static/images/notes/mk/ai-bank-of-the-future/what-obstacles.png",
+    "static/images/notes/mk/ai-bank-of-the-future/how.png",
+    "static/images/notes/mk/ai-bank-of-the-future/core-tech.png",
+    "static/images/notes/mk/tech-debt",
+    "static/images/notes/mk/ai-bank-of-the-future",
+    "static/images/notes/mk",
+    "static/images/notes",
+    "static/images/game-play/super-mario-bros-the-lost-levels.jpg",
+    "static/images/game-play/super-mario-bros-2.png",
+    "static/images/game-play/mario-bros.png",
+    "static/images/game-play/SuperMarioWorld.png",
+    "static/images/game-play/SuperMarioBros.jpg",
+    "static/images/game-play/SuperMario64.jpg",
+    "static/images/game-play",
+    "static/file/doc/Swift-Embrace-Change.pdf",
+    "static/images/game-covers",
+    "static/images/game-consoles",
+    "static/file/doc",
+    "REAMDE.md",
+    "content/Nondeterminism considered harmful.md",
+    "content/Utilization is all you need.md",
+    "content/projects/README.md",
+    "content/contents.md",
+    "content/Kimmy's Wiki.md"
+  ]
+}

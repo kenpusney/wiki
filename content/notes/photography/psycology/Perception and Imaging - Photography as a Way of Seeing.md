@@ -1,5 +1,8 @@
-title:: Perception and Imaging - Photography as a Way of Seeing
-date:: 2024-08-20
+---
+date: 2024-08-20
+---
+
+
 
 - # Ch1. Selection
 - ## Ganzfeld 甘兹菲尔德

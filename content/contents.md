@@ -1,0 +1,20 @@
+---
+aliases:
+  - 目录
+---
+
+
+主页 [[Kimmy's Wiki]]
+创作
+- [[projects/README|项目列表]]
+- [[notes/README|笔记]]
+- [[publications/README|合集作品 & 出版物]]
+收藏
+- [[收藏夹|收藏]]
+
+关于站点
+- [[Meta wiki]]
+- [[Code Of Conduct 行为守则]]
+- [[测试页面]]
+- [[关于我]]
+- [[FAQ 常见问题]]
