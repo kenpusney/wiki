@@ -1,11 +1,12 @@
 [project]
-name = "wiki"
+name = "kimiwiki"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "cairosvg>=2.9.0",
+    "markdown==3.10.2",
     "mkdocs>=1.6.1",
     "mkdocs-callouts>=1.16.1",
     "mkdocs-glightbox>=0.5.2",
@@ -13,4 +14,5 @@ dependencies = [
     "mkdocs-meta-descriptions-plugin>=4.1.0",
     "mkdocs-wikilinks-plugin>=0.1.2",
     "pillow>=12.3.0",
+    "pymdown-extensions==11.0.1",
 ]
