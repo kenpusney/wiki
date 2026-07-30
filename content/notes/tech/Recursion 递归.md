@@ -29,6 +29,7 @@ function fact(n) {
 尾递归指的是函数以尾调用的形式递归调用自己。
 
 同样以阶乘函数 fact 为例，实现如下：
+
 ```js
 function fact_impl(n, acc) {
     if (n == 0) return acc;
