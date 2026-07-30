@@ -7,7 +7,7 @@ date: 2020-10-13
 > —— Former CIO, major cloud provider
 
 
-![Tech Debt Trends](../../../static/images/notes/mk/tech-debt/tech-debt-trends.png 'Tech Debt Trends')
+![[tech-debt-trends.png]]
 
 ## What is tech debt
 
@@ -53,8 +53,3 @@ date: 2020-10-13
 5. Dedicate resources to tackling tech debt
 6. Avoid a big-bang approach to writing down all tech debt
 7. Determine which area are "bankrupt" and explore shifting them to a greenfield stack
-
-
-
-
-

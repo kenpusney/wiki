@@ -12,6 +12,6 @@
 - [[Agents made simple]]
 - [[Prompt Engineering is dead, long live prompting]]
 
-Histories
+## Histories
 - [[LLMs a chronological perspective]]
 - [[A Brief History of Artificial Intelligence]]

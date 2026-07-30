@@ -29,12 +29,13 @@ $$
 
 ##### Table 2.1 Imaging Equations
 
-| Newtownian Equation           | Gaussian Equation                 |
-|--|--|
-| $\frac{z}{f} = -\frac{1}{m}$  | $\frac{f'}{z'} + \frac{f}{z} = 1$ |
-| $\frac{z'}{f'} = -m$          | $\frac{z}{f} = 1-\frac{1}{m}$     |
-| $zz'=ff'$                     | $\frac{z'}{f'} = 1-m$     |
-| (see comment 1)               | (see comment 2)           |
+| Newtownian Equation          | Gaussian Equation                 |
+| ---------------------------- | --------------------------------- |
+| $\frac{z}{f} = -\frac{1}{m}$ | $\frac{f'}{z'} + \frac{f}{z} = 1$ |
+| $\frac{z'}{f'} = -m$         | $\frac{z}{f} = 1-\frac{1}{m}$     |
+| $zz'=ff'$                    | $\frac{z'}{f'} = 1-m$             |
+| (see comment 1)              | (see comment 2)                   |
+|                              |                                   |
 
 **Comments**
 
@@ -130,7 +131,7 @@ of marginal and chief first-order rays'.
 
 Two points are required to define a ray; the first point is defined by the field vector, $\vec{H}$, which lies in the object plane, and the second point is defined by the aperture vector, $\vec{\rho}$, which lies in the exit pupil plane. Both vectors are normalized so their magnitudes range from 0 to 1.
 
-![Optical path](./../lens-design/image/optical_path.png)
+![[optical_path.png]]
 
 ## 2.3 Image Aberrations
 
@@ -141,7 +142,7 @@ $$
 
 > In a homogenous medium the wavefront is spherical in shape. However, when the wavefront propagates through an optical system, it is deformed, and its shape is no longer spherical. As the rays are normal to the wavefront, they no longer converge to a sharp image point; i.e., the ideal image point as defined by central projection.
 
-![Aberrations as wavefront deformation](./image/aberrations-as-wavefront-deformation.png)
+![[aberrations-as-wavefront-deformation.png]]
 
 - $W/n$ wave deformation.
 - $\alpha$ angular ray aberration
@@ -253,4 +254,3 @@ $$
 # Chapter 3 Aspheric Surfaces
 
 ## 3.1 Spherical surface
-

@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "2fb2599915483763",
+        "id": "fc3b3f2b9f13356e",
         "type": "tabs",
         "children": [
           {
-            "id": "e081a005d4a44193",
+            "id": "d0694441af419e20",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/Kimmy's Wiki.md",
+                "file": "content/articles/结合性.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Kimmy's Wiki"
+              "title": "结合性"
             }
           }
         ]
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 395.5
   },
   "right": {
     "id": "86ae03747201b01e",
@@ -183,34 +183,53 @@
       "bases:Create new base": false
     }
   },
-  "active": "e081a005d4a44193",
+  "active": "d0694441af419e20",
   "lastOpenFiles": [
-    "static/images/others/horseshit.png",
-    "static/images/others",
-    "static/images/notes/mk/tech-debt/tech-debt-trends.png",
-    "static/images/notes/mk/ai-bank-of-the-future/what-obstacles.png",
-    "static/images/notes/mk/ai-bank-of-the-future/how.png",
-    "static/images/notes/mk/ai-bank-of-the-future/core-tech.png",
-    "static/images/notes/mk/tech-debt",
-    "static/images/notes/mk/ai-bank-of-the-future",
-    "static/images/notes/mk",
-    "static/images/notes",
-    "static/images/game-play/super-mario-bros-the-lost-levels.jpg",
-    "static/images/game-play/super-mario-bros-2.png",
-    "static/images/game-play/mario-bros.png",
-    "static/images/game-play/SuperMarioWorld.png",
-    "static/images/game-play/SuperMarioBros.jpg",
-    "static/images/game-play/SuperMario64.jpg",
-    "static/images/game-play",
-    "static/file/doc/Swift-Embrace-Change.pdf",
-    "static/images/game-covers",
-    "static/images/game-consoles",
-    "static/file/doc",
-    "REAMDE.md",
-    "content/Nondeterminism considered harmful.md",
-    "content/Utilization is all you need.md",
-    "content/projects/README.md",
+    "content/static/images/game-play/SuperMarioBros.jpg",
+    "content/static/images/game-play/SuperMario64.jpg",
+    "content/static/images/game-play/super-mario-bros-2.png",
+    "content/static/images/game-play/Super-mario-bros.jpg",
+    "content/static/images/game-play/mario-bros.png",
+    "content/static/images/game-consoles/NES.jpg",
+    "content/static/images/game-consoles/Famicom.jpg",
+    "content/static/images/game-consoles/ColorTVGame6.jpg",
+    "content/articles/超级马里奥.md",
+    "content/notes/tech/Meta-Programming.md",
+    "content/notes/笔记列表.md",
+    "content/notes/tech/API Gotchas.md",
+    "content/notes/tech/post third party cookie era.md",
+    "content/notes/tech/结合用户场景设计热度排序.md",
+    "content/notes/biz/Biz Report Notes.md",
+    "content/collect/收藏夹.md",
+    "content/collect/zhihu/知乎答案备份.md",
+    "content/articles/Agent Series/Agent Series.md",
+    "content/articles/Agent Series/Nondeterminism considered harmful.md",
+    "content/static/file/doc/Swift-Embrace-Change.pdf",
+    "content/publications/出版作品.md",
+    "content/Code Of Conduct 行为守则.md",
+    "content/FAQ 常见问题.md",
+    "content/notes/biz/McKinsey - The Hidden perils of unresolved grief.md",
+    "content/notes/biz/McKinsey - Ecosystem 2.0 - Climbing to the next level.md",
+    "content/notes/biz/McKinsey - AI-bank of the future.md",
+    "content/notes/photography/lens-design/Introduction to Lens Design 阅读笔记.md",
+    "content/站点目录.md",
+    "content/index.md",
+    "content/javascript/mathjax.js",
+    "content/javascript",
+    "content/articles/文章列表.md",
+    "content/articles/index.md",
+    "mkdocs.yml~",
     "content/contents.md",
-    "content/Kimmy's Wiki.md"
+    "content/articles/Agent Series/Prompt Engineering is dead, long live prompting.md",
+    "content/articles/draft",
+    "content/publications/bhoc/A Brief History of Artificial Intelligence.md",
+    "content/articles/Agent Series",
+    "docs",
+    "mkdocs.yml",
+    "uv.lock",
+    "pyproject.toml",
+    "content/static/images/others/horseshit.png",
+    "content/static/images/notes/mk/tech-debt/tech-debt-trends.png",
+    "content/static/images/notes/mk/ai-bank-of-the-future/what-obstacles.png"
   ]
 }
