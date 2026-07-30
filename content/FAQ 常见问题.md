@@ -8,4 +8,4 @@ date: 2016-05-05
 
 #### Why this site is in this kind of ugly styles?
   
-see [[测试页面]] for details.
+see [[Meta wiki]] for details.

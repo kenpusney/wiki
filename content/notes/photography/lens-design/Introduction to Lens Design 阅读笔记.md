@@ -53,7 +53,6 @@ or *law of refraction* 折射定律
 $$
 n_1 \sin\theta_1 = n_2 * \sin\theta_2 \\
 \iff
-
 \frac{\sin\theta_1}{\sin\theta_2} = n_{21} = \frac{n_2}{n_1} = \frac{v_1}{v_2}
 $$
 

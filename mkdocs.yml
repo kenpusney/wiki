@@ -4,6 +4,10 @@ theme:
   name: material
   features:
     - navigation.tabs
+  font:
+    text: "Noto Serif SC"
+    code: "Noto Sans Mono"
+  favicon: favicon.ico
 plugins:
   - search
   - meta-descriptions
@@ -16,11 +20,12 @@ markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.tilde
   - pymdownx.arithmatex:
       generic: true
 
 extra_javascript:
-  - javascripts/mathjax.js
+  - .scripts/mathjax.js
   - https://unpkg.com/mathjax@3/es5/tex-mml-chtml.js
 nav:
   - Home:

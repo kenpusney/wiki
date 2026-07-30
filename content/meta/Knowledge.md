@@ -1,4 +1,4 @@
-# How knowledege get weaving together
+# How knowledge get weaving together
 # 关于知识是如何交织在一起的
 
 
