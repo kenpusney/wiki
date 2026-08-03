@@ -1,45 +1,45 @@
 
-# Building effective agents
+## Building effective agents
 
 
 Published Dec 19, 2024 [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents)
 
-## What are agents?
+### What are agents?
 
 At Anthropic, we categorize all these variations as **agentic systems**, but draw an important architectural distinction between **workflows** and **agents**:
 
 - **Workflows** are systems where LLMs and tools are orchestrated through predefined code paths.
 - **Agents**, on the other hand, are systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks.
 
-## When (and when not) to use agents
+### When (and when not) to use agents
 
 Agentic systems often trade latency and cost for better task performance, and you should consider when this tradeoff makes sense.
 
 When more complexity is warranted, workflows offer predictability and consistency for well-defined tasks, whereas agents are the better option when flexibility and model-driven decision-making are needed at scale.
 
-## When and how to use frameworks
+### When and how to use frameworks
 
 If you do use a framework, ensure you understand the underlying code. Incorrect assumptions about what's under the hood are a common source of customer error.
 
-## Building blocks, workflows, and agents
+### Building blocks, workflows, and agents
 
-### Building block: The augmented LLM
+#### Building block: The augmented LLM
 
 The basic building block of agentic systems is an LLM enhanced with augmentations such as retrieval, tools, and memory.
 
 We recommend focusing on two key aspects of the implementation: tailoring these capabilities to your specific use case and ensuring they provide an easy, well-documented interface for your LLM.
 
-### Workflow: Prompt chaining
+#### Workflow: Prompt chaining
 
 Prompt chaining decomposes a task into a sequence of steps, where each LLM call processes the output of the previous one.
 
 You can add programmatic checks on any intermediate steps to ensure that the process is still on track.
 
-### Workflow: Routing
+#### Workflow: Routing
 
 Routing classifies an input and directs it to a specialized followup task. This workflow allows for separation of concerns, and building more specialized prompts.
 
-### Workflow: Parallelization
+#### Workflow: Parallelization
 
 LLMs can sometimes work simultaneously on a task and have their outputs aggregated programmatically. This workflow, parallelization, manifests in two key variations:
 
@@ -48,19 +48,19 @@ LLMs can sometimes work simultaneously on a task and have their outputs aggregat
 
 **When to use this workflow:** Parallelization is effective when the divided subtasks can be parallelized for speed, or when multiple perspectives or attempts are needed for higher confidence results.
 
-### Workflow: Orchestrator-workers
+#### Workflow: Orchestrator-workers
 
 In the orchestrator-workers workflow, a central LLM dynamically breaks down tasks, delegates them to worker LLMs, and synthesizes their results.
 
 **When to use this workflow:** This workflow is well-suited for complex tasks where you can't predict the subtasks needed (in coding, for example, the number of files that need to be changed and the nature of the change in each file likely depend on the task).
 
-### Workflow: Evaluator-optimizer
+#### Workflow: Evaluator-optimizer
 
 In the evaluator-optimizer workflow, one LLM call generates a response while another provides evaluation and feedback in a loop.
 
 **When to use this workflow:** This workflow is particularly effective when we have clear evaluation criteria, and when iterative refinement provides measurable value.
 
-### Agents
+#### Agents
 
 Agents are emerging in production as LLMs mature in key capabilities—understanding complex inputs, engaging in reasoning and planning, using tools reliably, and recovering from errors.
 
@@ -68,11 +68,11 @@ Agents can handle sophisticated tasks, but their implementation is often straigh
 
 **When to use agents:** Agents can be used for open-ended problems where it’s difficult or impossible to predict the required number of steps, and where you can't hardcode a fixed path.
 
-## Combining and customizing these patterns
+### Combining and customizing these patterns
 
  You should consider adding complexity _only_ when it demonstrably improves outcomes.
 
-## Summary
+### Summary
 
 Success in the LLM space isn't about building the most sophisticated system. It's about building the _right_ system for your needs. Start with simple prompts, optimize them with comprehensive evaluation, and add multi-step agentic systems only when simpler solutions fall short.
 
@@ -84,7 +84,7 @@ When implementing agents, we try to follow three core principles:
 
 Frameworks can help you get started quickly, but don't hesitate to reduce abstraction layers and build with basic components as you move to production.
 
-# Memory & context management with Claude Sonnet 4.6
+## Memory & context management with Claude Sonnet 4.6
 
 Published on May 22, 2025 [Memory & context management with Claude Sonnet 4.6](https://platform.claude.com/cookbook/tool-use-memory-cookbook)
 
@@ -97,30 +97,30 @@ Large language models have finite context windows (200k tokens for Claude 4). Wh
 - **Repeated patterns**: Similar tasks across conversations require re-explaining context every time
 - **Information loss**: When context fills up, earlier important information gets lost
 
-##  Use Cases
+###  Use Cases
 
 Memory and context management enable powerful new workflows:
 
-### 🔍 Code Review Assistant
+#### 🔍 Code Review Assistant
 
 - Learns debugging patterns from past reviews
 - Recognizes similar bugs instantly in future sessions
 - Builds team-specific code quality knowledge
 - **Production ready**: Integrate with [claude-code-action](https://github.com/anthropics/claude-code-action) for GitHub PR reviews
 
-### 📚 Research Assistant
+#### 📚 Research Assistant
 
 - Accumulates knowledge on topics over multiple sessions
 - Connects insights across different research threads
 - Maintains bibliography and source tracking
 
-### 💬 Customer Support Bot
+#### 💬 Customer Support Bot
 
 - Learns user preferences and communication style
 - Remembers common issues and solutions
 - Builds product knowledge base from interactions
 
-### 📊 Data Analysis Helper
+#### 📊 Data Analysis Helper
 
 - Remembers dataset patterns and anomalies
 - Stores analysis techniques that work well
@@ -130,9 +130,9 @@ Memory and context management enable powerful new workflows:
 
 **In production applications**, you should carefully consider whether to clear all memory, as it permanently removes learned patterns. Consider using selective deletion or organizing memory into project-specific directories instead.
 
-## Best Practices & Security
+### Best Practices & Security
 
-### Memory Management
+#### Memory Management
 
 **Do:**
 
@@ -147,11 +147,11 @@ Memory and context management enable powerful new workflows:
 - ❌ Let memory grow unbounded
 - ❌ Store everything indiscriminately
 
-### Security: Path Traversal Protection
+#### Security: Path Traversal Protection
 
 **Critical**: Always validate paths to prevent directory traversal attacks. See `memory_tool.py` for implementation.
 
-### Security: Memory Poisoning
+#### Security: Memory Poisoning
 
 **⚠️ Critical Risk**: Memory files are read back into Claude's context, making them a potential vector for prompt injection.
 
@@ -165,7 +165,7 @@ Memory and context management enable powerful new workflows:
 
 
 
-# How we built our multi-agent research system
+## How we built our multi-agent research system
 
 Published Jun 13, 2025 [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system)
 
@@ -193,7 +193,7 @@ Published Jun 13, 2025 [How we built our multi-agent research system](https://w
 - **Deployment needs careful coordination.**
 - **Synchronous execution creates bottlenecks.**
 
-## Appendix
+### Appendix
 
 - **End-state evaluation of agents that mutate state over many turns.**
 - **Long-horizon conversation management.** Production agents often engage in conversations spanning hundreds of turns, requiring careful context management strategies. As conversations extend, standard context windows become insufficient, necessitating intelligent compression and memory mechanisms. We implemented patterns where agents summarize completed work phases and store essential information in external memory before proceeding to new tasks. When context limits approach, agents can spawn fresh subagents with clean contexts while maintaining continuity through careful handoffs. Further, they can retrieve stored context like the research plan from their memory rather than losing previous work when reaching the context limit.
@@ -202,7 +202,7 @@ Published Jun 13, 2025 [How we built our multi-agent research system](https://w
 
 
 
-# Writing effective tools for agents — with agents
+## Writing effective tools for agents — with agents
 
 Published Sep 11, 2025 [Writing effective tools for agents — with agents](https://www.anthropic.com/engineering/writing-tools-for-agents)
 
@@ -212,7 +212,7 @@ In computing, deterministic systems produce the same output every time given ide
 
 Tools are a new kind of software which reflects a contract between deterministic systems and non-deterministic agents.
 
-## How to write tools
+### How to write tools
 
 - Building a prototype
 - Running an evaluation
@@ -221,9 +221,9 @@ Tools are a new kind of software which reflects a contract between deterministic
 	- **Analyzing results**
 - Collaborating with agents
 
-## Principles for writing effective tools
+### Principles for writing effective tools
 
-### Choosing the right tools for agents
+#### Choosing the right tools for agents
 
 More tools don't always lead to better outcomes. Agents have distinct "affordances" to traditional software—that is, they have different ways of perceiving the potential actions they can take with those tools.
 
@@ -235,13 +235,13 @@ Make sure each tool you build has a clear, distinct purpose.
 
 Too many tools or overlapping tools can also distract agents from pursuing efficient strategies.
 
-### Namespacing your tools
+#### Namespacing your tools
 
 Namespacing (grouping related tools under common prefixes) can help delineate boundaries between lots of tools.
 
 By selectively implementing tools whose names reflect natural subdivisions of tasks, you simultaneously reduce the number of tools and tool descriptions loaded into the agent's context and offload agentic computation from the agent's context back into the tool calls themselves.
 
-### Returning meaningful context from your tools
+#### Returning meaningful context from your tools
 
 Tool result should prioritize contextual relevance over flexibility.
 
@@ -250,7 +250,7 @@ Agents also tend to grapple with natural language names, terms, or identifiers s
 In some instances, agents may require the flexibility to interact with both natural language and technical identifiers outputs, if only to trigger downstream tool calls. You can enable both by exposing a simple `response_format` enum parameter in your tool, allowing your agent to control whether tools return `“concise”` or `“detailed”` responses (images below).
 
 We encourage you to select the best response structure based on your own evaluation.
-### Optimizing tool responses for token efficiency
+#### Optimizing tool responses for token efficiency
 
 We suggest implementing some combination of pagination, range selection, filtering, and/or truncation with sensible default parameter values for any tool responses that could use up lots of context.
 
@@ -258,7 +258,7 @@ If you choose to truncate responses, be sure to steer agents with helpful instru
 
 Similarly, if a tool call raises an error (for example, during input validation), you can prompt-engineer your error responses to clearly communicate specific and actionable improvements, rather than opaque error codes or tracebacks.
 
-### Prompt-engineering your tool descriptions
+#### Prompt-engineering your tool descriptions
 
 When writing tool descriptions and specs, think of how you would describe your tool to a new hire on your team.
 
@@ -284,20 +284,20 @@ With your evaluation you can measure the impact of your prompt engineering with 
 > - **Use meaningful namespacing in tool names.** When your tools span multiple services or resources, prefix names with the service (for example, `github_list_prs`, `slack_send_message`). This makes tool selection unambiguous as your library grows, and is especially important when using [tool search](https://platform.claude.com/docs/en/agents-and-tools/tool-use/tool-search-tool).
 > - **Design tool responses to return only high-signal information.** Return semantic, stable identifiers (for example, slugs or UUIDs) rather than opaque internal references, and include only the fields Claude needs to reason about its next step. Bloated responses waste context and make it harder for Claude to extract what matters.
 >
-> ## Providing tool use examples
+> ### Providing tool use examples
 > 
 > You can provide concrete examples of valid tool inputs to help Claude understand how to use your tools more effectively. This is particularly useful for complex tools with nested objects, optional parameters, or format-sensitive inputs.
 > 
 > Examples are included in the prompt alongside your tool schema, showing Claude concrete patterns for well-formed tool calls. This helps Claude understand when to include optional parameters, what formats to use, and how to structure complex inputs.
 > 
-> ### Requirements and limitations
+> #### Requirements and limitations
 >
 > - **Schema validation** - Each example must be valid according to the tool's `input_schema`. Invalid examples return a 400 error
 > - **Not supported for server-side tools** - Input examples work on user-defined and Anthropic-schema client tools, but not on server tools such as web search or code execution
 > - **Token cost** - Examples add to prompt tokens: ~20–50 tokens for simple examples, ~100–200 tokens for complex nested objects
 
 
-# Effective context engineering for AI agents
+## Effective context engineering for AI agents
 
 Published Sep 29, 2025 [Effective context engineering for AI agents](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
 
@@ -323,7 +323,7 @@ Context engineering is the art and science of curating what will go into the li
 
 [Context Rot](https://www.trychroma.com/research/context-rot) issue: As the number of tokens in the context window increases, the model's ability to accurately recall information from that context decreases.
 
-## The anatomy of effective context
+### The anatomy of effective context
 
 **System prompts** should be extremely clear and use simple, direct language that presents ideas at the _right altitude_ for the agent.
 - organizing prompts into distinct sections
@@ -342,7 +342,7 @@ Curating a minimal viable set of tools for the agent can also lead to more relia
 
 Providing examples - curate a set of diverse, canonical examples that effectively portray the expected behavior of the agent.
 
-## Context retrieval and agentic search
+### Context retrieval and agentic search
 
 > Agents are LLMs autonomously using tools in a loop.
 
@@ -354,7 +354,7 @@ Letting agents navigate and retrieve data autonomously also enables progressive 
 
 Trade-off: runtime exploration is slower than retrieving pre-computed data.
 
-### Context engineering for long-horizon tasks
+#### Context engineering for long-horizon tasks
 
 - Compaction
 - Structured note-taking
@@ -371,7 +371,7 @@ The choice between these approaches depends on task characteristics. For example
 
 
 
-# Effective harnesses for long-running agents
+## Effective harnesses for long-running agents
 
 Published Nov 26, 2025 [Effective harness for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
 
@@ -381,7 +381,7 @@ The core challenge of long-running agents is that they must work in discrete ses
 
 We developed a two-fold solution to enable the [Claude Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) to work effectively across many context windows: an **initializer agent** that sets up the environment on the first run, and a **coding agent** that is tasked with making incremental progress in every session, while leaving clear artifacts for the next session.
 
-## The long-running agent problem
+### The long-running agent problem
 
 - First, the agent tended to try to do too much at once—essentially to attempt to one-shot the app.
 - A second failure mode would often occur later in a project. After some features had already been built, a later agent instance would look around, see that progress had been made, and declare the job done.
@@ -391,15 +391,15 @@ When experimenting internally, we addressed these problems using a two-part solu
 1. Initializer agent: The very first agent session uses a specialized prompt that asks the model to set up the initial environment: an `init.sh` script, a claude-progress.txt file that keeps a log of what agents have done, and an initial git commit that shows what files were added.
 2. Coding agent: Every subsequent session asks the model to make incremental progress, then leave structured updates.1
 
-## Environment management
+### Environment management
 
-### Feature list
+#### Feature list
 
-### Incremental progress
+#### Incremental progress
 
 work on only one feature at a time.
 
-### Testing
+#### Testing
 
 One final major failure mode that we observed was Claude’s tendency to mark a feature as complete without proper testing.
 
