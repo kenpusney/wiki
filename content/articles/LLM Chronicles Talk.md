@@ -4,7 +4,7 @@ Outline: [[LLMs a chronological perspective]]
 
 这里我想分享一个洞察，就是早在很多东西被应用之前，已经很早就被验证过了。大部分大家在讨论的大模型应用技术和概念，比如Prompt Engineering、Fine Tune、CoT、Tool Use、RAG、ReAct甚至Mixture of Experts等其实都在2022年甚至之前就已经提出。我们可以在接下来的内容里分别看一下这些内容。
 
-# 什么是语言模型
+## 什么是语言模型
 
 首先我们先看一下，为什么是大语言模型，或者说，为什么我们要叫他们 Large Language Model？
 
@@ -24,9 +24,10 @@ Outline: [[LLMs a chronological perspective]]
 
 所以 A language model is a computational model that predicts sequences in natural language.
 
-旁边这张图是哥伦比亚大学的一份讲义中对于“语言模型”的形式化定义，只是给大家看下这个确实是有对应概念的，具体内容不必在意。
+下面是哥伦比亚大学的一份讲义中对于“语言模型”的形式化定义，只是给大家看下这个确实是有对应概念的，具体内容不必在意。
+![[LanguageModelDefinition.png]]
 
-# 史前时代
+## 史前时代
 
 既然是讲历史，我们就得从最早开始讲起。在正式进入语言模型这个形态之前，早期的自然语言处理跟AI绑定的并不是这么深，甚至是独立发展的。驱使其核心发展的主要是两个任务 —— 机器翻译和语音识别。
 
@@ -34,7 +35,7 @@ Outline: [[LLMs a chronological perspective]]
 
 上一个session里Peter带我们看过了关于图灵在1950年的那篇可以称之为开天辟地的论文， Computing Machinery and Intelligence。这篇论文里所提到的图灵测试，其中一个任务涉及到了自动理解和生成自然语言。这等于直接给自然语言处理提供了方向和目标。
 
-# 早期解决方案
+## 早期解决方案
 
 这篇论文前后也有一些关于机器翻译的设计，比如1930年代由乔治・阿尔斯特鲁尼提出方案，仅为一套采用纸带的自动化双语词典。另一项方案出自俄国人彼得・特罗扬斯基，内容更为详尽。特罗扬斯基的方案不仅包含双语词典，还依托世界语设计出一套处理不同语言间语法成分的配套方法。
 
@@ -42,13 +43,15 @@ Outline: [[LLMs a chronological perspective]]
 
 ![[LLMChronicleGeorgetownIBMExperiment.png]]
 
-# 乔姆斯基和符号化模型
+## 乔姆斯基和符号化模型
 
 最终实现突破的是来自数学界/语言学界的一位大佬，诺姆·乔姆斯基。他在1957年，也就是达特茅斯会议之后的那一年发表了一篇论文句法结构（Syntactic Structures）。这篇论文通过一套完全形式化的方法把“语言”这种东西给抽象化了，提出了现在的“形式语言理论”。一个语言就是一堆有限的符号和生成规则的集合，这些符号和规则组合起来就能生成语言里有效的句子。
 
+![[ChomskyGrammar.png|400]]
+
 乔姆斯基这套理论等于为符号化时代的模型奠定了基础，同时这套模型至今仍然在广泛使用，因为虽然穷尽自然语言里的规则不一定能做到，但是人工语言，比如我们编写代码使用的Java，是完全没问题的，所以这套理论也就成了后期编译原理和各种解析算法的理论基础。
 
-# 交互式小说
+## 交互式小说
 
 如同我前面讲到的1950年代到1990年代的主流思路是基于符号化的方式去设计语言模型，显然跟广义的人工智能一样，也遇到了发展瓶颈，毕竟自然语言太复杂了，即没有相对确定性的规则，又在不断演化发展，所以只能进行一些相对简单的转换工作。不过在一些特定领域内，是可以做成相对完善的应用的。比如至今还在活跃的一个非常小众的领域，交互式小说。早期的计算机游戏仅能通过终端来交互，于是就有了这种实现特定规则来生成故事，并且允许用户输入一些句子或者短语来与游戏世界交互，达成不同结局的冒险游戏。
 
@@ -56,7 +59,7 @@ Outline: [[LLMs a chronological perspective]]
 
 图里是一个经典的游戏Zork（中文一般叫做《魔域》或者《魔域帝国》）的界面，启动游戏就是“你站在一个白房子前面，有一个邮筒”。你可以打开邮筒，看到里面有一封信，然后拿到这封信，开始读其中的内容。
 
-# 中文房间 —— 计算机是否能拥有意识
+## 中文房间 —— 计算机是否能拥有意识
 
 通常的语言模型研究里一般都会排除这个时期，因为这段时间虽然也有进展但并没有成行的“模型”。所谓的模型也只是大家手工编辑的规则。但是这段时间因为人工智能的发展大家其实产生了很多议论，其中一个就是这个叫“中文房间”的思想实验。
 
@@ -74,7 +77,7 @@ Outline: [[LLMs a chronological perspective]]
 
 关于这个思想实验的讨论非常多，尤其是近些年来大语言模型出现以后，再次引发对于强人工智能的思考和争论。关于各方管点英文维基百科页面有详细的讲述，我们不做具体的展开。
 
-# 统计模型时代
+## 统计模型时代
 
 1990年代，基于统计的模型开始大量出现，其中的一个原因就是多媒体技术引入，然后语音识别的需求开始出现和应用。因为自然语言是有一定的统计学规律的，因此当时的思路就是通过统计学分析去预测下一个语言符号，然后适配具体的应用场景。这里的理论基础是1906年的马尔可夫链理论，我们可以看一下当时李开复做的一个叫做CASPER的demo。
 
@@ -84,7 +87,7 @@ Outline: [[LLMs a chronological perspective]]
 
 ![[LLMChronicleTNT.png|300]]
 
-# 中文分词难题
+## 中文分词难题
 
 这里额外提一句，为什么这些东西都是先从印欧系语言发展出来，因为现代汉语这种连续书写系统在当时存在一个非常困难的问题，就是如何进行分词（Tokenization）。因为印欧系语言大都是有空格分割的，而现代汉语并没有明显的词汇分界，而现代汉语复词数量远远多于单字词，大部分情况下单字并没有实际含义。
 
@@ -97,7 +100,14 @@ Outline: [[LLMs a chronological perspective]]
 
 还有一个例子就是论语里这句话，可以说每一个不同的句读都能直观展示一个人的立场。
 
-# 汉语分词连写
+民可使由之不可使知之：
+
+- 民可使，由之；不可使，知之。
+- 民可，使由之；不可，使知之。
+- 民可使，由之不可，使知之。
+- 民，可使由之，不可使知之。
+
+### 汉语分词连写
 
 在上个世纪有不少人曾建议过汉语分词连写的写法，比如某篇论文的摘要就用类似的方式写成这个样子：
 
@@ -113,15 +123,19 @@ Outline: [[LLMs a chronological perspective]]
 - 句子看起来不像没有空格的传统格式那么整齐。
 - 大多数中文单词都是一两个字长，即使不使用边界标记，辨识也不困难。
 
-# 汉语分词连写
+### Tokenizer
 
 当然了，在那个时候更不会想到现在的Tokenizer会实现的更暴力，完全不存在所谓的词汇分界这种概念了，空格也是内容的一部分。所以这种情况下这种奇怪的写法反倒成了累赘，可以看到同样一句话分词连写的情况下要比正常写法多用接近 30% 的 token。
 
+![[TiktokenOriginalChineseText.png|400]]
+
+![[TiktokenSegmentedChineseText.png|400]]
+
 目前主流汉语分词方案（比如jieba分词）都是通过权重词典和统计模型（n-gram + HMM）来解决。（[https://zhuanlan.zhihu.com/p/245372320](https://zhuanlan.zhihu.com/p/245372320)）
 
-# 神经网络时代
+## 神经网络时代
 
-其实从之前Peter的分享中可以看出来有两条线始终约束着人工智能的发展，一条线是算力，另外一条就是数据规模。当然也可以说只有一条线，因为只有算力足够的情况下才能处理特定规模的数据量。而当算力发展到可以支撑大量数据和深度网络的时候，结合原本的统计模型，语言模型也正式进入了神经网络时代。
+其实之前的分享中可以看出来有两条线始终约束着人工智能的发展，一条线是算力，另外一条就是数据规模。当然也可以说只有一条线，因为只有算力足够的情况下才能处理特定规模的数据量。而当算力发展到可以支撑大量数据和深度网络的时候，结合原本的统计模型，语言模型也正式进入了神经网络时代。
 
 这张图自下向上就是语言模型在神经网络时代发展路径。既然神经网络适合处理向量化数据，那我就可以通过向量嵌入的方式来构建对应文本的词向量，这样通过词向量的相似性来计算相似度和进行预测。（[https://milvus.org.cn/ai-quick-reference/what-are-dense-and-sparse-embeddings](https://milvus.org.cn/ai-quick-reference/what-are-dense-and-sparse-embeddings)）
 
@@ -133,7 +147,7 @@ A Neural Probabilistic Language Model
 
 图里提前透露了接下来的内容，不过大家应该都很熟悉了。在提及Transformers之前我们在看这段时间有哪些比较典型的应用。
 
-# 成熟应用 - 2011年**IBM Watson 赢得《危险边缘**》
+## 成熟应用 - 2011年**IBM Watson 赢得《危险边缘**》
 
 1997年深蓝的成功，让IBM开始探索其他领域的挑战。2011年经过多年准备终于在《危险边缘》这个问答节目中通过几期比赛战胜人类。这种通过大众媒体宣传高科技的活动变相进行营销，这件事情也同时开启了IBM股价的另一个增长周期。
 
@@ -146,9 +160,13 @@ A Neural Probabilistic Language Model
 
 这个事件火了以后，我们前面提到的约翰·瑟尔教授又站出来说，IBM只是做了一个非常精巧的程序，不是一个可以思考的计算机。老爷子几十年如一日地坚持这个观点。
 
-# 成熟应用 —— 虚拟语音助手
+![[JohnSearleOnIBMWatson.png]]
 
-另外一个成熟应用我们大家应该都再熟悉不过了，每个人手机应该都有一个内置语音助手。早期因为应用场景等原因其实这些工具都比较难用，比如右边的截图就是我当时的一个用法，因为之前的手机是Windows Phone，很多使用习惯和数据都还保留在微软平台，所以Siri的作用就是打开Cortana。
+## 成熟应用 —— 虚拟语音助手
+
+另外一个成熟应用我们大家应该都再熟悉不过了，每个人手机应该都有一个内置语音助手。早期因为应用场景等原因其实这些工具都比较难用，比如下面截图就是我当时的一个用法，因为之前的手机是Windows Phone，很多使用习惯和数据都还保留在微软平台，所以Siri的作用就是打开Cortana。
+
+![[HeySiriOpenCortana.png|200]]
 
 - Apple Siri (2011)
 - Microsoft Cortana (2014)
@@ -157,7 +175,7 @@ A Neural Probabilistic Language Model
 
 现在的大部分智能助理背后也都接入了大模型了，包括今年WWDC上看到的全新Siri。
 
-# 注意力机制
+## 注意力机制
 
 ![[AttentionPaper.png]]
 
@@ -186,7 +204,9 @@ A Neural Probabilistic Language Model
 
 简单理解：翻译每个词时，模型会自动 “盯着原文对应位置看”，不用强行把整段话塞到一个向量里。
 
-# Attention is All You Need
+![[Attention-animated.webm]]
+
+## Attention is All You Need
 
 ![[TransformersArchitecture.png]]
 
@@ -210,21 +230,21 @@ Transformer 沿用了机器翻译经典的**编码器 + 解码器**组合（类�
 
 Transformer Encoder主攻特征表示，Transformer Decoder擅长文本生成，二者合则天下无敌，分则各自为王。
 
-# Generative Pre-trained Transformers
+## Generative Pre-trained Transformers
 
 ![[GPTArchitecture.png]]
 
-# 预训练模型
+## 预训练模型
 
 Transformer 发表后，AI 社区迅速分化为两条路线——代表了对"如何利用 Transformer"的两种不同哲学。
 
-## BERT：理解的路线
+### BERT：理解的路线
 
 2018 年 10 月，谷歌的德夫林等人发表了 BERT（Bidirectional Encoder Representations from Transformers）。BERT 的核心思想是双向预训练：在大规模文本上，随机遮盖一些词（掩码语言模型，Masked Language Model），让模型根据上下文预测被遮盖的词。因为预测时可以同时看到左边和右边的上下文，BERT 学到的是真正"双向"的语言表征。
 
 BERT 在 11 个 NLP 基准测试上全面刷新了最优成绩，引发了 NLP 社区的震动。它确立了一种新的范式——"预训练 + 微调"（Pre-train + Fine-tune）：先在海量无标签文本上预训练一个通用的语言模型，然后在特定任务（如情感分析、问答、命名实体识别）上用少量标注数据微调。这种范式极大地降低了 NLP 任务的门槛——你不再需要为每个任务从头训练一个模型。
 
-## GPT：生成的路线
+### GPT：生成的路线
 
 几乎在同一时期，OpenAI 的拉德福德走了一条不同的路。
 
@@ -236,7 +256,7 @@ BERT 和 GPT 的分歧不仅是技术选择的差异，更反映了对 AI 未来
 
 历史最终站在了 GPT 一边——但不是因为 BERT 的思路错了，而是因为 GPT 路线更容易通过规模扩展来提升性能。"预测下一个词"是一个极其简单的训练目标，可以利用互联网上几乎无限的文本数据，而且天然适合自回归生成。
 
-# AI Dungeon
+## AI Dungeon
 
 ![[AIDungeonLogo.png]]
 
@@ -247,7 +267,7 @@ BERT 和 GPT 的分歧不仅是技术选择的差异，更反映了对 AI 未来
 
 GPT-2 出来以后的一个经典应用就是 AI Dungeon。
 
-# Large Language Models
+## Large Language Models
 
 2020 年 5 月，OpenAI 发表了 GPT-3 的论文——布朗等人的《Language Models are Few-Shot Learners》。GPT-3 拥有 1750 亿个参数，训练数据集包含约 5000 亿个词元（token，过滤后），加权采样后训练实际见到约 3000 亿个词元；训练成本据估计超过 400 万美元。
 
@@ -259,7 +279,9 @@ GPT-3 的能力引发了关于"涌现"（Emergence）的讨论。许多能力在
 
 规模定律给出了一个简洁但深刻的指引：继续扩大规模。这个指引将定义接下来几年 AI 的主旋律。
 
-# Retrieval-Augmented Generation（Meta 2021）
+## Retrieval-Augmented Generation（Meta 2021）
+
+![[RAGProcess.png]]
 
 现在主流的预训练大模型（比如文中的 BART、T5），知识全都 “记在模型参数里”，就像一个人**全靠大脑死记硬背所有知识**，有 3 个明显短板：
 
@@ -269,7 +291,7 @@ GPT-3 的能力引发了关于"涌现"（Emergence）的讨论。许多能力在
 
 此前也有 “先检索文档、再提取答案” 的 AI，但这类模型**只会摘抄原文**，不能自由组织语言回答问题，适用场景很窄。
 
-# PEFT（Parameter-Efficient Fine-Tuning）
+## PEFT（Parameter-Efficient Fine-Tuning）
 
 ![[ParameterEfficientFineTuning.png]]
 
@@ -289,7 +311,7 @@ GPT-3 的能力引发了关于"涌现"（Emergence）的讨论。许多能力在
 2. **加两条 “小旁路”**：在 Transformer 模型的注意力层（模型最核心的部分），并联两个**极小的矩阵（A、B）**，只训练这两个小矩阵，其余参数一概不碰；
 3. **合并使用**：训练完成后，把两个小矩阵的效果合并进原模型权重里。
 
-# Distillation（蒸馏）
+## Distillation（蒸馏）
 
 我们已经有了足够聪明的模型，有了可以完善它的方法，那么怎么对齐进行裁剪或者压缩呢？
 
@@ -299,7 +321,7 @@ Hugging Face 就尝试 **BERT / GPT2 等大模型做 “瘦身”**，造出了�
 
 这里用到的核心技术叫**知识蒸馏。**和普通学习不一样，学生不只是学 “标准答案”，还要模仿老师思考问题的整个过程（比如老师觉得某个词大概率填 A、其次是 B），这样学出来效果更接近原版大模型（压缩 40% 体积、提速 60%、保留 97% 能力）。
 
-# Quantization （量化，2023 GGML）
+## Quantization （量化，2023 GGML）
 
 ![[LlamaCppLogo.png|400]]
 
@@ -317,7 +339,7 @@ Hugging Face 就尝试 **BERT / GPT2 等大模型做 “瘦身”**，造出了�
 
 大家日常如果在本地部署过Ollama，使用的就是采用GGML格式量化之后的模型。
 
-# Mixture-of-Experts（2020 Google）
+## Mixture-of-Experts（2020 Google）
 
 ![[MixtureOfExpertsModelTree.png]]
 
@@ -329,7 +351,7 @@ Hugging Face 就尝试 **BERT / GPT2 等大模型做 “瘦身”**，造出了�
 2. 额外加一个**调度器（门控 / 路由网络）**，拿到输入内容后，只挑选**少数几个对口专家**干活，其余专家全程 “摸鱼” 不参与计算；
 3. 简单说：**模型整体规模可以做得极大，但每次实际运算只用到一小部分参数**，完美解决 “模型变大就变卡、变贵” 的难题。
 
-# Instruction Following（OpenAI 2022）
+## Instruction Following（OpenAI 2022）
 
 ![[InstructionFollowingGpt.png]]
 
@@ -344,11 +366,13 @@ Hugging Face 就尝试 **BERT / GPT2 等大模型做 “瘦身”**，造出了�
 
 单纯把 AI 模型做的更大，并不能让它好好听懂、执行人类指令，OpenAI 用「人类反馈 + 强化学习」（RLHF）改造了 GPT-3，做出了更好用的 InstructGPT，还证明了 “优化使用体验” 比盲目堆模型参数更有效。
 
+“有多少人工，就有多少智能”
+
 ![[InstructGPTTrainingProcess.png]]
 
 这个是直接导致了ChatGPT诞生的一个项目，因为训练Instruction Following的模版只要改成多轮对话，其实就是ChatGPT的场景了。
 
-# Tool Use（Google 2022）
+## Tool Use（Google 2022）
 
 ![[TALM-ToolUsePaper.png]]
 
@@ -366,7 +390,7 @@ TALM 设计了一套**纯文本交互规则**，不用改模型底层结构，�
 3. 系统触发对应的外部工具（天气查询、计算器、文献检索等），把工具返回的结果拼接在文本里；
 4. 模型结合工具结果，整理出最终答案回复用户。
 
-# Chain-of-Thought
+## Chain-of-Thought（Google 2022）
 
 ![[CoTPaper.png]]
 
@@ -378,7 +402,7 @@ TALM 设计了一套**纯文本交互规则**，不用改模型底层结构，�
 
 后来的事情大家都知道了，基本上主流模型都加入了Model native reasoning了。
 
-# ReAct
+## ReAct（Google 2023）
 
 ![[ReActPaper.png]]
 
@@ -391,6 +415,9 @@ TALM 设计了一套**纯文本交互规则**，不用改模型底层结构，�
 
 ReAct 是 **Reasoning（推理思考）+ Acting（行动执行）** 的组合范式，核心逻辑就是模仿人类的解题流程，形成一套循环：**思考 (Thought) → 行动 (Action) → 观察结果 (Observation)**，三步交替反复推进任务。
 
-# 回顾一下语言模型的发展路线
+## 回顾一下语言模型的发展路线
 
 ![[LanguageModelsRoadMap.png]]
+
+
+![[TaskRelatedViewRoadmap.png]]
