@@ -3,7 +3,6 @@ aliases:
   - LaaPS
 date: 2014-12-20
 ---
-
   
 > 原文发表于 2014-12-20， 我的lofter：http://kimleo.lofter.com/post/46977_4b8e610
 
@@ -32,9 +31,9 @@ date: 2014-12-20
 其实无论什么语言，都必须要有两个基本的能力，才算得上“可用”，首先是抽象，再就是组合。前者会给你提供整个系统中的基本要素和扩展方法，后者则能够利用这些东西去完成复杂的系统功能。
 
 当然DSL不必像GPL那样复杂，但也还是要一些东西（或者可以把他们叫做基本组合子 Combinator？）：
-	- 重复（循环/ 递归） Repeating
-	- 分支  Branching
-	- 引用  Reference
+- 重复（循环/ 递归） Repeating
+- 分支  Branching
+- 引用  Reference
 
 一个简单的例子就是正则表达式。Repeating方面来说，有Kleene Closure（`*` / `+` / `{ }`）；也支持Branching；至于Reference，对应的就是Capture / Grouping。
 

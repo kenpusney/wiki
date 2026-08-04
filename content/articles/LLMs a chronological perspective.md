@@ -1,3 +1,4 @@
+This is just a planning outline, final talk transcript is [[LLM Chronicles Talk]]
 ## Terms
 - `LLM: Large Language Model`. Why `Large`.
 - Traditional language models:
