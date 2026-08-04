@@ -1,0 +1,16 @@
+---
+title: C++14/17 与 Rust 相比有何优劣？
+date: 2016-02-25
+origin: https://www.zhihu.com/question/40726392/answer/88000623
+---
+# C++14/17 与 Rust 相比有何优劣？
+
+[知乎链接](https://www.zhihu.com/question/40726392/answer/88000623)
+
+---------
+
+Rust又不能用来装/撕逼。
+
+高下立判。
+
+谢邀。

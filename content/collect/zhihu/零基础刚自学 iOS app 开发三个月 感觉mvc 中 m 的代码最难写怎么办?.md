@@ -1,0 +1,20 @@
+---
+title: 零基础刚自学 iOS app 开发三个月 感觉mvc 中 m 的代码最难写怎么办?
+date: 2015-03-22
+origin: https://www.zhihu.com/question/28952238/answer/42718737
+---
+# 零基础刚自学 iOS app 开发三个月 感觉mvc 中 m 的代码最难写怎么办?
+
+[知乎链接](https://www.zhihu.com/question/28952238/answer/42718737)
+
+---------
+
+谢邀。
+
+因为这才是整个App的核心，叫做Business Logic（业务逻辑）。
+所以其实呢，这才是考验一个coder真正实力的地方。那些说做App简单的人很可能没有真正地在这个地方遇到问题。
+
+因为实现特定的业务逻辑所需要的算法，以及所采用的数据结构这些都是要精心设计和实现的，所以一定程度上要求需要有这方面的扎实的基本功。
+所以就像 [@刘鑫](https://www.zhihu.com/people/ebd95bca61f4aaed185d5f5366630719)所说的，回学校学CS（Computer Science，计算机科学）吧，不然你去自己专研 [@萧井陌](https://www.zhihu.com/people/fd7c571a0ada1a72e42e8d7992c4a780)的书单也行。
+
+就是这样。

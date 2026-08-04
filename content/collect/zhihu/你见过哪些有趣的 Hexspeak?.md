@@ -1,0 +1,13 @@
+---
+title: 你见过哪些有趣的 Hexspeak?
+date: 2014-09-15
+origin: https://www.zhihu.com/question/25367130/answer/30569338
+---
+# 你见过哪些有趣的 Hexspeak?
+
+[知乎链接](https://www.zhihu.com/question/25367130/answer/30569338)
+
+---------
+
+0xc0de4ac =Code for AC
+一位ACMer的ID。

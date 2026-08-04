@@ -1,0 +1,20 @@
+---
+title: TypeScript能完全替代JavaScript嗎？
+date: 2015-05-17
+origin: https://www.zhihu.com/question/29665566/answer/48070930
+---
+# TypeScript能完全替代JavaScript嗎？
+
+[知乎链接](https://www.zhihu.com/question/29665566/answer/48070930)
+
+---------
+
+目前来说，实践上是没问题的，而且有DefinitelyTyped这样强大的支持库，也很方便把现有的JavaScript代码一步步迁移到TypeScript。
+
+另外，Dojo 2正在用TypeScript重写哦。
+
+至于ECMAScript标准嘛，它有的TypeScript都有了，它没有的TypeScript做的更好，所以你还会怕TypeScript向未来兼容这种问题么。
+
+更不用说MS还一直跟ECMA有那么一腿。
+
+就是这样。

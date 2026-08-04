@@ -1,0 +1,14 @@
+---
+title: Perl 6 完工, 最让你惊艳的特性是什么?
+date: 2015-10-07
+origin: https://www.zhihu.com/question/36249393/answer/66616759
+---
+# Perl 6 完工, 最让你惊艳的特性是什么?
+
+[知乎链接](https://www.zhihu.com/question/36249393/answer/66616759)
+
+---------
+
+Type Annotation比Python 3.5的有用多了。
+
+未完待续。

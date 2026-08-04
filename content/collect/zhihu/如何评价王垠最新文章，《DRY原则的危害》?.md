@@ -1,0 +1,17 @@
+---
+title: 如何评价王垠最新文章，《DRY原则的危害》?
+date: 2015-06-17
+origin: https://www.zhihu.com/question/31278077/answer/51679108
+---
+# 如何评价王垠最新文章，《DRY原则的危害》?
+
+[知乎链接](https://www.zhihu.com/question/31278077/answer/51679108)
+
+---------
+
+DRY原则自身就不遵守这个原则。
+你们把它重复了不知道多少次了好伐。
+
+Don't repeat DRY.
+
+就是这样。
