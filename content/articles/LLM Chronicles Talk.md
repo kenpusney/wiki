@@ -204,8 +204,7 @@ A Neural Probabilistic Language Model
 
 简单理解：翻译每个词时，模型会自动 “盯着原文对应位置看”，不用强行把整段话塞到一个向量里。
 
-![[Attention-animated.webm]]
-
+预览视频：[Attention animated](https://commons.wikimedia.org/wiki/File:Attention-animated.webm?embedplayer=true)
 ## Attention is All You Need
 
 ![[TransformersArchitecture.png]]
