@@ -1,0 +1,65 @@
+{
+  "site": {
+    "title": "Kimmy's Wiki",
+    "description": "Kimmy's Wiki",
+    "baseUrl": "https://wiki.kimleo.net",
+    "author": "Kimmy",
+    "language": "en"
+  },
+  "theme": {
+    "name": "ink",
+    "darkMode": "auto",
+    "colors": {
+      "light": {
+        "background": "#ffffff",
+        "text": "#1a1a1a",
+        "primary": "#111111",
+        "accent": "#555555",
+        "muted": "#707070",
+        "border": "#e6e6e6",
+        "surface": "#fafafa"
+      },
+      "dark": {
+        "background": "#0e0e0e",
+        "text": "#ededed",
+        "primary": "#fafafa",
+        "accent": "#b8b8b8",
+        "muted": "#8a8a8a",
+        "border": "#2a2a2a",
+        "surface": "#171717"
+      }
+    },
+    "fonts": {
+      "heading": "Inter, system-ui, -apple-system, sans-serif",
+      "body": "Georgia, Cambria, \"Times New Roman\", serif",
+      "code": "\"JetBrains Mono\", ui-monospace, SFMono-Regular, Menlo, monospace"
+    }
+  },
+  "nav": [
+    {
+      "title": "Home",
+      "url": "/"
+    }
+  ],
+  "features": {
+    "explorer": true,
+    "search": true,
+    "graph": false,
+    "backlinks": true,
+    "tags": true,
+    "breadcrumbs": true,
+    "math": true,
+    "syntaxHighlight": true,
+    "mermaid": true,
+    "readingTime": true,
+    "rss": true,
+    "sitemap": true
+  },
+  "build": {
+    "contentDir": "content/",
+    "outDir": "public",
+    "basePath": "",
+    "landingPage": "index.md",
+    "folderIndex": true
+  }
+}

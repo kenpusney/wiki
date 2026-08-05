@@ -24,3 +24,7 @@ quartz/cli/tui/dist/
 
 __pycache__
 *.pyc
+
+.mdgarden-cache.json
+
+dist/
