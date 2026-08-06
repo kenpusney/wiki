@@ -29,7 +29,6 @@ date: 2020-10-10
 Google:
 - https://cacm.acm.org/magazines/2016/7/204032-why-google-stores-billions-of-lines-of-code-in-a-single-repository/fulltext
 - https://itsvit.com/blog/monorepo-google-way-ci-cd/
-- 
 
 
 Facebook:

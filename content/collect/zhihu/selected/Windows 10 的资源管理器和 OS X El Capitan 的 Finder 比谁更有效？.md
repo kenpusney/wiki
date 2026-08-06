@@ -1,0 +1,29 @@
+---
+title: Windows 10 的资源管理器和 OS X El Capitan 的 Finder 比谁更有效？
+date: 2015-10-05
+origin: https://www.zhihu.com/question/36163592/answer/66336732
+---
+# Windows 10 的资源管理器和 OS X El Capitan 的 Finder 比谁更有效？
+
+[知乎链接](https://www.zhihu.com/question/36163592/answer/66336732)
+
+---------
+
+从搜索框的可用性来看，Finder 完败（更奇葩的是默认居然不是搜索当前目录）。Windows Search 集成在那个位置真的是太棒了。
+（当然 OS X 还有 spotlight，不过并不是 finder 的一部分。
+
+另外关于 .DS_Store 的问题。我只写了一个脚本，没事儿都会专门在我的U盘和移动硬盘根目录运行一下。
+
+就是这样。
+
+---
+
+还有，Windows 7 以后的**库**感觉上用起来不比 tag 差。
+
+以及，case insensitive 才是最佳解决方案。
+
+新建xxx这个毛病我在用XP的年代就改过来了，尽量不用右键菜单而是打开应用在里面新建然后保存。毕竟大部分情况下快捷键都是Ctrl-N。
+
+另外对我这种习惯了手动管理目录树的人来说，侧边栏不是树形展开的真的很讨厌，现在 Finder 的收藏已经放不下了，不得不开两三个窗口。
+
+有种蛋蛋的忧伤。
