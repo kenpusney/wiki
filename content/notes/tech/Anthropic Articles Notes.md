@@ -511,7 +511,8 @@ There are a few particularly effective ways to steer output formatting:
 4. **Use detailed prompts for specific formatting preferences**
     For more control over markdown and formatting usage, provide explicit guidance:
 
-```<avoid_excessive_markdown_and_bullet_points>
+```
+<avoid_excessive_markdown_and_bullet_points>
 When writing reports, documents, technical explanations, analyses, or any long-form
 content, write in clear, flowing prose using complete paragraphs and sentences. Use
 standard paragraph breaks for organization and reserve markdown primarily for `inline

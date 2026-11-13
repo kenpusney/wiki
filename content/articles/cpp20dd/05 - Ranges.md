@@ -1,6 +1,8 @@
 ---
 title: Ranges
 date: 2021-08-27
+aliases:
+  - C++ 20 解析 —— Ranges
 ---
 
 我们看C++20中三大特性中的第四个，ranges。

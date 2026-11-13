@@ -4,36 +4,46 @@ date: 2018-05-11
 ---
 
 
-### Programming Languages I created
+## Programming Languages I created
 
-  - [:projects/ng]()
-  - [Passive Record](https://www.douban.com/note/322955493/) also [github:kenpusney/passive]()
-  - see [:projects] for more stuff I created
-
-### Programming Languages I am familiar with
+- [The NG Programming Language](https://ng.kimleo.net)
+ 
+## Programming Languages I am familiar with
 
   - [Languages I've tried](https://www.douban.com/note/289071944/)
 
-Experienced (in production, ★★★★★):
+**Experienced** (in production, ★★★★★):
 
   - Java
   - Groovy
   - Scala
-  - PHP
-  - JavaScript
+  - JavaScript  / TypeScript
+	  - [[说说 Typescript]]
+  - Python
+	  - [[为什么Python在Windows下使用比Linux下更方便？|Python版本测不准定律]]
+  - Kotlin
 
-Preferred (familiar, ★★★★☆):
+**Preferred** (familiar, ★★★★☆):
 
-  - TypeScript
-  - Perl 6
+  - Raku (originally Perl 6)
   - C++
+	  - [[C++ 20 解析相关文章]]
   - Ruby
+  - Rust
 
-Used (★★★☆☆):
+**Used** (★★★☆☆):
 
   - C
   - D
-  - Kotlin
-  - Python
-  - Rust
   - Go
+  - Zig
+	  - [[说说 Zig]]
+  - Racket
+  - OCaml
+	  - [[Better C++：如何设计一个更好的C++编程语言]]
+  - and many more...
+
+**Abandoned**  (used, but not preferred):
+  - PHP
+  - Dart
+	  - [[说说 Flutter：Skia、Dart 及其历史]]

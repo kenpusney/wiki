@@ -1,5 +1,6 @@
 ---
 title: Dependency Injection made simple
+date: 2021-11-21
 ---
 
 假设你在实现一个简单的应用，比如，fizzbuzz。需求非常简单，遇到 3 的倍数，输出 fizz，遇到 5 的倍数，输出 buzz，遇到 3 和 5 的公倍数（common multiple），输出 fizzbuzz。

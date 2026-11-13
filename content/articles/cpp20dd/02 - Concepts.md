@@ -1,6 +1,8 @@
 ---
 title: Concepts
 date: 2021-08-12
+aliases:
+  - C++ 20 解析 —— Concepts
 ---
 
 我们先从整个 C++ 社区心念多年的特性说起。

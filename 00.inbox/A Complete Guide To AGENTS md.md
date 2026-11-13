@@ -1,13 +1,15 @@
 ---
-title: "A Complete Guide To AGENTS.md"
-source: "https://www.aihero.dev/a-complete-guide-to-agents-md"
+title: A Complete Guide To AGENTS.md
+source: https://www.aihero.dev/a-complete-guide-to-agents-md
 author:
   - "[[Matt Pocock]]"
 published: 2026-01-18
 created: 2026-08-06
-description: "Learn how to optimize your AGENTS.md file for AI coding agents. Master progressive disclosure, keep instructions focused, and maximize agent performance."
+description: Learn how to optimize your AGENTS.md file for AI coding agents.
+  Master progressive disclosure, keep instructions focused, and maximize agent
+  performance.
 tags:
-  - "clippings"
+  - clippings
 ---
 Have you ever felt concerned about the size of your `AGENTS.md` file?
 
@@ -56,11 +58,11 @@ Kyle from Humanlayer's [article](https://www.humanlayer.dev/blog/writing-a-good-
 
 Every token in your `AGENTS.md` file gets loaded on **every single request**, regardless of whether it's relevant. This creates a hard budget problem:
 
-| Scenario | Impact |
-| --- | --- |
-| Small, focused `AGENTS.md` | More tokens available for task-specific instructions |
+| Scenario                   | Impact                                                |
+| -------------------------- | ----------------------------------------------------- |
+| Small, focused `AGENTS.md` | More tokens available for task-specific instructions  |
 | Large, bloated `AGENTS.md` | Fewer tokens for the actual work; agent gets confused |
-| Irrelevant instructions | Token waste + agent distraction = worse performance |
+| Irrelevant instructions    | Token waste + agent distraction = worse performance   |
 
 Taken together, this means that **the ideal `AGENTS.md` file should be as small as possible.**
 

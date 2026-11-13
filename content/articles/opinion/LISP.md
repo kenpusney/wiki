@@ -34,7 +34,7 @@ LISP的基础数据结构因为历史原因，设计成了单链表，也就是c
 >
 > https://www.zhihu.com/question/365348415/answer/979831472
 
->LISP“反智”只是题主可能觉得不习惯吧。Polish Notation就像VSO语序一样，习惯了汉语表达方式的话感觉就是很怪。
+> LISP“反智”只是题主可能觉得不习惯吧。Polish Notation就像VSO语序一样，习惯了汉语表达方式的话感觉就是很怪。
 > 
 > LISP的S-exp形式设计来更适合机器识别和解析，也影响了后来的TeX甚至xml的设计。还有LISP出现之后省了不少的goto。
 >

@@ -1,6 +1,8 @@
 ---
 title: Coroutine
 date: 2021-08-23
+aliases:
+  - C++ 20 解析 —— Coroutine
 ---
 
 我们来看另外一个语言特性的改动，coroutine。
